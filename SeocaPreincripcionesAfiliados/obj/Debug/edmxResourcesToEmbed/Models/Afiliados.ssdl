@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SeocaPreinscripcionesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errores durante la generación:
+advertencia 6013: La tabla o vista 'SeocaPreinscripciones.dbo.Afiliados_DatosPersonales' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+        <EntityType Name="Afiliados_DatosPersonales">
+          <Property Name="Apellido" Type="nvarchar" MaxLength="50" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+          <Property Name="CUIL" Type="nvarchar" MaxLength="50" />
+          <Property Name="Tipo_Doc" Type="nvarchar" MaxLength="50" />
+          <Property Name="Numero_Doc" Type="nvarchar" MaxLength="50" />
+          <Property Name="Delegacion" Type="nvarchar" MaxLength="150" />
+          <Property Name="Calificacion_Profesional" Type="nvarchar" MaxLength="150" />
+          <Property Name="Fecha_Afiliacion" Type="date" />
+          <Property Name="Estado_Civil" Type="nvarchar" MaxLength="50" />
+          <Property Name="Fecha_Nac" Type="date" />
+          <Property Name="Calle" Type="nvarchar" MaxLength="50" />
+          <Property Name="Numero_Calle" Type="nvarchar" MaxLength="50" />
+          <Property Name="Piso" Type="nvarchar" MaxLength="50" />
+          <Property Name="Dto" Type="nvarchar" MaxLength="50" />
+          <Property Name="Telefono" Type="int" />
+          <Property Name="CP" Type="int" />
+          <Property Name="Localidad" Type="nvarchar" MaxLength="150" />
+          <Property Name="Provincia" Type="nvarchar" MaxLength="150" />
+        </EntityType>-->
+  <!--Errores durante la generación:
+advertencia 6013: La tabla o vista 'SeocaPreinscripciones.dbo.Afiliados_Documentos' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+        <EntityType Name="Afiliados_Documentos">
+          <Property Name="Id" Type="int" />
+          <Property Name="Id_Afiliado" Type="int" />
+          <Property Name="Sexo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Nacionalidad" Type="nvarchar" MaxLength="150" />
+        </EntityType>-->
+  <!--Errores durante la generación:
+advertencia 6013: La tabla o vista 'SeocaPreinscripciones.dbo.Afiliados_Empresa' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+        <EntityType Name="Afiliados_Empresa">
+          <Property Name="Id" Type="int" />
+          <Property Name="Id_Afiliado" Type="int" />
+          <Property Name="Fecha_Ingreso" Type="date" />
+          <Property Name="Nombre_Empresa" Type="nvarchar" MaxLength="150" />
+          <Property Name="Cuit_Empresa" Type="nvarchar" MaxLength="50" />
+          <Property Name="Calle" Type="nvarchar" MaxLength="50" />
+          <Property Name="Numero" Type="int" />
+          <Property Name="Local" Type="nvarchar" MaxLength="50" />
+          <Property Name="Piso" Type="nvarchar" MaxLength="50" />
+          <Property Name="Dto" Type="nvarchar" MaxLength="50" />
+          <Property Name="CP" Type="int" />
+          <Property Name="Localidad" Type="nvarchar" MaxLength="150" />
+          <Property Name="Telefono" Type="int" />
+        </EntityType>-->
+  <!--Errores durante la generación:
+advertencia 6013: La tabla o vista 'SeocaPreinscripciones.dbo.Afiliados_Familiares' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+        <EntityType Name="Afiliados_Familiares">
+          <Property Name="Id" Type="int" />
+          <Property Name="Id_Afiliado" Type="int" />
+          <Property Name="Parentesco" Type="nvarchar" MaxLength="50" />
+          <Property Name="Apellido_Nombre" Type="nvarchar" MaxLength="150" />
+          <Property Name="Cert_Estudios" Type="date" />
+          <Property Name="Tipo_Doc" Type="nvarchar" MaxLength="50" />
+          <Property Name="Num_Doc" Type="nvarchar" MaxLength="150" />
+          <Property Name="Sexo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Fecha_Nac" Type="date" />
+          <Property Name="Venc" Type="date" />
+          <Property Name="Actualizacion" Type="date" />
+        </EntityType>-->
+  <EntityType Name="Empresas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RazonSocial" Type="varchar" MaxLength="100" />
+    <Property Name="NombreFantasia" Type="varchar" MaxLength="100" />
+    <Property Name="Cuit" Type="varchar" MaxLength="15" />
+    <Property Name="DomicilioReal" Type="varchar" MaxLength="150" />
+    <Property Name="LocalidadReal" Type="int" />
+    <Property Name="TelefonoReal" Type="varchar" MaxLength="20" />
+    <Property Name="DomicilioLegal" Type="varchar" MaxLength="150" />
+    <Property Name="LocalidadLegal" Type="int" />
+    <Property Name="TelefonoLegal" Type="varchar" MaxLength="20" />
+    <Property Name="Actividad" Type="int" />
+    <Property Name="Email" Type="varchar" MaxLength="150" />
+    <Property Name="PaginaWeb" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Empresas_Actividades">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Empresas_Antecedentes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Sucesora" Type="varchar" MaxLength="100" />
+    <Property Name="NumeroEmpresa" Type="int" />
+    <Property Name="FechaTransferencia" Type="datetime" />
+    <Property Name="Calle" Type="varchar" MaxLength="100" />
+    <Property Name="Piso" Type="varchar" MaxLength="3" />
+    <Property Name="Localidad" Type="varchar" MaxLength="100" />
+    <Property Name="CodigoPostal" Type="varchar" MaxLength="10" />
+    <Property Name="Provincia" Type="varchar" MaxLength="100" />
+    <Property Name="Telefono" Type="varchar" MaxLength="100" />
+    <Property Name="IdEmpresa" Type="int" />
+  </EntityType>
+  <EntityType Name="Empresas_Contadores">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NomreEstudio" Type="varchar" MaxLength="150" />
+    <Property Name="Direccion" Type="varchar" MaxLength="150" />
+    <Property Name="Telefono" Type="varchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="150" />
+    <Property Name="IdEmpresa" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Empresas_Empleados">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ApellidoNombre" Type="varchar" MaxLength="100" />
+    <Property Name="Cuil" Type="varchar" MaxLength="13" />
+    <Property Name="FechaIngreso" Type="datetime" />
+    <Property Name="Categoria" Type="varchar" MaxLength="100" />
+    <Property Name="TotalRemuneracion" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Art_100" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Sind" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Sepelio" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Jornada" Type="varchar" MaxLength="20" />
+    <Property Name="IdEmpresa" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Empresas_Sucursales">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="100" />
+    <Property Name="IdEmpresa" Type="int" />
+  </EntityType>
+  <EntityType Name="Empresas_Titulares">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ApellidoNombre" Type="varchar" MaxLength="100" />
+    <Property Name="DomicilioParticular" Type="varchar" MaxLength="100" />
+    <Property Name="Documento" Type="varchar" MaxLength="15" />
+    <Property Name="Cargo" Type="varchar" MaxLength="100" />
+    <Property Name="IdEmpresa" Type="int" />
+  </EntityType>
+  <EntityType Name="General_Localidades">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre_Localidad" Type="varchar" MaxLength="150" />
+  </EntityType>
+  <EntityContainer Name="SeocaPreinscripcionesModelStoreContainer">
+    <EntitySet Name="Empresas" EntityType="Self.Empresas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Empresas_Actividades" EntityType="Self.Empresas_Actividades" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Empresas_Antecedentes" EntityType="Self.Empresas_Antecedentes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Empresas_Contadores" EntityType="Self.Empresas_Contadores" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Empresas_Empleados" EntityType="Self.Empresas_Empleados" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Empresas_Sucursales" EntityType="Self.Empresas_Sucursales" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Empresas_Titulares" EntityType="Self.Empresas_Titulares" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="General_Localidades" EntityType="Self.General_Localidades" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

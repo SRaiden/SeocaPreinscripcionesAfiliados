@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+
+    <!-- CSS -->
+    <link type="text/css" href="~/Css/form.css" rel="stylesheet" />
+    <link type="text/css" href="~/Css/main.css" rel="stylesheet" />
+    <link type="text/css" href="~/Css/w3.css" rel="stylesheet" />
+    <link type="text/css" href="~/Css/TabPag.css" rel="stylesheet" />
+    <link type="text/css" href="~/Css/Table.css" rel="stylesheet" />
+
+
+    @*<script src="~/js/modalRegistrarse.js"></script>*@
+
+    <script src="https://kit.fontawesome.com/815e601374.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="http://momentjs.com/downloads/moment.min.js"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.5/xlsx.full.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.5/jszip.js"></script>
+
+</head>
+<body>
+
+    @RenderBody()
+
+    @Html.Partial("~/Views/Shared/MisViews/Footer.cshtml")
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>
