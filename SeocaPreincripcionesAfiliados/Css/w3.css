@@ -446,11 +446,19 @@ a {
 
 
 .w3-input {
-    padding: 8px;
     display: block;
     border: none;
-    border-bottom: 1px solid #ccc;
     width: 100%;
+    outline-style: none;
+    user-select: none;
+    border-color: black;
+    border-radius: 5px;
+    padding: 5px 6px;
+    font-size: 17px;
+    font-family: poppins;
+    /* line-height: 1.7px; */
+    border: 0.3px solid rgb(194, 194, 194);
+    box-shadow: -2px 3px 2px rgb(0 0 0 / 20%);
 }
 
 .txtGrillaEmpLiq {
@@ -1478,7 +1486,9 @@ a {
 }
 
 .w3-padding {
-    padding: 8px 16px !important;
+    font-size: 17px;
+    color: black;
+    padding: 8px 16px 8px 0px;
 }
 
 .w3-padding-large {
