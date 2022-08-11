@@ -478,6 +478,7 @@ a {
     padding: 5px 6px;
     font-size: 17px;
     font-family: poppins;
+    /* line-height: 1.7px; */
     /*line-height: 1.7px;*/
     border: 0.3px solid rgb(194, 194, 194);
     box-shadow: -2px 3px 2px rgb(0 0 0 / 20%);
