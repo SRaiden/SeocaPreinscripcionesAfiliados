@@ -81,7 +81,7 @@ dfn {
     font-style: italic;
 }
 
-.ocultar {
+.ocultar{
     display: none;
 }
 
@@ -444,6 +444,28 @@ a {
     transition: opacity 0s;
 }
 
+.btn-enviar {
+    margin: 2%;
+    padding: 5px 10px 5px 10px;
+    font-size: 20px;
+    border-radius: 10px;
+    border: 1px solid #337ab7;
+    color: #337ab7;
+    background-color: transparent;
+    outline-style: none;
+}
+
+.btn-enviar:hover {
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
+    font-size: 20px;
+    border-radius: 10px;
+    color: #ffffff;
+    background-color: #337ab7;
+    border: 0.3px solid #337ab7;
+    cursor: pointer;
+    user-select: none;
+}
 
 .w3-input {
     display: block;
@@ -457,6 +479,7 @@ a {
     font-size: 17px;
     font-family: poppins;
     /* line-height: 1.7px; */
+    /*line-height: 1.7px;*/
     border: 0.3px solid rgb(194, 194, 194);
     box-shadow: -2px 3px 2px rgb(0 0 0 / 20%);
 }

@@ -14,7 +14,6 @@
                 <button class="tablinks" onclick="openCity(event, 'Familiares')">Familiares</button>
             </div>
 
-
             <div id="DatosdelAfiliado" class="tabcontent">
 
                 <!-- -------------------- Apellido / Nombre / Cuit -------------------- -->
@@ -48,7 +47,7 @@
 
                                     foreach (dynamic Loc in TipoDoc)
                                     {
-                                        <option value="@Loc.Id">@Loc.Tipo</option>
+                                        <option value="@Loc.Id">@Loc.Nombre</option>
                                     }
                                 }
                             }
@@ -232,19 +231,14 @@
                 <div class="w3-row">
                     <div class="w3-third w3-container w3-text-white">
                         <div class="w3-padding  ">Sexo</div>
+                <!-- -------------------- Sexo / Nacionalidad -------------------- -->
+                <div class="w3-row">
+                    <div class="w3-third w3-container w3-text-white">
+                        <div class="w3-padding bg-zul">Genero</div>
                         <select class="w3-select" name="SexoAfiliadoDocumento" id="SexoAfiliadoDocumento">
-                            <option value="0">< Seleccione una Nacionalidad ></option>
-                            @{
-                                if (ViewData["SexoAfiliadoDocumento"] != null)
-                                {
-                                    IEnumerable<dynamic> SexoAfiliadoDocumento = (IEnumerable<dynamic>)ViewData["SexoAfiliadoDocumento"];
-
-                                    foreach (dynamic Loc in SexoAfiliadoDocumento)
-                                    {
-                                        <option value="@Loc.Id">@Loc.Nombre</option>
-                                    }
-                                }
-                            }
+                            <option value="0">< Seleccione una Genero ></option>
+                            <option value="Masculino">Masculino</option>
+                            <option value="Femenino">Femenino</option>
                         </select>
                     </div>
                     <div class="w3-third w3-container w3-text-white">
@@ -263,6 +257,8 @@
                                 }
                             }
                         </select>
+                        <div class="w3-padding bg-zul">Nacionalidad</div>
+                        <input type="text" id="Nacionalidad" name="Nacionalidad" class="w3-input w3-ligth-grey w3-left-align">
                     </div>
                     <div class="w3-third w3-container w3-text-white">
 
@@ -314,6 +310,11 @@
                     <div class="w3-third w3-container w3-text-white">
                         <div class="w3-padding  ">Fecha Ingreso</div>
                         <input type="text" id="FechaIngresoAfiliadoEmpresa" name="FechaIngresoAfiliadoEmpresa" class="w3-input w3-ligth-grey w3-left-align" onchange="changeCampos()">
+                <!-- -------------------- Fecha Ingreso / Nombre Empresa / Cuit Empresa -------------------- -->
+                <div class="w3-row">
+                    <div class="w3-third w3-container w3-text-white">
+                        <div class="w3-padding bg-zul">Fecha Ingreso</div>
+                        <input type="date" id="FechaIngresoAfiliadoEmpresa" name="FechaIngresoAfiliadoEmpresa" class="w3-input w3-ligth-grey w3-left-align" onchange="changeCampos()">
                     </div>
                     <div class="w3-third w3-container w3-text-white">
                         <div class="w3-padding  ">Nombre Empresa</div>
@@ -451,9 +452,9 @@
                         <select class="w3-select" name="TipoDocAfiliadoFamiliar" id="TipoDocAfiliadoFamiliar">
                             <option value="0">< Seleccione un Tipo Documento ></option>
                             @{
-                                if (ViewData["TipoDocumentoFamiliar"] != null)
+                                if (ViewData["TipoDoc"] != null)
                                 {
-                                    IEnumerable<dynamic> TipoDocumentoFamiliar = (IEnumerable<dynamic>)ViewData["TipoDocumentoFamiliar"];
+                                    IEnumerable<dynamic> TipoDocumentoFamiliar = (IEnumerable<dynamic>)ViewData["TipoDoc"];
 
                                     foreach (dynamic Loc in TipoDocumentoFamiliar)
                                     {
@@ -471,17 +472,8 @@
                         <div class="w3-padding  ">Sexo</div>
                         <select class="w3-select" name="SexoAfiliadoFamiliar" id="SexoAfiliadoFamiliar">
                             <option value="0">< Seleccione un Sexo ></option>
-                            @{
-                                if (ViewData["SexoAfiliadoFamiliar"] != null)
-                                {
-                                    IEnumerable<dynamic> Sexo = (IEnumerable<dynamic>)ViewData["SexoAfiliadoFamiliar"];
-
-                                    foreach (dynamic Loc in Sexo)
-                                    {
-                                        <option value="@Loc.Id">@Loc.Nombre</option>
-                                    }
-                                }
-                            }
+                            <option value="Masculino">Masculino</option>
+                            <option value="Femenino">Femenino</option>
                         </select>
                     </div>
                 </div>
