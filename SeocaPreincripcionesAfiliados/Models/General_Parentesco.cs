@@ -12,13 +12,9 @@ namespace SeocaPreincripcionesAfiliados.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Empresas_Titulares
+    public partial class General_Parentesco
     {
         public int Id { get; set; }
-        public string ApellidoNombre { get; set; }
-        public string DomicilioParticular { get; set; }
-        public string Documento { get; set; }
-        public string Cargo { get; set; }
-        public Nullable<int> IdEmpresa { get; set; }
+        public string Nombre { get; set; }
     }
 }

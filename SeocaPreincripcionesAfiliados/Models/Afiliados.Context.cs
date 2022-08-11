@@ -13,10 +13,10 @@ namespace SeocaPreincripcionesAfiliados.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class SeocaPreinscripcionesEntities : DbContext
+    public partial class SeocaPreinscripcionesEntities2 : DbContext
     {
-        public SeocaPreinscripcionesEntities()
-            : base("name=SeocaPreinscripcionesEntities")
+        public SeocaPreinscripcionesEntities2()
+            : base("name=SeocaPreinscripcionesEntities2")
         {
         }
     
@@ -25,14 +25,16 @@ namespace SeocaPreincripcionesAfiliados.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Empresas> Empresas { get; set; }
-        public virtual DbSet<Empresas_Actividades> Empresas_Actividades { get; set; }
-        public virtual DbSet<Empresas_Antecedentes> Empresas_Antecedentes { get; set; }
-        public virtual DbSet<Empresas_Contadores> Empresas_Contadores { get; set; }
-        public virtual DbSet<Empresas_Empleados> Empresas_Empleados { get; set; }
-        public virtual DbSet<Empresas_Sucursales> Empresas_Sucursales { get; set; }
-        public virtual DbSet<Empresas_Titulares> Empresas_Titulares { get; set; }
         public virtual DbSet<General_Documentos> General_Documentos { get; set; }
         public virtual DbSet<General_Localidades> General_Localidades { get; set; }
+        public virtual DbSet<General_Calificacion> General_Calificacion { get; set; }
+        public virtual DbSet<General_Delegacion> General_Delegacion { get; set; }
+        public virtual DbSet<General_Estado_Civil> General_Estado_Civil { get; set; }
+        public virtual DbSet<General_Parentesco> General_Parentesco { get; set; }
+        public virtual DbSet<General_Provincias> General_Provincias { get; set; }
+        public virtual DbSet<Afiliados_DatosPersonales> Afiliados_DatosPersonales { get; set; }
+        public virtual DbSet<Afiliados_Documentos> Afiliados_Documentos { get; set; }
+        public virtual DbSet<Afiliados_Empresa> Afiliados_Empresa { get; set; }
+        public virtual DbSet<Afiliados_Familiares> Afiliados_Familiares { get; set; }
     }
 }

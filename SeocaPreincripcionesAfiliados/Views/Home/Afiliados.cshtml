@@ -14,7 +14,6 @@
                 <button class="tablinks" onclick="openCity(event, 'Familiares')">Familiares</button>
             </div>
 
-
             <div id="DatosdelAfiliado" class="tabcontent">
 
                 <!-- -------------------- Apellido / Nombre / Cuit -------------------- -->
@@ -48,7 +47,7 @@
 
                                     foreach (dynamic Loc in TipoDoc)
                                     {
-                                        <option value="@Loc.Id">@Loc.Tipo</option>
+                                        <option value="@Loc.Id">@Loc.Nombre</option>
                                     }
                                 }
                             }
@@ -193,76 +192,19 @@
 
 
             <div id="Documento" class="tabcontent">
-
-                <!-- -------------------- Apellido / Nombre / Cuil -------------------- -->
-                <!--<div class="w3-row">
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding bg-zul">Apellido</div>
-                        <input type="text" id="ApellidoAfiliadoDocumento" name="ApellidoAfiliadoDocumento" class="w3-input w3-ligth-grey w3-left-align" readonly>
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding bg-zul">Nombre</div>
-                        <input type="text" id="NombreAfiliadoDocumento" name="NombreAfiliadoDocumento" class="w3-input w3-ligth-grey w3-left-align" readonly>
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding bg-zul">Cuil</div>
-                        <input type="text" id="CuilAfiliadoDocumento" name="CuilAfiliadoDocumento" class="w3-input w3-ligth-grey w3-left-align" readonly>
-                    </div>
-                </div>
-                <br>-->
-
-                <!-- -------------------- Documento / Numero Documento / Localidad -------------------- -->
-                <!--<div class="w3-row">
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding bg-zul">Documento</div>
-                        <input type="text" id="DocumentoAfiliadoDocumento" name="DocumentoAfiliadoDocumento" class="w3-input w3-ligth-grey w3-left-align" readonly>
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding bg-zul">Numero Documento</div>
-                        <input type="text" id="NumeroAfiliadoDocumento" name="NumeroAfiliadoDocumento" class="w3-input w3-ligth-grey w3-left-align" readonly>
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding bg-zul">Localidad</div>
-                        <input type="text" id="LocalidadAfiliadoDocumento" name="LocalidadAfiliadoDocumento" class="w3-input w3-ligth-grey w3-left-align" readonly>
-                    </div>
-                </div>
-                <br>-->
-
                 <!-- -------------------- Sexo / Nacionalidad -------------------- -->
                 <div class="w3-row">
                     <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding bg-zul">Sexo</div>
+                        <div class="w3-padding bg-zul">Genero</div>
                         <select class="w3-select" name="SexoAfiliadoDocumento" id="SexoAfiliadoDocumento">
-                            <option value="0">< Seleccione una Nacionalidad ></option>
-                            @{
-                                if (ViewData["SexoAfiliadoDocumento"] != null)
-                                {
-                                    IEnumerable<dynamic> SexoAfiliadoDocumento = (IEnumerable<dynamic>)ViewData["SexoAfiliadoDocumento"];
-
-                                    foreach (dynamic Loc in SexoAfiliadoDocumento)
-                                    {
-                                        <option value="@Loc.Id">@Loc.Nombre</option>
-                                    }
-                                }
-                            }
+                            <option value="0">< Seleccione una Genero ></option>
+                            <option value="Masculino">Masculino</option>
+                            <option value="Femenino">Femenino</option>
                         </select>
                     </div>
                     <div class="w3-third w3-container w3-text-white">
                         <div class="w3-padding bg-zul">Nacionalidad</div>
-                        <select class="w3-select" name="Nacionalidad" id="Nacionalidad">
-                            <option value="0">< Seleccione una Nacionalidad ></option>
-                            @{
-                                if (ViewData["Nacionalidad"] != null)
-                                {
-                                    IEnumerable<dynamic> Nacionalidad = (IEnumerable<dynamic>)ViewData["Nacionalidad"];
-
-                                    foreach (dynamic Loc in Nacionalidad)
-                                    {
-                                        <option value="@Loc.Id">@Loc.Nombre</option>
-                                    }
-                                }
-                            }
-                        </select>
+                        <input type="text" id="Nacionalidad" name="Nacionalidad" class="w3-input w3-ligth-grey w3-left-align">
                     </div>
                     <div class="w3-third w3-container w3-text-white">
 
@@ -275,45 +217,11 @@
 
             <div id="Empresa" class="tabcontent">
 
-                <!-- -------------------- Apellido / Nombre / Cuil -------------------- -->
-                <!--<div class="w3-row">
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding bg-zul">Apellido</div>
-                        <input type="text" id="ApellidoAfiliadoEmpresa" name="ApellidoAfiliadoEmpresa" class="w3-input w3-ligth-grey w3-left-align" readonly>
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding bg-zul">Nombre</div>
-                        <input type="text" id="NombreAfiliadoEmpresa" name="NombreAfiliadoEmpresa" class="w3-input w3-ligth-grey w3-left-align" readonly>
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding bg-zul">Cuil</div>
-                        <input type="text" id="CuilAfiliadoEmpresa" name="CuilAfiliadoEmpresa" class="w3-input w3-ligth-grey w3-left-align" readonly>
-                    </div>
-                </div>
-                <br>-->
-
-                <!-- -------------------- Documento / Numero Documento / Localidad -------------------- -->
-                <!--<div class="w3-row">
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding bg-zul">Documento</div>
-                        <input type="text" id="DocumentoAfiliadoEmpresa" name="DocumentoAfiliadoEmpresa" class="w3-input w3-ligth-grey w3-left-align" readonly>
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding bg-zul">Numero Documento</div>
-                        <input type="text" id="NumeroAfiliadoEmpresa" name="NumeroAfiliadoEmpresa" class="w3-input w3-ligth-grey w3-left-align" readonly>
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding bg-zul">Localidad</div>
-                        <input type="text" id="LocalidadAfiliadoEmpresa" name="LocalidadAfiliadoEmpresa" class="w3-input w3-ligth-grey w3-left-align" readonly>
-                    </div>
-                </div>
-                <br>-->
-
                 <!-- -------------------- Fecha Ingreso / Nombre Empresa / Cuit Empresa -------------------- -->
                 <div class="w3-row">
                     <div class="w3-third w3-container w3-text-white">
                         <div class="w3-padding bg-zul">Fecha Ingreso</div>
-                        <input type="text" id="FechaIngresoAfiliadoEmpresa" name="FechaIngresoAfiliadoEmpresa" class="w3-input w3-ligth-grey w3-left-align" onchange="changeCampos()">
+                        <input type="date" id="FechaIngresoAfiliadoEmpresa" name="FechaIngresoAfiliadoEmpresa" class="w3-input w3-ligth-grey w3-left-align" onchange="changeCampos()">
                     </div>
                     <div class="w3-third w3-container w3-text-white">
                         <div class="w3-padding bg-zul">Nombre Empresa</div>
@@ -380,40 +288,6 @@
 
             <div id="Familiares" class="tabcontent">
 
-                <!-- -------------------- Apellido / Nombre / Cuil -------------------- -->
-                <!--<div class="w3-row">
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding bg-zul">Apellido</div>
-                        <input type="text" id="ApellidoAfiliadoFamiliar" name="ApellidoAfiliadoFamiliar" class="w3-input w3-ligth-grey w3-left-align" readonly>
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding bg-zul">Nombre</div>
-                        <input type="text" id="NombreAfiliadoFamiliar" name="NombreAfiliadoFamiliar" class="w3-input w3-ligth-grey w3-left-align" readonly>
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding bg-zul">Cuil</div>
-                        <input type="text" id="CuilAfiliadoFamiliar" name="CuilAfiliadoFamiliar" class="w3-input w3-ligth-grey w3-left-align" readonly>
-                    </div>
-                </div>
-                <br>-->
-
-                <!-- -------------------- Documento / Numero Documento / Localidad -------------------- -->
-                <!--<div class="w3-row">
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding bg-zul">Documento</div>
-                        <input type="text" id="DocumentoAfiliadoFamiliar" name="DocumentoAfiliadoFamiliar" class="w3-input w3-ligth-grey w3-left-align" readonly>
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding bg-zul">Numero Documento</div>
-                        <input type="text" id="NumeroAfiliadoFamiliar" name="NumeroAfiliadoFamiliar" class="w3-input w3-ligth-grey w3-left-align" readonly>
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding bg-zul">Localidad</div>
-                        <input type="text" id="LocalidadAfiliadoFamiliar" name="LocalidadAfiliadoFamiliar" class="w3-input w3-ligth-grey w3-left-align" readonly>
-                    </div>
-                </div>
-                <br>-->
-
                 <!-- --------------------Parentesco / Apellido y Nombre / Cert Estudios  -------------------- -->
                 <div class="w3-row">
                     <div class="w3-third w3-container w3-text-white">
@@ -451,9 +325,9 @@
                         <select class="w3-select" name="TipoDocAfiliadoFamiliar" id="TipoDocAfiliadoFamiliar">
                             <option value="0">< Seleccione un Tipo Documento ></option>
                             @{
-                                if (ViewData["TipoDocumentoFamiliar"] != null)
+                                if (ViewData["TipoDoc"] != null)
                                 {
-                                    IEnumerable<dynamic> TipoDocumentoFamiliar = (IEnumerable<dynamic>)ViewData["TipoDocumentoFamiliar"];
+                                    IEnumerable<dynamic> TipoDocumentoFamiliar = (IEnumerable<dynamic>)ViewData["TipoDoc"];
 
                                     foreach (dynamic Loc in TipoDocumentoFamiliar)
                                     {
@@ -471,17 +345,8 @@
                         <div class="w3-padding bg-zul">Sexo</div>
                         <select class="w3-select" name="SexoAfiliadoFamiliar" id="SexoAfiliadoFamiliar">
                             <option value="0">< Seleccione un Sexo ></option>
-                            @{
-                                if (ViewData["SexoAfiliadoFamiliar"] != null)
-                                {
-                                    IEnumerable<dynamic> Sexo = (IEnumerable<dynamic>)ViewData["SexoAfiliadoFamiliar"];
-
-                                    foreach (dynamic Loc in Sexo)
-                                    {
-                                        <option value="@Loc.Id">@Loc.Nombre</option>
-                                    }
-                                }
-                            }
+                            <option value="Masculino">Masculino</option>
+                            <option value="Femenino">Femenino</option>
                         </select>
                     </div>
                 </div>

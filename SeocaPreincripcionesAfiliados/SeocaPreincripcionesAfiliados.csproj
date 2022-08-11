@@ -147,31 +147,37 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Afiliados.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Empresas.cs">
+    <Compile Include="Models\Afiliados_DatosPersonales.cs">
       <DependentUpon>Afiliados.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Empresas_Actividades.cs">
+    <Compile Include="Models\Afiliados_Documentos.cs">
       <DependentUpon>Afiliados.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Empresas_Antecedentes.cs">
+    <Compile Include="Models\Afiliados_Empresa.cs">
       <DependentUpon>Afiliados.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Empresas_Contadores.cs">
+    <Compile Include="Models\Afiliados_Familiares.cs">
       <DependentUpon>Afiliados.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Empresas_Empleados.cs">
+    <Compile Include="Models\General_Calificacion.cs">
       <DependentUpon>Afiliados.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Empresas_Sucursales.cs">
-      <DependentUpon>Afiliados.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Empresas_Titulares.cs">
+    <Compile Include="Models\General_Delegacion.cs">
       <DependentUpon>Afiliados.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\General_Documentos.cs">
       <DependentUpon>Afiliados.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\General_Estado_Civil.cs">
+      <DependentUpon>Afiliados.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\General_Localidades.cs">
+      <DependentUpon>Afiliados.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\General_Parentesco.cs">
+      <DependentUpon>Afiliados.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\General_Provincias.cs">
       <DependentUpon>Afiliados.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -183,7 +189,6 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Css\form.css" />
     <Content Include="Css\main.css" />
-    <Content Include="Css\modal.css" />
     <Content Include="Css\Table.css" />
     <Content Include="Css\TabPag.css" />
     <Content Include="Css\w3.css" />

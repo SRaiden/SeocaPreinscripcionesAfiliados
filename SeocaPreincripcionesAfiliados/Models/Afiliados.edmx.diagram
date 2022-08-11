@@ -4,16 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="30bb7fdef1ce4be0bb1f3fea6e60fb3a" Name="Diagram1">
-        <EntityTypeShape EntityType="SeocaPreinscripcionesModel.Empresas" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SeocaPreinscripcionesModel.Empresas_Actividades" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SeocaPreinscripcionesModel.Empresas_Antecedentes" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SeocaPreinscripcionesModel.Empresas_Contadores" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SeocaPreinscripcionesModel.Empresas_Empleados" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SeocaPreinscripcionesModel.Empresas_Sucursales" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SeocaPreinscripcionesModel.Empresas_Titulares" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SeocaPreinscripcionesModel.General_Documentos" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SeocaPreinscripcionesModel.General_Localidades" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+      <Diagram DiagramId="0dc63ffe4c264b2392b1140225276d3b" Name="Diagram1">
+        <EntityTypeShape EntityType="SeocaPreinscripcionesModel.General_Documentos" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SeocaPreinscripcionesModel.General_Localidades" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SeocaPreinscripcionesModel.General_Calificacion" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="SeocaPreinscripcionesModel.General_Delegacion" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="SeocaPreinscripcionesModel.General_Estado_Civil" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="SeocaPreinscripcionesModel.General_Parentesco" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SeocaPreinscripcionesModel.General_Provincias" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="SeocaPreinscripcionesModel.Afiliados_DatosPersonales" Width="1.5" PointX="3.375" PointY="6.75" />
+        <EntityTypeShape EntityType="SeocaPreinscripcionesModel.Afiliados_Documentos" Width="1.5" PointX="5.375" PointY="6.75" />
+        <EntityTypeShape EntityType="SeocaPreinscripcionesModel.Afiliados_Empresa" Width="1.5" PointX="7.375" PointY="3.75" />
+        <EntityTypeShape EntityType="SeocaPreinscripcionesModel.Afiliados_Familiares" Width="1.5" PointX="7.375" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

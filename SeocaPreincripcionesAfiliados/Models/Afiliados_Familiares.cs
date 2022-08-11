@@ -12,9 +12,17 @@ namespace SeocaPreincripcionesAfiliados.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Empresas_Actividades
+    public partial class Afiliados_Familiares
     {
-        public int Id { get; set; }
-        public string Descripcion { get; set; }
+        public int Id_Afiliado { get; set; }
+        public string Parentesco { get; set; }
+        public string Apellido_Nombre { get; set; }
+        public Nullable<System.DateTime> Cert_Estudios { get; set; }
+        public string Tipo_Doc { get; set; }
+        public string Num_Doc { get; set; }
+        public string Sexo { get; set; }
+        public Nullable<System.DateTime> Fecha_Nac { get; set; }
+        public Nullable<System.DateTime> Venc { get; set; }
+        public Nullable<System.DateTime> Actualizacion { get; set; }
     }
 }
