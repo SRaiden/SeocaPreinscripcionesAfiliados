@@ -32,6 +32,32 @@ section {
     display: block;
 }
 
+.btn-enviar {
+    display: flex;
+    margin: 30px auto;
+    user-select: none;
+    cursor: pointer;
+    padding: 5px 10px 5px 10px;
+    font-size: 20px;
+    border-radius: 10px;
+    border: 1px solid #337ab7;
+    color: #337ab7;
+    background-color: transparent;
+    outline-style: none;
+}
+
+    .btn-enviar:hover {
+        padding: 5px 10px 5px 10px;
+        border-radius: 5px;
+        font-size: 20px;
+        border-radius: 10px;
+        color: #ffffff;
+        background-color: #337ab7;
+        border: 0.3px solid #337ab7;
+        cursor: pointer;
+        user-select: none;
+    }
+
 summary {
     display: list-item;
 }
@@ -221,7 +247,7 @@ textarea {
 /* End extract */
 html,
 body {
-    font-family: Verdana, sans-serif;
+    font-family: Poppins, sans-serif;
     font-size: 15px;
     line-height: 1.5;
 }
@@ -444,29 +470,6 @@ a {
     transition: opacity 0s;
 }
 
-.btn-enviar {
-    margin: 2%;
-    padding: 5px 10px 5px 10px;
-    font-size: 20px;
-    border-radius: 10px;
-    border: 1px solid #337ab7;
-    color: #337ab7;
-    background-color: transparent;
-    outline-style: none;
-}
-
-.btn-enviar:hover {
-    padding: 5px 10px 5px 10px;
-    border-radius: 5px;
-    font-size: 20px;
-    border-radius: 10px;
-    color: #ffffff;
-    background-color: #337ab7;
-    border: 0.3px solid #337ab7;
-    cursor: pointer;
-    user-select: none;
-}
-
 .w3-input {
     display: block;
     border: none;
@@ -619,6 +622,7 @@ a {
 }
 
 .w3-modal-content {
+    background-color: red;
     margin: auto;
     background-color: #fff;
     position: relative;
