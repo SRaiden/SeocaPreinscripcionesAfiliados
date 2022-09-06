@@ -150,9 +150,6 @@
     <Compile Include="Models\Afiliados_DatosPersonales.cs">
       <DependentUpon>Afiliados.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Afiliados_Documentos.cs">
-      <DependentUpon>Afiliados.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Afiliados_Empresa.cs">
       <DependentUpon>Afiliados.tt</DependentUpon>
     </Compile>

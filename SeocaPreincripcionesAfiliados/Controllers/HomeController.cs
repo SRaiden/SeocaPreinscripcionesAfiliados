@@ -35,6 +35,8 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                 List<General_Parentesco> Parentesco = db.General_Parentesco.ToList<General_Parentesco>();
                 ViewData["Parentesco"] = Parentesco;
 
+                ViewBag.diaHoy = DateTime.Now.ToString("yyyy-MM-dd");
+
 
             }
             return View();
@@ -42,7 +44,7 @@ namespace SeocaPreincripcionesAfiliados.Controllers
 
 
         [HttpPost]
-        public ActionResult Afiliados(string matrizDatosAfiliado, string matrizDocumento = null, string matrizEmpresa = null, string matrizFamiliares = null)
+        public ActionResult Afiliados(string matrizDatosAfiliado, string matrizEmpresa = null, string matrizFamiliares = null)
         {
             using (Models.SeocaPreinscripcionesEntities2 db = new Models.SeocaPreinscripcionesEntities2())
             {
@@ -50,7 +52,7 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                 try
                 {
                     JArray jsonPreservar = JArray.Parse(matrizDatosAfiliado);
-                    string Apellido = "", Nombre = "", Cuil = "", TipoDoc = "", NumDoc = "", Delegacion = "", CalifProf = "", Fecha_Afiliacion = "", EstadoCivil = "", FechaNac = "", Calle = "", NumeroCalle = "", Piso = "", Dto = "", Telefono = "", CP = "", Localidad = "", Provincia = "";
+                    string Apellido = "", Nombre = "", Cuil = "", TipoDoc = "", NumDoc = "", Delegacion = "", CalifProf = "", Fecha_Solicitud = "", EstadoCivil = "", FechaNac = "", Calle = "", NumeroCalle = "", Piso = "", Dto = "", Telefono = "", CP = "", Localidad = "", Provincia = "", SexoAfiliadoDocumento = "", Nacionalidad = "";
                     foreach (JObject jsonOperaciones in jsonPreservar.Children<JObject>())
                     {
                         foreach (JProperty jsonOPropiedades in jsonOperaciones.Properties())
@@ -63,7 +65,7 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                             if (propiedad.Equals("NumDoc")) NumDoc = jsonOPropiedades.Value.ToString();
                             if (propiedad.Equals("Delegacion")) Delegacion = jsonOPropiedades.Value.ToString();
                             if (propiedad.Equals("CalifProf")) CalifProf = jsonOPropiedades.Value.ToString();
-                            if (propiedad.Equals("Fecha_Afiliacion")) Fecha_Afiliacion = jsonOPropiedades.Value.ToString();
+                            if (propiedad.Equals("Fecha_Solicitud")) Fecha_Solicitud = jsonOPropiedades.Value.ToString();
                             if (propiedad.Equals("EstadoCivil")) EstadoCivil = jsonOPropiedades.Value.ToString();
                             if (propiedad.Equals("FechaNac")) FechaNac = jsonOPropiedades.Value.ToString();
                             if (propiedad.Equals("Calle")) Calle = jsonOPropiedades.Value.ToString();
@@ -74,6 +76,9 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                             if (propiedad.Equals("CP")) CP = jsonOPropiedades.Value.ToString();
                             if (propiedad.Equals("Localidad")) Localidad = jsonOPropiedades.Value.ToString();
                             if (propiedad.Equals("Provincia")) Provincia = jsonOPropiedades.Value.ToString();
+
+                            if (propiedad.Equals("SexoAfiliadoDocumento")) SexoAfiliadoDocumento = jsonOPropiedades.Value.ToString();
+                            if (propiedad.Equals("Nacionalidad")) Nacionalidad = jsonOPropiedades.Value.ToString();
                         }
                     }
 
@@ -83,7 +88,7 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                         var Inscripcion = db.Afiliados_DatosPersonales.Where(d => d.CUIL == Cuil).First();
                         if (Inscripcion != null)
                         {
-                            return Json(new { success = true, responseText = "Ya hay un afiliado preinscripto anteriormente." }, JsonRequestBehavior.AllowGet);
+                            return Json(new { success = true, responseText = "Ya hay un afiliado preinscripto con mismo CUIT anteriormente." }, JsonRequestBehavior.AllowGet);
                         }
                     }
                     catch (Exception)
@@ -101,7 +106,7 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                         Numero_Doc = NumDoc,
                         Delegacion = Delegacion,
                         Calificacion_Profesional = CalifProf,
-                        Fecha_Afiliacion = DateTime.Parse(Fecha_Afiliacion),
+                        Fecha_Solicitud = DateTime.Parse(Fecha_Solicitud),
                         Estado_Civil = EstadoCivil,
                         Fecha_Nac = DateTime.Parse(FechaNac),
                         Calle = Calle,
@@ -111,64 +116,22 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                         Telefono = Int32.Parse(Telefono),
                         CP = Int32.Parse(CP),
                         Localidad = Localidad,
-                        Provincia = Provincia
+                        Provincia = Provincia,
+                        Sexo = SexoAfiliadoDocumento,
+                        Nacionalidad = Nacionalidad
                     };
 
                     db.Afiliados_DatosPersonales.Add(emp);
                     db.SaveChanges();
 
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return Json(new { success = true, responseText = "Error al Preincribir Datos del Afiliado." }, JsonRequestBehavior.AllowGet);
                 }
 
+
                 var ultimoId = db.Afiliados_DatosPersonales.OrderByDescending(d => d.Codigo).First().Codigo;
-
-                // DOCUMENTO
-                try
-                {
-                    JArray jsonPreservar = null;
-                    try
-                    {
-                        jsonPreservar = JArray.Parse(matrizDocumento);
-                    }
-                    catch (Exception)
-                    {
-
-                    }
-
-                    string SexoAfiliadoDocumento = "", Nacionalidad = "";
-                    if (jsonPreservar != null)
-                    {
-                        foreach (JObject jsonOperaciones in jsonPreservar.Children<JObject>())
-                        {
-                            foreach (JProperty jsonOPropiedades in jsonOperaciones.Properties())
-                            {
-                                string propiedad = jsonOPropiedades.Name;
-                                if (propiedad.Equals("SexoAfiliadoDocumento")) SexoAfiliadoDocumento = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("Nacionalidad")) Nacionalidad = jsonOPropiedades.Value.ToString();
-                            }
-
-                            // GUARDAR EN LA TABLA DE EMPRESAS ANTECEDENTES
-                            var emp = new Afiliados_Documentos
-                            {
-                                Id_Afiliado = ultimoId,
-                                Sexo = SexoAfiliadoDocumento,
-                                Nacionalidad = Nacionalidad
-                            };
-
-                            db.Afiliados_Documentos.Add(emp);
-                            db.SaveChanges();
-                        }
-
-                    }
-
-                }
-                catch (Exception ex)
-                {
-                    return Json(new { success = true, responseText = "Error al Preinscribir Documentos." }, JsonRequestBehavior.AllowGet);
-                }
 
                 // EMPRESA
                 try
@@ -228,7 +191,7 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                     }
 
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return Json(new { success = true, responseText = "Error al Preinscribir Datos de la Empresa." }, JsonRequestBehavior.AllowGet);
                 }
@@ -246,7 +209,7 @@ namespace SeocaPreincripcionesAfiliados.Controllers
 
                     }
 
-                    string Parentesco = "", ApellidoNombreAfiliadoFamiliar = "", CertEstudiosAfiliadoFamiliar = "", TipoDocAfiliadoFamiliar = "", NumDocAfiliadoFamiliar = "", SexoAfiliadoFamiliar = "", FechaNacAfiliadoFamiliar = "", VencioAfiliadoFamiliar = "", ActualizacionAfiliadoFamiliar = "";
+                    string Parentesco = "", ApellidoNombreAfiliadoFamiliar = "", CertEstudiosAfiliadoFamiliar = "", TipoDocAfiliadoFamiliar = "", NumDocAfiliadoFamiliar = "", SexoAfiliadoFamiliar = "", FechaNacAfiliadoFamiliar = "";
                     if (jsonPreservar != null)
                     {
                         foreach (JObject jsonOperaciones in jsonPreservar.Children<JObject>())
@@ -261,41 +224,58 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                                 if (propiedad.Equals("NumDocAfiliadoFamiliar")) NumDocAfiliadoFamiliar = jsonOPropiedades.Value.ToString();
                                 if (propiedad.Equals("SexoAfiliadoFamiliar")) SexoAfiliadoFamiliar = jsonOPropiedades.Value.ToString();
                                 if (propiedad.Equals("FechaNacAfiliadoFamiliar")) FechaNacAfiliadoFamiliar = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("VencioAfiliadoFamiliar")) VencioAfiliadoFamiliar = jsonOPropiedades.Value.ToString(); // !!!
-                                if (propiedad.Equals("ActualizacionAfiliadoFamiliar")) ActualizacionAfiliadoFamiliar = jsonOPropiedades.Value.ToString();  // !!!
                             }
 
-                            // GUARDAR EN LA TABLA DE EMPRESAS ANTECEDENTES
-                            var emp = new Afiliados_Familiares
+                            if (string.IsNullOrEmpty(CertEstudiosAfiliadoFamiliar))
                             {
-                                Id_Afiliado = ultimoId,
-                                Parentesco = Parentesco,
-                                Apellido_Nombre = ApellidoNombreAfiliadoFamiliar,
-                                Cert_Estudios = DateTime.Parse(CertEstudiosAfiliadoFamiliar),
-                                Tipo_Doc = TipoDocAfiliadoFamiliar,
-                                Num_Doc =NumDocAfiliadoFamiliar,
-                                Sexo = SexoAfiliadoFamiliar,
-                                Fecha_Nac = DateTime.Parse(FechaNacAfiliadoFamiliar),
-                                Venc = DateTime.Parse(VencioAfiliadoFamiliar),
-                                Actualizacion = DateTime.Parse(ActualizacionAfiliadoFamiliar) 
-                            };
+                                // GUARDAR EN LA TABLA DE EMPRESAS ANTECEDENTES
+                                var emp = new Afiliados_Familiares
+                                {
+                                    Id_Afiliado = ultimoId,
+                                    Parentesco = Parentesco,
+                                    Apellido_Nombre = ApellidoNombreAfiliadoFamiliar,
+                                    Tipo_Doc = TipoDocAfiliadoFamiliar,
+                                    Num_Doc = NumDocAfiliadoFamiliar,
+                                    Sexo = SexoAfiliadoFamiliar,
+                                    Fecha_Nac = DateTime.Parse(FechaNacAfiliadoFamiliar)
+                                };
 
-                            db.Afiliados_Familiares.Add(emp);
-                            db.SaveChanges();
+                                db.Afiliados_Familiares.Add(emp);
+                                db.SaveChanges();
+                            }
+                            else
+                            {
+                                // GUARDAR EN LA TABLA DE EMPRESAS ANTECEDENTES
+                                var emp = new Afiliados_Familiares
+                                {
+                                    Id_Afiliado = ultimoId,
+                                    Parentesco = Parentesco,
+                                    Apellido_Nombre = ApellidoNombreAfiliadoFamiliar,
+                                    Cert_Estudios = DateTime.Parse(CertEstudiosAfiliadoFamiliar),
+                                    Tipo_Doc = TipoDocAfiliadoFamiliar,
+                                    Num_Doc = NumDocAfiliadoFamiliar,
+                                    Sexo = SexoAfiliadoFamiliar,
+                                    Fecha_Nac = DateTime.Parse(FechaNacAfiliadoFamiliar)
+                                };
+
+                                db.Afiliados_Familiares.Add(emp);
+                                db.SaveChanges();
+                            }
+
+
                         }
 
                     }
 
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return Json(new { success = true, responseText = "Error al Preinscribir Antecedente." }, JsonRequestBehavior.AllowGet);
                 }
 
-            }
 
-            ViewBag.error = "Ya se ha preinscripto";
-            return View();
+                return Json(new { success = true, responseText = "Se ha realizado la Preinscripcion." }, JsonRequestBehavior.AllowGet);
+            }
         }
 
 

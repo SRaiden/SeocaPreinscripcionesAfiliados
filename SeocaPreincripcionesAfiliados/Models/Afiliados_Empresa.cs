@@ -14,6 +14,7 @@ namespace SeocaPreincripcionesAfiliados.Models
     
     public partial class Afiliados_Empresa
     {
+        public int Id { get; set; }
         public int Id_Afiliado { get; set; }
         public Nullable<System.DateTime> Fecha_Ingreso { get; set; }
         public string Nombre_Empresa { get; set; }

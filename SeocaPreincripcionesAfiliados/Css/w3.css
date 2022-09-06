@@ -81,7 +81,7 @@ dfn {
     font-style: italic;
 }
 
-.ocultar{
+.ocultar {
     display: none;
 }
 
@@ -221,7 +221,7 @@ textarea {
 /* End extract */
 html,
 body {
-    font-family: Verdana, sans-serif;
+    font-family: Poppins, sans-serif;
     font-size: 15px;
     line-height: 1.5;
 }
@@ -371,7 +371,6 @@ a {
 .w3-button {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
-    -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
@@ -445,27 +444,25 @@ a {
 }
 
 .btn-enviar {
-    margin: 2%;
+    margin: 30px auto;
+    display: flex;
     padding: 5px 10px 5px 10px;
     font-size: 20px;
-    border-radius: 10px;
+    border-radius: 5px;
     border: 1px solid #337ab7;
     color: #337ab7;
     background-color: transparent;
     outline-style: none;
 }
 
-.btn-enviar:hover {
-    padding: 5px 10px 5px 10px;
-    border-radius: 5px;
-    font-size: 20px;
-    border-radius: 10px;
-    color: #ffffff;
-    background-color: #337ab7;
-    border: 0.3px solid #337ab7;
-    cursor: pointer;
-    user-select: none;
-}
+    .btn-enviar:hover {
+        border-radius: 5px;
+        color: #ffffff;
+        background-color: #337ab7;
+        border: 0.3px solid #337ab7;
+        cursor: pointer;
+        user-select: none;
+    }
 
 .w3-input {
     display: block;
@@ -474,14 +471,13 @@ a {
     outline-style: none;
     user-select: none;
     border-color: black;
-    border-radius: 5px;
+    /*border-radius: 5px;*/
     padding: 5px 6px;
     font-size: 17px;
     font-family: poppins;
-    /* line-height: 1.7px; */
     /*line-height: 1.7px;*/
     border: 0.3px solid rgb(194, 194, 194);
-    box-shadow: -2px 3px 2px rgb(0 0 0 / 20%);
+    box-shadow: -2px 3px 2px rgb(0 0 0 / 10%);
 }
 
 .txtGrillaEmpLiq {
@@ -1511,7 +1507,7 @@ a {
 .w3-padding {
     font-size: 17px;
     color: black;
-    padding: 8px 16px 8px 0px;
+    padding: 8px 16px 8px 8px;
 }
 
 .w3-padding-large {
@@ -1703,6 +1699,12 @@ a {
 .w3-hover-black:hover {
     color: #fff !important;
     background-color: #000 !important;
+}
+
+.w3-bluesky,
+.w3-hover-bluesky:hover {
+    color: #fff !important;
+    background-color: #1178AB !important;
 }
 
 .w3-grey,

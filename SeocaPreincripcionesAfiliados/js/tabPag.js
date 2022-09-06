@@ -1,4 +1,4 @@
-﻿document.getElementById("empresas").click();
+﻿document.getElementById("datosdelAfiliado").click();
 
 function openCity(evt, cityName) {
     // Declare all variables

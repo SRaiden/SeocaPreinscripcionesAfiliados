@@ -17,7 +17,7 @@
           <Property Name="Numero_Doc" Type="nvarchar" MaxLength="50" />
           <Property Name="Delegacion" Type="nvarchar" MaxLength="150" />
           <Property Name="Calificacion_Profesional" Type="nvarchar" MaxLength="150" />
-          <Property Name="Fecha_Afiliacion" Type="date" />
+          <Property Name="Fecha_Solicitud" Type="date" />
           <Property Name="Estado_Civil" Type="nvarchar" MaxLength="50" />
           <Property Name="Fecha_Nac" Type="date" />
           <Property Name="Calle" Type="nvarchar" MaxLength="50" />
@@ -28,20 +28,15 @@
           <Property Name="CP" Type="int" />
           <Property Name="Localidad" Type="nvarchar" MaxLength="150" />
           <Property Name="Provincia" Type="nvarchar" MaxLength="150" />
-        </EntityType>
-        <EntityType Name="Afiliados_Documentos">
-          <Key>
-            <PropertyRef Name="Id_Afiliado" />
-          </Key>
-          <Property Name="Id_Afiliado" Type="int" Nullable="false" />
           <Property Name="Sexo" Type="nvarchar" MaxLength="50" />
           <Property Name="Nacionalidad" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="Afiliados_Empresa">
           <Key>
-            <PropertyRef Name="Id_Afiliado" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id_Afiliado" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id_Afiliado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Fecha_Ingreso" Type="date" />
           <Property Name="Nombre_Empresa" Type="nvarchar" MaxLength="150" />
           <Property Name="Cuit_Empresa" Type="nvarchar" MaxLength="50" />
@@ -56,8 +51,9 @@
         </EntityType>
         <EntityType Name="Afiliados_Familiares">
           <Key>
-            <PropertyRef Name="Id_Afiliado" />
+            <PropertyRef Name="Id" />
           </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Id_Afiliado" Type="int" Nullable="false" />
           <Property Name="Parentesco" Type="nvarchar" MaxLength="50" />
           <Property Name="Apellido_Nombre" Type="nvarchar" MaxLength="150" />
@@ -66,8 +62,6 @@
           <Property Name="Num_Doc" Type="nvarchar" MaxLength="150" />
           <Property Name="Sexo" Type="nvarchar" MaxLength="50" />
           <Property Name="Fecha_Nac" Type="date" />
-          <Property Name="Venc" Type="date" />
-          <Property Name="Actualizacion" Type="date" />
         </EntityType>
         <EntityType Name="General_Calificacion">
           <Key>
@@ -120,7 +114,6 @@
         </EntityType>
         <EntityContainer Name="SeocaPreinscripcionesModelStoreContainer">
           <EntitySet Name="Afiliados_DatosPersonales" EntityType="Self.Afiliados_DatosPersonales" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Afiliados_Documentos" EntityType="Self.Afiliados_Documentos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Afiliados_Empresa" EntityType="Self.Afiliados_Empresa" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Afiliados_Familiares" EntityType="Self.Afiliados_Familiares" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="General_Calificacion" EntityType="Self.General_Calificacion" Schema="dbo" store:Type="Tables" />
@@ -135,33 +128,76 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SeocaPreinscripcionesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="General_Documentos">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="General_Localidades">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre_Localidad" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityContainer Name="SeocaPreinscripcionesEntities2" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="General_Documentos" EntityType="Self.General_Documentos" />
-          <EntitySet Name="General_Localidades" EntityType="Self.General_Localidades" />
-          <EntitySet Name="General_Calificacion" EntityType="SeocaPreinscripcionesModel.General_Calificacion" />
-          <EntitySet Name="General_Delegacion" EntityType="SeocaPreinscripcionesModel.General_Delegacion" />
-          <EntitySet Name="General_Estado_Civil" EntityType="SeocaPreinscripcionesModel.General_Estado_Civil" />
-          <EntitySet Name="General_Parentesco" EntityType="SeocaPreinscripcionesModel.General_Parentesco" />
-          <EntitySet Name="General_Provincias" EntityType="SeocaPreinscripcionesModel.General_Provincias" />
           <EntitySet Name="Afiliados_DatosPersonales" EntityType="SeocaPreinscripcionesModel.Afiliados_DatosPersonales" />
-          <EntitySet Name="Afiliados_Documentos" EntityType="SeocaPreinscripcionesModel.Afiliados_Documentos" />
           <EntitySet Name="Afiliados_Empresa" EntityType="SeocaPreinscripcionesModel.Afiliados_Empresa" />
           <EntitySet Name="Afiliados_Familiares" EntityType="SeocaPreinscripcionesModel.Afiliados_Familiares" />
+          <EntitySet Name="General_Calificacion" EntityType="SeocaPreinscripcionesModel.General_Calificacion" />
+          <EntitySet Name="General_Delegacion" EntityType="SeocaPreinscripcionesModel.General_Delegacion" />
+          <EntitySet Name="General_Documentos" EntityType="SeocaPreinscripcionesModel.General_Documentos" />
+          <EntitySet Name="General_Estado_Civil" EntityType="SeocaPreinscripcionesModel.General_Estado_Civil" />
+          <EntitySet Name="General_Localidades" EntityType="SeocaPreinscripcionesModel.General_Localidades" />
+          <EntitySet Name="General_Parentesco" EntityType="SeocaPreinscripcionesModel.General_Parentesco" />
+          <EntitySet Name="General_Provincias" EntityType="SeocaPreinscripcionesModel.General_Provincias" />
         </EntityContainer>
+        <EntityType Name="Afiliados_DatosPersonales">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CUIL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Tipo_Doc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Numero_Doc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Delegacion" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Calificacion_Profesional" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha_Solicitud" Type="DateTime" Precision="0" />
+          <Property Name="Estado_Civil" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha_Nac" Type="DateTime" Precision="0" />
+          <Property Name="Calle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Numero_Calle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Piso" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Dto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Telefono" Type="Int32" />
+          <Property Name="CP" Type="Int32" />
+          <Property Name="Localidad" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Provincia" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Sexo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Nacionalidad" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Afiliados_Empresa">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id_Afiliado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha_Ingreso" Type="DateTime" Precision="0" />
+          <Property Name="Nombre_Empresa" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Cuit_Empresa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Calle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Numero" Type="Int32" />
+          <Property Name="Local" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Piso" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Dto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CP" Type="Int32" />
+          <Property Name="Localidad" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Telefono" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Afiliados_Familiares">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Afiliado" Type="Int32" Nullable="false" />
+          <Property Name="Parentesco" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Apellido_Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Cert_Estudios" Type="DateTime" Precision="0" />
+          <Property Name="Tipo_Doc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Num_Doc" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Sexo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha_Nac" Type="DateTime" Precision="0" />
+        </EntityType>
         <EntityType Name="General_Calificacion">
           <Key>
             <PropertyRef Name="Id" />
@@ -176,12 +212,26 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="General_Documentos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="General_Estado_Civil">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="General_Localidades">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Localidad" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="General_Parentesco">
           <Key>
@@ -197,89 +247,70 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="Afiliados_DatosPersonales">
-          <Key>
-            <PropertyRef Name="Codigo" />
-          </Key>
-          <Property Name="Codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CUIL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Tipo_Doc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Numero_Doc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Delegacion" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Calificacion_Profesional" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Fecha_Afiliacion" Type="DateTime" Precision="0" />
-          <Property Name="Estado_Civil" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Fecha_Nac" Type="DateTime" Precision="0" />
-          <Property Name="Calle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Numero_Calle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Piso" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Dto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Telefono" Type="Int32" />
-          <Property Name="CP" Type="Int32" />
-          <Property Name="Localidad" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Provincia" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Afiliados_Documentos">
-          <Key>
-            <PropertyRef Name="Id_Afiliado" />
-          </Key>
-          <Property Name="Id_Afiliado" Type="Int32" Nullable="false" />
-          <Property Name="Sexo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Nacionalidad" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Afiliados_Empresa">
-          <Key>
-            <PropertyRef Name="Id_Afiliado" />
-          </Key>
-          <Property Name="Id_Afiliado" Type="Int32" Nullable="false" />
-          <Property Name="Fecha_Ingreso" Type="DateTime" Precision="0" />
-          <Property Name="Nombre_Empresa" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Cuit_Empresa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Calle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Numero" Type="Int32" />
-          <Property Name="Local" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Piso" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Dto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CP" Type="Int32" />
-          <Property Name="Localidad" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Telefono" Type="Int32" />
-        </EntityType>
-        <EntityType Name="Afiliados_Familiares">
-          <Key>
-            <PropertyRef Name="Id_Afiliado" />
-          </Key>
-          <Property Name="Id_Afiliado" Type="Int32" Nullable="false" />
-          <Property Name="Parentesco" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Apellido_Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Cert_Estudios" Type="DateTime" Precision="0" />
-          <Property Name="Tipo_Doc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Num_Doc" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Sexo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Fecha_Nac" Type="DateTime" Precision="0" />
-          <Property Name="Venc" Type="DateTime" Precision="0" />
-          <Property Name="Actualizacion" Type="DateTime" Precision="0" />
-        </EntityType>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SeocaPreinscripcionesModelStoreContainer" CdmEntityContainer="SeocaPreinscripcionesEntities2">
-          <EntitySetMapping Name="General_Documentos">
-            <EntityTypeMapping TypeName="SeocaPreinscripcionesModel.General_Documentos">
-              <MappingFragment StoreEntitySet="General_Documentos">
-                <ScalarProperty Name="Id" ColumnName="Id" />
+          <EntitySetMapping Name="Afiliados_DatosPersonales">
+            <EntityTypeMapping TypeName="SeocaPreinscripcionesModel.Afiliados_DatosPersonales">
+              <MappingFragment StoreEntitySet="Afiliados_DatosPersonales">
+                <ScalarProperty Name="Nacionalidad" ColumnName="Nacionalidad" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+                <ScalarProperty Name="Localidad" ColumnName="Localidad" />
+                <ScalarProperty Name="CP" ColumnName="CP" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Dto" ColumnName="Dto" />
+                <ScalarProperty Name="Piso" ColumnName="Piso" />
+                <ScalarProperty Name="Numero_Calle" ColumnName="Numero_Calle" />
+                <ScalarProperty Name="Calle" ColumnName="Calle" />
+                <ScalarProperty Name="Fecha_Nac" ColumnName="Fecha_Nac" />
+                <ScalarProperty Name="Estado_Civil" ColumnName="Estado_Civil" />
+                <ScalarProperty Name="Fecha_Solicitud" ColumnName="Fecha_Solicitud" />
+                <ScalarProperty Name="Calificacion_Profesional" ColumnName="Calificacion_Profesional" />
+                <ScalarProperty Name="Delegacion" ColumnName="Delegacion" />
+                <ScalarProperty Name="Numero_Doc" ColumnName="Numero_Doc" />
+                <ScalarProperty Name="Tipo_Doc" ColumnName="Tipo_Doc" />
+                <ScalarProperty Name="CUIL" ColumnName="CUIL" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="General_Localidades">
-            <EntityTypeMapping TypeName="SeocaPreinscripcionesModel.General_Localidades">
-              <MappingFragment StoreEntitySet="General_Localidades">
+          <EntitySetMapping Name="Afiliados_Empresa">
+            <EntityTypeMapping TypeName="SeocaPreinscripcionesModel.Afiliados_Empresa">
+              <MappingFragment StoreEntitySet="Afiliados_Empresa">
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Localidad" ColumnName="Localidad" />
+                <ScalarProperty Name="CP" ColumnName="CP" />
+                <ScalarProperty Name="Dto" ColumnName="Dto" />
+                <ScalarProperty Name="Piso" ColumnName="Piso" />
+                <ScalarProperty Name="Local" ColumnName="Local" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Calle" ColumnName="Calle" />
+                <ScalarProperty Name="Cuit_Empresa" ColumnName="Cuit_Empresa" />
+                <ScalarProperty Name="Nombre_Empresa" ColumnName="Nombre_Empresa" />
+                <ScalarProperty Name="Fecha_Ingreso" ColumnName="Fecha_Ingreso" />
+                <ScalarProperty Name="Id_Afiliado" ColumnName="Id_Afiliado" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Nombre_Localidad" ColumnName="Nombre_Localidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Afiliados_Familiares">
+            <EntityTypeMapping TypeName="SeocaPreinscripcionesModel.Afiliados_Familiares">
+              <MappingFragment StoreEntitySet="Afiliados_Familiares">
+                <ScalarProperty Name="Fecha_Nac" ColumnName="Fecha_Nac" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="Num_Doc" ColumnName="Num_Doc" />
+                <ScalarProperty Name="Tipo_Doc" ColumnName="Tipo_Doc" />
+                <ScalarProperty Name="Cert_Estudios" ColumnName="Cert_Estudios" />
+                <ScalarProperty Name="Apellido_Nombre" ColumnName="Apellido_Nombre" />
+                <ScalarProperty Name="Parentesco" ColumnName="Parentesco" />
+                <ScalarProperty Name="Id_Afiliado" ColumnName="Id_Afiliado" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -299,10 +330,26 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="General_Documentos">
+            <EntityTypeMapping TypeName="SeocaPreinscripcionesModel.General_Documentos">
+              <MappingFragment StoreEntitySet="General_Documentos">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="General_Estado_Civil">
             <EntityTypeMapping TypeName="SeocaPreinscripcionesModel.General_Estado_Civil">
               <MappingFragment StoreEntitySet="General_Estado_Civil">
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="General_Localidades">
+            <EntityTypeMapping TypeName="SeocaPreinscripcionesModel.General_Localidades">
+              <MappingFragment StoreEntitySet="General_Localidades">
+                <ScalarProperty Name="Nombre_Localidad" ColumnName="Nombre_Localidad" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -320,74 +367,6 @@
               <MappingFragment StoreEntitySet="General_Provincias">
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Afiliados_DatosPersonales">
-            <EntityTypeMapping TypeName="SeocaPreinscripcionesModel.Afiliados_DatosPersonales">
-              <MappingFragment StoreEntitySet="Afiliados_DatosPersonales">
-                <ScalarProperty Name="Provincia" ColumnName="Provincia" />
-                <ScalarProperty Name="Localidad" ColumnName="Localidad" />
-                <ScalarProperty Name="CP" ColumnName="CP" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-                <ScalarProperty Name="Dto" ColumnName="Dto" />
-                <ScalarProperty Name="Piso" ColumnName="Piso" />
-                <ScalarProperty Name="Numero_Calle" ColumnName="Numero_Calle" />
-                <ScalarProperty Name="Calle" ColumnName="Calle" />
-                <ScalarProperty Name="Fecha_Nac" ColumnName="Fecha_Nac" />
-                <ScalarProperty Name="Estado_Civil" ColumnName="Estado_Civil" />
-                <ScalarProperty Name="Fecha_Afiliacion" ColumnName="Fecha_Afiliacion" />
-                <ScalarProperty Name="Calificacion_Profesional" ColumnName="Calificacion_Profesional" />
-                <ScalarProperty Name="Delegacion" ColumnName="Delegacion" />
-                <ScalarProperty Name="Numero_Doc" ColumnName="Numero_Doc" />
-                <ScalarProperty Name="Tipo_Doc" ColumnName="Tipo_Doc" />
-                <ScalarProperty Name="CUIL" ColumnName="CUIL" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Afiliados_Documentos">
-            <EntityTypeMapping TypeName="SeocaPreinscripcionesModel.Afiliados_Documentos">
-              <MappingFragment StoreEntitySet="Afiliados_Documentos">
-                <ScalarProperty Name="Nacionalidad" ColumnName="Nacionalidad" />
-                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
-                <ScalarProperty Name="Id_Afiliado" ColumnName="Id_Afiliado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Afiliados_Empresa">
-            <EntityTypeMapping TypeName="SeocaPreinscripcionesModel.Afiliados_Empresa">
-              <MappingFragment StoreEntitySet="Afiliados_Empresa">
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-                <ScalarProperty Name="Localidad" ColumnName="Localidad" />
-                <ScalarProperty Name="CP" ColumnName="CP" />
-                <ScalarProperty Name="Dto" ColumnName="Dto" />
-                <ScalarProperty Name="Piso" ColumnName="Piso" />
-                <ScalarProperty Name="Local" ColumnName="Local" />
-                <ScalarProperty Name="Numero" ColumnName="Numero" />
-                <ScalarProperty Name="Calle" ColumnName="Calle" />
-                <ScalarProperty Name="Cuit_Empresa" ColumnName="Cuit_Empresa" />
-                <ScalarProperty Name="Nombre_Empresa" ColumnName="Nombre_Empresa" />
-                <ScalarProperty Name="Fecha_Ingreso" ColumnName="Fecha_Ingreso" />
-                <ScalarProperty Name="Id_Afiliado" ColumnName="Id_Afiliado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Afiliados_Familiares">
-            <EntityTypeMapping TypeName="SeocaPreinscripcionesModel.Afiliados_Familiares">
-              <MappingFragment StoreEntitySet="Afiliados_Familiares">
-                <ScalarProperty Name="Actualizacion" ColumnName="Actualizacion" />
-                <ScalarProperty Name="Venc" ColumnName="Venc" />
-                <ScalarProperty Name="Fecha_Nac" ColumnName="Fecha_Nac" />
-                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
-                <ScalarProperty Name="Num_Doc" ColumnName="Num_Doc" />
-                <ScalarProperty Name="Tipo_Doc" ColumnName="Tipo_Doc" />
-                <ScalarProperty Name="Cert_Estudios" ColumnName="Cert_Estudios" />
-                <ScalarProperty Name="Apellido_Nombre" ColumnName="Apellido_Nombre" />
-                <ScalarProperty Name="Parentesco" ColumnName="Parentesco" />
-                <ScalarProperty Name="Id_Afiliado" ColumnName="Id_Afiliado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

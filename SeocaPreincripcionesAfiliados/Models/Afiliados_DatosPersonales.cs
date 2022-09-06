@@ -22,7 +22,7 @@ namespace SeocaPreincripcionesAfiliados.Models
         public string Numero_Doc { get; set; }
         public string Delegacion { get; set; }
         public string Calificacion_Profesional { get; set; }
-        public Nullable<System.DateTime> Fecha_Afiliacion { get; set; }
+        public Nullable<System.DateTime> Fecha_Solicitud { get; set; }
         public string Estado_Civil { get; set; }
         public Nullable<System.DateTime> Fecha_Nac { get; set; }
         public string Calle { get; set; }
@@ -33,5 +33,7 @@ namespace SeocaPreincripcionesAfiliados.Models
         public Nullable<int> CP { get; set; }
         public string Localidad { get; set; }
         public string Provincia { get; set; }
+        public string Sexo { get; set; }
+        public string Nacionalidad { get; set; }
     }
 }

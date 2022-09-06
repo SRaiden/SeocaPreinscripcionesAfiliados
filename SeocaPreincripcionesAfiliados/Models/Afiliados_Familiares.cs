@@ -14,6 +14,7 @@ namespace SeocaPreincripcionesAfiliados.Models
     
     public partial class Afiliados_Familiares
     {
+        public int Id { get; set; }
         public int Id_Afiliado { get; set; }
         public string Parentesco { get; set; }
         public string Apellido_Nombre { get; set; }
@@ -22,7 +23,5 @@ namespace SeocaPreincripcionesAfiliados.Models
         public string Num_Doc { get; set; }
         public string Sexo { get; set; }
         public Nullable<System.DateTime> Fecha_Nac { get; set; }
-        public Nullable<System.DateTime> Venc { get; set; }
-        public Nullable<System.DateTime> Actualizacion { get; set; }
     }
 }

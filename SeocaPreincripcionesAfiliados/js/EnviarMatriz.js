@@ -1,5 +1,4 @@
-﻿var matrizDocumento = new Array();
-var matrizEmpresa = new Array();
+﻿var matrizEmpresa = new Array();
 var matrizDatosAfiliado = new Array();
 var matrizFamiliares = new Array();
 
@@ -12,7 +11,7 @@ function enviar() {
     var NumDoc = document.getElementById("NumDoc").value;
     var Delegacion = document.getElementById("Delegacion").value;
     var CalifProf = document.getElementById("CalifProf").value;
-    var Fecha_Afiliacion = document.getElementById("Fecha_Afiliacion").value;
+    var Fecha_Solicitud = document.getElementById("Fecha_Solicitud").value;
     var EstadoCivil = document.getElementById("EstadoCivil").value;
     var FechaNac = document.getElementById("FechaNac").value;
     var Calle = document.getElementById("Calle").value;
@@ -23,7 +22,6 @@ function enviar() {
     var CP = document.getElementById("CP").value;
     var Localidad = document.getElementById("Localidad").value;
     var Provincia = document.getElementById("Provincia").value;
-
     var SexoAfiliadoDocumento = document.getElementById("SexoAfiliadoDocumento").value;
     var Nacionalidad = document.getElementById("Nacionalidad").value;
 
@@ -80,7 +78,7 @@ function enviar() {
         alert("Debe de seleccionar una Calificacion Profesional");
         return false;
     }
-    if (Fecha_Afiliacion == "") {
+    if (Fecha_Solicitud == "") {
         alert("Debe de ingresar la Fecha de Afiliacion");
         return false;
     }
@@ -90,6 +88,18 @@ function enviar() {
     }
     if (FechaNac == "") {
         alert("Debe de ingresar la Fecha de Nacimiento");
+        return false;
+    }
+    if (Calle == "") {
+        alert("Debe de ingresar la Calle");
+        return false;
+    }
+    if (NumeroCalle == "") {
+        alert("Debe de ingresar el N° de Calle");
+        return false;
+    }
+    if (Telefono == "") {
+        alert("Debe de ingresar el N° de Telefono");
         return false;
     }
     if (CP == 0) {
@@ -104,13 +114,12 @@ function enviar() {
         alert("Debe de seleccionar una Provincia");
         return false;
     }
-
     if (SexoAfiliadoDocumento == 0) {
         alert("Debe de seleccionar un Genero (Documento)");
         return false;
     }
     if (Nacionalidad == "") {
-        alert("Debe de ingresar la Nacionalidad (Documento)");
+        alert("Debe de ingresar la Nacionalidad");
         return false;
     }
 
@@ -134,12 +143,28 @@ function enviar() {
         alert("El CUIT de la empresa debe de constar de 11 caracteres");
         return false;
     }
+    if (CalleAfiliadoEmpresa == "") {
+        alert("Debe de ingresar la Calle de la Empresa (Empresa)");
+        return false;
+    }
+    if (NumeroAfiliadoEmpresa == "") {
+        alert("Debe de ingresar el N° de Calle de la Empresa (Empresa)");
+        return false;
+    }
+    if (LocalAfiliadoEmpresa == "") {
+        alert("Debe de ingresar el Local de la Empresa (Empresa)");
+        return false;
+    }
     if (CPAfiliadoEmpresa == 0) {
         alert("Debe de seleccionar el Codigo Postal (Empresa)");
         return false;
     }
     if (LocalidadAfiliadoEmpresa == "") {
         alert("Debe de ingresar la Localidad (Empresa)");
+        return false;
+    }
+    if (TelefonoAfiliadoEmpresa == "") {
+        alert("Debe de ingresar el Telefono (Empresa)");
         return false;
     }
 
@@ -151,7 +176,7 @@ function enviar() {
         NumDoc: NumDoc,
         Delegacion: Delegacion,
         CalifProf: CalifProf,
-        Fecha_Afiliacion: Fecha_Afiliacion,
+        Fecha_Solicitud: Fecha_Solicitud,
         EstadoCivil: EstadoCivil,
         FechaNac: FechaNac,
         Calle: Calle,
@@ -161,10 +186,7 @@ function enviar() {
         Telefono: Telefono,
         CP: CP,
         Localidad: Localidad,
-        Provincia: Provincia
-    });
-
-    matrizDocumento.push({
+        Provincia: Provincia,
         SexoAfiliadoDocumento: SexoAfiliadoDocumento,
         Nacionalidad: Nacionalidad
     });
@@ -185,8 +207,6 @@ function enviar() {
 
     //-------------------------------------------------------------------------------------------------//
 
-
-    if (matrizDocumento == "") matrizDocumento = null;
     if (matrizEmpresa == "") matrizEmpresa = null;
     if (matrizFamiliares == "") matrizFamiliares = null;
 
@@ -205,7 +225,6 @@ function enviar() {
         },
         data: {
             matrizDatosAfiliado: JSON.stringify(matrizDatosAfiliado),
-            matrizDocumento: JSON.stringify(matrizDocumento),
             matrizEmpresa: JSON.stringify(matrizEmpresa),
             matrizFamiliares: JSON.stringify(matrizFamiliares)
         }
@@ -224,8 +243,6 @@ function insertarFamiliar() {
     var NumDocAfiliadoFamiliar = document.getElementById("NumDocAfiliadoFamiliar").value;
     var SexoAfiliadoFamiliar = document.getElementById("SexoAfiliadoFamiliar").value; // select
     var FechaNacAfiliadoFamiliar = document.getElementById("FechaNacAfiliadoFamiliar").value;
-    var VencioAfiliadoFamiliar = document.getElementById("VencioAfiliadoFamiliar").value;
-    var ActualizacionAfiliadoFamiliar = document.getElementById("ActualizacionAfiliadoFamiliar").value;
 
     //Validaciones
     if (Parentesco == 0) {
@@ -234,10 +251,6 @@ function insertarFamiliar() {
     }
     if (ApellidoNombreAfiliadoFamiliar == "") {
         alert("Debe de ingresar el Nombre y Apellido del familiar");
-        return false;
-    }
-    if (CertEstudiosAfiliadoFamiliar == "") {
-        alert("Ingrese el certificado de Estudios");
         return false;
     }
     if (TipoDocAfiliadoFamiliar == 0) {
@@ -254,14 +267,6 @@ function insertarFamiliar() {
     }
     if (FechaNacAfiliadoFamiliar == "") {
         alert("Ingrese la Fecha de Nacimiento del Familiar");
-        return false;
-    }
-    if (VencioAfiliadoFamiliar == "") {
-        alert("Ingrese el Vencio del Familiar");
-        return false;
-    }
-    if (ActualizacionAfiliadoFamiliar == "") {
-        alert("Ingrese la Fecha de Actualizacion del familiar");
         return false;
     }
 
@@ -288,8 +293,6 @@ function insertarFamiliar() {
     document.getElementById("NumDocAfiliadoFamiliar").value = "";
     document.getElementById("SexoAfiliadoFamiliar").value = "0"; // select
     document.getElementById("FechaNacAfiliadoFamiliar").value = "";
-    document.getElementById("VencioAfiliadoFamiliar").value = "";
-    document.getElementById("ActualizacionAfiliadoFamiliar").value = "";
 
     matrizFamiliares.push({
         Parentesco: Parentesco,
@@ -298,9 +301,7 @@ function insertarFamiliar() {
         TipoDocAfiliadoFamiliar: TipoDocAfiliadoFamiliar,
         NumDocAfiliadoFamiliar: NumDocAfiliadoFamiliar,
         SexoAfiliadoFamiliar: SexoAfiliadoFamiliar,
-        FechaNacAfiliadoFamiliar: FechaNacAfiliadoFamiliar,
-        VencioAfiliadoFamiliar: VencioAfiliadoFamiliar,
-        ActualizacionAfiliadoFamiliar: ActualizacionAfiliadoFamiliar
+        FechaNacAfiliadoFamiliar: FechaNacAfiliadoFamiliar
     });
 
 }

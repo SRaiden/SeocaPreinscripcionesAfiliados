@@ -12,7 +12,7 @@
     <Property Name="Numero_Doc" Type="nvarchar" MaxLength="50" />
     <Property Name="Delegacion" Type="nvarchar" MaxLength="150" />
     <Property Name="Calificacion_Profesional" Type="nvarchar" MaxLength="150" />
-    <Property Name="Fecha_Afiliacion" Type="date" />
+    <Property Name="Fecha_Solicitud" Type="date" />
     <Property Name="Estado_Civil" Type="nvarchar" MaxLength="50" />
     <Property Name="Fecha_Nac" Type="date" />
     <Property Name="Calle" Type="nvarchar" MaxLength="50" />
@@ -23,20 +23,15 @@
     <Property Name="CP" Type="int" />
     <Property Name="Localidad" Type="nvarchar" MaxLength="150" />
     <Property Name="Provincia" Type="nvarchar" MaxLength="150" />
-  </EntityType>
-  <EntityType Name="Afiliados_Documentos">
-    <Key>
-      <PropertyRef Name="Id_Afiliado" />
-    </Key>
-    <Property Name="Id_Afiliado" Type="int" Nullable="false" />
     <Property Name="Sexo" Type="nvarchar" MaxLength="50" />
     <Property Name="Nacionalidad" Type="nvarchar" MaxLength="150" />
   </EntityType>
   <EntityType Name="Afiliados_Empresa">
     <Key>
-      <PropertyRef Name="Id_Afiliado" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id_Afiliado" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id_Afiliado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Fecha_Ingreso" Type="date" />
     <Property Name="Nombre_Empresa" Type="nvarchar" MaxLength="150" />
     <Property Name="Cuit_Empresa" Type="nvarchar" MaxLength="50" />
@@ -51,8 +46,9 @@
   </EntityType>
   <EntityType Name="Afiliados_Familiares">
     <Key>
-      <PropertyRef Name="Id_Afiliado" />
+      <PropertyRef Name="Id" />
     </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Id_Afiliado" Type="int" Nullable="false" />
     <Property Name="Parentesco" Type="nvarchar" MaxLength="50" />
     <Property Name="Apellido_Nombre" Type="nvarchar" MaxLength="150" />
@@ -61,8 +57,6 @@
     <Property Name="Num_Doc" Type="nvarchar" MaxLength="150" />
     <Property Name="Sexo" Type="nvarchar" MaxLength="50" />
     <Property Name="Fecha_Nac" Type="date" />
-    <Property Name="Venc" Type="date" />
-    <Property Name="Actualizacion" Type="date" />
   </EntityType>
   <EntityType Name="General_Calificacion">
     <Key>
@@ -115,7 +109,6 @@
   </EntityType>
   <EntityContainer Name="SeocaPreinscripcionesModelStoreContainer">
     <EntitySet Name="Afiliados_DatosPersonales" EntityType="Self.Afiliados_DatosPersonales" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Afiliados_Documentos" EntityType="Self.Afiliados_Documentos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Afiliados_Empresa" EntityType="Self.Afiliados_Empresa" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Afiliados_Familiares" EntityType="Self.Afiliados_Familiares" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="General_Calificacion" EntityType="Self.General_Calificacion" Schema="dbo" store:Type="Tables" />
