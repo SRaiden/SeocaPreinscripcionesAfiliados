@@ -171,10 +171,16 @@
     <Compile Include="Models\General_Localidades.cs">
       <DependentUpon>Afiliados.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\General_Nacionalidades.cs">
+      <DependentUpon>Afiliados.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\General_Parentesco.cs">
       <DependentUpon>Afiliados.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\General_Provincias.cs">
+      <DependentUpon>Afiliados.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\General_Sexo.cs">
       <DependentUpon>Afiliados.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

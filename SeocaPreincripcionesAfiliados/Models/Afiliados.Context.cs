@@ -25,7 +25,6 @@ namespace SeocaPreincripcionesAfiliados.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Afiliados_DatosPersonales> Afiliados_DatosPersonales { get; set; }
         public virtual DbSet<Afiliados_Empresa> Afiliados_Empresa { get; set; }
         public virtual DbSet<Afiliados_Familiares> Afiliados_Familiares { get; set; }
         public virtual DbSet<General_Calificacion> General_Calificacion { get; set; }
@@ -35,5 +34,8 @@ namespace SeocaPreincripcionesAfiliados.Models
         public virtual DbSet<General_Localidades> General_Localidades { get; set; }
         public virtual DbSet<General_Parentesco> General_Parentesco { get; set; }
         public virtual DbSet<General_Provincias> General_Provincias { get; set; }
+        public virtual DbSet<General_Nacionalidades> General_Nacionalidades { get; set; }
+        public virtual DbSet<General_Sexo> General_Sexo { get; set; }
+        public virtual DbSet<Afiliados_DatosPersonales> Afiliados_DatosPersonales { get; set; }
     }
 }

@@ -35,6 +35,12 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                 List<General_Parentesco> Parentesco = db.General_Parentesco.ToList<General_Parentesco>();
                 ViewData["Parentesco"] = Parentesco;
 
+                List<General_Sexo> Sexo = db.General_Sexo.ToList<General_Sexo>();
+                ViewData["Sexo"] = Sexo;
+
+                List<General_Nacionalidades> Nacionalidad = db.General_Nacionalidades.ToList<General_Nacionalidades>();
+                ViewData["Nacionalidad"] = Nacionalidad;
+
                 ViewBag.diaHoy = DateTime.Now.ToString("yyyy-MM-dd");
 
 
@@ -52,7 +58,7 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                 try
                 {
                     JArray jsonPreservar = JArray.Parse(matrizDatosAfiliado);
-                    string Apellido = "", Nombre = "", Cuil = "", TipoDoc = "", NumDoc = "", Delegacion = "", CalifProf = "", Fecha_Solicitud = "", EstadoCivil = "", FechaNac = "", Calle = "", NumeroCalle = "", Piso = "", Dto = "", Telefono = "", CP = "", Localidad = "", Provincia = "", SexoAfiliadoDocumento = "", Nacionalidad = "";
+                    string Apellido = "", Nombre = "", Cuil = "", TipoDoc = "", NumDoc = "", Delegacion = "", CalifProf = "", EstadoCivil = "", FechaNac = "", Calle = "", NumeroCalle = "", Piso = "", Dto = "", Telefono = "", Localidad = "", Provincia = "", SexoAfiliadoDocumento = "", Nacionalidad = "";
                     foreach (JObject jsonOperaciones in jsonPreservar.Children<JObject>())
                     {
                         foreach (JProperty jsonOPropiedades in jsonOperaciones.Properties())
@@ -65,7 +71,6 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                             if (propiedad.Equals("NumDoc")) NumDoc = jsonOPropiedades.Value.ToString();
                             if (propiedad.Equals("Delegacion")) Delegacion = jsonOPropiedades.Value.ToString();
                             if (propiedad.Equals("CalifProf")) CalifProf = jsonOPropiedades.Value.ToString();
-                            if (propiedad.Equals("Fecha_Solicitud")) Fecha_Solicitud = jsonOPropiedades.Value.ToString();
                             if (propiedad.Equals("EstadoCivil")) EstadoCivil = jsonOPropiedades.Value.ToString();
                             if (propiedad.Equals("FechaNac")) FechaNac = jsonOPropiedades.Value.ToString();
                             if (propiedad.Equals("Calle")) Calle = jsonOPropiedades.Value.ToString();
@@ -73,7 +78,7 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                             if (propiedad.Equals("Piso")) Piso = jsonOPropiedades.Value.ToString();
                             if (propiedad.Equals("Dto")) Dto = jsonOPropiedades.Value.ToString();
                             if (propiedad.Equals("Telefono")) Telefono = jsonOPropiedades.Value.ToString();
-                            if (propiedad.Equals("CP")) CP = jsonOPropiedades.Value.ToString();
+
                             if (propiedad.Equals("Localidad")) Localidad = jsonOPropiedades.Value.ToString();
                             if (propiedad.Equals("Provincia")) Provincia = jsonOPropiedades.Value.ToString();
 
@@ -96,29 +101,29 @@ namespace SeocaPreincripcionesAfiliados.Controllers
 
                     }
 
+                    string hoy = DateTime.Now.ToString("yyyy/MM/dd");
+
                     // GUARDAR EN LA TABLA DE EMPRESAS
                     var emp = new Afiliados_DatosPersonales
                     {
-                        Apellido = Apellido,
-                        Nombre = Nombre,
+                        ApellidoNombre = Apellido + " " + Nombre,
                         CUIL = Cuil,
-                        Tipo_Doc = TipoDoc,
+                        Tipo_Doc = Int32.Parse(TipoDoc),
                         Numero_Doc = NumDoc,
-                        Delegacion = Delegacion,
-                        Calificacion_Profesional = CalifProf,
-                        Fecha_Solicitud = DateTime.Parse(Fecha_Solicitud),
-                        Estado_Civil = EstadoCivil,
+                        Delegacion = Int32.Parse(Delegacion),
+                        Calificacion_Profesional = Int32.Parse(CalifProf),
+                        Fecha_Solicitud = DateTime.Parse(hoy),
+                        Estado_Civil = Int32.Parse(EstadoCivil),
                         Fecha_Nac = DateTime.Parse(FechaNac),
                         Calle = Calle,
                         Numero_Calle = NumeroCalle,
                         Piso = Piso,
                         Dto = Dto,
                         Telefono = Int32.Parse(Telefono),
-                        CP = Int32.Parse(CP),
-                        Localidad = Localidad,
+                        Localidad = Int32.Parse(Localidad),
                         Provincia = Provincia,
-                        Sexo = SexoAfiliadoDocumento,
-                        Nacionalidad = Nacionalidad
+                        Sexo = Int32.Parse(SexoAfiliadoDocumento),
+                        Nacionalidad = Int32.Parse(Nacionalidad) 
                     };
 
                     db.Afiliados_DatosPersonales.Add(emp);

@@ -15,25 +15,24 @@ namespace SeocaPreincripcionesAfiliados.Models
     public partial class Afiliados_DatosPersonales
     {
         public int Codigo { get; set; }
-        public string Apellido { get; set; }
-        public string Nombre { get; set; }
+        public string ApellidoNombre { get; set; }
         public string CUIL { get; set; }
-        public string Tipo_Doc { get; set; }
+        public Nullable<int> Tipo_Doc { get; set; }
         public string Numero_Doc { get; set; }
-        public string Delegacion { get; set; }
-        public string Calificacion_Profesional { get; set; }
+        public Nullable<int> Delegacion { get; set; }
+        public Nullable<int> Calificacion_Profesional { get; set; }
         public Nullable<System.DateTime> Fecha_Solicitud { get; set; }
-        public string Estado_Civil { get; set; }
+        public Nullable<int> Estado_Civil { get; set; }
         public Nullable<System.DateTime> Fecha_Nac { get; set; }
         public string Calle { get; set; }
         public string Numero_Calle { get; set; }
         public string Piso { get; set; }
         public string Dto { get; set; }
         public Nullable<int> Telefono { get; set; }
-        public Nullable<int> CP { get; set; }
-        public string Localidad { get; set; }
+        public Nullable<int> Localidad { get; set; }
         public string Provincia { get; set; }
-        public string Sexo { get; set; }
-        public string Nacionalidad { get; set; }
+        public Nullable<int> Sexo { get; set; }
+        public Nullable<int> Nacionalidad { get; set; }
+        public Nullable<bool> Ingresado { get; set; }
     }
 }

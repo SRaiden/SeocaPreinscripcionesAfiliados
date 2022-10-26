@@ -11,7 +11,6 @@ function enviar() {
     var NumDoc = document.getElementById("NumDoc").value;
     var Delegacion = document.getElementById("Delegacion").value;
     var CalifProf = document.getElementById("CalifProf").value;
-    var Fecha_Solicitud = document.getElementById("Fecha_Solicitud").value;
     var EstadoCivil = document.getElementById("EstadoCivil").value;
     var FechaNac = document.getElementById("FechaNac").value;
     var Calle = document.getElementById("Calle").value;
@@ -19,7 +18,6 @@ function enviar() {
     var Piso = document.getElementById("Piso").value;
     var Dto = document.getElementById("Dto").value;
     var Telefono = document.getElementById("Telefono").value;
-    var CP = document.getElementById("CP").value;
     var Localidad = document.getElementById("Localidad").value;
     var Provincia = document.getElementById("Provincia").value;
     var SexoAfiliadoDocumento = document.getElementById("SexoAfiliadoDocumento").value;
@@ -78,10 +76,6 @@ function enviar() {
         alert("Debe de seleccionar una Calificacion Profesional");
         return false;
     }
-    if (Fecha_Solicitud == "") {
-        alert("Debe de ingresar la Fecha de Afiliacion");
-        return false;
-    }
     if (EstadoCivil == 0) {
         alert("Debe de seleccionar un Estado Civil");
         return false;
@@ -100,10 +94,6 @@ function enviar() {
     }
     if (Telefono == "") {
         alert("Debe de ingresar el N° de Telefono");
-        return false;
-    }
-    if (CP == 0) {
-        alert("Debe de seleccionar el Codigo Postal");
         return false;
     }
     if (Localidad == "") {
@@ -176,7 +166,6 @@ function enviar() {
         NumDoc: NumDoc,
         Delegacion: Delegacion,
         CalifProf: CalifProf,
-        Fecha_Solicitud: Fecha_Solicitud,
         EstadoCivil: EstadoCivil,
         FechaNac: FechaNac,
         Calle: Calle,
@@ -184,7 +173,6 @@ function enviar() {
         Piso: Piso,
         Dto: Dto,
         Telefono: Telefono,
-        CP: CP,
         Localidad: Localidad,
         Provincia: Provincia,
         SexoAfiliadoDocumento: SexoAfiliadoDocumento,
