@@ -21,11 +21,9 @@ namespace SeocaPreincripcionesAfiliados.Models
         public string Cuit_Empresa { get; set; }
         public string Calle { get; set; }
         public Nullable<int> Numero { get; set; }
-        public string Local { get; set; }
         public string Piso { get; set; }
         public string Dto { get; set; }
-        public Nullable<int> CP { get; set; }
-        public string Localidad { get; set; }
+        public Nullable<int> Localidad { get; set; }
         public Nullable<int> Telefono { get; set; }
     }
 }

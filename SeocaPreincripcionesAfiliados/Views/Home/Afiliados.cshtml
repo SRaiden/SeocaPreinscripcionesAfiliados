@@ -242,7 +242,7 @@
                     </div>
                     <div class="w3-third w3-container w3-text-white">
                         <div class="w3-padding w3-bluesky">CUIT Empresa</div>
-                        <input type="text" id="CUITEmpresaAfiliadoEmpresa" name="CUITEmpresaAfiliadoEmpresa" class="w3-input w3-ligth-grey w3-left-align" onchange="changeCampos()">
+                        <input type="number" id="CUITEmpresaAfiliadoEmpresa" name="CUITEmpresaAfiliadoEmpresa" class="w3-input w3-ligth-grey w3-left-align" onchange="changeCampos()">
                     </div>
                 </div>
                 <br>
@@ -284,8 +284,23 @@
                 <!-- -------------------- Localidad / Telefono -------------------- -->
                 <div class="w3-row">
                     <div class="w3-third w3-container w3-text-white">
+
                         <div class="w3-padding w3-bluesky">Localidad</div>
-                        <input type="text" id="LocalidadAfiliadoEmpresa" name="LocalidadAfiliadoEmpresa" class="w3-input w3-ligth-grey w3-left-align" onchange="changeCampos()">
+                        <select class="w3-select" name="LocalidadAfiliadoEmpresa" id="LocalidadAfiliadoEmpresa">
+                            <option value="0">< Seleccione una Localidad ></option>
+                            @{
+                                if (ViewData["Localidades"] != null)
+                                {
+                                    IEnumerable<dynamic> Localidad = (IEnumerable<dynamic>)ViewData["Localidades"];
+
+                                    foreach (dynamic Loc in Localidad)
+                                    {
+                                        <option value="@Loc.Id">@Loc.Nombre_Localidad</option>
+                                    }
+                                }
+                            }
+                        </select>
+
                     </div>
                     <div class="w3-third w3-container w3-text-white">
                         <div class="w3-padding w3-bluesky">Telefono</div>
@@ -306,7 +321,6 @@
                     <div class="w3-third w3-container w3-text-white">
                         <div class="w3-padding w3-bluesky">Parentesco</div>
                         <select class="w3-select" name="Parentesco" id="Parentesco">
-                            <option value="0">< Seleccione un Parentesco ></option>
                             @{
                                 if (ViewData["Parentesco"] != null)
                                 {

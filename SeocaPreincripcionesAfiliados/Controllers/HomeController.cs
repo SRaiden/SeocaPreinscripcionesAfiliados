@@ -181,11 +181,9 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                                 Cuit_Empresa = CUITEmpresaAfiliadoEmpresa,
                                 Calle = CalleAfiliadoEmpresa,
                                 Numero = Int32.Parse(NumeroAfiliadoEmpresa),
-                                Local = LocalAfiliadoEmpresa,
                                 Piso = PisoAfiliadoEmpresa,
                                 Dto = DtoAfiliadoEmpresa,
-                                CP = Int32.Parse(CPAfiliadoEmpresa),
-                                Localidad = LocalidadAfiliadoEmpresa,
+                                Localidad = Int32.Parse(LocalidadAfiliadoEmpresa),
                                 Telefono = Int32.Parse(TelefonoAfiliadoEmpresa) 
                             };
 
@@ -196,7 +194,7 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                     }
 
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     return Json(new { success = true, responseText = "Error al Preinscribir Datos de la Empresa." }, JsonRequestBehavior.AllowGet);
                 }
@@ -273,7 +271,7 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                     }
 
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     return Json(new { success = true, responseText = "Error al Preinscribir Antecedente." }, JsonRequestBehavior.AllowGet);
                 }

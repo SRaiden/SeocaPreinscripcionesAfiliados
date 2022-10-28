@@ -29,18 +29,16 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
-    <Property Name="Id_Afiliado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id_Afiliado" Type="int" Nullable="false" />
     <Property Name="Fecha_Ingreso" Type="date" />
     <Property Name="Nombre_Empresa" Type="nvarchar" MaxLength="150" />
     <Property Name="Cuit_Empresa" Type="nvarchar" MaxLength="50" />
     <Property Name="Calle" Type="nvarchar" MaxLength="50" />
     <Property Name="Numero" Type="int" />
-    <Property Name="Local" Type="nvarchar" MaxLength="50" />
     <Property Name="Piso" Type="nvarchar" MaxLength="50" />
     <Property Name="Dto" Type="nvarchar" MaxLength="50" />
-    <Property Name="CP" Type="int" />
-    <Property Name="Localidad" Type="nvarchar" MaxLength="150" />
+    <Property Name="Localidad" Type="int" />
     <Property Name="Telefono" Type="int" />
   </EntityType>
   <EntityType Name="Afiliados_Familiares">

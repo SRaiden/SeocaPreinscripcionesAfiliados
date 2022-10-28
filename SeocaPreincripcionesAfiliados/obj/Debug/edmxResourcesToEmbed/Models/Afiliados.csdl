@@ -1,23 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="geosoftw_seocapreinscripcionesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="Afiliados_Empresa">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
-    <Property Name="Id_Afiliado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Fecha_Ingreso" Type="DateTime" Precision="0" />
-    <Property Name="Nombre_Empresa" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-    <Property Name="Cuit_Empresa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Calle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Numero" Type="Int32" />
-    <Property Name="Local" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Piso" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Dto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CP" Type="Int32" />
-    <Property Name="Localidad" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-    <Property Name="Telefono" Type="Int32" />
-  </EntityType>
   <EntityType Name="Afiliados_Familiares">
     <Key>
       <PropertyRef Name="Id" />
@@ -82,7 +64,6 @@
     <Property Name="Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityContainer Name="SeocaPreinscripcionesEntities2" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Afiliados_Empresa" EntityType="Self.Afiliados_Empresa" />
     <EntitySet Name="Afiliados_Familiares" EntityType="Self.Afiliados_Familiares" />
     <EntitySet Name="General_Calificacion" EntityType="Self.General_Calificacion" />
     <EntitySet Name="General_Delegacion" EntityType="Self.General_Delegacion" />
@@ -94,6 +75,7 @@
     <EntitySet Name="General_Nacionalidades" EntityType="geosoftw_seocapreinscripcionesModel.General_Nacionalidades" />
     <EntitySet Name="General_Sexo" EntityType="geosoftw_seocapreinscripcionesModel.General_Sexo" />
     <EntitySet Name="Afiliados_DatosPersonales" EntityType="geosoftw_seocapreinscripcionesModel.Afiliados_DatosPersonales" />
+    <EntitySet Name="Afiliados_Empresa" EntityType="geosoftw_seocapreinscripcionesModel.Afiliados_Empresa" />
   </EntityContainer>
   <EntityType Name="General_Nacionalidades">
     <Key>
@@ -133,5 +115,21 @@
     <Property Name="Sexo" Type="Int32" />
     <Property Name="Nacionalidad" Type="Int32" />
     <Property Name="Ingresado" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Afiliados_Empresa">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id_Afiliado" Type="Int32" Nullable="false" />
+    <Property Name="Fecha_Ingreso" Type="DateTime" Precision="0" />
+    <Property Name="Nombre_Empresa" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Cuit_Empresa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Calle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Numero" Type="Int32" />
+    <Property Name="Piso" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Dto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Localidad" Type="Int32" />
+    <Property Name="Telefono" Type="Int32" />
   </EntityType>
 </Schema>

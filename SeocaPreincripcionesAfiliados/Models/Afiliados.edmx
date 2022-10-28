@@ -34,18 +34,16 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Id_Afiliado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Afiliado" Type="int" Nullable="false" />
           <Property Name="Fecha_Ingreso" Type="date" />
           <Property Name="Nombre_Empresa" Type="nvarchar" MaxLength="150" />
           <Property Name="Cuit_Empresa" Type="nvarchar" MaxLength="50" />
           <Property Name="Calle" Type="nvarchar" MaxLength="50" />
           <Property Name="Numero" Type="int" />
-          <Property Name="Local" Type="nvarchar" MaxLength="50" />
           <Property Name="Piso" Type="nvarchar" MaxLength="50" />
           <Property Name="Dto" Type="nvarchar" MaxLength="50" />
-          <Property Name="CP" Type="int" />
-          <Property Name="Localidad" Type="nvarchar" MaxLength="150" />
+          <Property Name="Localidad" Type="int" />
           <Property Name="Telefono" Type="int" />
         </EntityType>
         <EntityType Name="Afiliados_Familiares">
@@ -143,24 +141,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="geosoftw_seocapreinscripcionesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Afiliados_Empresa">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Id_Afiliado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Fecha_Ingreso" Type="DateTime" Precision="0" />
-          <Property Name="Nombre_Empresa" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Cuit_Empresa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Calle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Numero" Type="Int32" />
-          <Property Name="Local" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Piso" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Dto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CP" Type="Int32" />
-          <Property Name="Localidad" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Telefono" Type="Int32" />
-        </EntityType>
         <EntityType Name="Afiliados_Familiares">
           <Key>
             <PropertyRef Name="Id" />
@@ -225,7 +205,6 @@
           <Property Name="Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityContainer Name="SeocaPreinscripcionesEntities2" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Afiliados_Empresa" EntityType="Self.Afiliados_Empresa" />
           <EntitySet Name="Afiliados_Familiares" EntityType="Self.Afiliados_Familiares" />
           <EntitySet Name="General_Calificacion" EntityType="Self.General_Calificacion" />
           <EntitySet Name="General_Delegacion" EntityType="Self.General_Delegacion" />
@@ -237,6 +216,7 @@
           <EntitySet Name="General_Nacionalidades" EntityType="geosoftw_seocapreinscripcionesModel.General_Nacionalidades" />
           <EntitySet Name="General_Sexo" EntityType="geosoftw_seocapreinscripcionesModel.General_Sexo" />
           <EntitySet Name="Afiliados_DatosPersonales" EntityType="geosoftw_seocapreinscripcionesModel.Afiliados_DatosPersonales" />
+          <EntitySet Name="Afiliados_Empresa" EntityType="geosoftw_seocapreinscripcionesModel.Afiliados_Empresa" />
         </EntityContainer>
         <EntityType Name="General_Nacionalidades">
           <Key>
@@ -277,31 +257,28 @@
           <Property Name="Nacionalidad" Type="Int32" />
           <Property Name="Ingresado" Type="Boolean" />
         </EntityType>
+        <EntityType Name="Afiliados_Empresa">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Afiliado" Type="Int32" Nullable="false" />
+          <Property Name="Fecha_Ingreso" Type="DateTime" Precision="0" />
+          <Property Name="Nombre_Empresa" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Cuit_Empresa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Calle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Numero" Type="Int32" />
+          <Property Name="Piso" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Dto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Localidad" Type="Int32" />
+          <Property Name="Telefono" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="geosoftw_seocapreinscripcionesModelStoreContainer" CdmEntityContainer="SeocaPreinscripcionesEntities2">
-          <EntitySetMapping Name="Afiliados_Empresa">
-            <EntityTypeMapping TypeName="geosoftw_seocapreinscripcionesModel.Afiliados_Empresa">
-              <MappingFragment StoreEntitySet="Afiliados_Empresa">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Id_Afiliado" ColumnName="Id_Afiliado" />
-                <ScalarProperty Name="Fecha_Ingreso" ColumnName="Fecha_Ingreso" />
-                <ScalarProperty Name="Nombre_Empresa" ColumnName="Nombre_Empresa" />
-                <ScalarProperty Name="Cuit_Empresa" ColumnName="Cuit_Empresa" />
-                <ScalarProperty Name="Calle" ColumnName="Calle" />
-                <ScalarProperty Name="Numero" ColumnName="Numero" />
-                <ScalarProperty Name="Local" ColumnName="Local" />
-                <ScalarProperty Name="Piso" ColumnName="Piso" />
-                <ScalarProperty Name="Dto" ColumnName="Dto" />
-                <ScalarProperty Name="CP" ColumnName="CP" />
-                <ScalarProperty Name="Localidad" ColumnName="Localidad" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Afiliados_Familiares">
             <EntityTypeMapping TypeName="geosoftw_seocapreinscripcionesModel.Afiliados_Familiares">
               <MappingFragment StoreEntitySet="Afiliados_Familiares">
@@ -412,6 +389,23 @@
                 <ScalarProperty Name="CUIL" ColumnName="CUIL" />
                 <ScalarProperty Name="ApellidoNombre" ColumnName="ApellidoNombre" />
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Afiliados_Empresa">
+            <EntityTypeMapping TypeName="geosoftw_seocapreinscripcionesModel.Afiliados_Empresa">
+              <MappingFragment StoreEntitySet="Afiliados_Empresa">
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Localidad" ColumnName="Localidad" />
+                <ScalarProperty Name="Dto" ColumnName="Dto" />
+                <ScalarProperty Name="Piso" ColumnName="Piso" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Calle" ColumnName="Calle" />
+                <ScalarProperty Name="Cuit_Empresa" ColumnName="Cuit_Empresa" />
+                <ScalarProperty Name="Nombre_Empresa" ColumnName="Nombre_Empresa" />
+                <ScalarProperty Name="Fecha_Ingreso" ColumnName="Fecha_Ingreso" />
+                <ScalarProperty Name="Id_Afiliado" ColumnName="Id_Afiliado" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

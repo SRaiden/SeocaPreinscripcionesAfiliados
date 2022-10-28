@@ -149,7 +149,7 @@ function enviar() {
         alert("Debe de seleccionar el Codigo Postal (Empresa)");
         return false;
     }
-    if (LocalidadAfiliadoEmpresa == "") {
+    if (LocalidadAfiliadoEmpresa == 0) {
         alert("Debe de ingresar la Localidad (Empresa)");
         return false;
     }
@@ -206,7 +206,6 @@ function enviar() {
             alert(response.responseText);
             window.open(response.enlace);
             location.reload();
-
         },
         error: function (response) {
             alert(response.responseText);
