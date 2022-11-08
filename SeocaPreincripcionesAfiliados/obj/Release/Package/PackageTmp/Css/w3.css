@@ -14,8 +14,15 @@ html {
     -webkit-text-size-adjust: 100%;
 }
 
+
 body {
     margin: 0;
+    background-image: url('../images/inscripcion-online.jpg');
+    background-color: #cccccc;
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
+    background-attachment: fixed;
 }
 
 article,
@@ -363,9 +370,41 @@ a {
     white-space: nowrap;
 }
 
-    .w3-btn:hover {
-        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    }
+.enviar {
+    border: none;
+    display: inline-block;
+    padding: 8px 16px;
+    vertical-align: middle;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    background-color: inherit;
+    text-align: center;
+    cursor: pointer;
+    white-space: nowrap;
+    background-color: green;
+    width: 100%;
+}
+
+.eliminar {
+    border: none;
+    display: inline-block;
+    padding: 8px 16px;
+    vertical-align: middle;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    background-color: inherit;
+    text-align: center;
+    cursor: pointer;
+    white-space: nowrap;
+    background-color: #C92603;
+    width: 100%;
+}
+
+.w3-btn:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
 
 .w3-btn,
 .w3-button {
@@ -717,47 +756,47 @@ a {
 }
 
     .w3-col.s1 {
-        width: 8.33333%;
+        width: 6.33333%;
     }
 
     .w3-col.s2 {
-        width: 16.66666%;
+        width: 14.66666%;
     }
 
     .w3-col.s3 {
-        width: 24.99999%;
+        width: 22.99999%;
     }
 
     .w3-col.s4 {
-        width: 33.33333%;
+        width: 31.33333%;
     }
 
     .w3-col.s5 {
-        width: 41.66666%;
+        width: 39.66666%;
     }
 
     .w3-col.s6 {
-        width: 49.99999%;
+        width: 47.99999%;
     }
 
     .w3-col.s7 {
-        width: 58.33333%;
+        width: 56.33333%;
     }
 
     .w3-col.s8 {
-        width: 66.66666%;
+        width: 64.66666%;
     }
 
     .w3-col.s9 {
-        width: 74.99999%;
+        width: 72.99999%;
     }
 
     .w3-col.s10 {
-        width: 83.33333%;
+        width: 81.33333%;
     }
 
     .w3-col.s11 {
-        width: 91.66666%;
+        width: 89.66666%;
     }
 
     .w3-col.s12 {
@@ -766,106 +805,106 @@ a {
 
 @media (min-width: 601px) {
     .w3-col.m1 {
-        width: 8.33333%;
+        width: 6.33333%;
     }
 
     .w3-col.m2 {
-        width: 16.66666%;
+        width: 14.66666%;
     }
 
     .w3-col.m3,
     .w3-quarter {
-        width: 24.99999%;
+        width: 22.99999%;
     }
 
     .w3-col.m4,
     .w3-third {
-        width: 33.33333%;
+        width: 31.33333%;
     }
 
     .w3-col.m5 {
-        width: 41.66666%;
+        width: 39.66666%;
     }
 
     .w3-col.m6,
     .w3-half {
-        width: 49.99999%;
+        width: 47.99999%;
     }
 
     .w3-col.m7 {
-        width: 58.33333%;
+        width: 56.33333%;
     }
 
     .w3-col.m8,
     .w3-twothird {
-        width: 66.66666%;
+        width: 64.66666%;
     }
 
     .w3-col.m9,
     .w3-threequarter {
-        width: 74.99999%;
+        width: 72.99999%;
     }
 
     .w3-col.m10 {
-        width: 83.33333%;
+        width: 81.33333%;
     }
 
     .w3-col.m11 {
-        width: 91.66666%;
+        width: 89.66666%;
     }
 
     .w3-col.m12 {
-        width: 99.99999%;
+        width: 97.99999%;
     }
 }
 
 @media (min-width: 993px) {
     .w3-col.l1 {
-        width: 8.33333%;
+        width: 6.33333%;
     }
 
     .w3-col.l2 {
-        width: 16.66666%;
+        width: 14.66666%;
     }
 
     .w3-col.l3 {
-        width: 24.99999%;
+        width: 22.99999%;
     }
 
     .w3-col.l4 {
-        width: 33.33333%;
+        width: 31.33333%;
     }
 
     .w3-col.l5 {
-        width: 41.66666%;
+        width: 39.66666%;
     }
 
     .w3-col.l6 {
-        width: 49.99999%;
+        width: 47.99999%;
     }
 
     .w3-col.l7 {
-        width: 58.33333%;
+        width: 56.33333%;
     }
 
     .w3-col.l8 {
-        width: 66.66666%;
+        width: 64.66666%;
     }
 
     .w3-col.l9 {
-        width: 74.99999%;
+        width: 72.99999%;
     }
 
     .w3-col.l10 {
-        width: 83.33333%;
+        width: 81.33333%;
     }
 
     .w3-col.l11 {
-        width: 91.66666%;
+        width: 89.66666%;
     }
 
     .w3-col.l12 {
-        width: 99.99999%;
+        width: 97.99999%;
     }
 }
 
@@ -2050,3 +2089,4 @@ a {
 .w3-hover-border-pale-blue:hover {
     border-color: #e7ffff !important;
 }
+

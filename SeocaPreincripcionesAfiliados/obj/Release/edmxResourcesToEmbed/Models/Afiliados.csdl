@@ -130,6 +130,6 @@
     <Property Name="Piso" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Dto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Localidad" Type="Int32" />
-    <Property Name="Telefono" Type="Int32" />
+    <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>

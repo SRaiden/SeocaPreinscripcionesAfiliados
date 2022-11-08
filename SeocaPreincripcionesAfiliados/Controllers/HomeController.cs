@@ -17,22 +17,22 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                 List<General_Localidades> Localidades = db.General_Localidades.ToList<General_Localidades>();
                 ViewData["Localidades"] = Localidades;
 
-                List<General_Documentos> TipoDoc = db.General_Documentos.ToList<General_Documentos>();
+                List<General_Documentos> TipoDoc = db.General_Documentos.Where(d=>d.Id != 0).ToList<General_Documentos>();
                 ViewData["TipoDoc"] = TipoDoc;
 
-                List<General_Delegacion> Delegacion = db.General_Delegacion.ToList<General_Delegacion>();
+                List<General_Delegacion> Delegacion = db.General_Delegacion.Where(d => d.Id != 0).ToList<General_Delegacion>();
                 ViewData["Delegacion"] = Delegacion;
 
-                List<General_Calificacion> CalifProf = db.General_Calificacion.ToList<General_Calificacion>();
+                List<General_Calificacion> CalifProf = db.General_Calificacion.Where(d => d.Id != 0).ToList<General_Calificacion>();
                 ViewData["CalifProf"] = CalifProf;
 
-                List<General_Estado_Civil> EstadoCivil = db.General_Estado_Civil.ToList<General_Estado_Civil>();
+                List<General_Estado_Civil> EstadoCivil = db.General_Estado_Civil.Where(d => d.Id != 0).ToList<General_Estado_Civil>();
                 ViewData["EstadoCivil"] = EstadoCivil;
 
-                List<General_Provincias> Provincia = db.General_Provincias.ToList<General_Provincias>();
+                List<General_Provincias> Provincia = db.General_Provincias.Where(d => d.Id != 0).ToList<General_Provincias>();
                 ViewData["Provincia"] = Provincia;
 
-                List<General_Parentesco> Parentesco = db.General_Parentesco.ToList<General_Parentesco>();
+                List<General_Parentesco> Parentesco = db.General_Parentesco.Where(d => d.Id != 0).ToList<General_Parentesco>();
                 ViewData["Parentesco"] = Parentesco;
 
                 List<General_Sexo> Sexo = db.General_Sexo.ToList<General_Sexo>();
@@ -42,7 +42,6 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                 ViewData["Nacionalidad"] = Nacionalidad;
 
                 ViewBag.diaHoy = DateTime.Now.ToString("yyyy-MM-dd");
-
 
             }
             return View();
@@ -123,7 +122,8 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                         Localidad = Int32.Parse(Localidad),
                         Provincia = Provincia,
                         Sexo = Int32.Parse(SexoAfiliadoDocumento),
-                        Nacionalidad = Int32.Parse(Nacionalidad) 
+                        Nacionalidad = Int32.Parse(Nacionalidad),
+                        Ingresado = false
                     };
 
                     db.Afiliados_DatosPersonales.Add(emp);
@@ -184,7 +184,7 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                                 Piso = PisoAfiliadoEmpresa,
                                 Dto = DtoAfiliadoEmpresa,
                                 Localidad = Int32.Parse(LocalidadAfiliadoEmpresa),
-                                Telefono = Int32.Parse(TelefonoAfiliadoEmpresa) 
+                                Telefono = TelefonoAfiliadoEmpresa
                             };
 
                             db.Afiliados_Empresa.Add(emp);
@@ -233,15 +233,15 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                             {
                                 // GUARDAR EN LA TABLA DE EMPRESAS ANTECEDENTES
                                 var emp = new Afiliados_Familiares
-                                {
-                                    Id_Afiliado = ultimoId,
-                                    Parentesco = Parentesco,
-                                    Apellido_Nombre = ApellidoNombreAfiliadoFamiliar,
-                                    Tipo_Doc = TipoDocAfiliadoFamiliar,
-                                    Num_Doc = NumDocAfiliadoFamiliar,
-                                    Sexo = SexoAfiliadoFamiliar,
-                                    Fecha_Nac = DateTime.Parse(FechaNacAfiliadoFamiliar)
-                                };
+                                    {
+                                        Id_Afiliado = ultimoId,
+                                        Parentesco = Parentesco,
+                                        Apellido_Nombre = ApellidoNombreAfiliadoFamiliar,
+                                        Tipo_Doc = TipoDocAfiliadoFamiliar,
+                                        Num_Doc = NumDocAfiliadoFamiliar,
+                                        Sexo = SexoAfiliadoFamiliar,
+                                        Fecha_Nac = DateTime.Parse(FechaNacAfiliadoFamiliar)
+                                    };
 
                                 db.Afiliados_Familiares.Add(emp);
                                 db.SaveChanges();
@@ -276,11 +276,8 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                     return Json(new { success = true, responseText = "Error al Preinscribir Antecedente." }, JsonRequestBehavior.AllowGet);
                 }
 
-
-                return Json(new { success = true, responseText = "Se ha realizado la Preinscripcion." }, JsonRequestBehavior.AllowGet);
+                return Json(new { success = true, responseText = "Preinscripcion Exitosa." }, JsonRequestBehavior.AllowGet);
             }
         }
-
-
     }
 }

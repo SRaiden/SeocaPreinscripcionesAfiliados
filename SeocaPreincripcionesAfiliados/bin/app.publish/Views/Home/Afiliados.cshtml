@@ -1,412 +1,408 @@
 ﻿@{
-    ViewBag.Title = "Empresa";
+    ViewBag.Title = "Afiliados";
 }
 
+<div class="container-100">
+    <div class="wrap-100">
+        <div class="form-100 validate-form">
+            <span class="title-100-form"> Formulario de solicitud de Afiliados </span>
+        </div>
 
-<!-- ----------------- F  O  R  M  U  L  A  R  I  O   S ----------------- -->
-<div class="w3-content" style="max-width:1564px">
-    <div class="w3-container">
-        <div class="w3-modal-content">
-            <div class="tab">
-                <button class="tablinks" onclick="openCity(event, 'DatosdelAfiliado')" id="datosdelAfiliado">Datos del Afiliado</button>
-                <button class="tablinks" onclick="openCity(event, 'Empresa')">Empresa</button>
-                <button class="tablinks" onclick="openCity(event, 'Familiares')">Familiares</button>
+
+        <h3 class="h3-input100"> Datos del Afiliado</h3>
+        <hr class="hrs" />
+        <br />
+
+        <div class="Datos">
+            <div class="wrap-input100 validate-input bg1 alert-validate" data-validate="Please Type Your Name">
+                <span class="label-input100"> Cuil </span>
+                <input type="number" id="Cuil" name="Cuil" class="input100 " onchange="changeCampos()">
             </div>
 
-            <div id="DatosdelAfiliado" class="tabcontent">
-
-                <!-- -------------------- Apellido / Nombre / Cuit -------------------- -->
-                <div class="w3-row">
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding w3-bluesky">Apellido</div>
-                        <input type="text" id="Apellido" name="Apellido" class="w3-input w3-ligth-grey " onchange="changeCampos()">
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding w3-bluesky">Nombre</div>
-                        <input type="text" id="Nombre" name="Nombre" class="w3-input w3-ligth-grey" onchange="changeCampos()">
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding w3-bluesky">Cuil</div>
-                        <input type="number" id="Cuil" name="Cuil" class="w3-input w3-ligth-grey " onchange="changeCampos()">
-                    </div>
+            <div class="w3-row">
+                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
+                    <span class="label-input100">Apellido</span>
+                    <input type="text" id="Apellido" name="Apellido" class="input100 " onchange="changeCampos()">
                 </div>
-                <br>
-
-                <!-- -------------------- Tipo Doc / Num Doc / Delegacion -------------------- -->
-
-                <div class="w3-row">
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding w3-bluesky">Tipo Documento</div>
-                        <select class="w3-select" name="TipoDoc" id="TipoDoc">
-                            <option value="0">< Seleccione un Tipo Documento ></option>
-                            @{
-                                if (ViewData["TipoDoc"] != null)
-                                {
-                                    IEnumerable<dynamic> TipoDoc = (IEnumerable<dynamic>)ViewData["TipoDoc"];
-
-                                    foreach (dynamic Loc in TipoDoc)
-                                    {
-                                        <option value="@Loc.Id">@Loc.Nombre</option>
-                                    }
-                                }
-                            }
-                        </select>
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding w3-bluesky">Numero Documento</div>
-                        <input type="number" id="NumDoc" name="NumDoc" class="w3-input w3-ligth-grey" onchange="changeCampos()">
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding w3-bluesky">Delegacion</div>
-                        <select class="w3-select" name="Delegacion" id="Delegacion">
-                            <option value="0">< Seleccione una Delegacion ></option>
-                            @{
-                                if (ViewData["Delegacion"] != null)
-                                {
-                                    IEnumerable<dynamic> Delegacion = (IEnumerable<dynamic>)ViewData["Delegacion"];
-
-                                    foreach (dynamic Loc in Delegacion)
-                                    {
-                                        <option value="@Loc.Id">@Loc.Nombre</option>
-                                    }
-                                }
-                            }
-                        </select>
-                    </div>
+                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
+                    <span class="label-input100">Nombre</span>
+                    <input type="text" id="Nombre" name="Nombre" class="input100" onchange="changeCampos()">
                 </div>
-                <br>
+                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
+                    <span class="label-input100">Tipo de Documento</span>
+                    <select class="w3-select bg1" name="TipoDoc" id="TipoDoc">
+                        <option value="0">< Seleccione un Tipo Documento ></option>
+                        @{
+                            if (ViewData["TipoDoc"] != null)
+                            {
+                                IEnumerable<dynamic> TipoDoc = (IEnumerable<dynamic>)ViewData["TipoDoc"];
 
-                <!-- -------------------- Calif Profesional / Fecha Afiliacion / Estado Civil -------------------- -->
-
-                <div class="w3-row">
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding w3-bluesky">Calificacion Profesional</div>
-                        <select class="w3-select" name="CalifProf" id="CalifProf">
-                            <option value="0">< Seleccione una Calificacion Profesional ></option>
-                            @{
-                                if (ViewData["CalifProf"] != null)
+                                foreach (dynamic Loc in TipoDoc)
                                 {
-                                    IEnumerable<dynamic> CalifProf = (IEnumerable<dynamic>)ViewData["CalifProf"];
-
-                                    foreach (dynamic Loc in CalifProf)
-                                    {
-                                        <option value="@Loc.Id">@Loc.Nombre</option>
-                                    }
+                                    <option value="@Loc.Id">@Loc.Nombre</option>
                                 }
                             }
-                        </select>
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding w3-bluesky">Estado Civil</div>
-                        <select class="w3-select" name="EstadoCivil" id="EstadoCivil">
-                            <option value="0">< Seleccione un Estado Civil ></option>
-                            @{
-                                if (ViewData["EstadoCivil"] != null)
-                                {
-                                    IEnumerable<dynamic> EstadoCivil = (IEnumerable<dynamic>)ViewData["EstadoCivil"];
-
-                                    foreach (dynamic Loc in EstadoCivil)
-                                    {
-                                        <option value="@Loc.Id">@Loc.Nombre</option>
-                                    }
-                                }
-                            }
-                        </select>
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding w3-bluesky">Fecha Nacimiento</div>
-                        <input type="date" id="FechaNac" name="FechaNac" class="w3-input w3-ligth-grey" onchange="changeCampos()">
-                    </div>
+                        }
+                    </select>
                 </div>
-                <br>
-
-                <!-- -------------------- Fecha Nacimiento / Calle / Numero Calle -------------------- -->
-
-                <div class="w3-row">
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding w3-bluesky">Calle</div>
-                        <input type="text" id="Calle" name="Calle" class="w3-input w3-ligth-grey" onchange="changeCampos()">
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding w3-bluesky">NumeroCalle</div>
-                        <input type="number" id="NumeroCalle" name="NumeroCalle" class="w3-input w3-ligth-grey" onchange="changeCampos()">
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding w3-bluesky">Piso</div>
-                        <input type="text" id="Piso" name="Piso" class="w3-input w3-ligth-grey" onchange="changeCampos()">
-                    </div>
-                </div>
-                <br>
-
-                <!-- -------------------- Piso / Dto / Telefono -------------------- -->
-
-                <div class="w3-row">
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding w3-bluesky">Dto</div>
-                        <input type="text" id="Dto" name="Dto" class="w3-input w3-ligth-grey" onchange="changeCampos()">
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding w3-bluesky">Telefono</div>
-                        <input type="number" id="Telefono" name="Telefono" class="w3-input w3-ligth-grey w3-left-align" onchange="changeCampos()">
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding w3-bluesky">Localidad</div>
-                        <select class="w3-select" name="Localidad" id="Localidad">
-                            <option value="0">< Seleccione una Localidad ></option>
-                            @{
-                                if (ViewData["Localidades"] != null)
-                                {
-                                    IEnumerable<dynamic> Localidad = (IEnumerable<dynamic>)ViewData["Localidades"];
-
-                                    foreach (dynamic Loc in Localidad)
-                                    {
-                                        <option value="@Loc.Id">@Loc.Nombre_Localidad</option>
-                                    }
-                                }
-                            }
-                        </select>
-                    </div>
-                </div>
-                <br>
-
-                <!-- -------------------- Localidad / Provincia -------------------- -->
-
-                <div class="w3-row">
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding w3-bluesky">Provincia</div>
-                        <select class="w3-select" name="Provincia" id="Provincia">
-                            <option value="0">< Seleccione una Provincia ></option>
-                            @{
-                                if (ViewData["Provincia"] != null)
-                                {
-                                    IEnumerable<dynamic> Provincia = (IEnumerable<dynamic>)ViewData["Provincia"];
-
-                                    foreach (dynamic Loc in Provincia)
-                                    {
-                                        <option value="@Loc.Id">@Loc.Nombre</option>
-                                    }
-                                }
-                            }
-                        </select>
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding w3-bluesky">Genero</div>
-                        <select class="w3-select" name="SexoAfiliadoDocumento" id="SexoAfiliadoDocumento">
-                            <option value="0">< Seleccione un Genero ></option>
-                            @{
-                                if (ViewData["Sexo"] != null)
-                                {
-                                    IEnumerable<dynamic> Sexo = (IEnumerable<dynamic>)ViewData["Sexo"];
-
-                                    foreach (dynamic Loc in Sexo)
-                                    {
-                                        <option value="@Loc.Codigo">@Loc.Descripcion</option>
-                                    }
-                                }
-                            }
-                        </select>
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding w3-bluesky">Nacionalidad</div>
-                        <select class="w3-select" name="Nacionalidad" id="Nacionalidad">
-                            <option value="0">< Seleccione una Nacionalidad ></option>
-                            @{
-                                if (ViewData["Nacionalidad"] != null)
-                                {
-                                    IEnumerable<dynamic> Nacionalidad = (IEnumerable<dynamic>)ViewData["Nacionalidad"];
-
-                                    foreach (dynamic Loc in Nacionalidad)
-                                    {
-                                        <option value="@Loc.Codigo">@Loc.Descripcion</option>
-                                    }
-                                }
-                            }
-                        </select>
-                    </div>
-                </div>
-                <br>
-
             </div>
 
-            <div id="Empresa" class="tabcontent">
+            <div class="w3-row">
+                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
+                    <span class="label-input100">Numero de Documento</span>
+                    <input type="number" id="NumDoc" name="NumDoc" class="input100" onchange="changeCampos()">
 
-                <!-- -------------------- Fecha Ingreso / Nombre Empresa / Cuit Empresa -------------------- -->
-                <div class="w3-row">
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding w3-bluesky">Fecha Ingreso</div>
-                        <input type="date" id="FechaIngresoAfiliadoEmpresa" name="FechaIngresoAfiliadoEmpresa" class="w3-input w3-ligth-grey w3-left-align" onchange="changeCampos()">
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding w3-bluesky">Nombre Empresa</div>
-                        <input type="text" id="NombreEmpresaAfiliadoEmpresa" name="NombreEmpresaAfiliadoEmpresa" class="w3-input w3-ligth-grey w3-left-align" onchange="changeCampos()">
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding w3-bluesky">CUIT Empresa</div>
-                        <input type="number" id="CUITEmpresaAfiliadoEmpresa" name="CUITEmpresaAfiliadoEmpresa" class="w3-input w3-ligth-grey w3-left-align" onchange="changeCampos()">
-                    </div>
                 </div>
-                <br>
+                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
+                    <span class="label-input100">Delegacion</span>
+                    <select class="w3-select bg1" name="Delegacion" id="Delegacion">
+                        <option value="0">< Seleccione una Delegacion ></option>
+                        @{
+                            if (ViewData["Delegacion"] != null)
+                            {
+                                IEnumerable<dynamic> Delegacion = (IEnumerable<dynamic>)ViewData["Delegacion"];
 
-                <!-- -------------------- Calle / Numero / Local -------------------- -->
-                <div class="w3-row">
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding w3-bluesky">Calle</div>
-                        <input type="text" id="CalleAfiliadoEmpresa" name="CalleAfiliadoEmpresa" class="w3-input w3-ligth-grey w3-left-align" onchange="changeCampos()">
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding w3-bluesky">Numero</div>
-                        <input type="text" id="NumeroAfiliadoEmpresa" name="NumeroAfiliadoEmpresa" class="w3-input w3-ligth-grey w3-left-align" onchange="changeCampos()">
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding w3-bluesky">Local</div>
-                        <input type="text" id="LocalAfiliadoEmpresa" name="LocalAfiliadoEmpresa" class="w3-input w3-ligth-grey w3-left-align" onchange="changeCampos()">
-                    </div>
-                </div>
-                <br>
-
-                <!-- -------------------- Piso / Dto / CP -------------------- -->
-                <div class="w3-row">
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding w3-bluesky">Piso</div>
-                        <input type="text" id="PisoAfiliadoEmpresa" name="PisoAfiliadoEmpresa" class="w3-input w3-ligth-grey w3-left-align" onchange="changeCampos()">
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding w3-bluesky">Dto</div>
-                        <input type="text" id="DtoAfiliadoEmpresa" name="DtoAfiliadoEmpresa" class="w3-input w3-ligth-grey w3-left-align" onchange="changeCampos()">
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding w3-bluesky">CP</div>
-                        <input type="number" id="CPAfiliadoEmpresa" name="CPAfiliadoEmpresa" class="w3-input w3-ligth-grey w3-left-align" onchange="changeCampos()">
-                    </div>
-                </div>
-                <br>
-
-                <!-- -------------------- Localidad / Telefono -------------------- -->
-                <div class="w3-row">
-                    <div class="w3-third w3-container w3-text-white">
-
-                        <div class="w3-padding w3-bluesky">Localidad</div>
-                        <select class="w3-select" name="LocalidadAfiliadoEmpresa" id="LocalidadAfiliadoEmpresa">
-                            <option value="0">< Seleccione una Localidad ></option>
-                            @{
-                                if (ViewData["Localidades"] != null)
+                                foreach (dynamic Loc in Delegacion)
                                 {
-                                    IEnumerable<dynamic> Localidad = (IEnumerable<dynamic>)ViewData["Localidades"];
-
-                                    foreach (dynamic Loc in Localidad)
-                                    {
-                                        <option value="@Loc.Id">@Loc.Nombre_Localidad</option>
-                                    }
+                                    <option value="@Loc.Id">@Loc.Nombre</option>
                                 }
                             }
-                        </select>
-
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding w3-bluesky">Telefono</div>
-                        <input type="number" id="TelefonoAfiliadoEmpresa" name="TelefonoAfiliadoEmpresa" class="w3-input w3-ligth-grey w3-left-align" onchange="changeCampos()">
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-                    </div>
+                        }
+                    </select>
                 </div>
-                <br>
+                <div class="w3-third">
+                    <span class="label-input100">Calificacion Profesional</span>
+                    <select class="w3-select bg1" name="CalifProf" id="CalifProf">
+                        <option value="0">< Seleccione una Calificacion Profesional ></option>
+                        @{
+                            if (ViewData["CalifProf"] != null)
+                            {
+                                IEnumerable<dynamic> CalifProf = (IEnumerable<dynamic>)ViewData["CalifProf"];
 
+                                foreach (dynamic Loc in CalifProf)
+                                {
+                                    <option value="@Loc.Id">@Loc.Nombre</option>
+                                }
+                            }
+                        }
+                    </select>
+                </div>
             </div>
 
+            <div class="w3-row">
+                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
+                    <span class="label-input100">Estado Civil</span>
+                    <select class="w3-select bg1" name="EstadoCivil" id="EstadoCivil">
+                        <option value="0">< Seleccione un Estado Civil ></option>
+                        @{
+                            if (ViewData["EstadoCivil"] != null)
+                            {
+                                IEnumerable<dynamic> EstadoCivil = (IEnumerable<dynamic>)ViewData["EstadoCivil"];
 
-            <div id="Familiares" class="tabcontent">
-
-                <!-- --------------------Parentesco / Apellido y Nombre / Cert Estudios  -------------------- -->
-                <div class="w3-row">
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding w3-bluesky">Parentesco</div>
-                        <select class="w3-select" name="Parentesco" id="Parentesco">
-                            @{
-                                if (ViewData["Parentesco"] != null)
+                                foreach (dynamic Loc in EstadoCivil)
                                 {
-                                    IEnumerable<dynamic> Parentesco = (IEnumerable<dynamic>)ViewData["Parentesco"];
+                                    <option value="@Loc.Id">@Loc.Nombre</option>
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
+                    <span class="label-input100">Fecha Nacimiento</span>
+                    <input type="date" id="FechaNac" name="FechaNac" class="input100" onchange="changeCampos()">
 
-                                    foreach (dynamic Loc in Parentesco)
+                </div>
+                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
+                    <span class="label-input100">Calle</span>
+                    <input type="text" id="Calle" name="Calle" class="input100" onchange="changeCampos()">
+
+                </div>
+            </div>
+
+            <div class="w3-row">
+                <!-- -------------------- Fecha / Importe / Interes_Mora -------------------- -->
+                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
+                    <span class="label-input100">Numero de Calle</span>
+                    <input type="number" id="NumeroCalle" name="NumeroCalle" class="input100" onchange="changeCampos()">
+
+                </div>
+                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
+                    <span class="label-input100">Piso</span>
+                    <input type="text" id="Piso" name="Piso" class="input100" onchange="changeCampos()">
+                </div>
+                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
+                    <span class="label-input100">Dto</span>
+                    <input type="text" id="Dto" name="Dto" class="input100" onchange="changeCampos()">
+                </div>
+            </div>
+
+            <div class="w3-row">
+                <!-- -------------------- Fecha / Importe / Interes_Mora -------------------- -->
+                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
+                    <span class="label-input100">Telefono</span>
+                    <input type="number" id="Telefono" name="Telefono" class="input100" onchange="changeCampos()">
+                </div>
+                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
+                    <span class="label-input100">Localidad</span>
+                    <select class="w3-select bg1" name="Localidad" id="Localidad">
+                        <option value="0">< Seleccione una Localidad ></option>
+                        @{
+                            if (ViewData["Localidades"] != null)
+                            {
+                                IEnumerable<dynamic> Localidad = (IEnumerable<dynamic>)ViewData["Localidades"];
+
+                                foreach (dynamic Loc in Localidad)
+                                {
+                                    <option value="@Loc.Id">@Loc.Nombre_Localidad</option>
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
+                    <span class="label-input100">Provincia</span>
+                    <select class="w3-select bg1" name="Provincia" id="Provincia">
+                        <option value="0">< Seleccione una Provincia ></option>
+                        @{
+                            if (ViewData["Provincia"] != null)
+                            {
+                                IEnumerable<dynamic> Provincia = (IEnumerable<dynamic>)ViewData["Provincia"];
+
+                                foreach (dynamic Loc in Provincia)
+                                {
+                                    <option value="@Loc.Id">@Loc.Nombre</option>
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="w3-row">
+                <!-- -------------------- Fecha / Importe / Interes_Mora -------------------- -->
+                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
+                    <span class="label-input100">Sexo</span>
+                    <select class="w3-select bg1" name="SexoAfiliadoDocumento" id="SexoAfiliadoDocumento">
+                        @{
+                            if (ViewData["Sexo"] != null)
+                            {
+                                IEnumerable<dynamic> Sexo = (IEnumerable<dynamic>)ViewData["Sexo"];
+
+                                foreach (dynamic Loc in Sexo)
+                                {
+                                  <option value="@Loc.Codigo">@Loc.Descripcion</option>
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
+                    <span class="label-input100">Nacionalidad</span>
+                    <select class="w3-select bg1" name="Nacionalidad" id="Nacionalidad">
+                        @{
+                            if (ViewData["Nacionalidad"] != null)
+                            {
+                                IEnumerable<dynamic> Nacionalidad = (IEnumerable<dynamic>)ViewData["Nacionalidad"];
+
+                                foreach (dynamic Loc in Nacionalidad)
+                                {
+                                    if (Loc.Codigo == 0)
                                     {
-                                        <option value="@Loc.Id">@Loc.Nombre</option>
+                                        <option value="@Loc.Codigo">< Seleccione una Nacionalidad ></option>
+                                    }
+                                    else
+                                    {
+                                        <option value = "@Loc.Codigo" > @Loc.Descripcion </option >
                                     }
                                 }
                             }
-                        </select>
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding w3-bluesky">Apellido y Nombre</div>
-                        <input type="text" id="ApellidoNombreAfiliadoFamiliar" name="ApellidoNombreAfiliadoFamiliar" class="w3-input w3-ligth-grey w3-left-align" onchange="changeCampos()">
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding w3-bluesky">Cert. Estudios</div>
-                        <input type="date" id="CertEstudiosAfiliadoFamiliar" name="CertEstudiosAfiliadoFamiliar" class="w3-input w3-ligth-grey w3-left-align" onchange="changeCampos()">
-                    </div>
+                        }
+                    </select>
                 </div>
-                <br>
+                <div class="w3-third">
+                   
+                </div>
+            </div>
+        </div>
 
-                <!-- -------------------- Tipo Doc / Num Doc / Sexo  -------------------- -->
-                <div class="w3-row">
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding w3-bluesky">Tipo Documento</div>
-                        <select class="w3-select" name="TipoDocAfiliadoFamiliar" id="TipoDocAfiliadoFamiliar">
-                            <option value="0">< Seleccione un Tipo Documento ></option>
-                            @{
-                                if (ViewData["TipoDoc"] != null)
+        <h3 class="h3-input100"> Empresas </h3>
+        <hr class="hrs" />
+        <br />
+
+        <div class="empresa">
+            <div class="w3-row">
+                <!-- -------------------- Apellido / Docimilio / Documento -------------------- -->
+                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
+                    <span class="label-input100">Fecha Ingreso</span>
+                    <input type="date" id="FechaIngresoAfiliadoEmpresa" name="FechaIngresoAfiliadoEmpresa" class="input100" onchange="changeCampos()">
+
+                </div>
+                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
+                    <span class="label-input100">Nombre Empresa</span>
+                    <input type="text" id="NombreEmpresaAfiliadoEmpresa" name="NombreEmpresaAfiliadoEmpresa" class="input100" onchange="changeCampos()">
+                </div>
+                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
+                    <span class="label-input100">Cuit</span>
+                    <input type="number" id="CUITEmpresaAfiliadoEmpresa" name="CUITEmpresaAfiliadoEmpresa" class="input100" onchange="changeCampos()">
+                </div>
+            </div>
+
+            <div class="w3-row">
+                <!-- -------------------- Apellido / Docimilio / Documento -------------------- -->
+                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
+                    <span class="label-input100">Calle</span>
+                    <input type="text" id="CalleAfiliadoEmpresa" name="CalleAfiliadoEmpresa" class="input100" onchange="changeCampos()">
+
+                </div>
+                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
+                    <span class="label-input100">Numero</span>
+                    <input type="number" id="NumeroAfiliadoEmpresa" name="NumeroAfiliadoEmpresa" class="input100" onchange="changeCampos()">
+                </div>
+                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
+                    <span class="label-input100">Local</span>
+                    <input type="text" id="LocalAfiliadoEmpresa" name="LocalAfiliadoEmpresa" class="input100" onchange="changeCampos()">
+                </div>
+            </div>
+
+            <div class="w3-row">
+                <!-- -------------------- Apellido / Docimilio / Documento -------------------- -->
+                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
+                    <span class="label-input100">Piso</span>
+                    <input type="text" id="PisoAfiliadoEmpresa" name="PisoAfiliadoEmpresa" class="input100" onchange="changeCampos()">
+                </div>
+                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
+                    <span class="label-input100">Dto</span>
+                    <input type="text" id="DtoAfiliadoEmpresa" name="DtoAfiliadoEmpresa" class="input100" onchange="changeCampos()">
+                </div>
+                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
+                    <span class="label-input100">CP</span>
+                    <input type="number" id="CPAfiliadoEmpresa" name="CPAfiliadoEmpresa" class="input100" onchange="changeCampos()">
+                </div>
+            </div>
+
+            <div class="w3-row">
+                <!-- -------------------- Apellido / Docimilio / Documento -------------------- -->
+                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
+                    <span class="label-input100">Localidad</span>
+                    <select class="w3-select bg1" name="LocalidadAfiliadoEmpresa" id="LocalidadAfiliadoEmpresa">
+                        <option value="0">< Seleccione una Localidad ></option>
+                        @{
+                            if (ViewData["Localidades"] != null)
+                            {
+                                IEnumerable<dynamic> Localidad = (IEnumerable<dynamic>)ViewData["Localidades"];
+
+                                foreach (dynamic Loc in Localidad)
                                 {
-                                    IEnumerable<dynamic> TipoDocumentoFamiliar = (IEnumerable<dynamic>)ViewData["TipoDoc"];
-
-                                    foreach (dynamic Loc in TipoDocumentoFamiliar)
-                                    {
-                                        <option value="@Loc.Id">@Loc.Nombre</option>
-                                    }
+                                    <option value="@Loc.Id">@Loc.Nombre_Localidad</option>
                                 }
                             }
-                        </select>
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding w3-bluesky">Numero Documento</div>
-                        <input type="number" id="NumDocAfiliadoFamiliar" name="NumDocAfiliadoFamiliar" class="w3-input w3-ligth-grey w3-left-align" onchange="changeCampos()">
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding w3-bluesky">Sexo</div>
-                        <select class="w3-select" name="SexoAfiliadoFamiliar" id="SexoAfiliadoFamiliar">
-                            <option value="0">< Seleccione un Sexo ></option>
-                            <option value="Masculino">Masculino</option>
-                            <option value="Femenino">Femenino</option>
-                        </select>
-                    </div>
+                        }
+                    </select>
                 </div>
-                <br>
-
-                <!-- -------------------- Fecha Nac / Vencio el / Actualizacion  -------------------- -->
-                <div class="w3-row">
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding w3-bluesky">Fecha Nac</div>
-                        <input type="date" id="FechaNacAfiliadoFamiliar" name="FechaNacAfiliadoFamiliar" class="w3-input w3-ligth-grey w3-left-align" onchange="changeCampos()">
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-
-                    </div>
+                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
+                    <span class="label-input100">Telefono</span>
+                    <input type="number" id="TelefonoAfiliadoEmpresa" name="TelefonoAfiliadoEmpresa" class="input100" onchange="changeCampos()">
                 </div>
-                <br>
-
-                <!-- -------------------- - / - / Agregar  -------------------- -->
-                <div class="w3-row">
-                    <div class="w3-third w3-container w3-text-white">
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-                        <button class="w3-right w3-margin-top w3-button w3-card bg-zul w3-text-white w3-hover-blue w3-hover-border-cyan" style="margin: 0 0 0 200px;" type="submit" onclick="insertarFamiliar()">
-                            Agregar Fila
-                        </button>
-                    </div>
+                <div class="w3-third">
                 </div>
+            </div>
 
+        </div>
+
+        <br />
+        <h3 class="h3-input100"> Familiares </h3>
+        <hr class="hrs" />
+        <br />
+
+        <div class="familiares">
+            <div class="w3-row">
+                <!-- -------------------- Apellido / Docimilio / Documento -------------------- -->
+                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
+                    <span class="label-input100">Parentesco</span>
+                    <select class="w3-select bg1" name="Parentesco" id="Parentesco">
+                        <option value="0">< Seleccione un Tipo Documento ></option>
+                        @{
+                            if (ViewData["Parentesco"] != null)
+                            {
+                                IEnumerable<dynamic> Parentesco = (IEnumerable<dynamic>)ViewData["Parentesco"];
+
+                                foreach (dynamic Loc in Parentesco)
+                                {
+                                    <option value="@Loc.Id">@Loc.Nombre</option>
+                                }
+                            }
+                        }
+                    </select>
+
+                </div>
+                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
+                    <span class="label-input100">Apellido y Nombre</span>
+                    <input type="text" id="ApellidoNombreAfiliadoFamiliar" name="ApellidoNombreAfiliadoFamiliar" class="input100" onchange="changeCampos()">
+                </div>
+                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
+                    <span class="label-input100">Certificado</span>
+                    <input type="date" id="CertEstudiosAfiliadoFamiliar" name="CertEstudiosAfiliadoFamiliar" class="input100" onchange="changeCampos()">
+                </div>
+            </div>
+
+            <div class="w3-row">
+                <!-- -------------------- Apellido / Docimilio / Documento -------------------- -->
+                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
+                    <span class="label-input100">Tipo Documento</span>
+                    <select class="w3-select bg1" name="TipoDocAfiliadoFamiliar" id="TipoDocAfiliadoFamiliar">
+                        <option value="0">< Seleccione un Tipo Documento ></option>
+                        @{
+                            if (ViewData["TipoDoc"] != null)
+                            {
+                                IEnumerable<dynamic> TipoDocumentoFamiliar = (IEnumerable<dynamic>)ViewData["TipoDoc"];
+
+                                foreach (dynamic Loc in TipoDocumentoFamiliar)
+                                {
+                                    <option value="@Loc.Id">@Loc.Nombre</option>
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
+                    <span class="label-input100">Numero Documento</span>
+                    <input type="number" id="NumDocAfiliadoFamiliar" name="NumDocAfiliadoFamiliar" class="input100" onchange="changeCampos()">
+                </div>
+                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
+                    <span class="label-input100">Sexo</span>
+                    <select class="w3-select bg1" name="SexoAfiliadoFamiliar" id="SexoAfiliadoFamiliar">
+                        @{
+                            if (ViewData["Sexo"] != null)
+                            {
+                                IEnumerable<dynamic> Sexo = (IEnumerable<dynamic>)ViewData["Sexo"];
+
+                                foreach (dynamic Loc in Sexo)
+                                {
+                                    <option value="@Loc.Codigo">@Loc.Descripcion</option>
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="w3-row">
+                <!-- -------------------- Apellido / Docimilio / Documento -------------------- -->
+                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
+                    <span class="label-input100">Fecha Nacimiento</span>
+                    <input type="date" id="FechaNacAfiliadoFamiliar" name="FechaNacAfiliadoFamiliar" class="input100" onchange="changeCampos()">
+
+                </div>
+                <div class="w3-third ">
+                    <button class="w3-right w3-margin-top enviar w3-card bg-zul w3-text-white w3-hover-green w3-hover-border-cyan" style="margin: 0 0 0 200px;" type="submit" onclick="insertarFamiliar()">
+                        Agregar Familiar
+                    </button>
+                </div>
+                <div class="w3-third">
+                </div>
+            </div>
+
+            <div class="w3-row">
                 <div class="container">
                     <table>
                         <thead>
@@ -422,21 +418,25 @@
                     </table>
                 </div>
             </div>
+        </div>
 
 
-            <button class="w3-right w3-margin-top w3-button w3-card bg-zul w3-text-white w3-hover-blue w3-hover-border-cyan" style="margin: 0 0 0 200px;" type="submit" onclick="return enviar();">
-                Crear
-            </button>
-
+        <div class="w3-row">
+            <div class="">
+                <button class="w3-right w3-margin-top enviar w3-card bg-zul w3-text-white w3-hover-green w3-hover-border-cyan" style="margin: 0 0 0 200px;" type="submit" onclick="return enviar();">
+                    ENVIAR
+                </button>
+            </div>
         </div>
 
     </div>
-
 </div>
+
+
 <br />
 
 @section scripts{
     <script src="~/js/tabPag.js"></script>
     <script src="~/js/EnviarMatriz.js"></script>
-    <script src="~/js/Familiares.js"></script>
 }
+

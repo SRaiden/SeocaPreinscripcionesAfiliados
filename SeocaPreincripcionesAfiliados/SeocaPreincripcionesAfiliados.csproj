@@ -199,6 +199,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\inscripcion-online.jpg" />
     <Content Include="js\EnviarMatriz.js" />
     <Content Include="js\Familiares.js" />
     <Content Include="js\tabPag.js" />
@@ -243,8 +244,8 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Afiliados.cshtml" />
     <Content Include="Views\Shared\MisViews\Footer.cshtml" />
+    <Content Include="Views\Home\Afiliados.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

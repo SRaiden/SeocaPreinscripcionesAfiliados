@@ -24,6 +24,6 @@ namespace SeocaPreincripcionesAfiliados.Models
         public string Piso { get; set; }
         public string Dto { get; set; }
         public Nullable<int> Localidad { get; set; }
-        public Nullable<int> Telefono { get; set; }
+        public string Telefono { get; set; }
     }
 }

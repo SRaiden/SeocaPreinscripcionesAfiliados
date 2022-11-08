@@ -257,6 +257,13 @@ function insertarFamiliar() {
         return false;
     }
 
+    for (i = 0; i < matrizFamiliares.length; i++) {
+        if (matrizFamiliares[i].NumDocAfiliadoFamiliar == NumDocAfiliadoFamiliar) {
+            alert("Ingrese un DNI distinto");
+            return false;
+        }
+    }
+
 
     var table = document.getElementById('bodyFamiliar');
     var x = table.insertRow(0);
@@ -271,7 +278,7 @@ function insertarFamiliar() {
     table.rows[0].insertCell(2);
     table.rows[0].cells[2].innerHTML = NumDocAfiliadoFamiliar;
     table.rows[0].insertCell(3);
-    table.rows[0].cells[3].innerHTML = '<button class="w3-button w3-card bg-zul w3-text-white w3-hover-blue w3-hover-border-cyan borrarFamiliar" type="button"  onclick="eliminarFamiliar(' + "'" + NumDocAfiliadoFamiliar + "'" + ')">Eliminar</button >';
+    table.rows[0].cells[3].innerHTML = '<button class="w3-right w3-margin-top eliminar w3-card bg-zul w3-text-white w3-hover-red w3-hover-border-cyan borrarFamiliar" type="button"  onclick="eliminarFamiliar(' + "'" + NumDocAfiliadoFamiliar + "'" + ')">Eliminar</button >';
 
     document.getElementById("Parentesco").value = "0"; // select
     document.getElementById("ApellidoNombreAfiliadoFamiliar").value = "";
