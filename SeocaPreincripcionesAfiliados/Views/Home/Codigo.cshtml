@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "Codigo";
+}
+
+<div class="w3-container" style="line-height : 5px;"></div>
+
+<div class="w3-panel w3-wide bg-zul w3-text-white w3-content w3-margin-left w3-margin-right w3-center w3-padding-24">
+    CODIGO DE VALIDACION
+</div>
+
+<div class="w3-padding w3-margin-left small2 w3-center">
+    @using (Html.BeginForm("Codigo", "Home", FormMethod.Post, new { @class = "w3-container", autocomplete = "off" }))
+    {
+        <div class="w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" style="display: inline-table;">
+            <span class="label-input100">CUIL</span>
+            <input type="number" id="Cuil" name="Cuil" class="input100">
+        </div>
+        <div class="w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" style="display: inline-table;">
+            <span class="label-input100">Codigo</span>
+            <input type="number" id="Codigo" name="Codigo" class="input100">
+        </div>
+        <div class="w3-container" style="display: inline-table;">
+            <div class="w3-half w3-container">
+                <button class="w3-right w3-margin-top enviar w3-card bg-zul w3-text-white w3-hover-green w3-hover-border-cyan" style="margin: 0 0 0 200px;" type="submit" onclick="return validar();" id="enviarDatos" name="enviarDatos">
+                    VALIDAR
+                </button>
+            </div>
+            <div class="w3-half w3-container ">
+                <button class="w3-right w3-margin-top enviar w3-card bg-zul w3-text-white w3-hover-green w3-hover-border-cyan" type="button" onclick="cerrarId01()">Cancelar</button>
+            </div>
+        </div>
+    }
+</div>
+
+
+@if (!string.IsNullOrEmpty(ViewBag.mensaje))
+{
+    <script type="text/javascript">
+        alert("@ViewBag.mensaje");
+    </script>
+}

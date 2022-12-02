@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\Nata\OneDrive\Documentos\GitHub\Seoca\SeocaPreinscripcionesAfiliados\SeocaPreincripcionesAfiliados\bin\app.publish\</_PublishTargetUrl>
-    <History>True|2022-11-07T16:33:23.5707933Z;True|2022-11-07T12:14:55.1515854-03:00;False|2022-11-07T12:10:46.3471553-03:00;True|2022-11-07T11:26:12.5478268-03:00;True|2022-11-07T10:52:26.6634845-03:00;True|2022-11-04T14:57:40.6868738-03:00;True|2022-10-27T14:54:47.7188763-03:00;</History>
+    <History>True|2022-11-28T16:38:01.0396311Z;True|2022-11-28T13:34:15.6285252-03:00;True|2022-11-11T09:53:45.6844031-03:00;True|2022-11-07T13:33:23.5707933-03:00;True|2022-11-07T12:14:55.1515854-03:00;False|2022-11-07T12:10:46.3471553-03:00;True|2022-11-07T11:26:12.5478268-03:00;True|2022-11-07T10:52:26.6634845-03:00;True|2022-11-04T14:57:40.6868738-03:00;True|2022-10-27T14:54:47.7188763-03:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -199,10 +199,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/08/2018 12:18:16</publishTime>
     </File>
     <File Include="bin/SeocaPreincripcionesAfiliados.dll">
-      <publishTime>11/07/2022 13:33:22</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="bin/SeocaPreincripcionesAfiliados.pdb">
-      <publishTime>11/07/2022 13:33:22</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
       <publishTime>11/28/2018 13:04:24</publishTime>
@@ -259,7 +259,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>07/19/2022 12:45:44</publishTime>
     </File>
     <File Include="Css/main.css">
-      <publishTime>11/04/2022 11:01:52</publishTime>
+      <publishTime>04/11/2022 11:01:52</publishTime>
     </File>
     <File Include="Css/Table.css">
       <publishTime>05/09/2022 14:13:46</publishTime>
@@ -268,7 +268,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/09/2022 14:13:36</publishTime>
     </File>
     <File Include="Css/w3.css">
-      <publishTime>07/11/2022 12:14:19</publishTime>
+      <publishTime>11/28/2022 10:19:58</publishTime>
     </File>
     <File Include="favicon.ico">
       <publishTime>07/18/2022 12:58:42</publishTime>
@@ -292,10 +292,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>07/18/2022 12:58:42</publishTime>
     </File>
     <File Include="images/inscripcion-online.jpg">
-      <publishTime>11/04/2022 11:04:07</publishTime>
+      <publishTime>04/11/2022 11:04:07</publishTime>
     </File>
     <File Include="js/EnviarMatriz.js">
-      <publishTime>07/11/2022 10:50:05</publishTime>
+      <publishTime>11/28/2022 11:45:25</publishTime>
     </File>
     <File Include="js/Familiares.js">
       <publishTime>08/11/2022 10:27:06</publishTime>
@@ -304,7 +304,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/09/2022 14:12:04</publishTime>
     </File>
     <File Include="Models/Afiliados.edmx.diagram">
-      <publishTime>11/04/2022 14:19:04</publishTime>
+      <publishTime>11/11/2022 09:41:35</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>07/18/2022 12:58:46</publishTime>
@@ -346,7 +346,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>07/18/2022 12:58:50</publishTime>
     </File>
     <File Include="Views/Home/Afiliados.cshtml">
-      <publishTime>11/07/2022 13:31:51</publishTime>
+      <publishTime>11/28/2022 12:08:54</publishTime>
+    </File>
+    <File Include="Views/Home/Codigo.cshtml">
+      <publishTime>11/28/2022 10:59:43</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>07/18/2022 12:58:42</publishTime>
@@ -355,7 +358,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>07/19/2022 12:45:05</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>11/04/2022 10:39:43</publishTime>
+      <publishTime>04/11/2022 10:39:43</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>07/18/2022 12:58:42</publishTime>

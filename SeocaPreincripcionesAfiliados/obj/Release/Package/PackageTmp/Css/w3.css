@@ -97,6 +97,10 @@ mark {
     color: #000;
 }
 
+.bg-zul {
+    background-color: #004b8c !important;
+}
+
 small {
     font-size: 80%;
 }

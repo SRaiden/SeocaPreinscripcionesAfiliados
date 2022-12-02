@@ -1,19 +1,42 @@
 ﻿using Newtonsoft.Json.Linq;
 using SeocaPreincripcionesAfiliados.Models;
+using SeocaPreincripcionesAfiliados.Models.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net.Mail;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
+using Microsoft.Reporting.WebForms;
 
 namespace SeocaPreincripcionesAfiliados.Controllers
 {
     public class HomeController : Controller
     {
+        public static string codigo = "";
+
         public ActionResult Afiliados()
         {
             using (Models.SeocaPreinscripcionesEntities2 db = new Models.SeocaPreinscripcionesEntities2())
             {
+                
+
+                if (codigo == "Codigo valido")
+                {
+                    ViewBag.mensaje = "Se ha verificado su preinscripcion.";
+                    codigo = "";
+                }
+                else if(codigo == "Codigo invalido")
+                {
+                    ViewBag.mensaje = "Codigo invalido o preinscripcion no encontrada.";
+                    codigo = "";
+                }
+
                 List<General_Localidades> Localidades = db.General_Localidades.ToList<General_Localidades>();
                 ViewData["Localidades"] = Localidades;
 
@@ -53,11 +76,19 @@ namespace SeocaPreincripcionesAfiliados.Controllers
         {
             using (Models.SeocaPreinscripcionesEntities2 db = new Models.SeocaPreinscripcionesEntities2())
             {
+
+                string Email = "";
+                string Cuil = "";
+
+                Random numeroRandom = new Random();
+                var password = numeroRandom.Next(0, 9999).ToString();
+                password = password.PadLeft(4, '0');
+
                 // EMPRESAS
                 try
                 {
                     JArray jsonPreservar = JArray.Parse(matrizDatosAfiliado);
-                    string Apellido = "", Nombre = "", Cuil = "", TipoDoc = "", NumDoc = "", Delegacion = "", CalifProf = "", EstadoCivil = "", FechaNac = "", Calle = "", NumeroCalle = "", Piso = "", Dto = "", Telefono = "", Localidad = "", Provincia = "", SexoAfiliadoDocumento = "", Nacionalidad = "";
+                    string Apellido = "", Nombre = "", TipoDoc = "", Celular = "", NumDoc = "", Delegacion = "", CalifProf = "", EstadoCivil = "", FechaNac = "", Calle = "", NumeroCalle = "", Piso = "", Dto = "", Telefono = "", Localidad = "", Provincia = "", SexoAfiliadoDocumento = "", Nacionalidad = "", chkConvenio = "", chkCuota = "", chkSeguro = "";
                     foreach (JObject jsonOperaciones in jsonPreservar.Children<JObject>())
                     {
                         foreach (JProperty jsonOPropiedades in jsonOperaciones.Properties())
@@ -83,22 +114,23 @@ namespace SeocaPreincripcionesAfiliados.Controllers
 
                             if (propiedad.Equals("SexoAfiliadoDocumento")) SexoAfiliadoDocumento = jsonOPropiedades.Value.ToString();
                             if (propiedad.Equals("Nacionalidad")) Nacionalidad = jsonOPropiedades.Value.ToString();
+                            if (propiedad.Equals("chkConvenio")) chkConvenio = jsonOPropiedades.Value.ToString();
+                            if (propiedad.Equals("chkCuota")) chkCuota = jsonOPropiedades.Value.ToString();
+                            if (propiedad.Equals("chkSeguro")) chkSeguro = jsonOPropiedades.Value.ToString();
+
+                            if (propiedad.Equals("Email")) Email = jsonOPropiedades.Value.ToString();
+                            if (propiedad.Equals("Celular")) Celular = jsonOPropiedades.Value.ToString();
                         }
                     }
 
                     // Validar si se preinscribio anteriormente
-                    try
-                    {
-                        var Inscripcion = db.Afiliados_DatosPersonales.Where(d => d.CUIL == Cuil).First();
-                        if (Inscripcion != null)
-                        {
-                            return Json(new { success = true, responseText = "Ya hay un afiliado preinscripto con mismo CUIT anteriormente." }, JsonRequestBehavior.AllowGet);
-                        }
-                    }
-                    catch (Exception)
-                    {
 
+                    var Inscripcion = db.Afiliados_DatosPersonales.Where(d => d.CUIL == Cuil).First();
+                    if (Inscripcion != null)
+                    {
+                        return Json(new { success = true, responseText = "Ya hay un afiliado preinscripto con mismo CUIL anteriormente." }, JsonRequestBehavior.AllowGet);
                     }
+
 
                     string hoy = DateTime.Now.ToString("yyyy/MM/dd");
 
@@ -123,7 +155,15 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                         Provincia = Provincia,
                         Sexo = Int32.Parse(SexoAfiliadoDocumento),
                         Nacionalidad = Int32.Parse(Nacionalidad),
-                        Ingresado = false
+                        Ingresado = false,
+                        NroAfiliado = 0,
+                        Art100 = true,
+                        Sepelio = Boolean.Parse(chkSeguro),
+                        Turismo = Boolean.Parse(chkCuota),
+                        Email = Email,
+                        Celular = Celular,
+                        Confirmado = false,
+                        CodigoTemporal = password
                     };
 
                     db.Afiliados_DatosPersonales.Add(emp);
@@ -135,8 +175,8 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                     return Json(new { success = true, responseText = "Error al Preincribir Datos del Afiliado." }, JsonRequestBehavior.AllowGet);
                 }
 
-
                 var ultimoId = db.Afiliados_DatosPersonales.OrderByDescending(d => d.Codigo).First().Codigo;
+
 
                 // EMPRESA
                 try
@@ -151,7 +191,7 @@ namespace SeocaPreincripcionesAfiliados.Controllers
 
                     }
 
-                    string FechaIngresoAfiliadoEmpresa = "", NombreEmpresaAfiliadoEmpresa = "", CUITEmpresaAfiliadoEmpresa = "", CalleAfiliadoEmpresa = "", NumeroAfiliadoEmpresa = "", LocalAfiliadoEmpresa = "", PisoAfiliadoEmpresa = "", DtoAfiliadoEmpresa = "", CPAfiliadoEmpresa = "", LocalidadAfiliadoEmpresa = "", TelefonoAfiliadoEmpresa = "";
+                    string FechaIngresoAfiliadoEmpresa = "", NombreEmpresaAfiliadoEmpresa = "", NombreFantasiaAfiliadoEmpresa = "", CUITEmpresaAfiliadoEmpresa = "", CalleAfiliadoEmpresa = "", NumeroAfiliadoEmpresa = "", LocalAfiliadoEmpresa = "", PisoAfiliadoEmpresa = "", DtoAfiliadoEmpresa = "", CPAfiliadoEmpresa = "", LocalidadAfiliadoEmpresa = "", TelefonoAfiliadoEmpresa = "", EmailAfiliadoEmpresa = "";
                     if (jsonPreservar != null)
                     {
                         foreach (JObject jsonOperaciones in jsonPreservar.Children<JObject>())
@@ -161,6 +201,7 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                                 string propiedad = jsonOPropiedades.Name;
                                 if (propiedad.Equals("FechaIngresoAfiliadoEmpresa")) FechaIngresoAfiliadoEmpresa = jsonOPropiedades.Value.ToString();
                                 if (propiedad.Equals("NombreEmpresaAfiliadoEmpresa")) NombreEmpresaAfiliadoEmpresa = jsonOPropiedades.Value.ToString();
+                                if (propiedad.Equals("NombreFantasiaAfiliadoEmpresa")) NombreFantasiaAfiliadoEmpresa = jsonOPropiedades.Value.ToString();
                                 if (propiedad.Equals("CUITEmpresaAfiliadoEmpresa")) CUITEmpresaAfiliadoEmpresa = jsonOPropiedades.Value.ToString();
                                 if (propiedad.Equals("CalleAfiliadoEmpresa")) CalleAfiliadoEmpresa = jsonOPropiedades.Value.ToString();
                                 if (propiedad.Equals("NumeroAfiliadoEmpresa")) NumeroAfiliadoEmpresa = jsonOPropiedades.Value.ToString();
@@ -170,6 +211,8 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                                 if (propiedad.Equals("CPAfiliadoEmpresa")) CPAfiliadoEmpresa = jsonOPropiedades.Value.ToString();
                                 if (propiedad.Equals("LocalidadAfiliadoEmpresa")) LocalidadAfiliadoEmpresa = jsonOPropiedades.Value.ToString();
                                 if (propiedad.Equals("TelefonoAfiliadoEmpresa")) TelefonoAfiliadoEmpresa = jsonOPropiedades.Value.ToString();
+                                if (propiedad.Equals("EmailAfiliadoEmpresa")) EmailAfiliadoEmpresa = jsonOPropiedades.Value.ToString();
+
                             }
 
                             // GUARDAR EN LA TABLA DE EMPRESAS ANTECEDENTES
@@ -178,13 +221,15 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                                 Id_Afiliado = ultimoId,
                                 Fecha_Ingreso = DateTime.Parse(FechaIngresoAfiliadoEmpresa),
                                 Nombre_Empresa = NombreEmpresaAfiliadoEmpresa,
+                                Nombre_Fantasia = NombreFantasiaAfiliadoEmpresa,
                                 Cuit_Empresa = CUITEmpresaAfiliadoEmpresa,
                                 Calle = CalleAfiliadoEmpresa,
                                 Numero = Int32.Parse(NumeroAfiliadoEmpresa),
                                 Piso = PisoAfiliadoEmpresa,
                                 Dto = DtoAfiliadoEmpresa,
                                 Localidad = Int32.Parse(LocalidadAfiliadoEmpresa),
-                                Telefono = TelefonoAfiliadoEmpresa
+                                Telefono = TelefonoAfiliadoEmpresa,
+                                Email = EmailAfiliadoEmpresa
                             };
 
                             db.Afiliados_Empresa.Add(emp);
@@ -194,7 +239,7 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                     }
 
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return Json(new { success = true, responseText = "Error al Preinscribir Datos de la Empresa." }, JsonRequestBehavior.AllowGet);
                 }
@@ -239,7 +284,7 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                                         Apellido_Nombre = ApellidoNombreAfiliadoFamiliar,
                                         Tipo_Doc = TipoDocAfiliadoFamiliar,
                                         Num_Doc = NumDocAfiliadoFamiliar,
-                                        Sexo = SexoAfiliadoFamiliar,
+                                        Sexo = Int32.Parse(SexoAfiliadoFamiliar),
                                         Fecha_Nac = DateTime.Parse(FechaNacAfiliadoFamiliar)
                                     };
 
@@ -257,7 +302,7 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                                     Cert_Estudios = DateTime.Parse(CertEstudiosAfiliadoFamiliar),
                                     Tipo_Doc = TipoDocAfiliadoFamiliar,
                                     Num_Doc = NumDocAfiliadoFamiliar,
-                                    Sexo = SexoAfiliadoFamiliar,
+                                    Sexo = Int32.Parse(SexoAfiliadoFamiliar),
                                     Fecha_Nac = DateTime.Parse(FechaNacAfiliadoFamiliar)
                                 };
 
@@ -271,13 +316,143 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                     }
 
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return Json(new { success = true, responseText = "Error al Preinscribir Antecedente." }, JsonRequestBehavior.AllowGet);
                 }
 
-                return Json(new { success = true, responseText = "Preinscripcion Exitosa." }, JsonRequestBehavior.AllowGet);
+
+                // Enviar E-Mail de Codigo de Validacion
+                try
+                {
+                    MailMessage omail = new MailMessage("seoca_noresponder@geosoft-web.com.ar", Email, "Clave de Preinscripcion", "Ingrese este codigo para confirmar su Preinscripcion de Afiliado. Su codigo es: " + password)
+                    {
+                        IsBodyHtml = true
+                    };
+
+                    //Attachment _attachment = new Attachment(@Archivo);
+                    //omail.Attachments.Add(_attachment);
+
+
+                    SmtpClient smtp = new SmtpClient("mail.geosoft-web.com.ar")
+                    {
+                        EnableSsl = false,
+                        UseDefaultCredentials = true,
+                        DeliveryMethod = SmtpDeliveryMethod.Network,
+                        Port = 25,
+                        Credentials = new System.Net.NetworkCredential("seoca_noresponder@geosoft-web.com.ar", "$a1b2c3d4e5$")
+                    };
+
+                    smtp.Send(omail);
+                    smtp.Dispose();
+                }
+                catch (Exception ex)
+                {
+
+                }
+
+
+                // Creacion de PDF
+                try
+                {
+
+                    // Obtener ultimo id de Liquidacion
+                    //string ultID = db.Afiliados_DatosPersonales.Where(d => d.IdEmpresa == ids).OrderByDescending(d => d.IdLiquidacion).First().IdLiquidacion.ToString();
+                    List<ReporteAfiliado> reporteAfiliado = db.Database.SqlQuery<ReporteAfiliado>("EXEC SP_crearReporteAfiliados @Codigo", new SqlParameter("Codigo", ultimoId)).ToList<ReporteAfiliado>();
+
+                    ReportViewer ReportViewer = new ReportViewer();
+                    ReportDataSource rdc = new ReportDataSource("DataSet1", reporteAfiliado);
+
+                    ReportViewer.Visible = true;
+                    ReportViewer.LocalReport.ReportPath = Server.MapPath("~/DatosAfiliado.rdlc");
+                    //ReportViewer.LocalReport.ReportPath = "~/ReporteLiquidacion.rdlc";
+                    ReportViewer.ShowParameterPrompts = true;
+                    ReportViewer.LocalReport.DataSources.Clear();
+                    ReportViewer.LocalReport.DataSources.Add(rdc);
+
+                    ReportViewer.ProcessingMode = ProcessingMode.Local;
+
+                    using (StreamReader rdlcSR = new StreamReader(Server.MapPath("~/DatosAfiliado.rdlc")))
+                    {
+                        ReportViewer.LocalReport.LoadReportDefinition(rdlcSR);
+                        ReportViewer.LocalReport.Refresh();
+                    }
+
+                    //ReportParameter parameter = new ReportParameter("Periodo", HttpUtility.HtmlDecode(periodo.ToString("MM/yyyy")));
+                    //ReportViewer.LocalReport.SetParameters(parameter);
+
+
+
+                    ReportViewer.LocalReport.Refresh();
+
+                    string mimeType = string.Empty;
+                    string encoding = string.Empty;
+                    string extension = string.Empty;
+
+                    //ReportViewer.ShowParameterPrompts = true;
+
+                    byte[] bytes = ReportViewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out string[] streamids, out Warning[] warnings);
+
+                    string file = "DatoAfiliado_" + Cuil + ".pdf";
+                    string XLPath = Server.MapPath("~\\PDFs");
+
+                    //FileStream fs = new FileStream(XLPath + "\\" + file.Replace("/", "_"), FileMode.Create, FileAccess.Write);
+                    //fs.Write(bytes, 0, bytes.Length);
+                    //fs.Close();
+
+                    Response.Clear();
+                    Response.ContentType = "application/octet-stream";
+
+                    Response.AddHeader("content-disposition", "attachment;filename=" + file);
+                    Response.Buffer = true;
+
+                    Response.OutputStream.Write(bytes, 0, bytes.Length);
+                    Response.OutputStream.Flush();
+
+                    //ViewBag.message = "Se ha agregado una nueva Liquidacion";
+                }
+                catch (Exception)
+                {
+                    ViewBag.message = "Error en la creacion del pdf";
+                    return RedirectToAction("Liquidacion");
+                }
+
+
+                return Json(new { success = true, responseText = "Preinscripcion Ingresada. Su id es " + ultimoId + ". Confirme el Codigo que le llego a su Email para confirmar su preinscripcion." }, JsonRequestBehavior.AllowGet);
             }
+        }
+
+
+
+        public ActionResult Codigo()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Codigo(string Cuil, string Codigo)
+        {
+            using (Models.SeocaPreinscripcionesEntities2 db = new Models.SeocaPreinscripcionesEntities2()) {
+                try
+                {
+                    var val = db.Afiliados_DatosPersonales.Where(d => d.CUIL == Cuil && d.CodigoTemporal == Codigo).First();
+
+                    Models.Afiliados_DatosPersonales adp = db.Afiliados_DatosPersonales.Find(val.Codigo);
+                    adp.Confirmado = true;
+
+                    db.Afiliados_DatosPersonales.Attach(adp);
+                    db.Entry(adp).State = EntityState.Modified;//this is for modiying/update existing entry
+                    db.SaveChanges();
+                    
+                    codigo = "Codigo valido";
+                }
+                catch (Exception)
+                {
+                    codigo = "Codigo invalido";
+                }
+            }
+
+            return RedirectToAction("Afiliados", "Home");
         }
     }
 }

@@ -21,7 +21,7 @@ namespace SeocaPreincripcionesAfiliados.Models
         public Nullable<System.DateTime> Cert_Estudios { get; set; }
         public string Tipo_Doc { get; set; }
         public string Num_Doc { get; set; }
-        public string Sexo { get; set; }
+        public Nullable<int> Sexo { get; set; }
         public Nullable<System.DateTime> Fecha_Nac { get; set; }
     }
 }

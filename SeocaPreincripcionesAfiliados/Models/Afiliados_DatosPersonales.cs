@@ -34,5 +34,16 @@ namespace SeocaPreincripcionesAfiliados.Models
         public Nullable<int> Sexo { get; set; }
         public Nullable<int> Nacionalidad { get; set; }
         public Nullable<bool> Ingresado { get; set; }
+        public Nullable<int> NroAfiliado { get; set; }
+        public string Email { get; set; }
+        public string Celular { get; set; }
+        public byte[] FotoFrenteDni { get; set; }
+        public byte[] FotoDorsoDni { get; set; }
+        public byte[] FotoReciboSueldo { get; set; }
+        public string CodigoTemporal { get; set; }
+        public Nullable<bool> Confirmado { get; set; }
+        public Nullable<bool> Art100 { get; set; }
+        public Nullable<bool> Turismo { get; set; }
+        public Nullable<bool> Sepelio { get; set; }
     }
 }

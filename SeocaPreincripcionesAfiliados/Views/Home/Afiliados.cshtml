@@ -2,31 +2,50 @@
     ViewBag.Title = "Afiliados";
 }
 
+<!-- ---------------------------- Modal Empleados Start ---------------------------- -->
+<div id="id01" class="w3-modal">
+    <div class="w3-modal-content">
+        <div id="modal-content">
+            Cargando...
+        </div>
+    </div>
+</div>
+
+
 <div class="container-100">
     <div class="wrap-100">
         <div class="form-100 validate-form">
             <span class="title-100-form"> Formulario de solicitud de Afiliados </span>
         </div>
 
+        <div class="w3-row">
+            <div class="w3-half wrap-input100 rs1-wrap-input100" style="margin: 0;">
+                <h3 class="h3-input100"> Datos del Afiliado</h3>
+            </div>
+            <div class="w3-half wrap-input100 rs1-wrap-input100" style="margin: 0;">
+                <button onclick="document.getElementById('id01').style.display='block'" class="btnCodigo w3-right w3-margin-top enviar w3-card bg-zul w3-text-white w3-hover-green w3-hover-border-cyan" style="margin: 0 0 0 200px;" type="button" id="Codigo" name="Codigo">
+                    CODIGO
+                </button>
+            </div>
+        </div>
 
-        <h3 class="h3-input100"> Datos del Afiliado</h3>
         <hr class="hrs" />
         <br />
 
         <div class="Datos">
             <div class="wrap-input100 validate-input bg1 alert-validate" data-validate="Please Type Your Name">
                 <span class="label-input100"> Cuil </span>
-                <input type="number" id="Cuil" name="Cuil" class="input100 " onchange="changeCampos()">
+                <input type="number" id="Cuil" name="Cuil" class="input100 " onblur="validarMomentoCuit()">
             </div>
 
             <div class="w3-row">
-                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
+                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate">
                     <span class="label-input100">Apellido</span>
-                    <input type="text" id="Apellido" name="Apellido" class="input100 " onchange="changeCampos()">
+                    <input type="text" id="Apellido" name="Apellido" class="input100 " onblur="validarMomentoApellido()">
                 </div>
                 <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
                     <span class="label-input100">Nombre</span>
-                    <input type="text" id="Nombre" name="Nombre" class="input100" onchange="changeCampos()">
+                    <input type="text" id="Nombre" name="Nombre" class="input100" onblur="validarMomentoNombre()">
                 </div>
                 <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
                     <span class="label-input100">Tipo de Documento</span>
@@ -48,9 +67,9 @@
             </div>
 
             <div class="w3-row">
-                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
+                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate">
                     <span class="label-input100">Numero de Documento</span>
-                    <input type="number" id="NumDoc" name="NumDoc" class="input100" onchange="changeCampos()">
+                    <input type="number" id="NumDoc" name="NumDoc" class="input100" onblur="validarMomentoNumDocumento()">
 
                 </div>
                 <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
@@ -90,7 +109,7 @@
             </div>
 
             <div class="w3-row">
-                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
+                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate">
                     <span class="label-input100">Estado Civil</span>
                     <select class="w3-select bg1" name="EstadoCivil" id="EstadoCivil">
                         <option value="0">< Seleccione un Estado Civil ></option>
@@ -109,39 +128,54 @@
                 </div>
                 <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
                     <span class="label-input100">Fecha Nacimiento</span>
-                    <input type="date" id="FechaNac" name="FechaNac" class="input100" onchange="changeCampos()">
+                    <input type="date" id="FechaNac" name="FechaNac" class="input100">
 
                 </div>
                 <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
                     <span class="label-input100">Calle</span>
-                    <input type="text" id="Calle" name="Calle" class="input100" onchange="changeCampos()">
+                    <input type="text" id="Calle" name="Calle" class="input100" onblur="validarMomentoCalle()">
 
                 </div>
             </div>
 
             <div class="w3-row">
                 <!-- -------------------- Fecha / Importe / Interes_Mora -------------------- -->
-                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
+                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate">
                     <span class="label-input100">Numero de Calle</span>
-                    <input type="number" id="NumeroCalle" name="NumeroCalle" class="input100" onchange="changeCampos()">
+                    <input type="number" id="NumeroCalle" name="NumeroCalle" class="input100" onblur="validarMomentoNumCalle()">
 
                 </div>
                 <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
                     <span class="label-input100">Piso</span>
-                    <input type="text" id="Piso" name="Piso" class="input100" onchange="changeCampos()">
+                    <input type="text" id="Piso" name="Piso" class="input100">
                 </div>
                 <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
                     <span class="label-input100">Dto</span>
-                    <input type="text" id="Dto" name="Dto" class="input100" onchange="changeCampos()">
+                    <input type="text" id="Dto" name="Dto" class="input100">
                 </div>
             </div>
 
             <div class="w3-row">
                 <!-- -------------------- Fecha / Importe / Interes_Mora -------------------- -->
-                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
+                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate">
                     <span class="label-input100">Telefono</span>
-                    <input type="number" id="Telefono" name="Telefono" class="input100" onchange="changeCampos()">
+                    <input type="tel" id="Telefono" name="Telefono" class="input100" onblur="validarMomentoTelefono()">
                 </div>
+                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate">
+                    <span class="label-input100">Celular</span>
+                    <input type="tel" id="Celular" name="Celular" class="input100" onblur="validarMomentoCelular()">
+                </div>
+                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate">
+                    <span class="label-input100">Email</span>
+                    <input type="email" id="Email" name="Email" class="input100" onblur="validarMomentoEmail()">
+                </div>
+
+
+
+            </div>
+
+            <div class="w3-row">
+                <!-- -------------------- Fecha / Importe / Interes_Mora -------------------- -->
                 <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
                     <span class="label-input100">Localidad</span>
                     <select class="w3-select bg1" name="Localidad" id="Localidad">
@@ -176,11 +210,7 @@
                         }
                     </select>
                 </div>
-            </div>
-
-            <div class="w3-row">
-                <!-- -------------------- Fecha / Importe / Interes_Mora -------------------- -->
-                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
+                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate">
                     <span class="label-input100">Sexo</span>
                     <select class="w3-select bg1" name="SexoAfiliadoDocumento" id="SexoAfiliadoDocumento">
                         @{
@@ -190,15 +220,17 @@
 
                                 foreach (dynamic Loc in Sexo)
                                 {
-                                  <option value="@Loc.Codigo">@Loc.Descripcion</option>
+                                    <option value="@Loc.Codigo">@Loc.Descripcion</option>
                                 }
                             }
                         }
                     </select>
                 </div>
+            </div>
+            <div>
                 <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
                     <span class="label-input100">Nacionalidad</span>
-                    <select class="w3-select bg1" name="Nacionalidad" id="Nacionalidad">
+                    <select class="w3-select bg1" name="Nacionalidad" id="Nacionalidad" onblur="validarMomentoNacionalidad()">
                         @{
                             if (ViewData["Nacionalidad"] != null)
                             {
@@ -212,18 +244,40 @@
                                     }
                                     else
                                     {
-                                        <option value = "@Loc.Codigo" > @Loc.Descripcion </option >
+                                        <option value="@Loc.Codigo"> @Loc.Descripcion </option>
                                     }
                                 }
                             }
                         }
                     </select>
                 </div>
+                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
+                    <label><input type="checkbox" value="Convenio" name="chkConvenio" class="w3-check bg1" id="chkConvenio" checked disabled /> Convenio Colectivo </label><br />
+                    <label><input type="checkbox" name="chkCuota" class="w3-check bg1" id="chkCuota" /> Cuota Sindical </label> <br />
+                    <label><input type="checkbox" name="chkSeguro" class="w3-check bg1" id="chkSeguro" /> Seguro Sepelio </label>
+                </div>
                 <div class="w3-third">
-                   
+                </div>
+            </div>
+
+            <div class="w3-row">
+                <!-- -------------------- Fecha / Importe / Interes_Mora -------------------- -->
+                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
+                    <span class="label-input100">Foto Frente DNI</span>
+                    <input accept="image/png,image/jpeg,application/pdf" type="file" name="fileU" id="fileU">
+                </div>
+                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
+                    <span class="label-input100">Foto Dorso DNI</span>
+                    <input accept="image/png,image/jpeg,application/pdf" type="file" name="fileD" id="fileD">
+                </div>
+                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
+                    <span class="label-input100">Ultimo Recibo Sueldo</span>
+                    <input accept="image/png,image/jpeg,application/pdf" type="file" name="fileT" id="fileT">
                 </div>
             </div>
         </div>
+
+        <!-- /////////////////////////////////////////////////////////////////////////////////////// -->
 
         <h3 class="h3-input100"> Empresas </h3>
         <hr class="hrs" />
@@ -232,57 +286,60 @@
         <div class="empresa">
             <div class="w3-row">
                 <!-- -------------------- Apellido / Docimilio / Documento -------------------- -->
-                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
+                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate">
                     <span class="label-input100">Fecha Ingreso</span>
-                    <input type="date" id="FechaIngresoAfiliadoEmpresa" name="FechaIngresoAfiliadoEmpresa" class="input100" onchange="changeCampos()">
+                    <input type="date" id="FechaIngresoAfiliadoEmpresa" name="FechaIngresoAfiliadoEmpresa" class="input100">
 
                 </div>
                 <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
-                    <span class="label-input100">Nombre Empresa</span>
-                    <input type="text" id="NombreEmpresaAfiliadoEmpresa" name="NombreEmpresaAfiliadoEmpresa" class="input100" onchange="changeCampos()">
+                    <span class="label-input100">Razon Social</span>
+                    <input type="text" id="NombreEmpresaAfiliadoEmpresa" name="NombreEmpresaAfiliadoEmpresa" class="input100" onblur="validarMomentoNombreEmpresa()">
                 </div>
                 <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
-                    <span class="label-input100">Cuit</span>
-                    <input type="number" id="CUITEmpresaAfiliadoEmpresa" name="CUITEmpresaAfiliadoEmpresa" class="input100" onchange="changeCampos()">
+                    <span class="label-input100">Nombre de Fantasia</span>
+                    <input type="text" id="NombreFantasiaAfiliadoEmpresa" name="NombreFantasiaAfiliadoEmpresa" class="input100">
                 </div>
             </div>
 
             <div class="w3-row">
                 <!-- -------------------- Apellido / Docimilio / Documento -------------------- -->
-                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
+                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate">
+                    <span class="label-input100">Cuit</span>
+                    <input type="number" id="CUITEmpresaAfiliadoEmpresa" name="CUITEmpresaAfiliadoEmpresa" class="input100" onblur="validarMomentoCuitEmpresa()">
+                </div>
+                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
                     <span class="label-input100">Calle</span>
-                    <input type="text" id="CalleAfiliadoEmpresa" name="CalleAfiliadoEmpresa" class="input100" onchange="changeCampos()">
-
+                    <input type="text" id="CalleAfiliadoEmpresa" name="CalleAfiliadoEmpresa" class="input100" onblur="validarMomentoCalleAfiliado()">
                 </div>
                 <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
                     <span class="label-input100">Numero</span>
-                    <input type="number" id="NumeroAfiliadoEmpresa" name="NumeroAfiliadoEmpresa" class="input100" onchange="changeCampos()">
-                </div>
-                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
-                    <span class="label-input100">Local</span>
-                    <input type="text" id="LocalAfiliadoEmpresa" name="LocalAfiliadoEmpresa" class="input100" onchange="changeCampos()">
+                    <input type="number" id="NumeroAfiliadoEmpresa" name="NumeroAfiliadoEmpresa" class="input100" onblur="validarMomentoNumeroAfiliado()">
                 </div>
             </div>
 
             <div class="w3-row">
                 <!-- -------------------- Apellido / Docimilio / Documento -------------------- -->
-                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
+                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate">
+                    <span class="label-input100">Local</span>
+                    <input type="text" id="LocalAfiliadoEmpresa" name="LocalAfiliadoEmpresa" class="input100" onblur="validarMomentoLocalAfiliado()">
+                </div>
+                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
                     <span class="label-input100">Piso</span>
-                    <input type="text" id="PisoAfiliadoEmpresa" name="PisoAfiliadoEmpresa" class="input100" onchange="changeCampos()">
+                    <input type="text" id="PisoAfiliadoEmpresa" name="PisoAfiliadoEmpresa" class="input100">
                 </div>
                 <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
                     <span class="label-input100">Dto</span>
-                    <input type="text" id="DtoAfiliadoEmpresa" name="DtoAfiliadoEmpresa" class="input100" onchange="changeCampos()">
-                </div>
-                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
-                    <span class="label-input100">CP</span>
-                    <input type="number" id="CPAfiliadoEmpresa" name="CPAfiliadoEmpresa" class="input100" onchange="changeCampos()">
+                    <input type="text" id="DtoAfiliadoEmpresa" name="DtoAfiliadoEmpresa" class="input100">
                 </div>
             </div>
 
             <div class="w3-row">
                 <!-- -------------------- Apellido / Docimilio / Documento -------------------- -->
-                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
+                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate">
+                    <span class="label-input100">CP</span>
+                    <input type="number" id="CPAfiliadoEmpresa" name="CPAfiliadoEmpresa" class="input100" onblur="validarMomentoCPAfiliado()">
+                </div>
+                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
                     <span class="label-input100">Localidad</span>
                     <select class="w3-select bg1" name="LocalidadAfiliadoEmpresa" id="LocalidadAfiliadoEmpresa">
                         <option value="0">< Seleccione una Localidad ></option>
@@ -299,15 +356,28 @@
                         }
                     </select>
                 </div>
-                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
+                <div class="w3-third wrap-input100 bg1 rs1-wrap-input100">
                     <span class="label-input100">Telefono</span>
-                    <input type="number" id="TelefonoAfiliadoEmpresa" name="TelefonoAfiliadoEmpresa" class="input100" onchange="changeCampos()">
+                    <input type="number" id="TelefonoAfiliadoEmpresa" name="TelefonoAfiliadoEmpresa" class="input100" onblur="validarMomentoTelefonoAfiliado()">
+                </div>
+            </div>
+
+            <div class="w3-row">
+                <!-- -------------------- Apellido / Docimilio / Documento -------------------- -->
+                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate">
+                    <span class="label-input100">Email</span>
+                    <input type="email" id="EmailAfiliadoEmpresa" name="EmailAfiliadoEmpresa" class="input100" onblur="validarMomentoEmailAfiliado()">
+                </div>
+                <div class="w3-third">
                 </div>
                 <div class="w3-third">
                 </div>
             </div>
 
         </div>
+
+
+        <!-- //////////////////////////////////////////////////////////////////////////////////////////////// -->
 
         <br />
         <h3 class="h3-input100"> Familiares </h3>
@@ -317,7 +387,7 @@
         <div class="familiares">
             <div class="w3-row">
                 <!-- -------------------- Apellido / Docimilio / Documento -------------------- -->
-                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
+                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate">
                     <span class="label-input100">Parentesco</span>
                     <select class="w3-select bg1" name="Parentesco" id="Parentesco">
                         <option value="0">< Seleccione un Tipo Documento ></option>
@@ -337,17 +407,17 @@
                 </div>
                 <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
                     <span class="label-input100">Apellido y Nombre</span>
-                    <input type="text" id="ApellidoNombreAfiliadoFamiliar" name="ApellidoNombreAfiliadoFamiliar" class="input100" onchange="changeCampos()">
+                    <input type="text" id="ApellidoNombreAfiliadoFamiliar" name="ApellidoNombreAfiliadoFamiliar" class="input100">
                 </div>
                 <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
                     <span class="label-input100">Certificado</span>
-                    <input type="date" id="CertEstudiosAfiliadoFamiliar" name="CertEstudiosAfiliadoFamiliar" class="input100" onchange="changeCampos()">
+                    <input type="date" id="CertEstudiosAfiliadoFamiliar" name="CertEstudiosAfiliadoFamiliar" class="input100">
                 </div>
             </div>
 
             <div class="w3-row">
                 <!-- -------------------- Apellido / Docimilio / Documento -------------------- -->
-                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
+                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate">
                     <span class="label-input100">Tipo Documento</span>
                     <select class="w3-select bg1" name="TipoDocAfiliadoFamiliar" id="TipoDocAfiliadoFamiliar">
                         <option value="0">< Seleccione un Tipo Documento ></option>
@@ -366,7 +436,7 @@
                 </div>
                 <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
                     <span class="label-input100">Numero Documento</span>
-                    <input type="number" id="NumDocAfiliadoFamiliar" name="NumDocAfiliadoFamiliar" class="input100" onchange="changeCampos()">
+                    <input type="number" id="NumDocAfiliadoFamiliar" name="NumDocAfiliadoFamiliar" class="input100">
                 </div>
                 <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
                     <span class="label-input100">Sexo</span>
@@ -388,9 +458,9 @@
 
             <div class="w3-row">
                 <!-- -------------------- Apellido / Docimilio / Documento -------------------- -->
-                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
+                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate">
                     <span class="label-input100">Fecha Nacimiento</span>
-                    <input type="date" id="FechaNacAfiliadoFamiliar" name="FechaNacAfiliadoFamiliar" class="input100" onchange="changeCampos()">
+                    <input type="date" id="FechaNacAfiliadoFamiliar" name="FechaNacAfiliadoFamiliar" class="input100">
 
                 </div>
                 <div class="w3-third ">
@@ -420,10 +490,12 @@
             </div>
         </div>
 
+        <br />
+        <br />
 
         <div class="w3-row">
-            <div class="">
-                <button class="w3-right w3-margin-top enviar w3-card bg-zul w3-text-white w3-hover-green w3-hover-border-cyan" style="margin: 0 0 0 200px;" type="submit" onclick="return enviar();">
+            <div class="wrap-input100 rs1-wrap-input100">
+                <button class="w3-right w3-margin-top enviar w3-card bg-zul w3-text-white w3-hover-green w3-hover-border-cyan" style="margin: 0 0 0 200px;" type="submit" onclick="return enviar();" id="enviarDatos" name="enviarDatos">
                     ENVIAR
                 </button>
             </div>
@@ -432,11 +504,19 @@
     </div>
 </div>
 
-
 <br />
+
+@if (!string.IsNullOrEmpty(ViewBag.mensaje))
+{
+    <script type="text/javascript">
+        alert("@ViewBag.mensaje");
+    </script>
+}
 
 @section scripts{
     <script src="~/js/tabPag.js"></script>
     <script src="~/js/EnviarMatriz.js"></script>
+    <script src="~/js/ValidacionesAfiliado.js"></script>
+    <script src="~/js/ValidacionesEmpresa.js"></script>
 }
 

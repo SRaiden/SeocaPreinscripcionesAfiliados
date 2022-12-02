@@ -2,6 +2,7 @@
 var matrizDatosAfiliado = new Array();
 var matrizFamiliares = new Array();
 
+
 function enviar() {
 
     var Apellido = document.getElementById("Apellido").value;
@@ -18,13 +19,19 @@ function enviar() {
     var Piso = document.getElementById("Piso").value;
     var Dto = document.getElementById("Dto").value;
     var Telefono = document.getElementById("Telefono").value;
+    var Celular = document.getElementById("Celular").value;
+    var Email = document.getElementById("Email").value;
     var Localidad = document.getElementById("Localidad").value;
     var Provincia = document.getElementById("Provincia").value;
     var SexoAfiliadoDocumento = document.getElementById("SexoAfiliadoDocumento").value;
     var Nacionalidad = document.getElementById("Nacionalidad").value;
+    var chkConvenio = document.getElementById("chkConvenio").value;
+    var chkCuota = document.getElementById("chkCuota").checked;
+    var chkSeguro = document.getElementById("chkSeguro").checked;
 
     var FechaIngresoAfiliadoEmpresa = document.getElementById("FechaIngresoAfiliadoEmpresa").value;
     var NombreEmpresaAfiliadoEmpresa = document.getElementById("NombreEmpresaAfiliadoEmpresa").value;
+    var NombreFantasiaAfiliadoEmpresa = document.getElementById("NombreFantasiaAfiliadoEmpresa").value;
     var CUITEmpresaAfiliadoEmpresa = document.getElementById("CUITEmpresaAfiliadoEmpresa").value;
     var CalleAfiliadoEmpresa = document.getElementById("CalleAfiliadoEmpresa").value;
     var NumeroAfiliadoEmpresa = document.getElementById("NumeroAfiliadoEmpresa").value;
@@ -34,6 +41,7 @@ function enviar() {
     var CPAfiliadoEmpresa = document.getElementById("CPAfiliadoEmpresa").value;
     var LocalidadAfiliadoEmpresa = document.getElementById("LocalidadAfiliadoEmpresa").value;
     var TelefonoAfiliadoEmpresa = document.getElementById("TelefonoAfiliadoEmpresa").value;
+    var EmailAfiliadoEmpresa = document.getElementById("EmailAfiliadoEmpresa").value;
 
     // Validaciones
     if (Apellido == "") {
@@ -44,6 +52,7 @@ function enviar() {
         alert("Debe de ingresar un Nombre");
         return false;
     }
+
     if (Cuil == "") {
         alert("Debe de ingresar el Cuil");
         return false;
@@ -56,6 +65,7 @@ function enviar() {
         alert("El CUIL debe de constar de 11 caracteres");
         return false;
     }
+
     if (TipoDoc == 0) {
         alert("Debe de seleccionar un Tipo Documento");
         return false;
@@ -113,6 +123,22 @@ function enviar() {
         return false;
     }
 
+    if (Email == "") {
+        alert("Debe de ingresar el Email");
+        return false;
+    }
+
+    var emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+    //Se muestra un texto a modo de ejemplo, luego va a ser un icono
+    if (!emailRegex.test(Email)) {
+        alert("Formato de Email no valido");
+        return false;
+    }
+
+
+    //-------------------------------------------------------------------//
+
+
     if (FechaIngresoAfiliadoEmpresa == "") {
         alert("Debe de ingresar la Fecha de Ingreso (Empresa)");
         return false;
@@ -157,6 +183,18 @@ function enviar() {
         alert("Debe de ingresar el Telefono (Empresa)");
         return false;
     }
+    if (EmailAfiliadoEmpresa == "") {
+        alert("Debe de ingresar el Email");
+        return false;
+    }
+
+    var emailRegexD = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+    //Se muestra un texto a modo de ejemplo, luego va a ser un icono
+    if (!emailRegexD.test(EmailAfiliadoEmpresa)) {
+        alert("Formato de Email no valido");
+        return false;
+    }
+
 
     matrizDatosAfiliado.push({
         Apellido: Apellido,
@@ -176,12 +214,18 @@ function enviar() {
         Localidad: Localidad,
         Provincia: Provincia,
         SexoAfiliadoDocumento: SexoAfiliadoDocumento,
-        Nacionalidad: Nacionalidad
+        Nacionalidad: Nacionalidad,
+        chkConvenio: chkConvenio,
+        chkCuota: chkCuota,
+        chkSeguro: chkSeguro,
+        Email: Email,
+        Celular: Celular
     });
 
     matrizEmpresa.push({
         FechaIngresoAfiliadoEmpresa: FechaIngresoAfiliadoEmpresa,
         NombreEmpresaAfiliadoEmpresa: NombreEmpresaAfiliadoEmpresa,
+        NombreFantasiaAfiliadoEmpresa: NombreFantasiaAfiliadoEmpresa,
         CUITEmpresaAfiliadoEmpresa: CUITEmpresaAfiliadoEmpresa,
         CalleAfiliadoEmpresa: CalleAfiliadoEmpresa,
         NumeroAfiliadoEmpresa: NumeroAfiliadoEmpresa,
@@ -190,13 +234,27 @@ function enviar() {
         DtoAfiliadoEmpresa: DtoAfiliadoEmpresa,
         CPAfiliadoEmpresa: CPAfiliadoEmpresa,
         LocalidadAfiliadoEmpresa: LocalidadAfiliadoEmpresa,
-        TelefonoAfiliadoEmpresa: TelefonoAfiliadoEmpresa
+        TelefonoAfiliadoEmpresa: TelefonoAfiliadoEmpresa,
+        EmailAfiliadoEmpresa: EmailAfiliadoEmpresa
     });
 
     //-------------------------------------------------------------------------------------------------//
 
     if (matrizEmpresa == "") matrizEmpresa = null;
     if (matrizFamiliares == "") matrizFamiliares = null;
+
+
+    //-------------------------------------------------------------------------------------------------//
+
+
+    //var selectFile = ($("#fileU"))[0].files[0];
+    //var dataString = new FormData();
+
+    //dataString.append("filesU", selectFile);
+    //dataString.append("matrizDatosAfiliado", matrizDatosAfiliado);
+    //dataString.append("matrizEmpresa", matrizEmpresa);
+    //dataString.append("matrizFamiliares", matrizFamiliares);
+
 
     $.ajax({
         url: '/Home/Afiliados',
@@ -216,7 +274,6 @@ function enviar() {
             matrizFamiliares: JSON.stringify(matrizFamiliares)
         }
     });
-
 
 }
 
@@ -313,3 +370,11 @@ $(document).on('click', '.borrarFamiliar', function (event) {
     event.preventDefault();
     $(this).closest('tr').remove();
 });
+
+$(".btnCodigo").click(function (eve) {
+    $("#modal-content").load("/Home/Codigo"); // GET
+});
+
+function cerrarId01() {
+    document.getElementById('id01').style.display = 'none';
+}
