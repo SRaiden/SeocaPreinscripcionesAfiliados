@@ -5,6 +5,16 @@ var matrizFamiliares = new Array();
 
 function enviar() {
 
+    
+
+}
+
+// -------------------------------------------------------------- //
+
+$("form#enviarDatos").submit(function (e) {
+
+    e.preventDefault();
+
     var Apellido = document.getElementById("Apellido").value;
     var Nombre = document.getElementById("Nombre").value;
     var Cuil = document.getElementById("Cuil").value;
@@ -52,7 +62,6 @@ function enviar() {
         alert("Debe de ingresar un Nombre");
         return false;
     }
-
     if (Cuil == "") {
         alert("Debe de ingresar el Cuil");
         return false;
@@ -65,7 +74,6 @@ function enviar() {
         alert("El CUIL debe de constar de 11 caracteres");
         return false;
     }
-
     if (TipoDoc == 0) {
         alert("Debe de seleccionar un Tipo Documento");
         return false;
@@ -122,12 +130,10 @@ function enviar() {
         alert("Debe de ingresar la Nacionalidad");
         return false;
     }
-
     if (Email == "") {
         alert("Debe de ingresar el Email");
         return false;
     }
-
     var emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
     //Se muestra un texto a modo de ejemplo, luego va a ser un icono
     if (!emailRegex.test(Email)) {
@@ -247,19 +253,17 @@ function enviar() {
     //-------------------------------------------------------------------------------------------------//
 
 
-    //var selectFile = ($("#fileU"))[0].files[0];
-    //var dataString = new FormData();
-
-    //dataString.append("filesU", selectFile);
-    //dataString.append("matrizDatosAfiliado", matrizDatosAfiliado);
-    //dataString.append("matrizEmpresa", matrizEmpresa);
-    //dataString.append("matrizFamiliares", matrizFamiliares);
-
+    var fileU = new FormData($('#fileU')[0]);
+    var data = fileU + "&matrizDatosAfiliado=" + matrizDatosAfiliado +
+        "&matrizEmpresa=" + matrizEmpresa + "&matrizFamiliares=" + matrizFamiliares;
 
     $.ajax({
         url: '/Home/Afiliados',
         type: 'POST',
         dataType: 'json',
+        contentType: false,
+        cache: false,
+        /* processData: false,*/
         success: function (response) {
             alert(response.responseText);
             window.open(response.enlace);
@@ -268,14 +272,37 @@ function enviar() {
         error: function (response) {
             alert(response.responseText);
         },
-        data: {
-            matrizDatosAfiliado: JSON.stringify(matrizDatosAfiliado),
-            matrizEmpresa: JSON.stringify(matrizEmpresa),
-            matrizFamiliares: JSON.stringify(matrizFamiliares)
-        }
+        data: data
     });
 
+
+    //$.ajax({
+    //    url: '/Home/Afiliados',
+    //    type: 'POST',
+    //    dataType: 'json',
+    //    contentType: false,
+    //    cache: false,
+    //    /*        processData: false,*/
+    //    success: function (response) {
+    //        alert(response.responseText);
+    //        window.open(response.enlace);
+    //        location.reload();
+    //    },
+    //    error: function (response) {
+    //        alert(response.responseText);
+    //    },
+    //    data: {
+    //        filesU: formData,
+    //        matrizDatosAfiliado: JSON.stringify(matrizDatosAfiliado),
+    //        matrizEmpresa: JSON.stringify(matrizEmpresa),
+    //        matrizFamiliares: JSON.stringify(matrizFamiliares)
+    //    }
+    //});
+
+
 }
+
+
 
 // -------------------------------------------------------------- //
 
