@@ -32,7 +32,8 @@
         <hr class="hrs" />
         <br />
 
-        <form method="post" enctype="multipart/form-data">
+        @using (Html.BeginForm("Afiliados", "Home", FormMethod.Post, new { autocomplete = "off" }))
+        {
             <div class="Datos">
                 <div class="wrap-input100 validate-input bg1 alert-validate" data-validate="Please Type Your Name">
                     <span class="label-input100"> Cuil </span>
@@ -51,7 +52,7 @@
                     <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
                         <span class="label-input100">Tipo de Documento</span>
                         <select class="w3-select bg1" name="TipoDoc" id="TipoDoc">
-                            <option value="0">< Seleccione un Tipo Documento ></option>
+                            <option value="0">< Tipo Documento ></option>
                             @{
                                 if (ViewData["TipoDoc"] != null)
                                 {
@@ -70,30 +71,35 @@
                 <div class="w3-row">
                     <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate">
                         <span class="label-input100">Numero de Documento</span>
-                        <input type="number" id="NumDoc" name="NumDoc" class="input100" onblur="validarMomentoNumDocumento()">
-
+                        <input type="number" id="NumDoc" name="NumDoc" class="input100" onblur="validarMomentoNumDocumento()" min="0">
                     </div>
                     <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
                         <span class="label-input100">Delegacion</span>
-                        <select class="w3-select bg1" name="Delegacion" id="Delegacion">
-                            <option value="0">< Seleccione una Delegacion ></option>
-                            @{
-                                if (ViewData["Delegacion"] != null)
-                                {
-                                    IEnumerable<dynamic> Delegacion = (IEnumerable<dynamic>)ViewData["Delegacion"];
-
-                                    foreach (dynamic Loc in Delegacion)
+                        @if (ViewBag.LoginDelegacion != null)
+                        {
+                            <select class="w3-select bg1" name="Delegacion" id="Delegacion">
+                                @{
+                                    if (ViewData["Delegacion"] != null)
                                     {
-                                        <option value="@Loc.Id">@Loc.Nombre</option>
+                                        IEnumerable<dynamic> Delegacion = (IEnumerable<dynamic>)ViewData["Delegacion"];
+
+                                        foreach (dynamic Loc in Delegacion)
+                                        {
+                                            <option value="@Loc.Id">@Loc.Nombre</option>
+                                        }
                                     }
                                 }
-                            }
-                        </select>
+                            </select>
+                        }
+                        else
+                        {
+                            <input type="text" id="Delegacion" name="Delegacion" class="input100" value="@ViewData["Delegacion"]" readonly>
+                        }
                     </div>
                     <div class="w3-third">
                         <span class="label-input100">Calificacion Profesional</span>
                         <select class="w3-select bg1" name="CalifProf" id="CalifProf">
-                            <option value="0">< Seleccione una Calificacion Profesional ></option>
+                            <option value="0">< Calif. Profesional></option>
                             @{
                                 if (ViewData["CalifProf"] != null)
                                 {
@@ -113,7 +119,7 @@
                     <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate">
                         <span class="label-input100">Estado Civil</span>
                         <select class="w3-select bg1" name="EstadoCivil" id="EstadoCivil">
-                            <option value="0">< Seleccione un Estado Civil ></option>
+                            <option value="0">< Estado Civil ></option>
                             @{
                                 if (ViewData["EstadoCivil"] != null)
                                 {
@@ -160,11 +166,11 @@
                     <!-- -------------------- Fecha / Importe / Interes_Mora -------------------- -->
                     <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate">
                         <span class="label-input100">Telefono</span>
-                        <input type="tel" id="Telefono" name="Telefono" class="input100" onblur="validarMomentoTelefono()">
+                        <input type="tel" id="Telefono" name="Telefono" class="input100" onblur="validarMomentoTelefono()" min="0">
                     </div>
                     <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate">
                         <span class="label-input100">Celular</span>
-                        <input type="tel" id="Celular" name="Celular" class="input100" onblur="validarMomentoCelular()">
+                        <input type="tel" id="Celular" name="Celular" class="input100" onblur="validarMomentoCelular()" min="0">
                     </div>
                     <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate">
                         <span class="label-input100">Email</span>
@@ -180,7 +186,7 @@
                     <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
                         <span class="label-input100">Localidad</span>
                         <select class="w3-select bg1" name="Localidad" id="Localidad">
-                            <option value="0">< Seleccione una Localidad ></option>
+                            <option value="0">< Localidad ></option>
                             @{
                                 if (ViewData["Localidades"] != null)
                                 {
@@ -197,7 +203,7 @@
                     <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
                         <span class="label-input100">Provincia</span>
                         <select class="w3-select bg1" name="Provincia" id="Provincia">
-                            <option value="0">< Seleccione una Provincia ></option>
+                            <option value="0">< Provincia ></option>
                             @{
                                 if (ViewData["Provincia"] != null)
                                 {
@@ -241,7 +247,7 @@
                                     {
                                         if (Loc.Codigo == 0)
                                         {
-                                            <option value="@Loc.Codigo">< Seleccione una Nacionalidad ></option>
+                                            <option value="@Loc.Codigo">< Nacionalidad ></option>
                                         }
                                         else
                                         {
@@ -314,16 +320,12 @@
                     </div>
                     <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
                         <span class="label-input100">Numero</span>
-                        <input type="number" id="NumeroAfiliadoEmpresa" name="NumeroAfiliadoEmpresa" class="input100" onblur="validarMomentoNumeroAfiliado()">
+                        <input type="number" id="NumeroAfiliadoEmpresa" name="NumeroAfiliadoEmpresa" class="input100" onblur="validarMomentoNumeroAfiliado()" min="0">
                     </div>
                 </div>
 
                 <div class="w3-row">
                     <!-- -------------------- Apellido / Docimilio / Documento -------------------- -->
-                    <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate">
-                        <span class="label-input100">Local</span>
-                        <input type="text" id="LocalAfiliadoEmpresa" name="LocalAfiliadoEmpresa" class="input100" onblur="validarMomentoLocalAfiliado()">
-                    </div>
                     <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
                         <span class="label-input100">Piso</span>
                         <input type="text" id="PisoAfiliadoEmpresa" name="PisoAfiliadoEmpresa" class="input100">
@@ -332,18 +334,19 @@
                         <span class="label-input100">Dto</span>
                         <input type="text" id="DtoAfiliadoEmpresa" name="DtoAfiliadoEmpresa" class="input100">
                     </div>
+                    <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate">
+                        <span class="label-input100">CP</span>
+                        <input type="number" id="CPAfiliadoEmpresa" name="CPAfiliadoEmpresa" class="input100" onblur="validarMomentoCPAfiliado()" min="0">
+                    </div>
                 </div>
 
                 <div class="w3-row">
                     <!-- -------------------- Apellido / Docimilio / Documento -------------------- -->
-                    <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate">
-                        <span class="label-input100">CP</span>
-                        <input type="number" id="CPAfiliadoEmpresa" name="CPAfiliadoEmpresa" class="input100" onblur="validarMomentoCPAfiliado()">
-                    </div>
+
                     <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
                         <span class="label-input100">Localidad</span>
                         <select class="w3-select bg1" name="LocalidadAfiliadoEmpresa" id="LocalidadAfiliadoEmpresa">
-                            <option value="0">< Seleccione una Localidad ></option>
+                            <option value="0">< Localidad ></option>
                             @{
                                 if (ViewData["Localidades"] != null)
                                 {
@@ -359,22 +362,13 @@
                     </div>
                     <div class="w3-third wrap-input100 bg1 rs1-wrap-input100">
                         <span class="label-input100">Telefono</span>
-                        <input type="number" id="TelefonoAfiliadoEmpresa" name="TelefonoAfiliadoEmpresa" class="input100" onblur="validarMomentoTelefonoAfiliado()">
+                        <input type="number" id="TelefonoAfiliadoEmpresa" name="TelefonoAfiliadoEmpresa" class="input100" onblur="validarMomentoTelefonoAfiliado()" min="0">
                     </div>
-                </div>
-
-                <div class="w3-row">
-                    <!-- -------------------- Apellido / Docimilio / Documento -------------------- -->
                     <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate">
                         <span class="label-input100">Email</span>
                         <input type="email" id="EmailAfiliadoEmpresa" name="EmailAfiliadoEmpresa" class="input100" onblur="validarMomentoEmailAfiliado()">
                     </div>
-                    <div class="w3-third">
-                    </div>
-                    <div class="w3-third">
-                    </div>
                 </div>
-
             </div>
 
 
@@ -391,7 +385,7 @@
                     <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate">
                         <span class="label-input100">Parentesco</span>
                         <select class="w3-select bg1" name="Parentesco" id="Parentesco">
-                            <option value="0">< Seleccione un Tipo Documento ></option>
+                            <option value="0">< Tipo Documento ></option>
                             @{
                                 if (ViewData["Parentesco"] != null)
                                 {
@@ -421,7 +415,7 @@
                     <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate">
                         <span class="label-input100">Tipo Documento</span>
                         <select class="w3-select bg1" name="TipoDocAfiliadoFamiliar" id="TipoDocAfiliadoFamiliar">
-                            <option value="0">< Seleccione un Tipo Documento ></option>
+                            <option value="0">< Tipo Documento ></option>
                             @{
                                 if (ViewData["TipoDoc"] != null)
                                 {
@@ -437,7 +431,7 @@
                     </div>
                     <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
                         <span class="label-input100">Numero Documento</span>
-                        <input type="number" id="NumDocAfiliadoFamiliar" name="NumDocAfiliadoFamiliar" class="input100">
+                        <input type="number" id="NumDocAfiliadoFamiliar" name="NumDocAfiliadoFamiliar" class="input100" min="0">
                     </div>
                     <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
                         <span class="label-input100">Sexo</span>
@@ -465,7 +459,7 @@
 
                     </div>
                     <div class="w3-third ">
-                        <button class="w3-right w3-margin-top enviar w3-card bg-zul w3-text-white w3-hover-green w3-hover-border-cyan" style="margin: 0 0 0 200px;" type="submit" onclick="insertarFamiliar()">
+                        <button class="w3-right w3-margin-top enviar w3-card bg-zul w3-text-white w3-hover-green w3-hover-border-cyan" style="margin: 0 0 0 200px;" type="button" onclick="insertarFamiliar()">
                             Agregar Familiar
                         </button>
                     </div>
@@ -494,15 +488,18 @@
             <br />
             <br />
 
+            <input type="text" id="matrizEmpresa" name="matrizEmpresa" hidden />
+            <input type="text" id="matrizDatosAfiliado" name="matrizDatosAfiliado" hidden />
+            <input type="text" id="matrizFamiliares" name="matrizFamiliares" hidden />
+
             <div class="w3-row">
                 <div class="wrap-input100 rs1-wrap-input100">
-                    <button class="w3-right w3-margin-top enviar w3-card bg-zul w3-text-white w3-hover-green w3-hover-border-cyan" style="margin: 0 0 0 200px;" type="submit" id="enviarDatos" name="enviarDatos">
+                    <button class="w3-right w3-margin-top enviar w3-card bg-zul w3-text-white w3-hover-green w3-hover-border-cyan" style="margin: 0 0 0 200px;" type="submit" id="enviarDatos" name="enviarDatos" onclick="return enviar()">
                         ENVIAR
                     </button>
                 </div>
             </div>
-
-        </form>
+        }
 
     </div>
 </div>
@@ -513,8 +510,10 @@
 {
     <script type="text/javascript">
         alert("@ViewBag.mensaje");
+        document.location.reload();
     </script>
 }
+
 
 @section scripts{
     <script src="~/js/tabPag.js"></script>

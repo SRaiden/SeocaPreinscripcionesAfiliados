@@ -40,10 +40,19 @@ namespace SeocaPreincripcionesAfiliados.Models
         public byte[] FotoFrenteDni { get; set; }
         public byte[] FotoDorsoDni { get; set; }
         public byte[] FotoReciboSueldo { get; set; }
-        public string CodigoTemporal { get; set; }
-        public Nullable<bool> Confirmado { get; set; }
         public Nullable<bool> Art100 { get; set; }
         public Nullable<bool> Turismo { get; set; }
         public Nullable<bool> Sepelio { get; set; }
+        public string CodigoTemporal { get; set; }
+        public Nullable<bool> Confirmado { get; set; }
+        public string Estado { get; set; }
+        public string ComentarioEstado { get; set; }
+        public Nullable<int> Usuario { get; set; }
+        public string FileNameFrente { get; set; }
+        public byte[] DataFrenteExtension { get; set; }
+        public string FileNameDorso { get; set; }
+        public byte[] DataDorsoExtension { get; set; }
+        public string FileNameSueldo { get; set; }
+        public byte[] DataSueldoExtension { get; set; }
     }
 }

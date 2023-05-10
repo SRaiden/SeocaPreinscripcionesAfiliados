@@ -25,6 +25,11 @@ function validarMomentoApellido() {
         document.getElementById('Apellido').placeholder = 'Debe de ingresar un Apellido';
         return false;
     }
+
+    if (!isNaN(Apellido)) {
+        document.getElementById('Apellido').placeholder = 'No puede ingresar Numeros';
+        return false;
+    }
 }
 
 function validarMomentoNombre() {
@@ -34,10 +39,16 @@ function validarMomentoNombre() {
         document.getElementById('Nombre').placeholder = 'Debe de ingresar un Nombre';
         return false;
     }
+
+    if (!isNaN(Nombre)) {
+        document.getElementById('Nombre').placeholder = 'No puede ingresar Numeros';
+        return false;
+    }
 }
 
 function validarMomentoNumDocumento() {
     var NumDoc = document.getElementById("NumDoc").value;
+    var n = parseInt(NumDoc);
 
     if (NumDoc == "") {
         document.getElementById('NumDoc').placeholder = 'Debe de ingresar un Numero Documento';

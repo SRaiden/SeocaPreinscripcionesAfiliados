@@ -1,0 +1,97 @@
+﻿
+@{
+    ViewBag.Title = "Inicio";
+}
+
+<div class="w3-container" style="margin-top: 5%;">
+    <div class="login-wrap" style="color:#fff; height: 500px; overflow-y: scroll;; float: left; margin-left: 5%; ">
+        <div class="login-html">
+            <h2 style="text-align:center;">REQUISITOS</h2>
+            <p class="section-paragraph">
+                Ser empleado/a de comercio encuadrado/a en el convenio 130/75 y prestar servicio en el ámbito de Capital Federal.
+            </p>
+            <h2 style="text-align:center;">DOCUMENTACIÓN</h2>
+            <div class="col-lg-12">
+                <p class="">
+
+                    Deberás contar con la siguiente documentación digitalizarla mediante foto o scanner para subir a la web al momento de realizar tu solicitud online:<br>
+                    <br>
+
+                    <strong></strong>
+                </p>
+                <ul>
+                    <strong>
+                        <li>DNI frente y dorso</li>
+                        <li>Último recibo de sueldo</li>
+                    </strong>
+                </ul>
+
+                <p class="">
+                    En caso de querer incluir a tu afiliación a los integrantes de tu grupo familiar (cónyuge y/o hijos/as), deberás contar con la siguiente documentación digitalizada mediante foto o scanner para adjuntar a tu solicitud:<br>
+                    <br>
+                    <br>
+                </p>
+                <ul>
+                    <strong>
+                        <li>DNI frente y dorso de cada integrante del grupo familiar</li>
+                        <li>
+                            Libreta de Matrimonio o Certificado de Convivencia emitido por Centros de Gestión y Participación del GCBA
+                        </li>
+                        <li>
+                            Partida de Nacimiento de los hijos menores de edad y/o discapacitados.
+                        </li>
+                        <li>
+                            En caso de existir guarda preadoptiva, tutela o adopción, además de presentar el DNI del niño/a, se deberá presentar una copia de la Resolución Judicial que otorga la guarda, tutela o adopción.
+                        </li>
+                        <li>
+                            Certificado de alumno/a regular para hijos/as mayores de 18 años.*<br>
+                            <small>*La afiliación de hijos/as podrá extenderse hasta los 21 años presentando dicho certificado, sin excepción.</small>
+                        </li>
+                    </strong>
+                </ul>
+                <br>
+            </div>
+        </div>
+    </div>
+
+    <div class="login-wrap" style="float: right; margin-right: 5%;">
+        <div class="login-html">
+            <h1 class="sign-in">INGRESAR</h1>
+            @using (Html.BeginForm("IniciarSesion", "Home", FormMethod.Post, new { autocomplete = "off", style = "display: flex; flex-direction: column;" }))
+            {
+                <div class="login-form">
+                    <div class="sign-in-htm">
+                        <div class="group">
+                            <label for="user" class="label">Usuario</label>
+                            <input id="user" type="text" class="input" name="user">
+                        </div>
+                        <div class="group">
+                            <label for="pass" class="label">Password</label>
+                            <input id="pass" type="password" class="input" data-type="password" name="pass">
+                        </div>
+                        <div class="group">
+                            <input id="check" type="checkbox" class="check" checked>
+                            <label for="check"><span class="icon"></span> Recordar Contraseña</label>
+                        </div>
+                        <div class="group">
+                            <input type="submit" class="button" value="Iniciar Sesion">
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<br />
+<br />
+
+
+@if (!string.IsNullOrEmpty(ViewBag.Error))
+{
+    <script type="text/javascript">
+        alert("@ViewBag.Error");
+    </script>
+}
+
+

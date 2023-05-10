@@ -32,14 +32,23 @@
           <Property Name="NroAfiliado" Type="int" />
           <Property Name="Email" Type="varchar" MaxLength="150" />
           <Property Name="Celular" Type="varchar" MaxLength="50" />
-          <Property Name="FotoFrenteDni" Type="image" />
-          <Property Name="FotoDorsoDni" Type="image" />
-          <Property Name="FotoReciboSueldo" Type="image" />
+          <Property Name="FotoFrenteDni" Type="varbinary(max)" />
+          <Property Name="FotoDorsoDni" Type="varbinary(max)" />
+          <Property Name="FotoReciboSueldo" Type="varbinary(max)" />
           <Property Name="Art100" Type="bit" />
           <Property Name="Turismo" Type="bit" />
           <Property Name="Sepelio" Type="bit" />
           <Property Name="CodigoTemporal" Type="varchar" MaxLength="100" />
           <Property Name="Confirmado" Type="bit" />
+          <Property Name="Estado" Type="varchar" MaxLength="20" />
+          <Property Name="ComentarioEstado" Type="varchar(max)" />
+          <Property Name="Usuario" Type="int" />
+          <Property Name="FileNameFrente" Type="nvarchar" MaxLength="150" />
+          <Property Name="DataFrenteExtension" Type="varbinary(max)" />
+          <Property Name="FileNameDorso" Type="nvarchar" MaxLength="150" />
+          <Property Name="DataDorsoExtension" Type="varbinary(max)" />
+          <Property Name="FileNameSueldo" Type="nvarchar" MaxLength="150" />
+          <Property Name="DataSueldoExtension" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Afiliados_Empresa">
           <Key>
@@ -73,6 +82,108 @@
           <Property Name="Sexo" Type="int" />
           <Property Name="Fecha_Nac" Type="date" />
         </EntityType>
+        <EntityType Name="Empresas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="RazonSocial" Type="varchar" MaxLength="100" />
+          <Property Name="NombreFantasia" Type="varchar" MaxLength="100" />
+          <Property Name="Cuit" Type="varchar" MaxLength="15" />
+          <Property Name="DomicilioReal" Type="varchar" MaxLength="150" />
+          <Property Name="NroReal" Type="varchar" MaxLength="10" />
+          <Property Name="LocalidadReal" Type="int" />
+          <Property Name="TelefonoReal" Type="varchar" MaxLength="20" />
+          <Property Name="DomicilioLegal" Type="varchar" MaxLength="150" />
+          <Property Name="NroLegal" Type="varchar" MaxLength="10" />
+          <Property Name="LocalidadLegal" Type="varchar" MaxLength="150" />
+          <Property Name="TelefonoLegal" Type="varchar" MaxLength="20" />
+          <Property Name="Actividad" Type="int" />
+          <Property Name="Email" Type="varchar" MaxLength="150" />
+          <Property Name="PaginaWeb" Type="varchar" MaxLength="200" />
+          <Property Name="Ingresada" Type="bit" />
+          <Property Name="NroEmpresa" Type="int" />
+          <Property Name="Usuario" Type="int" />
+          <Property Name="Estado" Type="varchar" MaxLength="10" />
+          <Property Name="ComentarioEstado" Type="varchar(max)" />
+          <Property Name="Confirmada" Type="bit" />
+        </EntityType>
+        <EntityType Name="Empresas_Actividades">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Empresas_Antecedentes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdEmpresa" Type="int" />
+          <Property Name="Sucesora" Type="varchar" MaxLength="100" />
+          <Property Name="NumeroEmpresa" Type="int" />
+          <Property Name="FechaTransferencia" Type="datetime" />
+          <Property Name="Calle" Type="varchar" MaxLength="100" />
+          <Property Name="Piso" Type="varchar" MaxLength="3" />
+          <Property Name="Localidad" Type="varchar" MaxLength="100" />
+          <Property Name="CodigoPostal" Type="varchar" MaxLength="10" />
+          <Property Name="Provincia" Type="varchar" MaxLength="100" />
+          <Property Name="Telefono" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Empresas_Contadores">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="NomreEstudio" Type="varchar" MaxLength="150" />
+          <Property Name="Direccion" Type="varchar" MaxLength="150" />
+          <Property Name="Telefono" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Empresas_Empleados">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="ApellidoNombre" Type="varchar" MaxLength="100" />
+          <Property Name="Cuil" Type="varchar" MaxLength="13" />
+          <Property Name="FechaIngreso" Type="datetime" />
+          <Property Name="Categoria" Type="int" />
+          <Property Name="TotalRemuneracion" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Afiliado" Type="bit" />
+          <Property Name="Jornada" Type="varchar" MaxLength="20" />
+          <Property Name="Horas" Type="int" />
+        </EntityType>
+        <EntityType Name="Empresas_Sucursales">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" />
+          <Property Name="IdEmpresa" Type="int" />
+          <Property Name="CodigoPostal" Type="int" />
+          <Property Name="Localidad" Type="varchar" MaxLength="100" />
+          <Property Name="Calle" Type="varchar" MaxLength="100" />
+          <Property Name="Altura" Type="varchar" MaxLength="10" />
+          <Property Name="Telefono" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Empresas_Titulares">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdEmpresa" Type="int" />
+          <Property Name="ApellidoNombre" Type="varchar" MaxLength="100" />
+          <Property Name="DomicilioParticular" Type="varchar" MaxLength="100" />
+          <Property Name="TipoDni" Type="int" />
+          <Property Name="Documento" Type="varchar" MaxLength="15" />
+          <Property Name="Cargo" Type="varchar" MaxLength="100" />
+          <Property Name="Localidad" Type="varchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="General_Calificacion">
           <Key>
             <PropertyRef Name="Id" />
@@ -86,6 +197,15 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="General_Delegacion_Usuarios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Usuario" Type="varchar" MaxLength="50" />
+          <Property Name="Contraseña" Type="varchar" MaxLength="50" />
+          <Property Name="Delegacion" Type="int" />
         </EntityType>
         <EntityType Name="General_Documentos">
           <Key>
@@ -108,6 +228,13 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Nombre_Localidad" Type="varchar" MaxLength="150" />
         </EntityType>
+        <EntityType Name="General_Nacionalidades">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="General_Parentesco">
           <Key>
             <PropertyRef Name="Id" />
@@ -122,13 +249,6 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Nombre" Type="nvarchar" MaxLength="150" />
         </EntityType>
-        <EntityType Name="General_Nacionalidades">
-          <Key>
-            <PropertyRef Name="Codigo" />
-          </Key>
-          <Property Name="Codigo" Type="int" Nullable="false" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
-        </EntityType>
         <EntityType Name="General_Sexo">
           <Key>
             <PropertyRef Name="Codigo" />
@@ -136,38 +256,60 @@
           <Property Name="Codigo" Type="int" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="50" />
         </EntityType>
+        <Function Name="SP_crearReporteAfiliados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Codigo" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="geosoftw_seocapreinscripcionesModelStoreContainer">
           <EntitySet Name="Afiliados_DatosPersonales" EntityType="Self.Afiliados_DatosPersonales" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Afiliados_Empresa" EntityType="Self.Afiliados_Empresa" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Afiliados_Familiares" EntityType="Self.Afiliados_Familiares" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empresas" EntityType="Self.Empresas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empresas_Actividades" EntityType="Self.Empresas_Actividades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empresas_Antecedentes" EntityType="Self.Empresas_Antecedentes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empresas_Contadores" EntityType="Self.Empresas_Contadores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empresas_Empleados" EntityType="Self.Empresas_Empleados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empresas_Sucursales" EntityType="Self.Empresas_Sucursales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empresas_Titulares" EntityType="Self.Empresas_Titulares" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="General_Calificacion" EntityType="Self.General_Calificacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="General_Delegacion" EntityType="Self.General_Delegacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="General_Delegacion_Usuarios" EntityType="Self.General_Delegacion_Usuarios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="General_Documentos" EntityType="Self.General_Documentos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="General_Estado_Civil" EntityType="Self.General_Estado_Civil" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="General_Localidades" EntityType="Self.General_Localidades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="General_Nacionalidades" EntityType="Self.General_Nacionalidades" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="General_Parentesco" EntityType="Self.General_Parentesco" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="General_Provincias" EntityType="Self.General_Provincias" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="General_Nacionalidades" EntityType="Self.General_Nacionalidades" Schema="seoca_pre" store:Type="Tables" />
-          <EntitySet Name="General_Sexo" EntityType="Self.General_Sexo" Schema="seoca_pre" store:Type="Tables" />
+          <EntitySet Name="General_Sexo" EntityType="Self.General_Sexo" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="geosoftw_seocapreinscripcionesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="SeocaPreinscripcionesEntities2" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="geosoftw_seocapreinscripcionesEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="SP_crearReporteAfiliados">
+          <Parameter Name="Codigo" Mode="In" Type="Int32" />
+          </FunctionImport>
           <EntitySet Name="Afiliados_DatosPersonales" EntityType="geosoftw_seocapreinscripcionesModel.Afiliados_DatosPersonales" />
           <EntitySet Name="Afiliados_Empresa" EntityType="geosoftw_seocapreinscripcionesModel.Afiliados_Empresa" />
           <EntitySet Name="Afiliados_Familiares" EntityType="geosoftw_seocapreinscripcionesModel.Afiliados_Familiares" />
+          <EntitySet Name="Empresas" EntityType="geosoftw_seocapreinscripcionesModel.Empresas" />
+          <EntitySet Name="Empresas_Actividades" EntityType="geosoftw_seocapreinscripcionesModel.Empresas_Actividades" />
+          <EntitySet Name="Empresas_Antecedentes" EntityType="geosoftw_seocapreinscripcionesModel.Empresas_Antecedentes" />
+          <EntitySet Name="Empresas_Contadores" EntityType="geosoftw_seocapreinscripcionesModel.Empresas_Contadores" />
+          <EntitySet Name="Empresas_Empleados" EntityType="geosoftw_seocapreinscripcionesModel.Empresas_Empleados" />
+          <EntitySet Name="Empresas_Sucursales" EntityType="geosoftw_seocapreinscripcionesModel.Empresas_Sucursales" />
+          <EntitySet Name="Empresas_Titulares" EntityType="geosoftw_seocapreinscripcionesModel.Empresas_Titulares" />
           <EntitySet Name="General_Calificacion" EntityType="geosoftw_seocapreinscripcionesModel.General_Calificacion" />
           <EntitySet Name="General_Delegacion" EntityType="geosoftw_seocapreinscripcionesModel.General_Delegacion" />
+          <EntitySet Name="General_Delegacion_Usuarios" EntityType="geosoftw_seocapreinscripcionesModel.General_Delegacion_Usuarios" />
           <EntitySet Name="General_Documentos" EntityType="geosoftw_seocapreinscripcionesModel.General_Documentos" />
           <EntitySet Name="General_Estado_Civil" EntityType="geosoftw_seocapreinscripcionesModel.General_Estado_Civil" />
           <EntitySet Name="General_Localidades" EntityType="geosoftw_seocapreinscripcionesModel.General_Localidades" />
+          <EntitySet Name="General_Nacionalidades" EntityType="geosoftw_seocapreinscripcionesModel.General_Nacionalidades" />
           <EntitySet Name="General_Parentesco" EntityType="geosoftw_seocapreinscripcionesModel.General_Parentesco" />
           <EntitySet Name="General_Provincias" EntityType="geosoftw_seocapreinscripcionesModel.General_Provincias" />
-          <EntitySet Name="General_Nacionalidades" EntityType="geosoftw_seocapreinscripcionesModel.General_Nacionalidades" />
           <EntitySet Name="General_Sexo" EntityType="geosoftw_seocapreinscripcionesModel.General_Sexo" />
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="Afiliados_DatosPersonales">
           <Key>
             <PropertyRef Name="Codigo" />
@@ -198,11 +340,20 @@
           <Property Name="FotoFrenteDni" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="FotoDorsoDni" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="FotoReciboSueldo" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="CodigoTemporal" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Confirmado" Type="Boolean" />
           <Property Name="Art100" Type="Boolean" />
           <Property Name="Turismo" Type="Boolean" />
           <Property Name="Sepelio" Type="Boolean" />
+          <Property Name="CodigoTemporal" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Confirmado" Type="Boolean" />
+          <Property Name="Estado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ComentarioEstado" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Usuario" Type="Int32" />
+          <Property Name="FileNameFrente" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="DataFrenteExtension" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="FileNameDorso" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="DataDorsoExtension" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="FileNameSueldo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="DataSueldoExtension" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Afiliados_Empresa">
           <Key>
@@ -212,6 +363,7 @@
           <Property Name="Id_Afiliado" Type="Int32" Nullable="false" />
           <Property Name="Fecha_Ingreso" Type="DateTime" Precision="0" />
           <Property Name="Nombre_Empresa" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Nombre_Fantasia" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="Cuit_Empresa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Calle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Numero" Type="Int32" />
@@ -219,7 +371,6 @@
           <Property Name="Dto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Localidad" Type="Int32" />
           <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Nombre_Fantasia" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Afiliados_Familiares">
@@ -236,6 +387,108 @@
           <Property Name="Sexo" Type="Int32" />
           <Property Name="Fecha_Nac" Type="DateTime" Precision="0" />
         </EntityType>
+        <EntityType Name="Empresas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="RazonSocial" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NombreFantasia" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Cuit" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="DomicilioReal" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="NroReal" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="LocalidadReal" Type="Int32" />
+          <Property Name="TelefonoReal" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DomicilioLegal" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="NroLegal" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="LocalidadLegal" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="TelefonoLegal" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Actividad" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="PaginaWeb" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Ingresada" Type="Boolean" />
+          <Property Name="NroEmpresa" Type="Int32" />
+          <Property Name="Usuario" Type="Int32" />
+          <Property Name="Estado" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ComentarioEstado" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Confirmada" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Empresas_Actividades">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Empresas_Antecedentes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdEmpresa" Type="Int32" />
+          <Property Name="Sucesora" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroEmpresa" Type="Int32" />
+          <Property Name="FechaTransferencia" Type="DateTime" Precision="3" />
+          <Property Name="Calle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Piso" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Localidad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CodigoPostal" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Provincia" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Empresas_Contadores">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="NomreEstudio" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Empresas_Empleados">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="ApellidoNombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Cuil" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="FechaIngreso" Type="DateTime" Precision="3" />
+          <Property Name="Categoria" Type="Int32" />
+          <Property Name="TotalRemuneracion" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Afiliado" Type="Boolean" />
+          <Property Name="Jornada" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Horas" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Empresas_Sucursales">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdEmpresa" Type="Int32" />
+          <Property Name="CodigoPostal" Type="Int32" />
+          <Property Name="Localidad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Calle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Altura" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Empresas_Titulares">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdEmpresa" Type="Int32" />
+          <Property Name="ApellidoNombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DomicilioParticular" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TipoDni" Type="Int32" />
+          <Property Name="Documento" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Cargo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Localidad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="General_Calificacion">
           <Key>
             <PropertyRef Name="Id" />
@@ -249,6 +502,15 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="General_Delegacion_Usuarios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Contraseña" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Delegacion" Type="Int32" />
         </EntityType>
         <EntityType Name="General_Documentos">
           <Key>
@@ -271,6 +533,13 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Nombre_Localidad" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="General_Nacionalidades">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="General_Parentesco">
           <Key>
             <PropertyRef Name="Id" />
@@ -285,13 +554,6 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="General_Nacionalidades">
-          <Key>
-            <PropertyRef Name="Codigo" />
-          </Key>
-          <Property Name="Codigo" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="General_Sexo">
           <Key>
             <PropertyRef Name="Codigo" />
@@ -299,20 +561,30 @@
           <Property Name="Codigo" Type="Int32" Nullable="false" />
           <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="geosoftw_seocapreinscripcionesModelStoreContainer" CdmEntityContainer="SeocaPreinscripcionesEntities2">
+        <EntityContainerMapping StorageEntityContainer="geosoftw_seocapreinscripcionesModelStoreContainer" CdmEntityContainer="geosoftw_seocapreinscripcionesEntities">
+          <FunctionImportMapping FunctionImportName="SP_crearReporteAfiliados" FunctionName="geosoftw_seocapreinscripcionesModel.Store.SP_crearReporteAfiliados" />
           <EntitySetMapping Name="Afiliados_DatosPersonales">
             <EntityTypeMapping TypeName="geosoftw_seocapreinscripcionesModel.Afiliados_DatosPersonales">
               <MappingFragment StoreEntitySet="Afiliados_DatosPersonales">
+                <ScalarProperty Name="DataSueldoExtension" ColumnName="DataSueldoExtension" />
+                <ScalarProperty Name="FileNameSueldo" ColumnName="FileNameSueldo" />
+                <ScalarProperty Name="DataDorsoExtension" ColumnName="DataDorsoExtension" />
+                <ScalarProperty Name="FileNameDorso" ColumnName="FileNameDorso" />
+                <ScalarProperty Name="DataFrenteExtension" ColumnName="DataFrenteExtension" />
+                <ScalarProperty Name="FileNameFrente" ColumnName="FileNameFrente" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="ComentarioEstado" ColumnName="ComentarioEstado" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Confirmado" ColumnName="Confirmado" />
+                <ScalarProperty Name="CodigoTemporal" ColumnName="CodigoTemporal" />
                 <ScalarProperty Name="Sepelio" ColumnName="Sepelio" />
                 <ScalarProperty Name="Turismo" ColumnName="Turismo" />
                 <ScalarProperty Name="Art100" ColumnName="Art100" />
-                <ScalarProperty Name="Confirmado" ColumnName="Confirmado" />
-                <ScalarProperty Name="CodigoTemporal" ColumnName="CodigoTemporal" />
                 <ScalarProperty Name="FotoReciboSueldo" ColumnName="FotoReciboSueldo" />
                 <ScalarProperty Name="FotoDorsoDni" ColumnName="FotoDorsoDni" />
                 <ScalarProperty Name="FotoFrenteDni" ColumnName="FotoFrenteDni" />
@@ -346,7 +618,6 @@
             <EntityTypeMapping TypeName="geosoftw_seocapreinscripcionesModel.Afiliados_Empresa">
               <MappingFragment StoreEntitySet="Afiliados_Empresa">
                 <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Nombre_Fantasia" ColumnName="Nombre_Fantasia" />
                 <ScalarProperty Name="Telefono" ColumnName="Telefono" />
                 <ScalarProperty Name="Localidad" ColumnName="Localidad" />
                 <ScalarProperty Name="Dto" ColumnName="Dto" />
@@ -354,6 +625,7 @@
                 <ScalarProperty Name="Numero" ColumnName="Numero" />
                 <ScalarProperty Name="Calle" ColumnName="Calle" />
                 <ScalarProperty Name="Cuit_Empresa" ColumnName="Cuit_Empresa" />
+                <ScalarProperty Name="Nombre_Fantasia" ColumnName="Nombre_Fantasia" />
                 <ScalarProperty Name="Nombre_Empresa" ColumnName="Nombre_Empresa" />
                 <ScalarProperty Name="Fecha_Ingreso" ColumnName="Fecha_Ingreso" />
                 <ScalarProperty Name="Id_Afiliado" ColumnName="Id_Afiliado" />
@@ -376,6 +648,115 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Empresas">
+            <EntityTypeMapping TypeName="geosoftw_seocapreinscripcionesModel.Empresas">
+              <MappingFragment StoreEntitySet="Empresas">
+                <ScalarProperty Name="Confirmada" ColumnName="Confirmada" />
+                <ScalarProperty Name="ComentarioEstado" ColumnName="ComentarioEstado" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="NroEmpresa" ColumnName="NroEmpresa" />
+                <ScalarProperty Name="Ingresada" ColumnName="Ingresada" />
+                <ScalarProperty Name="PaginaWeb" ColumnName="PaginaWeb" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Actividad" ColumnName="Actividad" />
+                <ScalarProperty Name="TelefonoLegal" ColumnName="TelefonoLegal" />
+                <ScalarProperty Name="LocalidadLegal" ColumnName="LocalidadLegal" />
+                <ScalarProperty Name="NroLegal" ColumnName="NroLegal" />
+                <ScalarProperty Name="DomicilioLegal" ColumnName="DomicilioLegal" />
+                <ScalarProperty Name="TelefonoReal" ColumnName="TelefonoReal" />
+                <ScalarProperty Name="LocalidadReal" ColumnName="LocalidadReal" />
+                <ScalarProperty Name="NroReal" ColumnName="NroReal" />
+                <ScalarProperty Name="DomicilioReal" ColumnName="DomicilioReal" />
+                <ScalarProperty Name="Cuit" ColumnName="Cuit" />
+                <ScalarProperty Name="NombreFantasia" ColumnName="NombreFantasia" />
+                <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empresas_Actividades">
+            <EntityTypeMapping TypeName="geosoftw_seocapreinscripcionesModel.Empresas_Actividades">
+              <MappingFragment StoreEntitySet="Empresas_Actividades">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empresas_Antecedentes">
+            <EntityTypeMapping TypeName="geosoftw_seocapreinscripcionesModel.Empresas_Antecedentes">
+              <MappingFragment StoreEntitySet="Empresas_Antecedentes">
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="Localidad" ColumnName="Localidad" />
+                <ScalarProperty Name="Piso" ColumnName="Piso" />
+                <ScalarProperty Name="Calle" ColumnName="Calle" />
+                <ScalarProperty Name="FechaTransferencia" ColumnName="FechaTransferencia" />
+                <ScalarProperty Name="NumeroEmpresa" ColumnName="NumeroEmpresa" />
+                <ScalarProperty Name="Sucesora" ColumnName="Sucesora" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empresas_Contadores">
+            <EntityTypeMapping TypeName="geosoftw_seocapreinscripcionesModel.Empresas_Contadores">
+              <MappingFragment StoreEntitySet="Empresas_Contadores">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="NomreEstudio" ColumnName="NomreEstudio" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empresas_Empleados">
+            <EntityTypeMapping TypeName="geosoftw_seocapreinscripcionesModel.Empresas_Empleados">
+              <MappingFragment StoreEntitySet="Empresas_Empleados">
+                <ScalarProperty Name="Horas" ColumnName="Horas" />
+                <ScalarProperty Name="Jornada" ColumnName="Jornada" />
+                <ScalarProperty Name="Afiliado" ColumnName="Afiliado" />
+                <ScalarProperty Name="TotalRemuneracion" ColumnName="TotalRemuneracion" />
+                <ScalarProperty Name="Categoria" ColumnName="Categoria" />
+                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+                <ScalarProperty Name="Cuil" ColumnName="Cuil" />
+                <ScalarProperty Name="ApellidoNombre" ColumnName="ApellidoNombre" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empresas_Sucursales">
+            <EntityTypeMapping TypeName="geosoftw_seocapreinscripcionesModel.Empresas_Sucursales">
+              <MappingFragment StoreEntitySet="Empresas_Sucursales">
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Altura" ColumnName="Altura" />
+                <ScalarProperty Name="Calle" ColumnName="Calle" />
+                <ScalarProperty Name="Localidad" ColumnName="Localidad" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empresas_Titulares">
+            <EntityTypeMapping TypeName="geosoftw_seocapreinscripcionesModel.Empresas_Titulares">
+              <MappingFragment StoreEntitySet="Empresas_Titulares">
+                <ScalarProperty Name="Localidad" ColumnName="Localidad" />
+                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
+                <ScalarProperty Name="Documento" ColumnName="Documento" />
+                <ScalarProperty Name="TipoDni" ColumnName="TipoDni" />
+                <ScalarProperty Name="DomicilioParticular" ColumnName="DomicilioParticular" />
+                <ScalarProperty Name="ApellidoNombre" ColumnName="ApellidoNombre" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="General_Calificacion">
             <EntityTypeMapping TypeName="geosoftw_seocapreinscripcionesModel.General_Calificacion">
               <MappingFragment StoreEntitySet="General_Calificacion">
@@ -388,6 +769,16 @@
             <EntityTypeMapping TypeName="geosoftw_seocapreinscripcionesModel.General_Delegacion">
               <MappingFragment StoreEntitySet="General_Delegacion">
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="General_Delegacion_Usuarios">
+            <EntityTypeMapping TypeName="geosoftw_seocapreinscripcionesModel.General_Delegacion_Usuarios">
+              <MappingFragment StoreEntitySet="General_Delegacion_Usuarios">
+                <ScalarProperty Name="Delegacion" ColumnName="Delegacion" />
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -416,6 +807,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="General_Nacionalidades">
+            <EntityTypeMapping TypeName="geosoftw_seocapreinscripcionesModel.General_Nacionalidades">
+              <MappingFragment StoreEntitySet="General_Nacionalidades">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="General_Parentesco">
             <EntityTypeMapping TypeName="geosoftw_seocapreinscripcionesModel.General_Parentesco">
               <MappingFragment StoreEntitySet="General_Parentesco">
@@ -432,14 +831,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="General_Nacionalidades">
-            <EntityTypeMapping TypeName="geosoftw_seocapreinscripcionesModel.General_Nacionalidades">
-              <MappingFragment StoreEntitySet="General_Nacionalidades">
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="General_Sexo">
             <EntityTypeMapping TypeName="geosoftw_seocapreinscripcionesModel.General_Sexo">
               <MappingFragment StoreEntitySet="General_Sexo">
@@ -448,7 +839,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

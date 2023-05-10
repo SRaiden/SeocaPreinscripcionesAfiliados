@@ -18,6 +18,7 @@ namespace SeocaPreincripcionesAfiliados.Models
         public int Id_Afiliado { get; set; }
         public Nullable<System.DateTime> Fecha_Ingreso { get; set; }
         public string Nombre_Empresa { get; set; }
+        public string Nombre_Fantasia { get; set; }
         public string Cuit_Empresa { get; set; }
         public string Calle { get; set; }
         public Nullable<int> Numero { get; set; }
@@ -25,7 +26,6 @@ namespace SeocaPreincripcionesAfiliados.Models
         public string Dto { get; set; }
         public Nullable<int> Localidad { get; set; }
         public string Telefono { get; set; }
-        public string Nombre_Fantasia { get; set; }
         public string Email { get; set; }
     }
 }

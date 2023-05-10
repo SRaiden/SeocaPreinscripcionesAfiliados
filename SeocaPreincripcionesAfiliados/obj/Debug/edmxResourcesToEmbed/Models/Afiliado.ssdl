@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="geosoftw_seocapreinscripcionesModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Afiliados_DatosPersonales">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ApellidoNombre" Type="nvarchar" MaxLength="100" />
+    <Property Name="CUIL" Type="nvarchar" MaxLength="50" />
+    <Property Name="Tipo_Doc" Type="int" />
+    <Property Name="Numero_Doc" Type="nvarchar" MaxLength="50" />
+    <Property Name="Delegacion" Type="int" />
+    <Property Name="Calificacion_Profesional" Type="int" />
+    <Property Name="Fecha_Solicitud" Type="date" />
+    <Property Name="Estado_Civil" Type="int" />
+    <Property Name="Fecha_Nac" Type="date" />
+    <Property Name="Calle" Type="nvarchar" MaxLength="50" />
+    <Property Name="Numero_Calle" Type="nvarchar" MaxLength="50" />
+    <Property Name="Piso" Type="nvarchar" MaxLength="50" />
+    <Property Name="Dto" Type="nvarchar" MaxLength="50" />
+    <Property Name="Telefono" Type="int" />
+    <Property Name="Localidad" Type="int" />
+    <Property Name="Provincia" Type="nvarchar" MaxLength="150" />
+    <Property Name="Sexo" Type="int" />
+    <Property Name="Nacionalidad" Type="int" />
+    <Property Name="Ingresado" Type="bit" />
+    <Property Name="NroAfiliado" Type="int" />
+    <Property Name="Email" Type="varchar" MaxLength="150" />
+    <Property Name="Celular" Type="varchar" MaxLength="50" />
+    <Property Name="FotoFrenteDni" Type="image" />
+    <Property Name="FotoDorsoDni" Type="image" />
+    <Property Name="FotoReciboSueldo" Type="image" />
+    <Property Name="Art100" Type="bit" />
+    <Property Name="Turismo" Type="bit" />
+    <Property Name="Sepelio" Type="bit" />
+    <Property Name="CodigoTemporal" Type="varchar" MaxLength="100" />
+    <Property Name="Confirmado" Type="bit" />
+    <Property Name="Estado" Type="varchar" MaxLength="20" />
+    <Property Name="ComentarioEstado" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="Afiliados_Empresa">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id_Afiliado" Type="int" Nullable="false" />
+    <Property Name="Fecha_Ingreso" Type="date" />
+    <Property Name="Nombre_Empresa" Type="nvarchar" MaxLength="150" />
+    <Property Name="Nombre_Fantasia" Type="varchar" MaxLength="150" />
+    <Property Name="Cuit_Empresa" Type="nvarchar" MaxLength="50" />
+    <Property Name="Calle" Type="nvarchar" MaxLength="50" />
+    <Property Name="Numero" Type="int" />
+    <Property Name="Piso" Type="nvarchar" MaxLength="50" />
+    <Property Name="Dto" Type="nvarchar" MaxLength="50" />
+    <Property Name="Localidad" Type="int" />
+    <Property Name="Telefono" Type="varchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Afiliados_Familiares">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id_Afiliado" Type="int" Nullable="false" />
+    <Property Name="Parentesco" Type="nvarchar" MaxLength="50" />
+    <Property Name="Apellido_Nombre" Type="nvarchar" MaxLength="150" />
+    <Property Name="Cert_Estudios" Type="date" />
+    <Property Name="Tipo_Doc" Type="nvarchar" MaxLength="50" />
+    <Property Name="Num_Doc" Type="nvarchar" MaxLength="150" />
+    <Property Name="Sexo" Type="int" />
+    <Property Name="Fecha_Nac" Type="date" />
+  </EntityType>
+  <EntityType Name="General_Calificacion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="General_Delegacion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="General_Documentos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="General_Estado_Civil">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="General_Localidades">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Nombre_Localidad" Type="varchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="General_Parentesco">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="General_Provincias">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="General_Nacionalidades">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="int" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="General_Sexo">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="int" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityContainer Name="geosoftw_seocapreinscripcionesModel1StoreContainer">
+    <EntitySet Name="Afiliados_DatosPersonales" EntityType="Self.Afiliados_DatosPersonales" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Afiliados_Empresa" EntityType="Self.Afiliados_Empresa" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Afiliados_Familiares" EntityType="Self.Afiliados_Familiares" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="General_Calificacion" EntityType="Self.General_Calificacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="General_Delegacion" EntityType="Self.General_Delegacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="General_Documentos" EntityType="Self.General_Documentos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="General_Estado_Civil" EntityType="Self.General_Estado_Civil" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="General_Localidades" EntityType="Self.General_Localidades" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="General_Parentesco" EntityType="Self.General_Parentesco" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="General_Provincias" EntityType="Self.General_Provincias" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="General_Nacionalidades" EntityType="Self.General_Nacionalidades" Schema="seoca_pre" store:Type="Tables" />
+    <EntitySet Name="General_Sexo" EntityType="Self.General_Sexo" Schema="seoca_pre" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

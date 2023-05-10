@@ -1,6 +1,4 @@
-﻿
-
-var matrizEmpresa = new Array();
+﻿var matrizEmpresa = new Array();
 var matrizDatosAfiliado = new Array();
 var matrizFamiliares = new Array();
 
@@ -37,23 +35,30 @@ function enviar() {
     var CUITEmpresaAfiliadoEmpresa = document.getElementById("CUITEmpresaAfiliadoEmpresa").value;
     var CalleAfiliadoEmpresa = document.getElementById("CalleAfiliadoEmpresa").value;
     var NumeroAfiliadoEmpresa = document.getElementById("NumeroAfiliadoEmpresa").value;
-    var LocalAfiliadoEmpresa = document.getElementById("LocalAfiliadoEmpresa").value;
     var PisoAfiliadoEmpresa = document.getElementById("PisoAfiliadoEmpresa").value;
     var DtoAfiliadoEmpresa = document.getElementById("DtoAfiliadoEmpresa").value;
     var CPAfiliadoEmpresa = document.getElementById("CPAfiliadoEmpresa").value;
     var LocalidadAfiliadoEmpresa = document.getElementById("LocalidadAfiliadoEmpresa").value;
     var TelefonoAfiliadoEmpresa = document.getElementById("TelefonoAfiliadoEmpresa").value;
+    var EmailAfiliadoEmpresa = document.getElementById("EmailAfiliadoEmpresa").value;
 
     // Validaciones
     if (Apellido == "") {
         alert("Debe de ingresar un Apellido");
         return false;
     }
+    if (!isNaN(Apellido)) {
+        alert("No puede ingresar numeros");
+        return false;
+    }
     if (Nombre == "") {
         alert("Debe de ingresar un Nombre");
         return false;
     }
-
+    if (!isNaN(Nombre)) {
+        alert("No puede ingresar numeros");
+        return false;
+    }
     if (Cuil == "") {
         alert("Debe de ingresar el Cuil");
         return false;
@@ -66,7 +71,6 @@ function enviar() {
         alert("El CUIL debe de constar de 11 caracteres");
         return false;
     }
-
     if (TipoDoc == 0) {
         alert("Debe de seleccionar un Tipo Documento");
         return false;
@@ -79,10 +83,14 @@ function enviar() {
         alert("Ingrese solo numeros en el campo Numero Documento");
         return false;
     }
-    if (Delegacion == 0) {
-        alert("Debe de seleccionar una Delegacion");
+    if (NumDoc < 0) {
+        alert("No se puede ingresar valores negativos en Numero de Documento");
         return false;
     }
+    //if (Delegacion == 0) {
+    //    alert("Debe de seleccionar una Delegacion");
+    //    return false;
+    //}
     if (CalifProf == 0) {
         alert("Debe de seleccionar una Calificacion Profesional");
         return false;
@@ -107,7 +115,7 @@ function enviar() {
         alert("Debe de ingresar el N° de Telefono");
         return false;
     }
-    if (Localidad == "") {
+    if (Localidad == 0) {
         alert("Debe de ingresar la Localidad");
         return false;
     }
@@ -119,16 +127,14 @@ function enviar() {
         alert("Debe de seleccionar un Genero (Documento)");
         return false;
     }
-    if (Nacionalidad == "") {
+    if (Nacionalidad == 0) {
         alert("Debe de ingresar la Nacionalidad");
         return false;
     }
-
     if (Email == "") {
         alert("Debe de ingresar el Email");
         return false;
     }
-
     var emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
     //Se muestra un texto a modo de ejemplo, luego va a ser un icono
     if (!emailRegex.test(Email)) {
@@ -168,12 +174,12 @@ function enviar() {
         alert("Debe de ingresar el N° de Calle de la Empresa (Empresa)");
         return false;
     }
-    if (LocalAfiliadoEmpresa == "") {
-        alert("Debe de ingresar el Local de la Empresa (Empresa)");
+    if (CPAfiliadoEmpresa == 0) {
+        alert("Debe de ingresar el Codigo Postal (Empresa)");
         return false;
     }
-    if (CPAfiliadoEmpresa == 0) {
-        alert("Debe de seleccionar el Codigo Postal (Empresa)");
+    if (CPAfiliadoEmpresa < 0) {
+        alert("No puede ingresar numeros negativos en Codigo Postal (Empresa)");
         return false;
     }
     if (LocalidadAfiliadoEmpresa == 0) {
@@ -184,6 +190,19 @@ function enviar() {
         alert("Debe de ingresar el Telefono (Empresa)");
         return false;
     }
+    if (EmailAfiliadoEmpresa == "") {
+        alert("Debe de ingresar el Email");
+        return false;
+    }
+
+    var emailRegexD = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+
+    //Se muestra un texto a modo de ejemplo, luego va a ser un icono
+    if (!emailRegexD.test(EmailAfiliadoEmpresa)) {
+        alert("Formato de Email no valido");
+        return false;
+    }
+
 
     matrizDatosAfiliado.push({
         Apellido: Apellido,
@@ -218,12 +237,12 @@ function enviar() {
         CUITEmpresaAfiliadoEmpresa: CUITEmpresaAfiliadoEmpresa,
         CalleAfiliadoEmpresa: CalleAfiliadoEmpresa,
         NumeroAfiliadoEmpresa: NumeroAfiliadoEmpresa,
-        LocalAfiliadoEmpresa: LocalAfiliadoEmpresa,
         PisoAfiliadoEmpresa: PisoAfiliadoEmpresa,
         DtoAfiliadoEmpresa: DtoAfiliadoEmpresa,
         CPAfiliadoEmpresa: CPAfiliadoEmpresa,
         LocalidadAfiliadoEmpresa: LocalidadAfiliadoEmpresa,
-        TelefonoAfiliadoEmpresa: TelefonoAfiliadoEmpresa
+        TelefonoAfiliadoEmpresa: TelefonoAfiliadoEmpresa,
+        EmailAfiliadoEmpresa: EmailAfiliadoEmpresa
     });
 
     //-------------------------------------------------------------------------------------------------//
@@ -232,38 +251,33 @@ function enviar() {
     if (matrizFamiliares == "") matrizFamiliares = null;
 
 
+
     //-------------------------------------------------------------------------------------------------//
 
+    document.getElementById("matrizEmpresa").value = JSON.stringify(matrizEmpresa);
+    document.getElementById("matrizDatosAfiliado").value = JSON.stringify(matrizDatosAfiliado);
+    document.getElementById("matrizFamiliares").value = JSON.stringify(matrizFamiliares);
 
-    //var selectFile = ($("#fileU"))[0].files[0];
-    //var dataString = new FormData();
-
-    //dataString.append("filesU", selectFile);
-    //dataString.append("matrizDatosAfiliado", matrizDatosAfiliado);
-    //dataString.append("matrizEmpresa", matrizEmpresa);
-    //dataString.append("matrizFamiliares", matrizFamiliares);
-
-
-    $.ajax({
-        url: '/Home/Afiliados',
-        type: 'POST',
-        dataType: 'json',
-        success: function (response) {
-            alert(response.responseText);
-            window.open(response.enlace);
-            location.reload();
-        },
-        error: function (response) {
-            alert(response.responseText);
-        },
-        data: {
-            matrizDatosAfiliado: JSON.stringify(matrizDatosAfiliado),
-            matrizEmpresa: JSON.stringify(matrizEmpresa),
-            matrizFamiliares: JSON.stringify(matrizFamiliares)
-        }
-    });
-
+    //$.ajax({
+    //    url: '/Home/Afiliados',
+    //    type: 'POST',
+    //    dataType: 'json',
+    //    success: function (response) {
+    //        alert(response.responseText);
+    //        location.reload();
+    //    },
+    //    error: function (response) {
+    //        alert(response.responseText);
+    //    },
+    //    data: {
+    //        matrizDatosAfiliado: JSON.stringify(matrizDatosAfiliado),
+    //        matrizEmpresa: JSON.stringify(matrizEmpresa),
+    //        matrizFamiliares: JSON.stringify(matrizFamiliares)
+    //    }
+    //});
 }
+
+
 
 // -------------------------------------------------------------- //
 
@@ -283,6 +297,10 @@ function insertarFamiliar() {
     }
     if (ApellidoNombreAfiliadoFamiliar == "") {
         alert("Debe de ingresar el Nombre y Apellido del familiar");
+        return false;
+    }
+    if (!isNaN(ApellidoNombreAfiliadoFamiliar)) {
+        alert("No puede ingresar numeros en Nombre y Apellido (Familiar)");
         return false;
     }
     if (TipoDocAfiliadoFamiliar == 0) {
@@ -342,6 +360,7 @@ function insertarFamiliar() {
         SexoAfiliadoFamiliar: SexoAfiliadoFamiliar,
         FechaNacAfiliadoFamiliar: FechaNacAfiliadoFamiliar
     });
+
 
 }
 

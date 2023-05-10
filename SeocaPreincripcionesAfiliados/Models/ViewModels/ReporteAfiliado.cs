@@ -9,11 +9,11 @@ namespace SeocaPreincripcionesAfiliados.Models.ViewModels
 {
     public class ReporteAfiliado
     {
-        [Display(Name = "Apellido_Nombre")]
-        public string Apellido_Nombre { get; set; }
+        [Display(Name = "ApellidoNombre")]
+        public string ApellidoNombre { get; set; }
 
-        [Display(Name = "Cuil")]
-        public string Cuil { get; set; }
+        [Display(Name = "CUIL")]
+        public string CUIL { get; set; }
 
         [Display(Name = "Delegacion")]
         public string Delegacion { get; set; }
@@ -24,8 +24,8 @@ namespace SeocaPreincripcionesAfiliados.Models.ViewModels
         [Display(Name = "Estado_Civil")]
         public string Estado_Civil { get; set; }
 
-        [Display(Name = "Fecha_Nacimiento")]
-        public string Fecha_Nacimiento { get; set; }
+        [Display(Name = "Fecha_Nac")]
+        public DateTime Fecha_Nac { get; set; }
 
         [Display(Name = "Calle")]
         public string Calle { get; set; }
@@ -34,13 +34,13 @@ namespace SeocaPreincripcionesAfiliados.Models.ViewModels
         public string Numero_Calle { get; set; }
 
         [Display(Name = "Telefono")]
-        public string Telefono { get; set; }
+        public int Telefono { get; set; }
 
-        [Display(Name = "Localidad")]
-        public string Localidad { get; set; }
+        [Display(Name = "Localidad_Afiliado")]
+        public string Localidad_Afiliado { get; set; }
 
         [Display(Name = "NroAfiliado")]
-        public string NroAfiliado { get; set; }
+        public int NroAfiliado { get; set; }
 
         [Display(Name = "Email")]
         public string Email { get; set; }
@@ -58,7 +58,7 @@ namespace SeocaPreincripcionesAfiliados.Models.ViewModels
         public string Calle_Empresa { get; set; }
 
         [Display(Name = "Numero_Empresa")]
-        public string Numero_Empresa { get; set; }
+        public int Numero_Empresa { get; set; }
 
         [Display(Name = "Localidad_Empresa")]
         public string Localidad_Empresa { get; set; }
@@ -76,7 +76,7 @@ namespace SeocaPreincripcionesAfiliados.Models.ViewModels
         public string Telefono_Empresa { get; set; }
 
         [Display(Name = "Fecha_Ingreso_Empresa")]
-        public string Fecha_Ingreso_Empresa { get; set; }
+        public DateTime Fecha_Ingreso_Empresa { get; set; }
 
     }
 }

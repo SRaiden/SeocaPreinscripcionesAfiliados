@@ -5,6 +5,12 @@
         document.getElementById('NombreEmpresaAfiliadoEmpresa').placeholder = 'Debe de ingresar el Nombre de Empresa (Empresa)';
         return false;
     }
+
+    if (!isNaN(NombreEmpresaAfiliadoEmpresa)) {
+        document.getElementById('NombreEmpresaAfiliadoEmpresa').value = "";
+        document.getElementById('NombreEmpresaAfiliadoEmpresa').placeholder = 'No puede ingresar numeros en Nombre Empresa)';
+        return false;
+    }
 }
 
 function validarMomentoCuitEmpresa() {
@@ -44,14 +50,6 @@ function validarMomentoNumeroAfiliado() {
     }
 }
 
-function validarMomentoLocalAfiliado() {
-    var LocalAfiliadoEmpresa = document.getElementById("LocalAfiliadoEmpresa").value;
-
-    if (LocalAfiliadoEmpresa == "") {
-        document.getElementById('LocalAfiliadoEmpresa').placeholder = 'Debe de ingresar el Local de la Empresa (Empresa)';
-        return false;
-    }
-}
 
 function validarMomentoCPAfiliado() {
     var CPAfiliadoEmpresa = document.getElementById("CPAfiliadoEmpresa").value;

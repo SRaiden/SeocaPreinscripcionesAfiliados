@@ -44,7 +44,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!ApellidoNombre.Value, "ReporteAfiliado")</Value>
+                    <Value>=First(Fields!ApellidoNombre.Value, "DataSet1")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -52,10 +52,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>ApellidoNombre</rd:DefaultName>
-            <Top>0.05292cm</Top>
-            <Left>7.06438cm</Left>
+            <Top>0.10584cm</Top>
+            <Left>6.87917cm</Left>
             <Height>0.6cm</Height>
-            <Width>4.21626cm</Width>
+            <Width>5.86021cm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -71,7 +71,7 @@
         <KeepTogether>true</KeepTogether>
         <Top>0.97578cm</Top>
         <Left>0.47307cm</Left>
-        <Height>0.67438cm</Height>
+        <Height>0.70584cm</Height>
         <Width>15.68917cm</Width>
         <Style>
           <Border>
@@ -114,36 +114,6 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Textbox Name="CUIL">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>=First(Fields!CUIL.Value, "ReporteAfiliado")</Value>
-                <Style />
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>CUIL</rd:DefaultName>
-        <Top>1.77698cm</Top>
-        <Left>7.53745cm</Left>
-        <Height>0.6cm</Height>
-        <Width>4.24628cm</Width>
-        <ZIndex>2</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
       <Textbox Name="Textbox36">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
@@ -170,7 +140,7 @@
         <Left>0.76412cm</Left>
         <Height>0.6cm</Height>
         <Width>4.79833cm</Width>
-        <ZIndex>3</ZIndex>
+        <ZIndex>2</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -223,7 +193,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!Delegacion.Value, "ReporteAfiliado")</Value>
+                    <Value>=First(Fields!Delegacion.Value, "DataSet1")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -231,10 +201,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Delegacion</rd:DefaultName>
-            <Top>0.04792cm</Top>
-            <Left>7.06436cm</Left>
+            <Top>0.11575cm</Top>
+            <Left>6.87918cm</Left>
             <Height>0.6cm</Height>
-            <Width>4.21626cm</Width>
+            <Width>5.86021cm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -250,9 +220,9 @@
         <KeepTogether>true</KeepTogether>
         <Top>2.52691cm</Top>
         <Left>0.47306cm</Left>
-        <Height>0.70966cm</Height>
+        <Height>0.71575cm</Height>
         <Width>15.68917cm</Width>
-        <ZIndex>4</ZIndex>
+        <ZIndex>3</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -283,7 +253,7 @@
         <Left>0.77291cm</Left>
         <Height>0.6cm</Height>
         <Width>4.79837cm</Width>
-        <ZIndex>5</ZIndex>
+        <ZIndex>4</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -303,7 +273,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!Estado_Civil.Value, "ReporteAfiliado")</Value>
+                    <Value>=First(Fields!Estado_Civil.Value, "DataSet1")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -311,10 +281,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Estado_Civil</rd:DefaultName>
-            <Top>0.07056cm</Top>
-            <Left>7.06439cm</Left>
+            <Top>0.06755cm</Top>
+            <Left>6.87568cm</Left>
             <Height>0.6cm</Height>
-            <Width>4.21276cm</Width>
+            <Width>5.86021cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -331,7 +301,7 @@
         <Left>0.47656cm</Left>
         <Height>0.69373cm</Height>
         <Width>15.68917cm</Width>
-        <ZIndex>6</ZIndex>
+        <ZIndex>5</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -362,7 +332,7 @@
         <Left>1.8489cm</Left>
         <Height>0.6cm</Height>
         <Width>3.71708cm</Width>
-        <ZIndex>7</ZIndex>
+        <ZIndex>6</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -382,18 +352,22 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!Fecha_Nac.Value, "ReporteAfiliado")</Value>
-                    <Style />
+                    <Value>=First(Fields!Fecha_Nac.Value, "DataSet1")</Value>
+                    <Style>
+                      <Format>d</Format>
+                    </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Fecha_Nac</rd:DefaultName>
             <Top>0.02646cm</Top>
-            <Left>7.06439cm</Left>
+            <Left>6.87568cm</Left>
             <Height>0.6cm</Height>
-            <Width>4.21276cm</Width>
+            <Width>5.86021cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -410,7 +384,7 @@
         <Left>0.47656cm</Left>
         <Height>0.67438cm</Height>
         <Width>15.68917cm</Width>
-        <ZIndex>8</ZIndex>
+        <ZIndex>7</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -441,7 +415,7 @@
         <Left>1.8489cm</Left>
         <Height>0.6cm</Height>
         <Width>3.71708cm</Width>
-        <ZIndex>9</ZIndex>
+        <ZIndex>8</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -475,7 +449,7 @@
         <Left>1.8489cm</Left>
         <Height>0.6cm</Height>
         <Width>3.71708cm</Width>
-        <ZIndex>10</ZIndex>
+        <ZIndex>9</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -509,7 +483,7 @@
         <Left>1.84539cm</Left>
         <Height>0.6cm</Height>
         <Width>3.71708cm</Width>
-        <ZIndex>11</ZIndex>
+        <ZIndex>10</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -521,43 +495,12 @@
         </Style>
       </Textbox>
       <Rectangle Name="Rectangle5">
-        <ReportItems>
-          <Textbox Name="Calle">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!Calle.Value, "ReporteAfiliado")</Value>
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Calle</rd:DefaultName>
-            <Top>0.02646cm</Top>
-            <Left>7.06437cm</Left>
-            <Height>0.6cm</Height>
-            <Width>4.24628cm</Width>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-        </ReportItems>
         <KeepTogether>true</KeepTogether>
         <Top>9.05761cm</Top>
         <Left>0.47305cm</Left>
         <Height>0.67438cm</Height>
         <Width>15.68917cm</Width>
-        <ZIndex>12</ZIndex>
+        <ZIndex>11</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -588,7 +531,7 @@
         <Left>1.84539cm</Left>
         <Height>0.6cm</Height>
         <Width>3.71708cm</Width>
-        <ZIndex>13</ZIndex>
+        <ZIndex>12</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -622,7 +565,7 @@
         <Left>1.84538cm</Left>
         <Height>0.6cm</Height>
         <Width>3.71708cm</Width>
-        <ZIndex>14</ZIndex>
+        <ZIndex>13</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -635,25 +578,25 @@
       </Textbox>
       <Rectangle Name="Rectangle6">
         <ReportItems>
-          <Textbox Name="Localidad">
+          <Textbox Name="Localidad_Afiliado">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Sum(Fields!Localidad.Value, "ReporteAfiliado")</Value>
+                    <Value>=First(Fields!Localidad_Afiliado.Value, "DataSet1")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Localidad</rd:DefaultName>
-            <Top>0.07438cm</Top>
-            <Left>7.06791cm</Left>
+            <rd:DefaultName>Localidad_Afiliado</rd:DefaultName>
+            <Top>0.02646cm</Top>
+            <Left>6.8792cm</Left>
             <Height>0.6cm</Height>
-            <Width>4.21276cm</Width>
+            <Width>5.86021cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -668,9 +611,9 @@
         <KeepTogether>true</KeepTogether>
         <Top>10.5663cm</Top>
         <Left>0.47304cm</Left>
-        <Height>0.67438cm</Height>
+        <Height>0.74615cm</Height>
         <Width>15.68917cm</Width>
-        <ZIndex>15</ZIndex>
+        <ZIndex>14</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -701,7 +644,7 @@
         <Left>1.84538cm</Left>
         <Height>0.6cm</Height>
         <Width>3.71708cm</Width>
-        <ZIndex>16</ZIndex>
+        <ZIndex>15</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -735,67 +678,7 @@
         <Left>1.84537cm</Left>
         <Height>0.6cm</Height>
         <Width>3.71708cm</Width>
-        <ZIndex>17</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Calificacion_Profesional">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>=First(Fields!Calificacion_Profesional.Value, "ReporteAfiliado")</Value>
-                <Style />
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Calificacion_Profesional</rd:DefaultName>
-        <Top>3.35122cm</Top>
-        <Left>7.53742cm</Left>
-        <Height>0.6cm</Height>
-        <Width>4.24628cm</Width>
-        <ZIndex>18</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Sexo">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>=First(Fields!Sexo.Value, "ReporteAfiliado")</Value>
-                <Style />
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Sexo</rd:DefaultName>
-        <Top>4.89189cm</Top>
-        <Left>7.53742cm</Left>
-        <Height>0.6cm</Height>
-        <Width>4.24628cm</Width>
-        <ZIndex>19</ZIndex>
+        <ZIndex>16</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -840,43 +723,13 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Nacionalidad">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!Nacionalidad.Value, "ReporteAfiliado")</Value>
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Nacionalidad</rd:DefaultName>
-            <Top>0.05674cm</Top>
-            <Left>7.06084cm</Left>
-            <Height>0.6cm</Height>
-            <Width>4.21983cm</Width>
-            <ZIndex>1</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
         </ReportItems>
         <KeepTogether>true</KeepTogether>
         <Top>12.06616cm</Top>
         <Left>0.47658cm</Left>
         <Height>0.67438cm</Height>
         <Width>15.68917cm</Width>
-        <ZIndex>20</ZIndex>
+        <ZIndex>17</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -884,96 +737,6 @@
           <BackgroundColor>LightGrey</BackgroundColor>
         </Style>
       </Rectangle>
-      <Textbox Name="Telefono">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>=Sum(Fields!Telefono.Value, "ReporteAfiliado")</Value>
-                <Style />
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Telefono</rd:DefaultName>
-        <Top>6.37623cm</Top>
-        <Left>7.53742cm</Left>
-        <Height>0.6cm</Height>
-        <Width>4.21629cm</Width>
-        <ZIndex>21</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Numero_Calle">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>=First(Fields!Numero_Calle.Value, "ReporteAfiliado")</Value>
-                <Style />
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Numero_Calle</rd:DefaultName>
-        <Top>9.81637cm</Top>
-        <Left>7.53742cm</Left>
-        <Height>0.6cm</Height>
-        <Width>4.21629cm</Width>
-        <ZIndex>22</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Provincia">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>=First(Fields!Provincia.Value, "ReporteAfiliado")</Value>
-                <Style />
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Provincia</rd:DefaultName>
-        <Top>11.38179cm</Top>
-        <Left>7.54095cm</Left>
-        <Height>0.6cm</Height>
-        <Width>4.21629cm</Width>
-        <ZIndex>23</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
       <Textbox Name="Textbox48">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
@@ -1000,7 +763,7 @@
         <Left>0.76412cm</Left>
         <Height>0.6cm</Height>
         <Width>4.79833cm</Width>
-        <ZIndex>24</ZIndex>
+        <ZIndex>18</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1020,7 +783,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!Nombre_Empresa.Value, "ReporteAfiliado")</Value>
+                    <Value>=First(Fields!Nombre_Empresa.Value, "DataSet1")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -1028,10 +791,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Nombre_Empresa</rd:DefaultName>
-            <Top>0.0391cm</Top>
-            <Left>6.92682cm</Left>
+            <Top>0.02646cm</Top>
+            <Left>6.8739cm</Left>
             <Height>0.6cm</Height>
-            <Width>4.37854cm</Width>
+            <Width>5.86021cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1048,7 +811,7 @@
         <Left>0.47834cm</Left>
         <Height>0.67438cm</Height>
         <Width>15.68917cm</Width>
-        <ZIndex>25</ZIndex>
+        <ZIndex>19</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1079,7 +842,7 @@
         <Left>1.85068cm</Left>
         <Height>0.6cm</Height>
         <Width>3.71708cm</Width>
-        <ZIndex>26</ZIndex>
+        <ZIndex>20</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1113,7 +876,7 @@
         <Left>1.85067cm</Left>
         <Height>0.6cm</Height>
         <Width>3.71708cm</Width>
-        <ZIndex>27</ZIndex>
+        <ZIndex>21</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1133,7 +896,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!Telefono_Empresa.Value, "ReporteAfiliado")</Value>
+                    <Value>=First(Fields!Telefono_Empresa.Value, "DataSet1")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -1142,9 +905,9 @@
             </Paragraphs>
             <rd:DefaultName>Telefono_Empresa</rd:DefaultName>
             <Top>0.02646cm</Top>
-            <Left>6.95329cm</Left>
+            <Left>6.87391cm</Left>
             <Height>0.6cm</Height>
-            <Width>4.32563cm</Width>
+            <Width>5.86021cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1161,7 +924,7 @@
         <Left>0.47833cm</Left>
         <Height>0.67438cm</Height>
         <Width>15.68917cm</Width>
-        <ZIndex>28</ZIndex>
+        <ZIndex>22</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1192,7 +955,7 @@
         <Left>1.85067cm</Left>
         <Height>0.6cm</Height>
         <Width>3.71708cm</Width>
-        <ZIndex>29</ZIndex>
+        <ZIndex>23</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1226,7 +989,7 @@
         <Left>1.85066cm</Left>
         <Height>0.6cm</Height>
         <Width>3.71708cm</Width>
-        <ZIndex>30</ZIndex>
+        <ZIndex>24</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1278,7 +1041,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!Calle_Empresa.Value, "ReporteAfiliado")</Value>
+                    <Value>=First(Fields!Calle_Empresa.Value, "DataSet1")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -1286,10 +1049,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Calle_Empresa</rd:DefaultName>
-            <Top>0.05674cm</Top>
-            <Left>6.92329cm</Left>
+            <Left>6.87037cm</Left>
             <Height>0.6cm</Height>
-            <Width>4.35208cm</Width>
+            <Width>5.86021cm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -1307,7 +1069,7 @@
         <Left>0.48187cm</Left>
         <Height>0.67438cm</Height>
         <Width>15.68917cm</Width>
-        <ZIndex>31</ZIndex>
+        <ZIndex>25</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1341,7 +1103,7 @@
         <Left>0.76941cm</Left>
         <Height>0.65292cm</Height>
         <Width>5.38041cm</Width>
-        <ZIndex>32</ZIndex>
+        <ZIndex>26</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1375,7 +1137,7 @@
         <Left>1.84183cm</Left>
         <Height>0.6cm</Height>
         <Width>3.71708cm</Width>
-        <ZIndex>33</ZIndex>
+        <ZIndex>27</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1427,7 +1189,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Sum(Fields!Localidad_Empresa.Value, "ReporteAfiliado")</Value>
+                    <Value>=First(Fields!Localidad_Empresa.Value, "DataSet1")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -1435,10 +1197,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Localidad_Empresa</rd:DefaultName>
-            <Top>0.09051cm</Top>
-            <Left>6.93212cm</Left>
+            <Top>0.02146cm</Top>
+            <Left>6.8792cm</Left>
             <Height>0.6cm</Height>
-            <Width>4.37854cm</Width>
+            <Width>5.86021cm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -1456,7 +1218,7 @@
         <Left>0.47304cm</Left>
         <Height>0.69051cm</Height>
         <Width>15.68917cm</Width>
-        <ZIndex>34</ZIndex>
+        <ZIndex>28</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1464,6 +1226,128 @@
           <BackgroundColor>LightGrey</BackgroundColor>
         </Style>
       </Rectangle>
+      <Textbox Name="CUIL">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!CUIL.Value, "DataSet1")</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>CUIL</rd:DefaultName>
+        <Top>1.82273cm</Top>
+        <Left>7.35224cm</Left>
+        <Height>0.6cm</Height>
+        <Width>5.86021cm</Width>
+        <ZIndex>29</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Calificacion_Profesional">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!Calificacion_Profesional.Value, "DataSet1")</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Calificacion_Profesional</rd:DefaultName>
+        <Top>3.38671cm</Top>
+        <Left>7.35224cm</Left>
+        <Height>0.6cm</Height>
+        <Width>5.86021cm</Width>
+        <ZIndex>30</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Telefono">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Sum(Fields!Telefono.Value, "DataSet1")</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Telefono</rd:DefaultName>
+        <Top>6.39004cm</Top>
+        <Left>7.35224cm</Left>
+        <Height>0.6cm</Height>
+        <Width>5.86021cm</Width>
+        <ZIndex>31</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Sexo">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!Sexo.Value, "DataSet1")</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Sexo</rd:DefaultName>
+        <Top>4.86571cm</Top>
+        <Left>7.35224cm</Left>
+        <Height>0.6cm</Height>
+        <Width>5.86021cm</Width>
+        <ZIndex>32</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
       <Textbox Name="Cuit_Empresa">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
@@ -1471,7 +1355,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!Cuit_Empresa.Value, "ReporteAfiliado")</Value>
+                <Value>=First(Fields!Cuit_Empresa.Value, "DataSet1")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -1480,10 +1364,10 @@
         </Paragraphs>
         <rd:DefaultName>Cuit_Empresa</rd:DefaultName>
         <Top>15.68701cm</Top>
-        <Left>7.40516cm</Left>
+        <Left>7.35224cm</Left>
         <Height>0.6cm</Height>
-        <Width>4.35208cm</Width>
-        <ZIndex>35</ZIndex>
+        <Width>5.86021cm</Width>
+        <ZIndex>33</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1501,19 +1385,23 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!Fecha_Ingreso_Empresa.Value, "ReporteAfiliado")</Value>
-                <Style />
+                <Value>=First(Fields!Fecha_Ingreso_Empresa.Value, "DataSet1")</Value>
+                <Style>
+                  <Format>d</Format>
+                </Style>
               </TextRun>
             </TextRuns>
-            <Style />
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Fecha_Ingreso_Empresa</rd:DefaultName>
-        <Top>17.1957cm</Top>
-        <Left>7.43162cm</Left>
+        <Top>17.18479cm</Top>
+        <Left>7.35224cm</Left>
         <Height>0.6cm</Height>
-        <Width>4.35208cm</Width>
-        <ZIndex>36</ZIndex>
+        <Width>5.86021cm</Width>
+        <ZIndex>34</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1531,19 +1419,141 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Sum(Fields!Numero_Empresa.Value, "ReporteAfiliado")</Value>
+                <Value>=Sum(Fields!Numero_Empresa.Value, "DataSet1")</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Numero_Empresa</rd:DefaultName>
+        <Top>18.66028cm</Top>
+        <Left>7.35224cm</Left>
+        <Height>0.6cm</Height>
+        <Width>5.86021cm</Width>
+        <ZIndex>35</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Nacionalidad">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!Nacionalidad.Value, "DataSet1")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
             <Style />
           </Paragraph>
         </Paragraphs>
-        <rd:DefaultName>Numero_Empresa</rd:DefaultName>
-        <Top>18.72933cm</Top>
-        <Left>7.40516cm</Left>
+        <rd:DefaultName>Nacionalidad</rd:DefaultName>
+        <Top>12.06616cm</Top>
+        <Left>7.35224cm</Left>
         <Height>0.6cm</Height>
-        <Width>4.35208cm</Width>
+        <Width>5.86021cm</Width>
+        <ZIndex>36</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Provincia">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!Provincia.Value, "DataSet1")</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Provincia</rd:DefaultName>
+        <Top>11.32505cm</Top>
+        <Left>7.35224cm</Left>
+        <Height>0.6cm</Height>
+        <Width>5.86021cm</Width>
         <ZIndex>37</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Calle">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!Calle.Value, "DataSet1")</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Calle</rd:DefaultName>
+        <Top>9.08407cm</Top>
+        <Left>7.35224cm</Left>
+        <Height>0.6cm</Height>
+        <Width>5.86021cm</Width>
+        <ZIndex>38</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Numero_Calle">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!Numero_Calle.Value, "DataSet1")</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Numero_Calle</rd:DefaultName>
+        <Top>9.81637cm</Top>
+        <Left>7.35224cm</Left>
+        <Height>0.6cm</Height>
+        <Width>5.86021cm</Width>
+        <ZIndex>39</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1678,7 +1688,7 @@
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="ReporteAfiliado">
+    <DataSet Name="DataSet1">
       <Query>
         <DataSourceName>DataSet1</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
@@ -1720,9 +1730,9 @@
           <DataField>Telefono</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="Localidad">
-          <DataField>Localidad</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
+        <Field Name="Localidad_Afiliado">
+          <DataField>Localidad_Afiliado</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="NroAfiliado">
           <DataField>NroAfiliado</DataField>
@@ -1754,7 +1764,7 @@
         </Field>
         <Field Name="Localidad_Empresa">
           <DataField>Localidad_Empresa</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Provincia">
           <DataField>Provincia</DataField>

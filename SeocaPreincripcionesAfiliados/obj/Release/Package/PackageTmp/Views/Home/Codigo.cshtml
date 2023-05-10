@@ -27,8 +27,16 @@
                 </button>
             </div>
             <div class="w3-half w3-container ">
-                <button class="w3-right w3-margin-top enviar w3-card bg-zul w3-text-white w3-hover-green w3-hover-border-cyan" type="button" onclick="cerrarId01()">Cancelar</button> 
+                <button class="w3-right w3-margin-top enviar w3-card bg-zul w3-text-white w3-hover-green w3-hover-border-cyan" type="button" onclick="cerrarId01()">Cancelar</button>
             </div>
         </div>
     }
 </div>
+
+
+@if (!string.IsNullOrEmpty(ViewBag.mensaje))
+{
+    <script type="text/javascript">
+        alert("@ViewBag.mensaje");
+    </script>
+}
