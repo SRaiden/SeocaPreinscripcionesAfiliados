@@ -32,27 +32,27 @@
         <hr class="hrs" />
         <br />
 
-        @using (Html.BeginForm("Afiliados", "Home", FormMethod.Post, new { autocomplete = "off" }))
+        @using (Html.BeginForm("Afiliados", "Home", FormMethod.Post, new { autocomplete = "off", enctype = "multipart/form-data" }))
         {
             <div class="Datos">
                 <div class="wrap-input100 validate-input bg1 alert-validate" data-validate="Please Type Your Name">
                     <span class="label-input100"> Cuil </span>
-                    <input type="number" id="Cuil" name="Cuil" class="input100 " onblur="validarMomentoCuit()">
+                    <input type="number" id="Cuil" name="Cuil" class="input100 " onblur="validarMomentoCuit()" value="@ViewBag.vacio">
                 </div>
 
                 <div class="w3-row">
                     <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate">
                         <span class="label-input100">Apellido</span>
-                        <input type="text" id="Apellido" name="Apellido" class="input100 " onblur="validarMomentoApellido()">
+                        <input type="text" id="Apellido" name="Apellido" class="input100 " onblur="validarMomentoApellido()" value="@ViewBag.vacio">
                     </div>
                     <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
                         <span class="label-input100">Nombre</span>
-                        <input type="text" id="Nombre" name="Nombre" class="input100" onblur="validarMomentoNombre()">
+                        <input type="text" id="Nombre" name="Nombre" class="input100" onblur="validarMomentoNombre()" value="@ViewBag.vacio">
                     </div>
                     <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
                         <span class="label-input100">Tipo de Documento</span>
                         <select class="w3-select bg1" name="TipoDoc" id="TipoDoc">
-                            <option value="0">< Seleccione un Tipo Documento ></option>
+                            <option value="0">< Tipo Documento ></option>
                             @{
                                 if (ViewData["TipoDoc"] != null)
                                 {
@@ -99,7 +99,7 @@
                     <div class="w3-third">
                         <span class="label-input100">Calificacion Profesional</span>
                         <select class="w3-select bg1" name="CalifProf" id="CalifProf">
-                            <option value="0">< Seleccione una Calificacion Profesional ></option>
+                            <option value="0">< Calif. Profesional></option>
                             @{
                                 if (ViewData["CalifProf"] != null)
                                 {
@@ -119,7 +119,7 @@
                     <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate">
                         <span class="label-input100">Estado Civil</span>
                         <select class="w3-select bg1" name="EstadoCivil" id="EstadoCivil">
-                            <option value="0">< Seleccione un Estado Civil ></option>
+                            <option value="0">< Estado Civil ></option>
                             @{
                                 if (ViewData["EstadoCivil"] != null)
                                 {
@@ -186,7 +186,7 @@
                     <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
                         <span class="label-input100">Localidad</span>
                         <select class="w3-select bg1" name="Localidad" id="Localidad">
-                            <option value="0">< Seleccione una Localidad ></option>
+                            <option value="0">< Localidad ></option>
                             @{
                                 if (ViewData["Localidades"] != null)
                                 {
@@ -203,7 +203,7 @@
                     <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
                         <span class="label-input100">Provincia</span>
                         <select class="w3-select bg1" name="Provincia" id="Provincia">
-                            <option value="0">< Seleccione una Provincia ></option>
+                            <option value="0">< Provincia ></option>
                             @{
                                 if (ViewData["Provincia"] != null)
                                 {
@@ -247,7 +247,7 @@
                                     {
                                         if (Loc.Codigo == 0)
                                         {
-                                            <option value="@Loc.Codigo">< Seleccione una Nacionalidad ></option>
+                                            <option value="@Loc.Codigo">< Nacionalidad ></option>
                                         }
                                         else
                                         {
@@ -271,15 +271,27 @@
                     <!-- -------------------- Fecha / Importe / Interes_Mora -------------------- -->
                     <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
                         <span class="label-input100">Foto Frente DNI</span>
-                        <input accept="image/png,image/jpeg,application/pdf" type="file" name="fileU" id="fileU">
+                        <input accept="image/png,image/jpeg,application/pdf" type="file" name="fileDNIFrente" id="fileDNIFrente">
                     </div>
                     <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
                         <span class="label-input100">Foto Dorso DNI</span>
-                        <input accept="image/png,image/jpeg,application/pdf" type="file" name="fileD" id="fileD">
+                        <input accept="image/png,image/jpeg,application/pdf" type="file" name="fileDNIDorso" id="fileDNIDorso">
                     </div>
                     <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
                         <span class="label-input100">Ultimo Recibo Sueldo</span>
-                        <input accept="image/png,image/jpeg,application/pdf" type="file" name="fileT" id="fileT">
+                        <input accept="image/png,image/jpeg,application/pdf" type="file" name="fileReciboSueldo" id="fileReciboSueldo">
+                    </div>
+                </div>
+
+                <div class="w3-row">
+                    <!-- -------------------- Fecha / Importe / Interes_Mora -------------------- -->
+                    <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
+                        <span class="label-input100">Foto de Perfil</span>
+                        <input accept="image/png,image/jpeg,application/pdf" type="file" name="filePerfil" id="filePerfil">
+                    </div>
+                    <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
+                    </div>
+                    <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
                     </div>
                 </div>
             </div>
@@ -346,7 +358,7 @@
                     <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
                         <span class="label-input100">Localidad</span>
                         <select class="w3-select bg1" name="LocalidadAfiliadoEmpresa" id="LocalidadAfiliadoEmpresa">
-                            <option value="0">< Seleccione una Localidad ></option>
+                            <option value="0">< Localidad ></option>
                             @{
                                 if (ViewData["Localidades"] != null)
                                 {
@@ -385,7 +397,7 @@
                     <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate">
                         <span class="label-input100">Parentesco</span>
                         <select class="w3-select bg1" name="Parentesco" id="Parentesco">
-                            <option value="0">< Seleccione un Tipo Documento ></option>
+                            <option value="0">< Tipo Documento ></option>
                             @{
                                 if (ViewData["Parentesco"] != null)
                                 {
@@ -415,7 +427,7 @@
                     <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate">
                         <span class="label-input100">Tipo Documento</span>
                         <select class="w3-select bg1" name="TipoDocAfiliadoFamiliar" id="TipoDocAfiliadoFamiliar">
-                            <option value="0">< Seleccione un Tipo Documento ></option>
+                            <option value="0">< Tipo Documento ></option>
                             @{
                                 if (ViewData["TipoDoc"] != null)
                                 {

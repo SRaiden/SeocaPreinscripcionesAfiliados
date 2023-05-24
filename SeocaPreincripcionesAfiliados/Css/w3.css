@@ -68,6 +68,10 @@ template {
     display: none;
 }
 
+.textAlignCenter{
+    text-align: center;
+}
+
 a {
     background-color: transparent;
 }
@@ -236,9 +240,11 @@ textarea {
 /* End extract */
 html,
 body {
-    font-family: Poppins, sans-serif;
-    font-size: 15px;
+/*    font-family: Poppins, sans-serif;
+    font-size: 15px;*/
     line-height: 1.5;
+    font-family: Verdana, sans-serif;
+    font-size: 15px;
 }
 
 html {
@@ -394,6 +400,23 @@ a {
     width: 100%;
 }
 
+.enviars {
+    border: none;
+    display: inline-block;
+    padding: 20px 16px;
+    vertical-align: middle;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    background-color: inherit;
+    text-align: center;
+    cursor: pointer;
+    white-space: nowrap;
+    background-color: green;
+    width: 100%;
+}
+
+
 .eliminar {
     border: none;
     display: inline-block;
@@ -526,6 +549,15 @@ a {
     border: 0.3px solid rgb(194, 194, 194);
     box-shadow: -2px 3px 2px rgb(0 0 0 / 10%);
 }
+
+.w3-inputs {
+    padding: 8px;
+    display: block;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+}
+
 
 .txtGrillaEmpLiq {
     padding: 8px;

@@ -1,0 +1,152 @@
+﻿@model IEnumerable<SeocaPreincripcionesAfiliados.Models.ViewModels.DatosAfiliados>
+
+@{
+    ViewBag.Title = "ReporteAfiliados";
+}
+
+@{
+    if (ViewBag.login)
+    {
+        @Html.Partial("~/Views/Shared/BarraNavegacion.cshtml")
+    }
+}
+
+<div class="w3-content" style="max-width:1564px">
+    <!-- ---------------------------- Modal Ver Start ---------------------------- -->
+    <div id="id01" class="w3-modal">
+        <div class="w3-modal-content">
+            <div id="modal-content">
+                Cargando...
+            </div>
+        </div>
+    </div>
+
+    <br /><br /><br /><br />
+
+    <div style="background-color: white;">
+        <div class="w3-padding-32 w3-center w3-xlarge bg-zul w3-text-white">AFILIADOS</div>
+
+        <br />
+
+        <div class="w3-row">
+            @using (Html.BeginForm("GrillaAfiliados", "Home", FormMethod.Post, new { @class = "w3-container", autocomplete = "off" }))
+            {
+
+                <div class="w3-row">
+                    <div class="w3-col w3-container" style="width:30%">
+                        <input class="w3-inputs" type="text" placeholder="Apellido y Nombres" name="buscarAPELLIDO" value="@ViewBag.filtroApellido">
+                    </div>
+
+                    <div class="w3-col w3-container" style="width:30%">
+                        <input class="w3-inputs" type="text" placeholder="CUIL" name="buscarCUIL" value="@ViewBag.filtroCUIL">
+                    </div>
+
+                    <div class="w3-col w3-container" style="width:20%">
+                        <input class="w3-inputs" type="text" placeholder="DNI" name="buscarDNI" value="@ViewBag.filtroDNI">
+                    </div>
+
+                    <div class="w3-col w3-container" style="width:20%">
+                        <button class="w3-btn w3-text-light-grey bg-zul w3-hover-blue" type="submit" id="BuscarAfiliados"> <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i> Buscar</button>
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="w3-row">
+                    <div class="w3-col w3-container">
+                        <select name="estados" id="estados" class="w3-select" onchange="guardarEstados()">
+                            <option value="0">< Todos ></option>
+                            <option value="1">< Pendiente ></option>
+                            <option value="2">< A revisar ></option>
+                            <option value="3">< Ingresado ></option>
+                            <option value="4">< Rechazado ></option>
+                        </select>
+
+
+                        @if (!string.IsNullOrEmpty(ViewBag.filtroEstado))
+                        {
+                            <script>
+                                SelectSuc.options[z].setAttribute("selected", "selected");
+                                document.getElementById("estados").value = ;
+                            </script>
+
+                            <script>
+                var SelectSuc = document.getElementById("estados");
+
+                for (var z = 0; z < SelectSuc.children.length; z++) {
+                    var value = SelectSuc.options[z].value;
+                    if (@ViewBag.filtroEstado == value) {
+                        SelectSuc.options[z].setAttribute("selected", "selected");
+                        //document.getElementById("NombreSucursal").value = value;
+                    }
+                }
+
+                var corte = valorPreestablecido.split('-');
+                document.getElementById("sucElegida").value = corte[0];
+                            </script>
+                        }
+                    </div>
+                </div>
+
+            }
+
+        </div>
+
+        <br />
+
+        <div class="w3-container">
+
+            <div class="w3-responsive">
+                <div class="w3-left">
+                    <h2>Afiliados</h2>
+                </div>
+
+                <table class="w3-table-all EmpleadosCargados" id="EmpleadosCargados">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center;">DNI</th>
+                            <th style="text-align: center;">CUIL</th>
+                            <th style="text-align: center;">Apellido y Nombre</th>
+                            <th style="text-align: center;">Fecha Afiliado</th>
+                            <th style="text-align: center;">Estado</th>
+                            <th style="text-align: center;">N° Afiliado</th>
+                            <th style="text-align: center;"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var items in Model)
+                        {
+                            <tr>
+                                <td><input type="text" class="w3-inputs" value="@items.Numero_Doc" style="width: 150px;" /></td>
+                                <td><input type="text" class="w3-inputs" value="@items.CUIL" style="width: 150px;" /></td>
+                                <td><input type="text" class="w3-inputs" value="@items.ApellidoNombre" /></td>
+                                <td><input type="text" class="w3-inputs" value="@items.FS" /></td>
+                                <td><input type="text" class="w3-inputs" value="@items.Estado" /></td>
+                                <td><input type="text" class="w3-inputs" value="@items.NroAfiliado" /></td>
+
+                                <td><button onclick="document.getElementById('id01').style.display='block'" class="btnHistorial" data-id="@items.Codigo" data-toggle="modal" type="button" title="Ver Afiliado"><i class="fa-solid fa-chalkboard-user" style="height: 25px;"></i></button></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+
+            <br>
+            <br>
+
+        </div>
+
+    </div>
+</div>
+
+@if (!string.IsNullOrEmpty(ViewBag.Mensaje))
+{
+    <script type="text/javascript">
+        alert("@ViewBag.Mensaje");
+    </script>
+}
+
+@section scripts{
+    <script src="~/js/Afiliados.js"></script>
+}

@@ -30,6 +30,7 @@
     <Property Name="FotoFrenteDni" Type="varbinary(max)" />
     <Property Name="FotoDorsoDni" Type="varbinary(max)" />
     <Property Name="FotoReciboSueldo" Type="varbinary(max)" />
+    <Property Name="FotoPerfil" Type="varbinary(max)" />
     <Property Name="Art100" Type="bit" />
     <Property Name="Turismo" Type="bit" />
     <Property Name="Sepelio" Type="bit" />
@@ -38,12 +39,10 @@
     <Property Name="Estado" Type="varchar" MaxLength="20" />
     <Property Name="ComentarioEstado" Type="varchar(max)" />
     <Property Name="Usuario" Type="int" />
-    <Property Name="FileNameFrente" Type="nvarchar" MaxLength="150" />
-    <Property Name="DataFrenteExtension" Type="varbinary(max)" />
-    <Property Name="FileNameDorso" Type="nvarchar" MaxLength="150" />
-    <Property Name="DataDorsoExtension" Type="varbinary(max)" />
-    <Property Name="FileNameSueldo" Type="nvarchar" MaxLength="150" />
-    <Property Name="DataSueldoExtension" Type="varbinary(max)" />
+    <Property Name="extensionFrente" Type="varchar" MaxLength="10" />
+    <Property Name="extensionDorso" Type="varchar" MaxLength="10" />
+    <Property Name="extensionSueldo" Type="varchar" MaxLength="10" />
+    <Property Name="extensionPerfil" Type="varchar" MaxLength="10" />
   </EntityType>
   <EntityType Name="Afiliados_Empresa">
     <Key>

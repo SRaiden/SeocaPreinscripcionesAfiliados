@@ -4,8 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6ddb63052ba5486dbed557eed481a222" Name="Diagram1" ZoomLevel="21">
-        <EntityTypeShape EntityType="geosoftw_seocapreinscripcionesModel.Afiliados_DatosPersonales" Width="1.5" PointX="0.75" PointY="0.75" />
+      <Diagram DiagramId="6ddb63052ba5486dbed557eed481a222" Name="Diagram1" ZoomLevel="59">
         <EntityTypeShape EntityType="geosoftw_seocapreinscripcionesModel.Afiliados_Empresa" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="geosoftw_seocapreinscripcionesModel.Afiliados_Familiares" Width="1.5" PointX="4.75" PointY="0.75" />
         <EntityTypeShape EntityType="geosoftw_seocapreinscripcionesModel.Empresas" Width="1.5" PointX="4.75" PointY="4.75" />
@@ -15,8 +14,8 @@
         <EntityTypeShape EntityType="geosoftw_seocapreinscripcionesModel.Empresas_Empleados" Width="1.5" PointX="8.75" PointY="0.75" />
         <EntityTypeShape EntityType="geosoftw_seocapreinscripcionesModel.Empresas_Sucursales" Width="1.5" PointX="8.75" PointY="4.75" />
         <EntityTypeShape EntityType="geosoftw_seocapreinscripcionesModel.Empresas_Titulares" Width="1.5" PointX="8.75" PointY="8.75" />
-        <EntityTypeShape EntityType="geosoftw_seocapreinscripcionesModel.General_Calificacion" Width="1.5" PointX="10.75" PointY="0.75" />
-        <EntityTypeShape EntityType="geosoftw_seocapreinscripcionesModel.General_Delegacion" Width="1.5" PointX="0.75" PointY="10.75" />
+        <EntityTypeShape EntityType="geosoftw_seocapreinscripcionesModel.General_Calificacion" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="geosoftw_seocapreinscripcionesModel.General_Delegacion" Width="1.5" PointX="10.75" PointY="0.75" />
         <EntityTypeShape EntityType="geosoftw_seocapreinscripcionesModel.General_Delegacion_Usuarios" Width="1.5" PointX="2.75" PointY="10.75" />
         <EntityTypeShape EntityType="geosoftw_seocapreinscripcionesModel.General_Documentos" Width="1.5" PointX="10.75" PointY="3.75" />
         <EntityTypeShape EntityType="geosoftw_seocapreinscripcionesModel.General_Estado_Civil" Width="1.5" PointX="4.75" PointY="10.75" />
@@ -25,6 +24,7 @@
         <EntityTypeShape EntityType="geosoftw_seocapreinscripcionesModel.General_Parentesco" Width="1.5" PointX="12.75" PointY="0.75" />
         <EntityTypeShape EntityType="geosoftw_seocapreinscripcionesModel.General_Provincias" Width="1.5" PointX="12.75" PointY="3.75" />
         <EntityTypeShape EntityType="geosoftw_seocapreinscripcionesModel.General_Sexo" Width="1.5" PointX="12.75" PointY="6.75" />
+        <EntityTypeShape EntityType="geosoftw_seocapreinscripcionesModel.Afiliados_DatosPersonales" Width="1.5" PointX="7.375" PointY="12.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

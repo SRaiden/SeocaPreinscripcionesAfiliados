@@ -40,10 +40,20 @@ namespace SeocaPreincripcionesAfiliados.Controllers
             {
                 try
                 {
-                    var login = db.General_Delegacion_Usuarios.Where(d => d.Usuario == user).Where(d => d.Contraseña == pass).First().Id;
-                    Session["SessionUser"] = login.ToString();
 
-                    return RedirectToAction("Afiliados", "Home");
+                    var soyadmin = db.General_Delegacion_Usuarios.Where(d => d.Usuario == user).Where(d => d.Contraseña == pass).First();
+                    Session["SessionUser"] = soyadmin.Id.ToString();
+
+                    if (soyadmin.Delegacion == 0)
+                    {
+                        return RedirectToAction("ReporteAfiliados", "Home");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Afiliados", "Home");
+                    }
+                    
+                   
                 }
                 catch (Exception ex)
                 {
@@ -53,14 +63,19 @@ namespace SeocaPreincripcionesAfiliados.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("/CerrarSesion")]
+        public ActionResult CerrarSesion()
+        {
+            return RedirectToAction("Home", "IniciarSesion");
+        }
+
         //---------------------------------------//
 
         public ActionResult Afiliados()
         {
             using (Models.geosoftw_seocapreinscripcionesEntities db = new Models.geosoftw_seocapreinscripcionesEntities())
             {
-
-
                 if (codigo == "Codigo valido")
                 {
                     ViewBag.mensaje = "Se ha verificado su preinscripcion.";
@@ -87,12 +102,14 @@ namespace SeocaPreincripcionesAfiliados.Controllers
 
                     var Delegacion = db.General_Delegacion.Where(d => d.Id == dele).First().Nombre;
                     ViewData["Delegacion"] = Delegacion;
+                    ViewBag.login = true;
                 }
                 catch (Exception ex)
                 {
-                    var Delegacion = db.General_Delegacion.ToList<General_Delegacion>();
+                    var Delegacion = db.General_Delegacion.Where(d=> d.Id == 0).First().Nombre;
                     ViewData["Delegacion"] = Delegacion;
                     ViewBag.LoginDelegacion = true;
+                    ViewBag.login = false;
                 }
 
                 List<General_Calificacion> CalifProf = db.General_Calificacion.Where(d => d.Id != 0).ToList<General_Calificacion>();
@@ -119,9 +136,8 @@ namespace SeocaPreincripcionesAfiliados.Controllers
             return View();
         }
 
-
         [HttpPost]
-        public ActionResult Afiliados(/*HttpPostedFileBase fileU, HttpPostedFileBase fileD, HttpPostedFileBase fileT,*/ string matrizDatosAfiliado, string matrizEmpresa = null, string matrizFamiliares = null)
+        public ActionResult Afiliados(string matrizDatosAfiliado, string matrizEmpresa = null, string matrizFamiliares = null, HttpPostedFileBase fileDNIFrente = null, HttpPostedFileBase fileDNIDorso = null, HttpPostedFileBase fileReciboSueldo = null, HttpPostedFileBase filePerfil = null)
         {
             using (Models.geosoftw_seocapreinscripcionesEntities db = new Models.geosoftw_seocapreinscripcionesEntities())
             {
@@ -185,30 +201,59 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                     {
                     }
 
+                    byte[] bytesFrente = null;
+                    byte[] bytesDorso = null;
+                    byte[] bytesSueldo = null;
+                    byte[] bytesPerfil = null;
 
-                    //var FileNameFrente = System.IO.Path.GetFileName(fileU.FileName);
-                    //byte[] bytesFrente;
-                    //using (BinaryReader br = new BinaryReader(fileU.InputStream))
-                    //{
-                    //    bytesFrente = br.ReadBytes(fileU.ContentLength);
-                    //}
+                    string extFrente = null;
+                    string extDorso = null;
+                    string extSueldo = null;
+                    string extPerfil = null;
 
-                    //var FileNameDorso = System.IO.Path.GetFileName(fileD.FileName);
-                    //byte[] bytesDorso;
-                    //using (BinaryReader br = new BinaryReader(fileD.InputStream))
-                    //{
-                    //    bytesDorso = br.ReadBytes(fileD.ContentLength);
-                    //}
+                    if (fileDNIFrente != null)
+                    {
+                        var FileNameFrente = System.IO.Path.GetFileName(fileDNIFrente.FileName);
+                        string[] FF = FileNameFrente.Split('.');
+                        extFrente = FF[1];
+                        using (BinaryReader br = new BinaryReader(fileDNIFrente.InputStream))
+                        {
+                            bytesFrente = br.ReadBytes(fileDNIFrente.ContentLength);
+                        }
+                    }
 
-                    //var FileNameSueldo = System.IO.Path.GetFileName(fileT.FileName);
-                    //byte[] bytesSueldo;
-                    //using (BinaryReader br = new BinaryReader(fileT.InputStream))
-                    //{
-                    //    bytesSueldo = br.ReadBytes(fileT.ContentLength);
-                    //}
+                    if (fileDNIDorso != null)
+                    {
+                        var FileNameDorso = System.IO.Path.GetFileName(fileDNIDorso.FileName);
+                        string[] FD = FileNameDorso.Split('.');
+                        extDorso = FD[1];
+                        using (BinaryReader br = new BinaryReader(fileDNIDorso.InputStream))
+                        {
+                            bytesDorso = br.ReadBytes(fileDNIDorso.ContentLength);
+                        }
+                    }
 
+                    if (fileReciboSueldo != null)
+                    {
+                        var FileNameSueldo = System.IO.Path.GetFileName(fileReciboSueldo.FileName);
+                        string[] FS = FileNameSueldo.Split('.');
+                        extSueldo = FS[1];
+                        using (BinaryReader br = new BinaryReader(fileReciboSueldo.InputStream))
+                        {
+                            bytesSueldo = br.ReadBytes(fileReciboSueldo.ContentLength);
+                        }
+                    }
 
-
+                    if (filePerfil != null)
+                    {
+                        var FileNamePerfil = System.IO.Path.GetFileName(filePerfil.FileName);
+                        string[] FP = FileNamePerfil.Split('.');
+                        extPerfil = FP[1];
+                        using (BinaryReader br = new BinaryReader(filePerfil.InputStream))
+                        {
+                            bytesPerfil = br.ReadBytes(filePerfil.ContentLength);
+                        }
+                    }
 
                     int dele;
                     string hoy = DateTime.Now.ToString("yyyy/MM/dd");
@@ -217,7 +262,7 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                     {
                         var session = Session["SessionUser"].ToString();
                         int ids = Int32.Parse(session.ToString());
-                        
+
                         dele = db.General_Delegacion.Where(d => d.Nombre == Delegacion).First().Id;
                         conf = true;
                     }
@@ -256,13 +301,17 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                         Celular = Celular,
                         Confirmado = conf,
                         CodigoTemporal = password,
+                        Estado = "Pendiente",
 
-                        //FileNameFrente = FileNameFrente,
-                        //DataFrenteExtension = bytesFrente,
-                        //FileNameDorso = FileNameDorso,
-                        //DataDorsoExtension = bytesDorso,
-                        //FileNameSueldo = FileNameSueldo,
-                        //DataSueldoExtension = bytesSueldo
+                        FotoFrenteDni = bytesFrente,
+                        FotoDorsoDni = bytesDorso,
+                        FotoReciboSueldo = bytesSueldo,
+                        FotoPerfil = bytesPerfil,
+
+                        extensionFrente = extFrente,
+                        extensionDorso = extDorso,
+                        extensionSueldo = extSueldo,
+                        extensionPerfil = extPerfil
                     };
 
                     db.Afiliados_DatosPersonales.Add(emp);
@@ -477,10 +526,8 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                         ReportViewer.LocalReport.Refresh();
                     }
 
-                    //ReportParameter parameter = new ReportParameter("Periodo", HttpUtility.HtmlDecode(periodo.ToString("MM/yyyy")));
-                    //ReportViewer.LocalReport.SetParameters(parameter);
-
-
+                    ReportParameter parameter = new ReportParameter("ultimoID", HttpUtility.HtmlDecode(ultimoId.ToString()));
+                    ReportViewer.LocalReport.SetParameters(parameter);
 
                     ReportViewer.LocalReport.Refresh();
 
@@ -517,10 +564,257 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                     return RedirectToAction("Liquidacion");
                 }
 
+                // Limpiar Planilla
+                ViewBag.vacio = "";
+                ViewBag.comboVacio = 0;
+
                 ViewBag.mensaje = "Preinscripcion Ingresada. Su id es " + ultimoId + ". Confirme el Codigo que le llego a su Email para confirmar su preinscripcion.";
                 return View();
             }
         }
+
+        //---------------------------------------//
+
+        [HttpGet]
+        public ActionResult GrillaAfiliados()
+        {
+            try
+            {
+                var session = Session["SessionUser"].ToString();
+                int ids = Int32.Parse(session.ToString());
+
+                try
+                {
+                    using (Models.geosoftw_seocapreinscripcionesEntities db = new Models.geosoftw_seocapreinscripcionesEntities())
+                    {
+                        //List<DatosAfiliados> empleado = db.Database.SqlQuery<DatosAfiliados>("EXEC SP_VerTablaAfiliados").ToList<DatosAfiliados>();
+                        List<DatosAfiliados> empleado = db.Database.SqlQuery<DatosAfiliados>("EXEC SP_VerTodosAfiliados @apellidoNombre, @Cuil, @DNI", new SqlParameter("apellidoNombre", ""), new SqlParameter("Cuil", ""), new SqlParameter("DNI", "")).ToList<DatosAfiliados>();
+
+                        List<DatosAfiliados> verEmpleados = new List<DatosAfiliados>();
+
+                        foreach (var emp in empleado)
+                        {
+                            DatosAfiliados ver = new DatosAfiliados
+                            {
+                                Codigo = Int32.Parse(emp.Codigo.ToString())
+                            };
+
+                            ver.ApellidoNombre = emp.ApellidoNombre;
+                            string[] cfs = emp.Fecha_Solicitud.ToString().Split(' ');
+                            ver.FS = cfs[0];
+                            //ver.FS = DateTime.Parse(emp.Fecha_Solicitud.ToString("dd/MM/yyyy")).ToString();
+
+                            string cuil = emp.CUIL; // COLOCARLE LOS GUIONES
+                            cuil = cuil.Insert(2, "-").Insert(11, "-");
+                            ver.CUIL = cuil;
+
+                            ver.Numero_Doc = emp.Numero_Doc;
+                            if (string.IsNullOrEmpty(emp.Estado)) ver.Estado = "Pendiente";
+                            else ver.Estado = emp.Estado;
+
+                            ver.NroAfiliado = Int32.Parse(emp.NroAfiliado.ToString());
+
+                            verEmpleados.Add(ver);
+                        }
+                        ViewBag.login = true;
+                        ViewBag.filtroApellido = "";
+                        ViewBag.filtroCUIL = "";
+                        ViewBag.filtroDNI = "";
+                        ViewBag.filtroEstado = "";
+
+                        return View(verEmpleados);
+                    }
+                }
+                catch(Exception ex)
+                {
+                    Console.Write(ex.Message);
+                    return View();
+                }
+            }
+            catch (Exception)
+            {
+                ViewBag.login = false;
+                return RedirectToAction("IniciarSesion", "Home");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult GrillaAfiliados(FormCollection form)
+        {
+            try
+            {
+                var session = Session["SessionUser"].ToString();
+                int ids = Int32.Parse(session.ToString());
+
+                string apellido = Convert.ToString(form["buscarAPELLIDO"]);
+                string CUIL = Convert.ToString(form["buscarCUIL"]);
+                string DNI = Convert.ToString(form["buscarDNI"]);
+                string estados = Convert.ToString(form["estados"]);
+
+                try
+                {
+                    using (Models.geosoftw_seocapreinscripcionesEntities db = new Models.geosoftw_seocapreinscripcionesEntities())
+                    {
+                        List<DatosAfiliados> empleado = null;
+                        //TODOS LOS ACTIVOS
+                        if (estados == "0")
+                        {
+                            empleado = db.Database.SqlQuery<DatosAfiliados>("EXEC SP_VerTodosAfiliados @apellidoNombre, @Cuil, @DNI", new SqlParameter("apellidoNombre", apellido), new SqlParameter("Cuil", CUIL), new SqlParameter("DNI", DNI)).ToList<DatosAfiliados>();
+                        }
+                        else if (estados == "1") // Pendiente
+                        {
+                            empleado = db.Database.SqlQuery<DatosAfiliados>("EXEC SP_VerTodosAfiliadosSegunEstado @apellidoNombre, @Cuil, @DNI, @Estado", new SqlParameter("apellidoNombre", apellido), new SqlParameter("Cuil", CUIL), new SqlParameter("DNI", DNI), new SqlParameter("Estado", "Pendiente")).ToList<DatosAfiliados>();
+                        }
+                        else if (estados == "2") // A revisar
+                        {
+                            empleado = db.Database.SqlQuery<DatosAfiliados>("EXEC SP_VerTodosAfiliadosSegunEstado @apellidoNombre, @Cuil, @DNI, @Estado", new SqlParameter("apellidoNombre", apellido), new SqlParameter("Cuil", CUIL), new SqlParameter("DNI", DNI), new SqlParameter("Estado", "A Revisar")).ToList<DatosAfiliados>();
+                        }
+                        else if (estados == "3") // Activo
+                        {
+                            empleado = db.Database.SqlQuery<DatosAfiliados>("EXEC SP_VerTodosAfiliadosSegunEstado @apellidoNombre, @Cuil, @DNI, @Estado", new SqlParameter("apellidoNombre", apellido), new SqlParameter("Cuil", CUIL), new SqlParameter("DNI", DNI), new SqlParameter("Estado", "Activo")).ToList<DatosAfiliados>();
+                        }
+                        else if (estados == "4") // De Baja
+                        {
+                            empleado = db.Database.SqlQuery<DatosAfiliados>("EXEC SP_VerTodosAfiliadosSegunEstado @apellidoNombre, @Cuil, @DNI, @Estado", new SqlParameter("apellidoNombre", apellido), new SqlParameter("Cuil", CUIL), new SqlParameter("DNI", DNI), new SqlParameter("Estado", "De Baja")).ToList<DatosAfiliados>();
+                        }
+
+                        List<DatosAfiliados> verEmpleados = new List<DatosAfiliados>();
+
+                        if (empleado.Count == 0) ViewBag.Mensaje = "No hay afiliados encontrados con este filtro";
+
+                        foreach (var emp in empleado)
+                        {
+                            DatosAfiliados ver = new DatosAfiliados
+                            {
+                                Codigo = Int32.Parse(emp.Codigo.ToString())
+                            };
+
+                            ver.ApellidoNombre = emp.ApellidoNombre;
+                            string[] cfs = emp.Fecha_Solicitud.ToString().Split(' ');
+                            ver.FS = cfs[0];
+                            //ver.FS = DateTime.Parse(emp.Fecha_Solicitud.ToString("dd/MM/yyyy")).ToString();
+
+                            string cuil = emp.CUIL; // COLOCARLE LOS GUIONES
+                            cuil = cuil.Insert(2, "-").Insert(11, "-");
+                            ver.CUIL = cuil;
+
+                            ver.Numero_Doc = emp.Numero_Doc;
+                            if (string.IsNullOrEmpty(emp.Estado)) ver.Estado = "Pendiente";
+                            else ver.Estado = emp.Estado;
+
+                            ver.NroAfiliado = Int32.Parse(emp.NroAfiliado.ToString());
+
+                            verEmpleados.Add(ver);
+                        }
+                        ViewBag.login = true;
+                        ViewBag.filtroApellido = apellido;
+                        ViewBag.filtroCUIL = CUIL;
+                        ViewBag.filtroDNI = DNI;
+                        ViewBag.filtroEstado = estados;
+
+                        return View(verEmpleados);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.Write(ex.Message);
+                    return View();
+                }
+            }
+            catch (Exception)
+            {
+                ViewBag.login = false;
+                return RedirectToAction("IniciarSesion", "Home");
+            }
+        }
+
+        //---------------------------------------//
+
+        [HttpGet]
+        [Route("/verDatoAfiliado")]
+        [Route("/verDatoAfiliado/{id}")]
+        public ActionResult verDatoAfiliado(int id)
+        {
+            try
+            {
+                var session = Session["SessionUser"].ToString();
+                int ids = Int32.Parse(session.ToString());
+
+                using (Models.geosoftw_seocapreinscripcionesEntities db = new Models.geosoftw_seocapreinscripcionesEntities())
+                {
+                    // Obtenemos los datos del empleado a modificar
+                    DatoAfiliadoDetallado afiliado = db.Database.SqlQuery<DatoAfiliadoDetallado>("EXEC SP_verDatoAfiliado @Codigo", new SqlParameter("Codigo", id)).First<DatoAfiliadoDetallado>();
+                    List<DatosFamiliarAfiliado> familiar = db.Database.SqlQuery<DatosFamiliarAfiliado>("EXEC SP_VerDatoFamiliar @Codigo", new SqlParameter("Codigo", afiliado.Codigo)).ToList<DatosFamiliarAfiliado>();
+
+                    string[] cfs = afiliado.Fecha_Solicitud.ToString().Split(' ');
+
+                    DatoAfiliadoDetallado verAfiliado = new DatoAfiliadoDetallado
+                    {
+                        Codigo = afiliado.Codigo,
+                        ApellidoNombre = afiliado.ApellidoNombre,
+                        CUIL = afiliado.CUIL,
+                        Delegacion = afiliado.Delegacion,
+                        Numero_Doc = afiliado.Numero_Doc,
+                        Calificacion_Profesional = afiliado.Calificacion_Profesional,
+                        Estado_Civil = afiliado.Estado_Civil,
+                        FS = cfs[0],
+                        Fecha_Nac = afiliado.Fecha_Nac,
+                        Calle = afiliado.Calle,
+                        Numero_Calle = afiliado.Numero_Calle,
+                        Telefono = afiliado.Telefono,
+                        Localidad_Afiliado = afiliado.Localidad_Afiliado,
+                        NroAfiliado = afiliado.NroAfiliado,
+                        Email = afiliado.Email,
+                        Celular = afiliado.Celular,
+                        Provincia = afiliado.Provincia,
+                        Estado = afiliado.Estado,
+                        Sexo = afiliado.Sexo,
+                        Nacionalidad = afiliado.Nacionalidad,
+                        Telefono_Empresa = afiliado.Telefono_Empresa,
+
+                        Nombre_Empresa = afiliado.Nombre_Empresa,
+                        Cuit_Empresa = afiliado.Cuit_Empresa,
+                        Calle_Empresa = afiliado.Calle_Empresa,
+                        Numero_Empresa = afiliado.Numero_Empresa,
+                        Localidad_Empresa = afiliado.Localidad_Empresa,
+                        Fecha_Ingreso_Empresa = afiliado.Fecha_Ingreso_Empresa
+                    };
+
+                    List<DatosFamiliarAfiliado> listFamiliar = new List<DatosFamiliarAfiliado>();
+                    foreach(var i in familiar)
+                    {
+                        string[] ce = i.Cert_Estudios.ToString().Split(' ');
+                        string[] fn = i.Fecha_Nac.ToString().Split(' ');
+
+                        DatosFamiliarAfiliado dfa = new DatosFamiliarAfiliado
+                        {
+                            Apellido_Nombre = i.Apellido_Nombre,
+                            Id_Afiliado = i.Id_Afiliado,
+                            CE = ce[0],
+                            FN = fn[0],
+                            Num_Doc = i.Num_Doc,
+                            Parentesco = i.Parentesco,
+                            Sexo = i.Sexo,
+                            Tipo_Doc = i.Tipo_Doc
+                        };
+                        listFamiliar.Add(dfa);
+                    }
+
+
+                    if(familiar.Count != 0) ViewBag.familiar = listFamiliar;
+                    else ViewBag.familiar = null;
+
+                    return View(verAfiliado);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Session = false;
+                return RedirectToAction("IniciarSesion", "IniciarSesion");
+            }
+        }
+
+        //---------------------------------------//
 
 
         public ActionResult Codigo()

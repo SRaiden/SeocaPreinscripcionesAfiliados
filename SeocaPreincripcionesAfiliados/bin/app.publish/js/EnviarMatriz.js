@@ -2,6 +2,44 @@
 var matrizDatosAfiliado = new Array();
 var matrizFamiliares = new Array();
 
+function borrarCampos() {
+    document.getElementById("Apellido").value = "";
+    document.getElementById("Nombre").value = "";
+    document.getElementById("Cuil").value = "";
+    document.getElementById("TipoDoc").value = 0;
+    document.getElementById("NumDoc").value = "";
+    document.getElementById("CalifProf").value = 0;
+    document.getElementById("EstadoCivil").value = 0;
+    document.getElementById("FechaNac").value = "";
+    document.getElementById("Calle").value = "";
+    document.getElementById("NumeroCalle").value = "";
+    document.getElementById("Piso").value = "";
+    document.getElementById("Dto").value = "";
+    document.getElementById("Telefono").value = "";
+    document.getElementById("Celular").value = "";
+    document.getElementById("Email").value = "";
+    document.getElementById("Localidad").value = 0;
+    document.getElementById("Provincia").value = 0;
+    document.getElementById("SexoAfiliadoDocumento").value = 0;
+    document.getElementById("Nacionalidad").value = 0;
+    document.getElementById("chkCuota").checked = false;
+    document.getElementById("chkSeguro").checked = false;
+
+    document.getElementById("FechaIngresoAfiliadoEmpresa").value = "";
+    document.getElementById("NombreEmpresaAfiliadoEmpresa").value = "";
+    document.getElementById("NombreFantasiaAfiliadoEmpresa").value = "";
+    document.getElementById("CUITEmpresaAfiliadoEmpresa").value = "";
+    document.getElementById("CalleAfiliadoEmpresa").value = "";
+    document.getElementById("NumeroAfiliadoEmpresa").value = "";
+    document.getElementById("PisoAfiliadoEmpresa").value = "";
+    document.getElementById("DtoAfiliadoEmpresa").value = "";
+    document.getElementById("CPAfiliadoEmpresa").value = "";
+    document.getElementById("LocalidadAfiliadoEmpresa").value = 0;
+    document.getElementById("TelefonoAfiliadoEmpresa").value = "";
+    document.getElementById("EmailAfiliadoEmpresa").value = "";
+
+}
+
 
 function enviar() {
 
@@ -48,7 +86,7 @@ function enviar() {
         return false;
     }
     if (!isNaN(Apellido)) {
-        alert("No puede ingresar numeros");
+        alert("No puede ingresar numeros en Apellido");
         return false;
     }
     if (Nombre == "") {
@@ -56,7 +94,7 @@ function enviar() {
         return false;
     }
     if (!isNaN(Nombre)) {
-        alert("No puede ingresar numeros");
+        alert("No puede ingresar numeros en Nombre");
         return false;
     }
     if (Cuil == "") {
