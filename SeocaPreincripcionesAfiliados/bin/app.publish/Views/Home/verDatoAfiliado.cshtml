@@ -1,0 +1,146 @@
+﻿@model SeocaPreincripcionesAfiliados.Models.ViewModels.DatoAfiliadoDetallado
+
+<div class="w3-container" style="line-height : 5px;"></div>
+
+
+
+<div class="w3-padding w3-margin-left small2 w3-center">
+
+    <div class="w3-row w3-container">
+
+        <div class="w3-panel w3-wide bg-zul w3-text-white w3-content w3-margin-left w3-margin-right w3-center w3-padding-24">
+            DATOS DEL AFILIADO
+        </div>
+
+        <div class="w3-row">
+            <div class="w3-col w3-container" style="width: 50%;">
+                <label class="w3-text-blue">Apellido y Nombre</label>
+                @Html.TextBoxFor(model => model.ApellidoNombre, new { @class = "w3-input w3-border", placeholder = "Apellido", id = "Apellido", @readonly = "readonly" })
+            </div>
+            <div class="w3-col w3-container" style="width: 50%;">
+                <label class="w3-text-blue">Cuil</label>
+                @Html.TextBoxFor(model => model.CUIL, new { @class = "w3-input w3-border", placeholder = "CUIL", id = "CUIL", @readonly = "readonly" })
+            </div>
+        </div>
+
+        <br />
+
+        <div class="w3-row">
+            <div class="w3-col w3-container" style="width: 33%;">
+                <label class="w3-text-blue">Delegacion</label>
+                @Html.TextBoxFor(model => model.Delegacion, new { @class = "w3-input w3-border", placeholder = "Delegacion", id = "Delegacion", type = "text", @readonly = "readonly" })
+            </div>
+            <div class="w3-col w3-container" style="width: 33%;">
+                <label class="w3-text-blue">Calificacion Profesional</label>
+                @Html.TextBoxFor(model => model.Calificacion_Profesional, new { @class = "w3-input w3-border", placeholder = "Calificacion_Profesional", id = "Calificacion_Profesional", type = "text", @readonly = "readonly" })
+            </div>
+            <div class="w3-col w3-container" style="width: 33%;">
+                <label class="w3-text-blue">Fecha Nacimiento</label>
+                @Html.TextBoxFor(model => model.Fecha_Nac, "{0:yyyy-MM-dd}", new { @class = "w3-input w3-border", placeholder = "Nac:DD/MM/AA", id = "FechaNac", type = "date", @readonly = "readonly" })
+            </div>
+        </div>
+
+        <br>
+
+        <div class="w3-row">
+            <div class="w3-col w3-container" style="width: 33%;">
+                <label class="w3-text-blue">Fecha Solicitud</label>
+                @Html.TextBoxFor(model => model.FS, new { @class = "w3-input w3-border", placeholder = "Fecha Solicitud", id = "Fs", type = "text", @readonly = "readonly" })
+            </div>
+
+            <div class="w3-col w3-container" style="width: 33%;">
+                <label class="w3-text-blue">Email</label>
+                @Html.TextBoxFor(model => model.Email, new { @class = "w3-input w3-border", placeholder = "Email", id = "Email", type = "text", @readonly = "readonly" })
+            </div>
+
+            <div class="w3-col w3-container" style="width: 33%;">
+                <label class="w3-text-blue">Cel.</label>
+                @Html.TextBoxFor(model => model.Celular, new { @class = "w3-input w3-border", placeholder = "Celular", id = "Celular", type = "text", @readonly = "readonly" })
+            </div>
+
+        </div>
+
+        <hr />
+
+        <div class="w3-panel w3-wide bg-zul w3-text-white w3-content w3-margin-left w3-margin-right w3-center w3-padding-24">
+            Empresa
+        </div>
+
+        <div class="w3-row">
+            <div class="w3-col w3-container" style="width: 50%;">
+                <label class="w3-text-blue">Razon Social</label>
+                @Html.TextBoxFor(model => model.Nombre_Empresa, new { @class = "w3-input w3-border", placeholder = "Nombre_Empresa", id = "Nombre_Empresa", @readonly = "readonly" })
+            </div>
+            <div class="w3-col w3-container" style="width: 50%;">
+                <label class="w3-text-blue">Cuit</label>
+                @Html.TextBoxFor(model => model.Cuit_Empresa, new { @class = "w3-input w3-border", placeholder = "Cuit_Empresa", id = "Cuit_Empresa", @readonly = "readonly" })
+            </div>
+        </div>
+
+        <br />
+
+        <div class="w3-row">
+            <div class="w3-col w3-container" style="width: 33%;">
+                <label class="w3-text-blue">Calle</label>
+                @Html.TextBoxFor(model => model.Calle_Empresa, new { @class = "w3-input w3-border", placeholder = "Calle_Empresa", id = "Calle_Empresa", type = "text", @readonly = "readonly" })
+            </div>
+            <div class="w3-col w3-container" style="width: 33%;">
+                <label class="w3-text-blue">Numero</label>
+                @Html.TextBoxFor(model => model.Numero_Empresa, new { @class = "w3-input w3-border", placeholder = "Numero_Empresa", id = "Numero_Empresa", type = "text", @readonly = "readonly" })
+            </div>
+            <div class="w3-col w3-container" style="width: 33%;">
+                <label class="w3-text-blue">Localidad</label>
+                @Html.TextBoxFor(model => model.Localidad_Empresa, new { @class = "w3-input w3-border", placeholder = "Localidad_Empresa", id = "Localidad_Empresa", type = "text", @readonly = "readonly" })
+            </div>
+        </div>
+
+        <hr />
+
+        @if (ViewBag.familiar != null)
+        {
+            <div class="w3-panel w3-wide bg-zul w3-text-white w3-content w3-margin-left w3-margin-right w3-center w3-padding-24">
+                Familiares
+            </div>
+
+            <div class="w3-container">
+                <div class="w3-responsive">
+                    <table class="w3-table-all EmpleadosCargados" id="EmpleadosCargados">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center;">Parentesco</th>
+                                <th style="text-align: center;">Apellido y Nombre</th>
+                                <th style="text-align: center;">Cert. Estudios</th>
+                                <th style="text-align: center;">N° Documento</th>
+                                <th style="text-align: center;">Fecha Nac.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var items in ViewBag.familiar)
+                            {
+                                <tr>
+                                    <td><input type="text" class="w3-inputs" value="@items.Parentesco" style="width: 150px;" /></td>
+                                    <td><input type="text" class="w3-inputs" value="@items.Apellido_Nombre" style="width: 150px;" /></td>
+                                    <td><input type="text" class="w3-inputs" value="@items.CE" /></td>
+                                    <td><input type="text" class="w3-inputs" value="@items.Num_Doc" /></td>
+                                    <td><input type="text" class="w3-inputs" value="@items.FN" /></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <hr />
+        }
+
+        <br> <br>
+
+        <div class="w3-row">
+            <div class="w3-col w3-container">
+                <p><button class="w3-btn w3-text-white bg-zul w3-hover-zul w3-right" type="button" onclick="cerrarId01()" style="padding: 1% 3% 1% 3%;">Salir</button></p>
+            </div>
+        </div>
+
+    </div>
+</div>
+

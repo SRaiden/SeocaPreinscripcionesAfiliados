@@ -67,7 +67,7 @@ namespace SeocaPreincripcionesAfiliados.Controllers
         [Route("/CerrarSesion")]
         public ActionResult CerrarSesion()
         {
-            return RedirectToAction("Home", "IniciarSesion");
+            return RedirectToAction("IniciarSesion", "Home");
         }
 
         //---------------------------------------//

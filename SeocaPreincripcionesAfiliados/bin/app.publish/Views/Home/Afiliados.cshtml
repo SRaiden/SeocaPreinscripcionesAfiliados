@@ -2,6 +2,14 @@
     ViewBag.Title = "Afiliados";
 }
 
+@{
+    if (ViewBag.login)
+    {
+        @Html.Partial("~/Views/Shared/BarraNavegacion.cshtml")
+    }
+}
+
+
 <!-- ---------------------------- Modal Empleados Start ---------------------------- -->
 <div id="id01" class="w3-modal">
     <div class="w3-modal-content">
@@ -24,7 +32,7 @@
             </div>
             <div class="w3-half wrap-input100 rs1-wrap-input100" style="margin: 0;">
                 <button onclick="document.getElementById('id01').style.display='block'" class="btnCodigo w3-right w3-margin-top enviar w3-card bg-zul w3-text-white w3-hover-green w3-hover-border-cyan" style="margin: 0 0 0 200px;" type="button" id="Codigo" name="Codigo">
-                    CODIGO
+                    CODIGO DE VALIDACION
                 </button>
             </div>
         </div>
@@ -73,29 +81,21 @@
                         <span class="label-input100">Numero de Documento</span>
                         <input type="number" id="NumDoc" name="NumDoc" class="input100" onblur="validarMomentoNumDocumento()" min="0">
                     </div>
-                    <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
-                        <span class="label-input100">Delegacion</span>
-                        @if (ViewBag.LoginDelegacion != null)
-                        {
-                            <select class="w3-select bg1" name="Delegacion" id="Delegacion">
-                                @{
-                                    if (ViewData["Delegacion"] != null)
-                                    {
-                                        IEnumerable<dynamic> Delegacion = (IEnumerable<dynamic>)ViewData["Delegacion"];
 
-                                        foreach (dynamic Loc in Delegacion)
-                                        {
-                                            <option value="@Loc.Id">@Loc.Nombre</option>
-                                        }
-                                    }
-                                }
-                            </select>
-                        }
-                        else
-                        {
+                    @if (ViewBag.Delegacion != "Sin Delegación")
+                    {
+                        <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
+                            <span class="label-input100">Delegacion</span>
                             <input type="text" id="Delegacion" name="Delegacion" class="input100" value="@ViewData["Delegacion"]" readonly>
-                        }
-                    </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div hidden>
+                            <input type="text" id="Delegacion" name="Delegacion" class="input100" value="@ViewData["Delegacion"]" readonly>
+                        </div>
+                    }
+
                     <div class="w3-third">
                         <span class="label-input100">Calificacion Profesional</span>
                         <select class="w3-select bg1" name="CalifProf" id="CalifProf">
@@ -327,11 +327,11 @@
                         <input type="number" id="CUITEmpresaAfiliadoEmpresa" name="CUITEmpresaAfiliadoEmpresa" class="input100" onblur="validarMomentoCuitEmpresa()">
                     </div>
                     <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
-                        <span class="label-input100">Calle</span>
+                        <span class="label-input100">Calle Real</span>
                         <input type="text" id="CalleAfiliadoEmpresa" name="CalleAfiliadoEmpresa" class="input100" onblur="validarMomentoCalleAfiliado()">
                     </div>
                     <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
-                        <span class="label-input100">Numero</span>
+                        <span class="label-input100">Numero de Calle Real</span>
                         <input type="number" id="NumeroAfiliadoEmpresa" name="NumeroAfiliadoEmpresa" class="input100" onblur="validarMomentoNumeroAfiliado()" min="0">
                     </div>
                 </div>
@@ -347,7 +347,7 @@
                         <input type="text" id="DtoAfiliadoEmpresa" name="DtoAfiliadoEmpresa" class="input100">
                     </div>
                     <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate">
-                        <span class="label-input100">CP</span>
+                        <span class="label-input100">CP Real</span>
                         <input type="number" id="CPAfiliadoEmpresa" name="CPAfiliadoEmpresa" class="input100" onblur="validarMomentoCPAfiliado()" min="0">
                     </div>
                 </div>
@@ -356,7 +356,7 @@
                     <!-- -------------------- Apellido / Docimilio / Documento -------------------- -->
 
                     <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
-                        <span class="label-input100">Localidad</span>
+                        <span class="label-input100">Localidad Real</span>
                         <select class="w3-select bg1" name="LocalidadAfiliadoEmpresa" id="LocalidadAfiliadoEmpresa">
                             <option value="0">< Localidad ></option>
                             @{
@@ -505,13 +505,26 @@
             <input type="text" id="matrizFamiliares" name="matrizFamiliares" hidden />
 
             <div class="w3-row">
-                <div class="wrap-input100 rs1-wrap-input100">
-                    <button class="w3-right w3-margin-top enviar w3-card bg-zul w3-text-white w3-hover-green w3-hover-border-cyan" style="margin: 0 0 0 200px;" type="submit" id="enviarDatos" name="enviarDatos" onclick="return enviar()">
+                <div class="w3-content">
+                    <button class="w3-margin-top enviars w3-card bg-green w3-text-white w3-hover-green w3-hover-border-cyan" type="submit" id="enviarDatos" name="enviarDatos" onclick="return enviar()">
                         ENVIAR
                     </button>
                 </div>
             </div>
         }
+
+        <br />
+        <br />
+        <div class="w3-row">
+            <div class="w3-half wrap-input100 rs1-wrap-input100" style="margin: 0;">
+
+            </div>
+            <div class="w3-half wrap-input100 rs1-wrap-input100" style="margin: 0;">
+                <button onclick="document.getElementById('id01').style.display='block'" class="btnCodigo w3-right w3-margin-top enviar w3-card bg-zul w3-text-white w3-hover-green w3-hover-border-cyan" style="margin: 0 0 0 200px;" type="button" id="Codigo" name="Codigo">
+                    CODIGO DE VALIDACION
+                </button>
+            </div>
+        </div>
 
     </div>
 </div>
