@@ -13,12 +13,26 @@
 }
 
 .wrap-100 {
-    width: 920px;
+    /*width: 920px;*/
     background: #fff;
     border-radius: 10px;
     overflow: hidden;
     padding: 62px 55px 90px;
     background: #e6e6e6;
+}
+
+
+.title-15-form {
+    font-size: 15px;
+    text-align: center;
+    width: 100%;
+    text-decoration: underline;
+}
+
+.title-10-form {
+    font-size: 15px;
+    text-align: center;
+    width: 100%;
 }
 
 

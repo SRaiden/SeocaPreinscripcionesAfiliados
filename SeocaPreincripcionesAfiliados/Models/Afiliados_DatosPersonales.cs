@@ -42,8 +42,7 @@ namespace SeocaPreincripcionesAfiliados.Models
         public byte[] FotoReciboSueldo { get; set; }
         public byte[] FotoPerfil { get; set; }
         public Nullable<bool> Art100 { get; set; }
-        public Nullable<bool> Turismo { get; set; }
-        public Nullable<bool> Sepelio { get; set; }
+        public Nullable<bool> CuotaAfiliado { get; set; }
         public string CodigoTemporal { get; set; }
         public Nullable<bool> Confirmado { get; set; }
         public string Estado { get; set; }

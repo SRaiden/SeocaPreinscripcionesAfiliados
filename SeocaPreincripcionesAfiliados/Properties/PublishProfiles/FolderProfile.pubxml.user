@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\Nata\OneDrive\Documentos\GitHub\Seoca\SeocaPreinscripcionesAfiliados\SeocaPreincripcionesAfiliados\bin\app.publish\</_PublishTargetUrl>
-    <History>True|2023-05-24T14:02:36.5045285Z;True|2023-05-24T10:57:16.4290213-03:00;True|2023-05-12T11:59:12.8828289-03:00;True|2023-05-11T10:03:16.2805343-03:00;True|2023-05-11T09:53:16.2713061-03:00;True|2023-05-10T14:52:55.0075890-03:00;True|2023-05-10T12:10:37.5123075-03:00;True|2023-05-10T11:29:33.9345014-03:00;True|2023-05-10T11:04:10.9676374-03:00;True|2022-11-28T13:38:01.0396311-03:00;True|2022-11-28T13:34:15.6285252-03:00;True|2022-11-11T09:53:45.6844031-03:00;True|2022-11-07T13:33:23.5707933-03:00;True|2022-11-07T12:14:55.1515854-03:00;False|2022-11-07T12:10:46.3471553-03:00;True|2022-11-07T11:26:12.5478268-03:00;True|2022-11-07T10:52:26.6634845-03:00;True|2022-11-04T14:57:40.6868738-03:00;True|2022-10-27T14:54:47.7188763-03:00;</History>
+    <History>True|2023-06-14T16:23:28.1450462Z;True|2023-06-13T11:56:38.3938152-03:00;True|2023-06-09T13:21:33.6253448-03:00;True|2023-06-09T12:51:41.9379755-03:00;True|2023-06-09T11:00:04.6624832-03:00;True|2023-05-24T14:41:58.9456275-03:00;True|2023-05-24T11:02:36.5045285-03:00;True|2023-05-24T10:57:16.4290213-03:00;True|2023-05-12T11:59:12.8828289-03:00;True|2023-05-11T10:03:16.2805343-03:00;True|2023-05-11T09:53:16.2713061-03:00;True|2023-05-10T14:52:55.0075890-03:00;True|2023-05-10T12:10:37.5123075-03:00;True|2023-05-10T11:29:33.9345014-03:00;True|2023-05-10T11:04:10.9676374-03:00;True|2022-11-28T13:38:01.0396311-03:00;True|2022-11-28T13:34:15.6285252-03:00;True|2022-11-11T09:53:45.6844031-03:00;True|2022-11-07T13:33:23.5707933-03:00;True|2022-11-07T12:14:55.1515854-03:00;False|2022-11-07T12:10:46.3471553-03:00;True|2022-11-07T11:26:12.5478268-03:00;True|2022-11-07T10:52:26.6634845-03:00;True|2022-11-04T14:57:40.6868738-03:00;True|2022-10-27T14:54:47.7188763-03:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -14,6 +14,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="bin/Antlr3.Runtime.pdb">
       <publishTime>09/10/2013 16:29:20</publishTime>
+    </File>
+    <File Include="bin/BouncyCastle.Cryptography.dll">
+      <publishTime>02/18/2023 12:44:16</publishTime>
     </File>
     <File Include="bin/de/Microsoft.ReportViewer.Common.resources.dll">
       <publishTime>08/27/2022 18:03:58</publishTime>
@@ -165,6 +168,15 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="bin/ko/Microsoft.ReportViewer.WinForms.resources.dll">
       <publishTime>08/27/2022 18:04:02</publishTime>
     </File>
+    <File Include="bin/MailKit.dll">
+      <publishTime>04/15/2023 19:43:04</publishTime>
+    </File>
+    <File Include="bin/MailKit.dll.config">
+      <publishTime>04/15/2023 19:43:04</publishTime>
+    </File>
+    <File Include="bin/MailKit.pdb">
+      <publishTime>04/15/2023 19:43:04</publishTime>
+    </File>
     <File Include="bin/Microsoft.Build.Framework.dll">
       <publishTime>06/20/2016 14:45:20</publishTime>
     </File>
@@ -263,6 +275,15 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
       <publishTime>07/25/2012 11:48:56</publishTime>
+    </File>
+    <File Include="bin/MimeKit.dll">
+      <publishTime>04/15/2023 19:03:16</publishTime>
+    </File>
+    <File Include="bin/MimeKit.dll.config">
+      <publishTime>04/15/2023 19:03:14</publishTime>
+    </File>
+    <File Include="bin/MimeKit.pdb">
+      <publishTime>04/15/2023 19:03:16</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>04/22/2019 01:06:16</publishTime>
@@ -451,10 +472,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/27/2022 18:04:02</publishTime>
     </File>
     <File Include="bin/SeocaPreincripcionesAfiliados.dll">
-      <publishTime>05/24/2023 11:02:34</publishTime>
+      <publishTime>06/14/2023 13:23:26</publishTime>
     </File>
     <File Include="bin/SeocaPreincripcionesAfiliados.pdb">
-      <publishTime>05/24/2023 11:02:34</publishTime>
+      <publishTime>06/14/2023 13:23:26</publishTime>
     </File>
     <File Include="bin/SqlServerTypes/x64/msvcr120.dll">
       <publishTime>11/28/2022 14:27:58</publishTime>
@@ -470,6 +491,21 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="bin/stdole.dll">
       <publishTime>08/31/2022 13:12:07</publishTime>
+    </File>
+    <File Include="bin/System.Buffers.dll">
+      <publishTime>02/19/2020 10:05:18</publishTime>
+    </File>
+    <File Include="bin/System.Memory.dll">
+      <publishTime>08/05/2022 00:31:02</publishTime>
+    </File>
+    <File Include="bin/System.Numerics.Vectors.dll">
+      <publishTime>05/15/2018 13:29:44</publishTime>
+    </File>
+    <File Include="bin/System.Runtime.CompilerServices.Unsafe.dll">
+      <publishTime>10/22/2021 20:40:18</publishTime>
+    </File>
+    <File Include="bin/System.Threading.Tasks.Extensions.dll">
+      <publishTime>02/19/2020 10:05:18</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
       <publishTime>11/28/2018 13:04:24</publishTime>
@@ -567,14 +603,17 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Content/Site.css">
       <publishTime>07/18/2022 12:58:42</publishTime>
     </File>
+    <File Include="Css/bootstrap.css">
+      <publishTime>05/30/2023 14:24:02</publishTime>
+    </File>
     <File Include="Css/form.css">
       <publishTime>07/19/2022 12:45:44</publishTime>
     </File>
     <File Include="Css/IniciarSesion.css">
-      <publishTime>05/23/2023 10:58:51</publishTime>
+      <publishTime>06/09/2023 13:05:29</publishTime>
     </File>
     <File Include="Css/main.css">
-      <publishTime>11/04/2022 11:01:52</publishTime>
+      <publishTime>06/14/2023 13:00:14</publishTime>
     </File>
     <File Include="Css/Table.css">
       <publishTime>09/05/2022 14:13:46</publishTime>
@@ -613,10 +652,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/04/2023 10:44:59</publishTime>
     </File>
     <File Include="js/Afiliados.js">
-      <publishTime>05/23/2023 13:49:50</publishTime>
+      <publishTime>06/06/2023 14:50:04</publishTime>
     </File>
     <File Include="js/EnviarMatriz.js">
-      <publishTime>05/12/2023 11:52:27</publishTime>
+      <publishTime>06/14/2023 12:59:24</publishTime>
     </File>
     <File Include="js/Familiares.js">
       <publishTime>08/11/2022 10:27:06</publishTime>
@@ -628,10 +667,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/10/2023 11:51:02</publishTime>
     </File>
     <File Include="js/ValidacionesEmpresa.js">
-      <publishTime>05/10/2023 11:57:09</publishTime>
+      <publishTime>06/13/2023 14:37:19</publishTime>
     </File>
     <File Include="Models/Afiliados.edmx.diagram">
-      <publishTime>05/12/2023 11:13:53</publishTime>
+      <publishTime>06/07/2023 10:35:22</publishTime>
     </File>
     <File Include="Reportes/DataSet1.xsc">
       <publishTime>05/09/2023 12:11:49</publishTime>
@@ -694,13 +733,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/28/2022 14:27:58</publishTime>
     </File>
     <File Include="Views/Home/Afiliados.cshtml">
-      <publishTime>05/22/2023 11:20:26</publishTime>
+      <publishTime>06/14/2023 13:23:09</publishTime>
     </File>
     <File Include="Views/Home/Codigo.cshtml">
-      <publishTime>12/01/2022 09:37:34</publishTime>
+      <publishTime>06/09/2023 13:18:34</publishTime>
     </File>
     <File Include="Views/Home/GrillaAfiliados.cshtml">
-      <publishTime>05/24/2023 09:59:18</publishTime>
+      <publishTime>05/24/2023 14:36:32</publishTime>
     </File>
     <File Include="Views/Home/IniciarSesion.cshtml">
       <publishTime>05/11/2023 11:01:09</publishTime>
@@ -718,7 +757,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>07/19/2022 12:45:05</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>05/23/2023 10:50:03</publishTime>
+      <publishTime>05/30/2023 09:37:14</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>07/18/2022 12:58:42</publishTime>
@@ -727,7 +766,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>07/18/2022 12:58:42</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/24/2023 10:57:15</publishTime>
+      <publishTime>06/09/2023 12:51:40</publishTime>
     </File>
   </ItemGroup>
 </Project>

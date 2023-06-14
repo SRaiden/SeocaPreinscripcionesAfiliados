@@ -5,3 +5,4 @@
 function cerrarId01() {
     document.getElementById('id01').style.display = 'none';
 }
+

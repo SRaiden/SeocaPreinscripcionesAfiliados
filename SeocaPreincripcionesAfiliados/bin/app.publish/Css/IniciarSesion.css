@@ -21,6 +21,23 @@ a {
     text-decoration: none
 }
 
+.codigo-wraps {
+    width: 100%;
+    margin: auto;
+    max-width: 525px;
+    min-height: 670px;
+    position: relative;
+}
+
+.codigo-html {
+    width: 100%;
+    height: 50%;
+    position: absolute;
+    padding: 90px 70px 50px 70px;
+    background: rgba(40,57,101,.9);
+    border-radius: 15px;
+}
+
 .login-wrap {
     width: 100%;
     margin: auto;

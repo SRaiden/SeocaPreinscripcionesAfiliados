@@ -51,15 +51,6 @@ function validarMomentoNumeroAfiliado() {
 }
 
 
-function validarMomentoCPAfiliado() {
-    var CPAfiliadoEmpresa = document.getElementById("CPAfiliadoEmpresa").value;
-
-    if (CPAfiliadoEmpresa == 0) {
-        document.getElementById('CPAfiliadoEmpresa').placeholder = 'Debe de seleccionar el Codigo Postal (Empresa)';
-        return false;
-    }
-}
-
 function validarMomentoTelefonoAfiliado() {
     var TelefonoAfiliadoEmpresa = document.getElementById("TelefonoAfiliadoEmpresa").value;
 
@@ -83,5 +74,21 @@ function validarMomentoEmailAfiliado() {
         document.getElementById('EmailAfiliadoEmpresa').value = "";
         document.getElementById('EmailAfiliadoEmpresa').placeholder = 'Formato de Email no valido (Empresa)';
         return false;
+    }
+}
+
+function cuitpostal() {
+    var cod = document.getElementById("LocalidadAfiliadoEmpresa").value;
+    document.getElementById("CPAfiliadoEmpresa").value = cod;
+}
+
+function elegRubro() {
+    var cod = document.getElementById("RubroAfiliadoEmpresa").value;
+    if (cod == "Otro") {
+        document.getElementById("OtroRubroAfiliadoEmpresa").disabled = false;
+    }
+    else {
+        document.getElementById("OtroRubroAfiliadoEmpresa").disabled = true;
+        document.getElementById("OtroRubroAfiliadoEmpresa").value = "";
     }
 }
