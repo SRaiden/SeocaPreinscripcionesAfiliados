@@ -1,43 +1,43 @@
 ﻿
 var matrizFamiliares = new Array();
 
-function borrarCampos() {
-    document.getElementById("Apellido").value = "";
-    document.getElementById("Nombre").value = "";
-    document.getElementById("Cuil").value = "";
-    document.getElementById("TipoDoc").value = 0;
-    document.getElementById("NumDoc").value = "";
-    document.getElementById("CalifProf").value = 0;
-    document.getElementById("EstadoCivil").value = 0;
-    document.getElementById("FechaNac").value = "";
-    document.getElementById("Calle").value = "";
-    document.getElementById("NumeroCalle").value = "";
-    document.getElementById("Piso").value = "";
-    document.getElementById("Dto").value = "";
-    document.getElementById("Telefono").value = "";
-    document.getElementById("Celular").value = "";
-    document.getElementById("Email").value = "";
-    document.getElementById("Localidad").value = 0;
-    document.getElementById("Provincia").value = 0;
-    document.getElementById("SexoAfiliadoDocumento").value = 0;
-    document.getElementById("Nacionalidad").value = 0;
-    document.getElementById("chkCuota").checked = false;
-    document.getElementById("chkSeguro").checked = false;
+function changeCampos() {
+    var Apellido = document.getElementById("Apellido").value;
+    document.getElementById("Apellido").value = Apellido.toUpperCase();
 
-    document.getElementById("FechaIngresoAfiliadoEmpresa").value = "";
-    document.getElementById("NombreEmpresaAfiliadoEmpresa").value = "";
-    document.getElementById("NombreFantasiaAfiliadoEmpresa").value = "";
-    document.getElementById("CUITEmpresaAfiliadoEmpresa").value = "";
-    document.getElementById("CalleAfiliadoEmpresa").value = "";
-    document.getElementById("NumeroAfiliadoEmpresa").value = "";
-    document.getElementById("PisoAfiliadoEmpresa").value = "";
-    document.getElementById("DtoAfiliadoEmpresa").value = "";
-    document.getElementById("LocalidadAfiliadoEmpresa").value = 0;
-    document.getElementById("TelefonoAfiliadoEmpresa").value = "";
-    document.getElementById("EmailAfiliadoEmpresa").value = "";
+    var Nombre = document.getElementById("Nombre").value;
+    document.getElementById("Nombre").value = Nombre.toUpperCase();
 
+    var Email = document.getElementById("Email").value;
+    document.getElementById("Email").value = Email.toUpperCase();
+
+    var EmailConfirmacion = document.getElementById("EmailConfirmacion").value;
+    document.getElementById("EmailConfirmacion").value = EmailConfirmacion.toUpperCase();
+
+    var Calle = document.getElementById("Calle").value;
+    document.getElementById("Calle").value = Calle.toUpperCase();
+
+    var Localidad = document.getElementById("Localidad").value;
+    document.getElementById("Localidad").value = Localidad.toUpperCase();
+
+    var ApellidoNombreAfiliadoFamiliar = document.getElementById("ApellidoNombreAfiliadoFamiliar").value;
+    document.getElementById("ApellidoNombreAfiliadoFamiliar").value = ApellidoNombreAfiliadoFamiliar.toUpperCase();
+
+    var NombreEmpresaAfiliadoEmpresa = document.getElementById("NombreEmpresaAfiliadoEmpresa").value;
+    document.getElementById("NombreEmpresaAfiliadoEmpresa").value = NombreEmpresaAfiliadoEmpresa.toUpperCase();
+
+    var NombreFantasiaAfiliadoEmpresa = document.getElementById("NombreFantasiaAfiliadoEmpresa").value;
+    document.getElementById("NombreFantasiaAfiliadoEmpresa").value = NombreFantasiaAfiliadoEmpresa.toUpperCase();
+
+    var OtroRubroAfiliadoEmpresa = document.getElementById("OtroRubroAfiliadoEmpresa").value;
+    document.getElementById("OtroRubroAfiliadoEmpresa").value = OtroRubroAfiliadoEmpresa.toUpperCase();
+
+    var CalleAfiliadoEmpresa = document.getElementById("CalleAfiliadoEmpresa").value;
+    document.getElementById("CalleAfiliadoEmpresa").value = CalleAfiliadoEmpresa.toUpperCase();
+
+    var EmailAfiliadoEmpresa = document.getElementById("EmailAfiliadoEmpresa").value;
+    document.getElementById("EmailAfiliadoEmpresa").value = EmailAfiliadoEmpresa.toUpperCase();
 }
-
 
 function enviar() {
     var matrizEmpresa = new Array();
@@ -46,10 +46,8 @@ function enviar() {
     var Apellido = document.getElementById("Apellido").value;
     var Nombre = document.getElementById("Nombre").value;
     var Cuil = document.getElementById("Cuil").value;
-    //var TipoDoc = document.getElementById("TipoDoc").value;
     var NumDoc = document.getElementById("NumDoc").value;
     var Delegacion = document.getElementById("Delegacion").value;
-    //var CalifProf = document.getElementById("CalifProf").value;
     var EstadoCivil = document.getElementById("EstadoCivil").value;
     var FechaNac = document.getElementById("FechaNac").value;
     var Calle = document.getElementById("Calle").value;
@@ -64,9 +62,6 @@ function enviar() {
     var Provincia = document.getElementById("Provincia").value;
     var SexoAfiliadoDocumento = document.getElementById("SexoAfiliadoDocumento").value;
     var Nacionalidad = document.getElementById("Nacionalidad").value;
-    var chkConvenio = document.getElementById("chkConvenio").value;
-    var chkCuota = document.getElementById("chkCuota").checked;
-    //var chkSeguro = document.getElementById("chkSeguro").checked;
 
     var FechaIngresoAfiliadoEmpresa = document.getElementById("FechaIngresoAfiliadoEmpresa").value;
     var NombreEmpresaAfiliadoEmpresa = document.getElementById("NombreEmpresaAfiliadoEmpresa").value;
@@ -83,8 +78,9 @@ function enviar() {
     var EmailAfiliadoEmpresa = document.getElementById("EmailAfiliadoEmpresa").value;
 
     var fileDNIFrente = document.getElementById("fileDNIFrente").value;
-    var fileDNIDorso = document.getElementById("textDorsoDNI").value;
-    var fileReciboSueldo = document.getElementById("textReciboSueldo").value;
+    var fileDNIDorso = document.getElementById("fileDNIDorso").value;
+    var fileReciboSueldo = document.getElementById("fileReciboSueldo").value;
+    var fileNotaSolicitud = document.getElementById("fileNS").value;
 
     // Validaciones
     if (!isNaN(Apellido)) {
@@ -122,21 +118,20 @@ function enviar() {
         alert("No se puede ingresar valores negativos en Numero de Documento");
         return false;
     }
-
-    //if (CalifProf == 0) {
-    //    alert("Debe de seleccionar una Calificacion Profesional");
-    //    return false;
-    //}
     if (EstadoCivil == 0) {
         alert("Debe de seleccionar un Estado Civil");
+        return false;
+    }
+    if (SexoAfiliadoDocumento == 0) {
+        alert("Debe de seleccionar un Genero");
         return false;
     }
     if (FechaNac == "") {
         alert("Debe de ingresar la Fecha de Nacimiento");
         return false;
     }
-    if (Localidad == 0) {
-        alert("Debe de ingresar la Localidad");
+    if (Localidad == "") {
+        alert("Debe de ingresar la Localidad del afiliado");
         return false;
     }
     if (Provincia == 0) {
@@ -187,6 +182,10 @@ function enviar() {
         alert("Debe de ingresar el archivo de Recibo Sueldo");
         return false;
     }
+    if (fileNotaSolicitud == "") {
+        alert("Debe de ingresar el archivo de Nota de Solicitud");
+        return false;
+    }
 
     //-------------------------------------------------------------------//
 
@@ -221,6 +220,13 @@ function enviar() {
         alert("Debe de ingresar la Calle de la Empresa (Empresa)");
         return false;
     }
+
+    if (RubroAfiliadoEmpresa == "0") {
+        alert("Debe de Elegir una Actividad");
+        return false;
+    }
+
+
     if (RubroAfiliadoEmpresa == "Otro") {
         if (OtroRubroAfiliadoEmpresa == "") {
             alert("Debe de especificar el nombre del Rubro si eligio Otro");
@@ -258,10 +264,8 @@ function enviar() {
         Apellido: Apellido,
         Nombre: Nombre,
         Cuil: Cuil,
-        //TipoDoc: TipoDoc,
         NumDoc: NumDoc,
         Delegacion: Delegacion,
-        //CalifProf: CalifProf,
         EstadoCivil: EstadoCivil,
         FechaNac: FechaNac,
         Calle: Calle,
@@ -273,9 +277,6 @@ function enviar() {
         Provincia: Provincia,
         SexoAfiliadoDocumento: SexoAfiliadoDocumento,
         Nacionalidad: Nacionalidad,
-        chkConvenio: chkConvenio,
-        chkCuota: chkCuota,
-        //chkSeguro: chkSeguro,
         Email: Email,
         Celular: Celular
     });
@@ -326,18 +327,17 @@ function enviar() {
     //});
 }
 
-
-
 // -------------------------------------------------------------- //
 
 function insertarFamiliar() {
     var Parentesco = document.getElementById("Parentesco").value; // select
     var ApellidoNombreAfiliadoFamiliar = document.getElementById("ApellidoNombreAfiliadoFamiliar").value;
-    //var CertEstudiosAfiliadoFamiliar = document.getElementById("CertEstudiosAfiliadoFamiliar").value;
-    //var TipoDocAfiliadoFamiliar = document.getElementById("TipoDocAfiliadoFamiliar").value; // select
     var NumDocAfiliadoFamiliar = document.getElementById("NumDocAfiliadoFamiliar").value;
     var SexoAfiliadoFamiliar = document.getElementById("SexoAfiliadoFamiliar").value; // select
     var FechaNacAfiliadoFamiliar = document.getElementById("FechaNacAfiliadoFamiliar").value;
+
+    var e = document.getElementById("Parentesco");
+    var text = e.options[e.selectedIndex].text;
 
     //Validaciones
     if (Parentesco == 0) {
@@ -348,14 +348,14 @@ function insertarFamiliar() {
         alert("Debe de ingresar el Nombre y Apellido del familiar");
         return false;
     }
+    if (SexoAfiliadoFamiliar == 0) {
+        alert("Debe de ingresar un Genero de Familiar");
+        return false;
+    }
     if (!isNaN(ApellidoNombreAfiliadoFamiliar)) {
         alert("No puede ingresar numeros en Nombre y Apellido (Familiar)");
         return false;
     }
-    //if (TipoDocAfiliadoFamiliar == 0) {
-    //    alert("Debe de ingresar el Tipo de Documento");
-    //    return false;
-    //}
     if (NumDocAfiliadoFamiliar == "") {
         alert("Debe de ingresar el Numero de Documento");
         return false;
@@ -380,7 +380,7 @@ function insertarFamiliar() {
 
     //x.innerHTML = "&nbsp;";
     table.rows[0].insertCell(0);
-    table.rows[0].cells[0].innerHTML = Parentesco;
+    table.rows[0].cells[0].innerHTML = text;
     table.rows[0].insertCell(1);
     table.rows[0].cells[1].innerHTML = ApellidoNombreAfiliadoFamiliar;
     table.rows[0].insertCell(2);
@@ -390,8 +390,6 @@ function insertarFamiliar() {
 
     document.getElementById("Parentesco").value = "0"; // select
     document.getElementById("ApellidoNombreAfiliadoFamiliar").value = "";
-    //document.getElementById("CertEstudiosAfiliadoFamiliar").value = "";
-    //document.getElementById("TipoDocAfiliadoFamiliar").value = "0"; // select
     document.getElementById("NumDocAfiliadoFamiliar").value = "";
     document.getElementById("SexoAfiliadoFamiliar").value = "0"; // select
     document.getElementById("FechaNacAfiliadoFamiliar").value = "";
@@ -399,8 +397,6 @@ function insertarFamiliar() {
     matrizFamiliares.push({
         Parentesco: Parentesco,
         ApellidoNombreAfiliadoFamiliar: ApellidoNombreAfiliadoFamiliar,
-        //CertEstudiosAfiliadoFamiliar: CertEstudiosAfiliadoFamiliar,
-        //TipoDocAfiliadoFamiliar: TipoDocAfiliadoFamiliar,
         NumDocAfiliadoFamiliar: NumDocAfiliadoFamiliar,
         SexoAfiliadoFamiliar: SexoAfiliadoFamiliar,
         FechaNacAfiliadoFamiliar: FechaNacAfiliadoFamiliar
@@ -440,27 +436,119 @@ function fileFotoPerfil() {
     document.getElementById("textFotoPerfil").value = fileList[0].name;
 }
 
+function fileNotaSolicitud() {
+    const fileList = event.target.files;
+    document.getElementById("textNotaSolicitud").value = fileList[0].name;
+}
+
 function valiCuil() {
     var cuit = document.getElementById("Cuil").value;
-    if (cuit.length == 11) {
-        var cadena1 = cuit.slice(0, 2);
-        var cadena2 = cuit.slice(2, 10);
-        var cadena3 = cuit.slice(10, 11);
+    var cadena1 = "";
+    var cadena2 = "";
+    var cadena3 = "";
 
-        var cuit = cadena1 + "-" + cadena2 + "-" + cadena3;
-        document.getElementById("Cuil").value = cuit;
+    if (cuit != "") {
+        if (cuit.length == 11) {
+            cadena1 = cuit.slice(0, 2);
+            cadena2 = cuit.slice(2, 10);
+            cadena3 = cuit.slice(10, 11);
+        } else if (cuit.length == 13) {
+            cadena1 = cuit.slice(0, 2);
+            cadena2 = cuit.slice(3, 11);
+            cadena3 = cuit.slice(12, 13);
+        } else {
+            document.getElementById("Cuil").value = "";
+            alert("Este cuit es invalido");
+        }
+
+        //----------------------------------------------------//
+        var rv = false;
+        var verificador;
+        var resultado = 0;
+        var cuit_nro = cadena1 + cadena2 + cadena3;
+        cuitnro = parseInt(cuit_nro);
+        var codes = "6789456789";
+
+        verificador = cadena3;
+        var x = 0;
+        while (x < 10) {
+            var digitovalidador = codes.slice(x, x + 1); // recorrer digito x digito de codes 
+            var digito = cuit_nro.slice(x, x + 1); // recorrer digito x digito de CUIT INGRESADO
+
+            digitovalidador = parseInt(digitovalidador);
+            digito = parseInt(digito);
+
+            var digitoValidacion = digitovalidador * digito;
+            resultado += digitoValidacion;
+            x = x + 1;
+        }
+        resultado = resultado % 11;
+
+        if (resultado == verificador) {
+            var cuit = cadena1 + "-" + cadena2 + "-" + cadena3;
+            document.getElementById("Cuil").value = cuit;
+            document.getElementById("NumDoc").value = cadena2;
+        } else {
+            document.getElementById("Cuil").value = "";
+            alert("Este cuit es invalido");
+        }
+        
+    } else {
+        document.getElementById("NumDoc").value = "";
     }
 }
 
 function valiCuit() {
     var cuit = document.getElementById("CUITEmpresaAfiliadoEmpresa").value;
-    if (cuit.length == 11) {
-        var cadena1 = cuit.slice(0, 2);
-        var cadena2 = cuit.slice(2, 10);
-        var cadena3 = cuit.slice(10, 11);
+    var cadena1 = "";
+    var cadena2 = "";
+    var cadena3 = "";
 
-        var cuit = cadena1 + "-" + cadena2 + "-" + cadena3;
-        document.getElementById("CUITEmpresaAfiliadoEmpresa").value = cuit;
+
+    if (cuit != "") {
+        if (cuit.length == 11) {
+            cadena1 = cuit.slice(0, 2);
+            cadena2 = cuit.slice(2, 10);
+            cadena3 = cuit.slice(10, 11);
+        } else if (cuit.length == 13) {
+            cadena1 = cuit.slice(0, 2);
+            cadena2 = cuit.slice(3, 11);
+            cadena3 = cuit.slice(12, 13);
+        } else {
+            document.getElementById("CUITEmpresaAfiliadoEmpresa").value = "";
+            alert("Este cuit es invalido");
+        }
+
+        //----------------------------------------------------//
+        var rv = false;
+        var verificador;
+        var resultado = 0;
+        var cuit_nro = cadena1 + cadena2 + cadena3;
+        cuitnro = parseInt(cuit_nro);
+        var codes = "6789456789";
+
+        verificador = cadena3;
+        var x = 0;
+        while (x < 10) {
+            var digitovalidador = codes.slice(x, x + 1); // recorrer digito x digito de codes 
+            var digito = cuit_nro.slice(x, x + 1); // recorrer digito x digito de CUIT INGRESADO
+
+            digitovalidador = parseInt(digitovalidador);
+            digito = parseInt(digito);
+
+            var digitoValidacion = digitovalidador * digito;
+            resultado += digitoValidacion;
+            x = x + 1;
+        }
+        resultado = resultado % 11;
+        if (resultado == verificador) {
+            var cuit = cadena1 + "-" + cadena2 + "-" + cadena3;
+            document.getElementById("CUITEmpresaAfiliadoEmpresa").value = cuit;
+
+        } else {
+            document.getElementById("CUITEmpresaAfiliadoEmpresa").value = "";
+            alert("Este cuit es invalido");
+        }
     }
 }
 

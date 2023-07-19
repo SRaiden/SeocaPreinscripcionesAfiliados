@@ -29,7 +29,7 @@ namespace SeocaPreincripcionesAfiliados.Models
         public string Piso { get; set; }
         public string Dto { get; set; }
         public Nullable<int> Telefono { get; set; }
-        public Nullable<int> Localidad { get; set; }
+        public string Localidad { get; set; }
         public string Provincia { get; set; }
         public Nullable<int> Sexo { get; set; }
         public Nullable<int> Nacionalidad { get; set; }
@@ -41,6 +41,7 @@ namespace SeocaPreincripcionesAfiliados.Models
         public byte[] FotoDorsoDni { get; set; }
         public byte[] FotoReciboSueldo { get; set; }
         public byte[] FotoPerfil { get; set; }
+        public byte[] FotoNotaSolicitud { get; set; }
         public Nullable<bool> Art100 { get; set; }
         public Nullable<bool> CuotaAfiliado { get; set; }
         public string CodigoTemporal { get; set; }
@@ -52,5 +53,7 @@ namespace SeocaPreincripcionesAfiliados.Models
         public string extensionDorso { get; set; }
         public string extensionSueldo { get; set; }
         public string extensionPerfil { get; set; }
+        public string extensionNotaSolicitud { get; set; }
+        public Nullable<bool> ActualizacionSecretaria { get; set; }
     }
 }

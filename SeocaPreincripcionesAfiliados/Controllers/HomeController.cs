@@ -41,24 +41,30 @@ namespace SeocaPreincripcionesAfiliados.Controllers
             {
                 try
                 {
+                    var soyadmin = db.General_Delegacion_Usuarios.FirstOrDefault(d => d.Usuario == user && d.Contraseña == pass);
 
-                    var soyadmin = db.General_Delegacion_Usuarios.Where(d => d.Usuario == user).Where(d => d.Contraseña == pass).First();
-                    Session["SessionUser"] = soyadmin.Id.ToString();
-
-                    if (soyadmin.Delegacion == 0)
+                    if (soyadmin != null)
                     {
-                        return RedirectToAction("ReporteAfiliados", "Home");
+                        Session["SessionUser"] = soyadmin.Id.ToString();
+
+                        if (soyadmin.Delegacion == 0)
+                        {
+                            return RedirectToAction("ReporteAfiliados", "Home");
+                        }
+                        else
+                        {
+                            return RedirectToAction("Afiliados", "Home");
+                        }
                     }
                     else
                     {
-                        return RedirectToAction("Afiliados", "Home");
+                        ViewBag.Error = "Datos Invalidos";
+                        return View();
                     }
-                    
-                   
                 }
                 catch (Exception ex)
                 {
-                    ViewBag.Error = "Datos Invalidos";
+                    ViewBag.Error = "Error de conexión";
                     return View();
                 }
             }
@@ -77,71 +83,80 @@ namespace SeocaPreincripcionesAfiliados.Controllers
         {
             using (Models.geosoftw_seocapreinscripcionesEntities db = new Models.geosoftw_seocapreinscripcionesEntities())
             {
-                if (codigo == "Codigo valido")
-                {
-                    ViewBag.mensaje = "Se ha verificado su preinscripcion.";
-                    codigo = "";
-                }
-                else if (codigo == "Codigo invalido")
-                {
-                    ViewBag.mensaje = "Codigo invalido o preinscripcion no encontrada.";
-                    codigo = "";
-                }
-
-                List<General_Localidades> Localidades = db.General_Localidades.ToList<General_Localidades>();
-                ViewData["Localidades"] = Localidades;
-
-                List<General_Documentos> TipoDoc = db.General_Documentos.Where(d => d.Id != 0).ToList<General_Documentos>();
-                ViewData["TipoDoc"] = TipoDoc;
-
                 try
                 {
-                    var session = Session["SessionUser"].ToString();
-                    int ids = Int32.Parse(session.ToString());
+                    if (codigo == "Codigo valido")
+                    {
+                        ViewBag.mensaje = "Se ha verificado su preinscripción.";
+                        codigo = "";
+                    }
+                    else if (codigo == "Codigo invalido")
+                    {
+                        ViewBag.mensaje = "Código inválido o preinscripción no encontrada.";
+                        codigo = "";
+                    }
 
-                    var dele = db.General_Delegacion_Usuarios.Where(d => d.Id == ids).First().Delegacion;
+                    var session = Session["SessionUser"]?.ToString();
+                    if (!string.IsNullOrEmpty(session))
+                    {
+                        int ids;
+                        if (int.TryParse(session, out ids))
+                        {
+                            var dele = db.General_Delegacion_Usuarios.FirstOrDefault(d => d.Id == ids)?.Delegacion;
+                            var Delegacion = db.General_Delegacion.FirstOrDefault(d => d.Id == dele)?.Nombre;
+                            ViewData["Delegacion"] = Delegacion;
+                            ViewBag.login = true;
+                        }
+                    }
+                    else
+                    {
+                        var Delegacion = db.General_Delegacion.FirstOrDefault(d => d.Id == 0)?.Nombre;
+                        ViewData["Delegacion"] = Delegacion;
+                        ViewBag.LoginDelegacion = true;
+                        ViewBag.login = false;
+                    }
 
-                    var Delegacion = db.General_Delegacion.Where(d => d.Id == dele).First().Nombre;
-                    ViewData["Delegacion"] = Delegacion;
-                    ViewBag.login = true;
+                    List<General_Localidades> Localidades = db.General_Localidades.OrderBy(d => d.Nombre_Localidad).ToList();
+                    ViewData["Localidades"] = Localidades;
+
+                    List<General_Documentos> TipoDoc = db.General_Documentos.Where(d => d.Id != 0).OrderBy(d => d.Nombre).ToList();
+                    ViewData["TipoDoc"] = TipoDoc;
+
+                    List<Empresas_Actividades> actR = db.Empresas_Actividades.Where(d => d.Id != 0).OrderBy(d => d.Descripcion).ToList();
+                    ViewData["Rubro"] = actR;
+
+                    List<General_Calificacion> CalifProf = db.General_Calificacion.Where(d => d.Id != 0).OrderBy(d => d.Nombre).ToList();
+                    ViewData["CalifProf"] = CalifProf;
+
+                    List<General_Estado_Civil> EstadoCivil = db.General_Estado_Civil.Where(d => d.Id != 0).OrderBy(d => d.Nombre).ToList();
+                    ViewData["EstadoCivil"] = EstadoCivil;
+
+                    List<General_Provincias> Provincia = db.General_Provincias.Where(d => d.Id != 0).OrderBy(d => d.Nombre).ToList();
+                    ViewData["Provincia"] = Provincia;
+
+                    List<General_Parentesco> Parentesco = db.General_Parentesco.Where(d => d.Id != 0).OrderBy(d => d.Nombre).ToList();
+                    ViewData["Parentesco"] = Parentesco;
+
+                    List<General_Sexo> Sexo = db.General_Sexo.OrderBy(d => d.Descripcion).ToList();
+                    ViewData["Sexo"] = Sexo;
+
+                    List<General_Nacionalidades> Nacionalidad = db.General_Nacionalidades.OrderBy(d => d.Descripcion).ToList();
+                    ViewData["Nacionalidad"] = Nacionalidad;
+
+                    ViewBag.diaHoy = DateTime.Now.ToString("yyyy-MM-dd");
+
+                    return View();
                 }
                 catch (Exception ex)
                 {
-                    var Delegacion = db.General_Delegacion.Where(d=> d.Id == 0).First().Nombre;
-                    ViewData["Delegacion"] = Delegacion;
-                    ViewBag.LoginDelegacion = true;
-                    ViewBag.login = false;
+                    ViewBag.Error = "Error de conexión";
+                    return View();
                 }
-
-                List<General_ActividadRubro> actR = db.General_ActividadRubro.Where(d => d.Id != 0).ToList<General_ActividadRubro>();
-                ViewData["Rubro"] = actR;
-
-                List<General_Calificacion> CalifProf = db.General_Calificacion.Where(d => d.Id != 0).ToList<General_Calificacion>();
-                ViewData["CalifProf"] = CalifProf;
-
-                List<General_Estado_Civil> EstadoCivil = db.General_Estado_Civil.Where(d => d.Id != 0).ToList<General_Estado_Civil>();
-                ViewData["EstadoCivil"] = EstadoCivil;
-
-                List<General_Provincias> Provincia = db.General_Provincias.Where(d => d.Id != 0).ToList<General_Provincias>();
-                ViewData["Provincia"] = Provincia;
-
-                List<General_Parentesco> Parentesco = db.General_Parentesco.Where(d => d.Id != 0).ToList<General_Parentesco>();
-                ViewData["Parentesco"] = Parentesco;
-
-                List<General_Sexo> Sexo = db.General_Sexo.ToList<General_Sexo>();
-                ViewData["Sexo"] = Sexo;
-
-                List<General_Nacionalidades> Nacionalidad = db.General_Nacionalidades.ToList<General_Nacionalidades>();
-                ViewData["Nacionalidad"] = Nacionalidad;
-
-                ViewBag.diaHoy = DateTime.Now.ToString("yyyy-MM-dd");
-
             }
-            return View();
         }
 
         [HttpPost]
-        public ActionResult Afiliados(string matrizDatosAfiliado, string matrizEmpresa = null, string matrizFamiliares = null, HttpPostedFileBase fileDNIFrente = null, HttpPostedFileBase fileDNIDorso = null, HttpPostedFileBase fileReciboSueldo = null, HttpPostedFileBase filePerfil = null)
+        public ActionResult Afiliados(string matrizDatosAfiliado, string matrizEmpresa = null, string matrizFamiliares = null, HttpPostedFileBase fileDNIFrente = null, HttpPostedFileBase fileDNIDorso = null, HttpPostedFileBase fileReciboSueldo = null, HttpPostedFileBase filePerfil = null, HttpPostedFileBase fileNS = null)
         {
             using (Models.geosoftw_seocapreinscripcionesEntities db = new Models.geosoftw_seocapreinscripcionesEntities())
             {
@@ -159,127 +174,149 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                 try
                 {
                     JArray jsonPreservar = JArray.Parse(matrizDatosAfiliado);
-                    string Apellido = "", Nombre = "", TipoDoc = "", Celular = "", NumDoc = "", Delegacion = "", CalifProf = "", EstadoCivil = "", FechaNac = "", Calle = "", NumeroCalle = "", Piso = "", Dto = "", Telefono = "", Localidad = "", Provincia = "", SexoAfiliadoDocumento = "", Nacionalidad = "", chkConvenio = "", chkCuota = "", chkSeguro = "";
+
+                    Dictionary<string, string> propiedades = new Dictionary<string, string>()
+                    {
+                        { "Apellido", "" },
+                        { "Nombre", "" },
+                        { "Cuil", "" },
+                        { "NumDoc", "" },
+                        { "Delegacion", "" },
+                        { "EstadoCivil", "" },
+                        { "FechaNac", "" },
+                        { "Calle", "" },
+                        { "NumeroCalle", "" },
+                        { "Piso", "" },
+                        { "Dto", "" },
+                        { "Telefono", "" },
+                        { "Localidad", "" },
+                        { "Provincia", "" },
+                        { "Celular", "" },
+                        { "SexoAfiliadoDocumento", "" },
+                        { "Nacionalidad", "" },
+                        { "Email", "" }
+                    };
+
                     foreach (JObject jsonOperaciones in jsonPreservar.Children<JObject>())
                     {
                         foreach (JProperty jsonOPropiedades in jsonOperaciones.Properties())
                         {
                             string propiedad = jsonOPropiedades.Name;
-                            if (propiedad.Equals("Apellido")) Apellido = jsonOPropiedades.Value.ToString();
-                            if (propiedad.Equals("Nombre")) Nombre = jsonOPropiedades.Value.ToString();
-                            if (propiedad.Equals("Cuil")) Cuil = jsonOPropiedades.Value.ToString();
-                            //if (propiedad.Equals("TipoDoc")) TipoDoc = jsonOPropiedades.Value.ToString();
-                            if (propiedad.Equals("NumDoc")) NumDoc = jsonOPropiedades.Value.ToString();
-                            if (propiedad.Equals("Delegacion")) Delegacion = jsonOPropiedades.Value.ToString();
-                            //if (propiedad.Equals("CalifProf")) CalifProf = jsonOPropiedades.Value.ToString();
-                            if (propiedad.Equals("EstadoCivil")) EstadoCivil = jsonOPropiedades.Value.ToString();
-                            if (propiedad.Equals("FechaNac")) FechaNac = jsonOPropiedades.Value.ToString();
-                            if (propiedad.Equals("Calle")) Calle = jsonOPropiedades.Value.ToString();
-                            if (propiedad.Equals("NumeroCalle")) NumeroCalle = jsonOPropiedades.Value.ToString();
-                            if (propiedad.Equals("Piso")) Piso = jsonOPropiedades.Value.ToString();
-                            if (propiedad.Equals("Dto")) Dto = jsonOPropiedades.Value.ToString();
-                            if (propiedad.Equals("Telefono")) Telefono = jsonOPropiedades.Value.ToString();
-
-                            if (propiedad.Equals("Localidad")) Localidad = jsonOPropiedades.Value.ToString();
-                            if (propiedad.Equals("Provincia")) Provincia = jsonOPropiedades.Value.ToString();
-
-                            if (propiedad.Equals("SexoAfiliadoDocumento")) SexoAfiliadoDocumento = jsonOPropiedades.Value.ToString();
-                            if (propiedad.Equals("Nacionalidad")) Nacionalidad = jsonOPropiedades.Value.ToString();
-                            if (propiedad.Equals("chkConvenio")) chkConvenio = jsonOPropiedades.Value.ToString();
-                            if (propiedad.Equals("chkCuota")) chkCuota = jsonOPropiedades.Value.ToString();
-                            if (propiedad.Equals("chkSeguro")) chkSeguro = jsonOPropiedades.Value.ToString();
-
-                            if (propiedad.Equals("Email")) Email = jsonOPropiedades.Value.ToString();
-                            if (propiedad.Equals("Celular")) Celular = jsonOPropiedades.Value.ToString();
+                            if (propiedades.ContainsKey(propiedad))
+                            {
+                                propiedades[propiedad] = jsonOPropiedades.Value.ToString();
+                            }
                         }
                     }
+
+                    string Apellido = propiedades["Apellido"];
+                    string Nombre = propiedades["Nombre"];
+                    Cuil = propiedades["Cuil"];
+                    string NumDoc = propiedades["NumDoc"];
+                    string Delegacion = propiedades["Delegacion"];
+                    string EstadoCivil = propiedades["EstadoCivil"];
+                    string FechaNac = propiedades["FechaNac"];
+                    string Calle = propiedades["Calle"];
+                    string NumeroCalle = propiedades["NumeroCalle"];
+                    string Piso = propiedades["Piso"];
+                    string Dto = propiedades["Dto"];
+                    string Telefono = propiedades["Telefono"];
+                    string Localidad = propiedades["Localidad"];
+                    string Provincia = propiedades["Provincia"];
+                    string SexoAfiliadoDocumento = propiedades["SexoAfiliadoDocumento"];
+                    string Nacionalidad = propiedades["Nacionalidad"];
+                    string Celular = propiedades["Celular"];
+                    Email = propiedades["Email"];
 
                     // Validar si se preinscribio anteriormente
 
                     Cuil = Cuil.Replace("-", "");
 
-                    try
+                    var Inscripcion = db.Afiliados_DatosPersonales.FirstOrDefault(d => d.CUIL == Cuil);
+                    if (Inscripcion != null)
                     {
-                        var Inscripcion = db.Afiliados_DatosPersonales.Where(d => d.CUIL == Cuil).First();
-                        return Json(new { Error = true, responseText = "Ya hay un afiliado preinscripto con mismo CUIL anteriormente." }, JsonRequestBehavior.AllowGet);
-                    }
-                    catch (Exception)
-                    {
+                        try
+                        {
+                            var session = Session["SessionUser"]?.ToString();
+                            if (!string.IsNullOrEmpty(session) && int.TryParse(session, out int ids))
+                            {
+                                ViewBag.login = true;
+                                return Json(new { Error = true, responseText = "Ya hay un afiliado preinscripto con mismo CUIL anteriormente." }, JsonRequestBehavior.AllowGet);
+                            }
+                            else
+                            {
+                                ViewBag.login = false;
+                                return Json(new { Error = true, responseText = "Ya hay un afiliado preinscripto con mismo CUIL anteriormente." }, JsonRequestBehavior.AllowGet);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            ViewBag.login = false;
+                            return Json(new { Error = true, responseText = "Ya hay un afiliado preinscripto con mismo CUIL anteriormente." }, JsonRequestBehavior.AllowGet);
+                        }
                     }
 
                     byte[] bytesFrente = null;
                     byte[] bytesDorso = null;
                     byte[] bytesSueldo = null;
                     byte[] bytesPerfil = null;
+                    byte[] bytesNotaSolicitud = null;
 
                     string extFrente = null;
                     string extDorso = null;
                     string extSueldo = null;
                     string extPerfil = null;
+                    string extNotaSolicitud = null;
 
-                    if (fileDNIFrente != null)
+                    void ReadFile(HttpPostedFileBase file, out byte[] bytes, out string extension)
                     {
-                        var FileNameFrente = System.IO.Path.GetFileName(fileDNIFrente.FileName);
-                        string[] FF = FileNameFrente.Split('.');
-                        extFrente = FF[1];
-                        using (BinaryReader br = new BinaryReader(fileDNIFrente.InputStream))
+                        bytes = null;
+                        extension = null;
+                        if (file != null)
                         {
-                            bytesFrente = br.ReadBytes(fileDNIFrente.ContentLength);
+                            var fileName = Path.GetFileName(file.FileName);
+                            string[] fileParts = fileName.Split('.');
+                            extension = fileParts[1];
+                            using (BinaryReader br = new BinaryReader(file.InputStream))
+                            {
+                                bytes = br.ReadBytes(file.ContentLength);
+                            }
                         }
                     }
 
-                    if (fileDNIDorso != null)
-                    {
-                        var FileNameDorso = System.IO.Path.GetFileName(fileDNIDorso.FileName);
-                        string[] FD = FileNameDorso.Split('.');
-                        extDorso = FD[1];
-                        using (BinaryReader br = new BinaryReader(fileDNIDorso.InputStream))
-                        {
-                            bytesDorso = br.ReadBytes(fileDNIDorso.ContentLength);
-                        }
-                    }
+                    ReadFile(fileDNIFrente, out bytesFrente, out extFrente);
+                    ReadFile(fileDNIDorso, out bytesDorso, out extDorso);
+                    ReadFile(fileReciboSueldo, out bytesSueldo, out extSueldo);
+                    ReadFile(filePerfil, out bytesPerfil, out extPerfil);
+                    ReadFile(fileNS, out bytesNotaSolicitud, out extNotaSolicitud);
 
-                    if (fileReciboSueldo != null)
-                    {
-                        var FileNameSueldo = System.IO.Path.GetFileName(fileReciboSueldo.FileName);
-                        string[] FS = FileNameSueldo.Split('.');
-                        extSueldo = FS[1];
-                        using (BinaryReader br = new BinaryReader(fileReciboSueldo.InputStream))
-                        {
-                            bytesSueldo = br.ReadBytes(fileReciboSueldo.ContentLength);
-                        }
-                    }
-
-                    if (filePerfil != null)
-                    {
-                        var FileNamePerfil = System.IO.Path.GetFileName(filePerfil.FileName);
-                        string[] FP = FileNamePerfil.Split('.');
-                        extPerfil = FP[1];
-                        using (BinaryReader br = new BinaryReader(filePerfil.InputStream))
-                        {
-                            bytesPerfil = br.ReadBytes(filePerfil.ContentLength);
-                        }
-                    }
-
-                    int dele;
+                    int dele = 0;
                     string hoy = DateTime.Now.ToString("yyyy/MM/dd");
 
+                    conf = false;
                     try
                     {
-                        var session = Session["SessionUser"].ToString();
-                        int ids = Int32.Parse(session.ToString());
-
-                        dele = db.General_Delegacion.Where(d => d.Nombre == Delegacion).First().Id;
-                        conf = true;
+                        var session = Session["SessionUser"]?.ToString();
+                        if (!string.IsNullOrEmpty(session) && int.TryParse(session, out int ids))
+                        {
+                            ViewBag.login = true;
+                            dele = db.General_Delegacion.FirstOrDefault(d => d.Nombre == Delegacion)?.Id ?? 0;
+                            conf = true;
+                        }
+                        else
+                        {
+                            dele = 0;
+                            ViewBag.login = false;
+                        }
                     }
                     catch (Exception ex)
                     {
-                        dele = Int32.Parse("0");
+                        dele = 0;
+                        ViewBag.login = false;
                     }
 
                     if (string.IsNullOrEmpty(Telefono)) Telefono = "0";
 
-                    // GUARDAR EN LA TABLA DE EMPRESAS
                     var emp = new Afiliados_DatosPersonales
                     {
                         ApellidoNombre = Apellido + " " + Nombre,
@@ -287,7 +324,6 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                         Tipo_Doc = 1,
                         Numero_Doc = NumDoc,
                         Delegacion = dele,
-                        //Calificacion_Profesional = Int32.Parse(CalifProf),
                         Fecha_Solicitud = DateTime.Parse(hoy),
                         Estado_Civil = Int32.Parse(EstadoCivil),
                         Fecha_Nac = DateTime.Parse(FechaNac),
@@ -296,14 +332,14 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                         Piso = Piso,
                         Dto = Dto,
                         Telefono = Int32.Parse(Telefono),
-                        Localidad = Int32.Parse(Localidad),
+                        Localidad = Localidad,
                         Provincia = Provincia,
                         Sexo = Int32.Parse(SexoAfiliadoDocumento),
                         Nacionalidad = Int32.Parse(Nacionalidad),
                         Ingresado = false,
                         NroAfiliado = 0,
                         Art100 = true,
-                        CuotaAfiliado = Boolean.Parse(chkCuota),
+                        CuotaAfiliado = false,
                         Email = Email,
                         Celular = Celular,
                         Confirmado = conf,
@@ -314,16 +350,17 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                         FotoDorsoDni = bytesDorso,
                         FotoReciboSueldo = bytesSueldo,
                         FotoPerfil = bytesPerfil,
+                        FotoNotaSolicitud = bytesNotaSolicitud,
 
                         extensionFrente = extFrente,
                         extensionDorso = extDorso,
                         extensionSueldo = extSueldo,
-                        extensionPerfil = extPerfil
+                        extensionPerfil = extPerfil,
+                        extensionNotaSolicitud = extNotaSolicitud
                     };
 
                     db.Afiliados_DatosPersonales.Add(emp);
                     db.SaveChanges();
-
                 }
                 catch (Exception ex)
                 {
@@ -342,38 +379,30 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                     }
                     catch (Exception)
                     {
-
                     }
 
-                    string FechaIngresoAfiliadoEmpresa = "", NombreEmpresaAfiliadoEmpresa = "", NombreFantasiaAfiliadoEmpresa = "", CUITEmpresaAfiliadoEmpresa = "", CalleAfiliadoEmpresa = "", NumeroAfiliadoEmpresa = "", PisoAfiliadoEmpresa = "", DtoAfiliadoEmpresa = "", LocalidadAfiliadoEmpresa = "", TelefonoAfiliadoEmpresa = "", EmailAfiliadoEmpresa = "", RubroAfiliadoEmpresa = "", OtroRubroAfiliadoEmpresa = "";
                     if (jsonPreservar != null)
                     {
                         foreach (JObject jsonOperaciones in jsonPreservar.Children<JObject>())
                         {
-                            foreach (JProperty jsonOPropiedades in jsonOperaciones.Properties())
-                            {
-                                string propiedad = jsonOPropiedades.Name;
-                                if (propiedad.Equals("FechaIngresoAfiliadoEmpresa")) FechaIngresoAfiliadoEmpresa = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("NombreEmpresaAfiliadoEmpresa")) NombreEmpresaAfiliadoEmpresa = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("NombreFantasiaAfiliadoEmpresa")) NombreFantasiaAfiliadoEmpresa = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("CUITEmpresaAfiliadoEmpresa")) CUITEmpresaAfiliadoEmpresa = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("CalleAfiliadoEmpresa")) CalleAfiliadoEmpresa = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("RubroAfiliadoEmpresa")) RubroAfiliadoEmpresa = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("OtroRubroAfiliadoEmpresa")) OtroRubroAfiliadoEmpresa = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("NumeroAfiliadoEmpresa")) NumeroAfiliadoEmpresa = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("PisoAfiliadoEmpresa")) PisoAfiliadoEmpresa = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("DtoAfiliadoEmpresa")) DtoAfiliadoEmpresa = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("LocalidadAfiliadoEmpresa")) LocalidadAfiliadoEmpresa = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("TelefonoAfiliadoEmpresa")) TelefonoAfiliadoEmpresa = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("EmailAfiliadoEmpresa")) EmailAfiliadoEmpresa = jsonOPropiedades.Value.ToString();
-
-                            }
+                            string FechaIngresoAfiliadoEmpresa = jsonOperaciones.Value<string>("FechaIngresoAfiliadoEmpresa");
+                            string NombreEmpresaAfiliadoEmpresa = jsonOperaciones.Value<string>("NombreEmpresaAfiliadoEmpresa");
+                            string NombreFantasiaAfiliadoEmpresa = jsonOperaciones.Value<string>("NombreFantasiaAfiliadoEmpresa");
+                            string CUITEmpresaAfiliadoEmpresa = jsonOperaciones.Value<string>("CUITEmpresaAfiliadoEmpresa");
+                            string CalleAfiliadoEmpresa = jsonOperaciones.Value<string>("CalleAfiliadoEmpresa");
+                            string RubroAfiliadoEmpresa = jsonOperaciones.Value<string>("RubroAfiliadoEmpresa");
+                            string OtroRubroAfiliadoEmpresa = jsonOperaciones.Value<string>("OtroRubroAfiliadoEmpresa");
+                            string NumeroAfiliadoEmpresa = jsonOperaciones.Value<string>("NumeroAfiliadoEmpresa");
+                            string PisoAfiliadoEmpresa = jsonOperaciones.Value<string>("PisoAfiliadoEmpresa");
+                            string DtoAfiliadoEmpresa = jsonOperaciones.Value<string>("DtoAfiliadoEmpresa");
+                            string LocalidadAfiliadoEmpresa = jsonOperaciones.Value<string>("LocalidadAfiliadoEmpresa");
+                            string TelefonoAfiliadoEmpresa = jsonOperaciones.Value<string>("TelefonoAfiliadoEmpresa");
+                            string EmailAfiliadoEmpresa = jsonOperaciones.Value<string>("EmailAfiliadoEmpresa");
 
                             CUITEmpresaAfiliadoEmpresa = CUITEmpresaAfiliadoEmpresa.Replace("-", "");
 
                             if (RubroAfiliadoEmpresa == "Otro") RubroAfiliadoEmpresa = "0";
 
-                            // GUARDAR EN LA TABLA DE EMPRESAS ANTECEDENTES
                             var emp = new Afiliados_Empresa
                             {
                                 Id_Afiliado = ultimoId,
@@ -395,9 +424,7 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                             db.Afiliados_Empresa.Add(emp);
                             db.SaveChanges();
                         }
-
                     }
-
                 }
                 catch (Exception)
                 {
@@ -414,27 +441,20 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                     }
                     catch (Exception)
                     {
-
                     }
 
-                    string Parentesco = "", ApellidoNombreAfiliadoFamiliar = "", CertEstudiosAfiliadoFamiliar = "", TipoDocAfiliadoFamiliar = "", NumDocAfiliadoFamiliar = "", SexoAfiliadoFamiliar = "", FechaNacAfiliadoFamiliar = "";
                     if (jsonPreservar != null)
                     {
                         foreach (JObject jsonOperaciones in jsonPreservar.Children<JObject>())
                         {
-                            foreach (JProperty jsonOPropiedades in jsonOperaciones.Properties())
-                            {
-                                string propiedad = jsonOPropiedades.Name;
-                                if (propiedad.Equals("Parentesco")) Parentesco = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("ApellidoNombreAfiliadoFamiliar")) ApellidoNombreAfiliadoFamiliar = jsonOPropiedades.Value.ToString();
-                                //if (propiedad.Equals("CertEstudiosAfiliadoFamiliar")) CertEstudiosAfiliadoFamiliar = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("TipoDocAfiliadoFamiliar")) TipoDocAfiliadoFamiliar = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("NumDocAfiliadoFamiliar")) NumDocAfiliadoFamiliar = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("SexoAfiliadoFamiliar")) SexoAfiliadoFamiliar = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("FechaNacAfiliadoFamiliar")) FechaNacAfiliadoFamiliar = jsonOPropiedades.Value.ToString();
-                            }
+                            string Parentesco = jsonOperaciones.Value<string>("Parentesco");
+                            string ApellidoNombreAfiliadoFamiliar = jsonOperaciones.Value<string>("ApellidoNombreAfiliadoFamiliar");
+                            //string CertEstudiosAfiliadoFamiliar = jsonOperaciones.Value<string>("CertEstudiosAfiliadoFamiliar");
+                            string TipoDocAfiliadoFamiliar = jsonOperaciones.Value<string>("TipoDocAfiliadoFamiliar");
+                            string NumDocAfiliadoFamiliar = jsonOperaciones.Value<string>("NumDocAfiliadoFamiliar");
+                            string SexoAfiliadoFamiliar = jsonOperaciones.Value<string>("SexoAfiliadoFamiliar");
+                            string FechaNacAfiliadoFamiliar = jsonOperaciones.Value<string>("FechaNacAfiliadoFamiliar");
 
-                            // GUARDAR EN LA TABLA DE EMPRESAS ANTECEDENTES
                             var emp = new Afiliados_Familiares
                             {
                                 Id_Afiliado = ultimoId,
@@ -449,11 +469,8 @@ namespace SeocaPreincripcionesAfiliados.Controllers
 
                             db.Afiliados_Familiares.Add(emp);
                             db.SaveChanges();
-
                         }
-
                     }
-
                 }
                 catch (Exception)
                 {
@@ -466,118 +483,34 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                     // Enviar E-Mail de Codigo de Validacion
                     try
                     {
-                        try
-                        {
-                            MailKit.Net.Smtp.SmtpClient smtp2 = new MailKit.Net.Smtp.SmtpClient();
-                            smtp2.Connect("vps-2676239-x.dattaweb.com", 465, MailKit.Security.SecureSocketOptions.SslOnConnect);
-                            smtp2.Authenticate("afiliaciones@seocaweb.com.ar", "XhkW@bK7cJ");
+                        MailKit.Net.Smtp.SmtpClient smtp2 = new MailKit.Net.Smtp.SmtpClient();
+                        smtp2.Connect("vps-2676239-x.dattaweb.com", 465, MailKit.Security.SecureSocketOptions.SslOnConnect);
+                        smtp2.Authenticate("afiliaciones@seocaweb.com.ar", "Hws*7YN7kB");
 
-                            MimeMessage email = new MimeMessage();
-                            email.From.Add(MailboxAddress.Parse("afiliaciones@seocaweb.com.ar"));
-                            email.To.Add(MailboxAddress.Parse(Email));
-                            email.Subject = "Confirmacion de Preinscripcion Afiliado";
-                            email.Body = new TextPart("html") { Text = "Haga click en este enlace para confirmar su preinscripcion. http://seoca-preafiliaciones.geosoft-web.com.ar/Home/Codigo?cuil=" + Cuil};
+                        MimeMessage email = new MimeMessage();
+                        email.From.Add(MailboxAddress.Parse("afiliaciones@seocaweb.com.ar"));
+                        email.To.Add(MailboxAddress.Parse(Email));
+                        email.Subject = "Confirmacion de Preinscripcion Afiliado";
+                        email.Body = new TextPart("html") { Text = "Haga click en este enlace para confirmar su preinscripcion. http://seoca-preafiliaciones.geosoft-web.com.ar/Home/Codigo?cuil=" + Cuil };
 
-                            smtp2.Send(email);
-                            smtp2.Disconnect(true);
-                        }
-                        catch (Exception)
-                        {
-                            ViewBag.message = "Error al registrarse.";
-                            return View("IniciarSesion");
-                        }
+                        smtp2.Send(email);
+                        smtp2.Disconnect(true);
+
+                        ViewBag.mensaje = "Preinscripcion Ingresada. Confirme el Codigo que le llego a su Email para confirmar su preinscripcion.";
+
                     }
                     catch (Exception ex)
                     {
+                        ViewBag.message = "Error al registrarse.";
+                        return View("IniciarSesion");
                     }
                 }
-
-                // Creacion de PDF
-                try
+                else
                 {
+                    ViewBag.mensaje = "Preinscripcion Ingresada.";
 
-                    // Obtener ultimo id de Liquidacion
-                    List<ReporteAfiliado> reporteAfiliado = db.Database.SqlQuery<ReporteAfiliado>("EXEC SP_crearReporteAfiliados @Codigo", new SqlParameter("Codigo", ultimoId)).ToList<ReporteAfiliado>();
-
-                    ReportViewer ReportViewer = new ReportViewer();
-                    ReportDataSource rdc = new ReportDataSource("DataSet1", reporteAfiliado);
-
-                    ReportViewer.Visible = true;
-                    ReportViewer.LocalReport.ReportPath = Server.MapPath("~/DatosAfiliado.rdlc");
-                    //ReportViewer.LocalReport.ReportPath = "~/ReporteLiquidacion.rdlc";
-                    ReportViewer.ShowParameterPrompts = true;
-                    ReportViewer.LocalReport.DataSources.Clear();
-                    ReportViewer.LocalReport.DataSources.Add(rdc);
-
-                    ReportViewer.ProcessingMode = ProcessingMode.Local;
-
-                    using (StreamReader rdlcSR = new StreamReader(Server.MapPath("~/DatosAfiliado.rdlc")))
-                    {
-                        ReportViewer.LocalReport.LoadReportDefinition(rdlcSR);
-                        ReportViewer.LocalReport.Refresh();
-                    }
-
-                    ReportParameter parameter = new ReportParameter("Email", HttpUtility.HtmlDecode(Email.ToString()));
-                    ReportViewer.LocalReport.SetParameters(parameter);
-
-                    ReportViewer.LocalReport.Refresh();
-
-                    string mimeType = string.Empty;
-                    string encoding = string.Empty;
-                    string extension = string.Empty;
-
-                    //ReportViewer.ShowParameterPrompts = true;
-
-                    byte[] bytes = ReportViewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out string[] streamids, out Warning[] warnings);
-
-                    string file = "DatoAfiliado_" + Cuil + ".pdf";
-                    string XLPath = Server.MapPath("~\\PDFs");
-
-                    //FileStream fs = new FileStream(XLPath + "\\" + file.Replace("/", "_"), FileMode.Create, FileAccess.Write);
-                    //fs.Write(bytes, 0, bytes.Length);
-                    //fs.Close();
-
-                    Response.Clear();
-                    Response.ContentType = "application/octet-stream";
-
-                    Response.AddHeader("content-disposition", "attachment;filename=" + file);
-                    Response.Buffer = true;
-
-                    Response.OutputStream.Write(bytes, 0, bytes.Length);
-                    Response.OutputStream.Flush();
-
-                    try
-                    {
-                        var session = Session["SessionUser"].ToString();
-                        int ids = Int32.Parse(session.ToString());
-
-                        var dele = db.General_Delegacion_Usuarios.Where(d => d.Id == ids).First().Delegacion;
-
-                        var Delegacion = db.General_Delegacion.Where(d => d.Id == dele).First().Nombre;
-                        ViewData["Delegacion"] = Delegacion;
-                        ViewBag.login = true;
-                    }
-                    catch (Exception ex)
-                    {
-                        var Delegacion = db.General_Delegacion.Where(d => d.Id == 0).First().Nombre;
-                        ViewData["Delegacion"] = Delegacion;
-                        ViewBag.LoginDelegacion = true;
-                        ViewBag.login = false;
-                    }
-
-                    ViewBag.message = "Preinscripcion Ingresada. Su id es " + ultimoId + ". Confirme el Codigo que le llego a su Email para confirmar su preinscripcion.";
-                }
-                catch (Exception ex)
-                {
-                    ViewBag.message = "Error en la creacion del pdf";
-                    return RedirectToAction("Liquidacion");
                 }
 
-                // Limpiar Planilla
-                ViewBag.vacio = "";
-                ViewBag.comboVacio = 0;
-
-                ViewBag.mensaje = "Preinscripcion Ingresada. Su id es " + ultimoId + ". Confirme el Codigo que le llego a su Email para confirmar su preinscripcion.";
                 return View();
             }
         }
@@ -589,61 +522,76 @@ namespace SeocaPreincripcionesAfiliados.Controllers
         {
             try
             {
-                var session = Session["SessionUser"].ToString();
-                int ids = Int32.Parse(session.ToString());
-
-                try
+                var session = Session["SessionUser"]?.ToString();
+                if (!string.IsNullOrEmpty(session))
                 {
-                    using (Models.geosoftw_seocapreinscripcionesEntities db = new Models.geosoftw_seocapreinscripcionesEntities())
+                    int ids;
+                    if (int.TryParse(session, out ids))
                     {
-                        //List<DatosAfiliados> empleado = db.Database.SqlQuery<DatosAfiliados>("EXEC SP_VerTablaAfiliados").ToList<DatosAfiliados>();
-                        List<DatosAfiliados> empleado = db.Database.SqlQuery<DatosAfiliados>("EXEC SP_VerTodosAfiliados @apellidoNombre, @Cuil, @DNI", new SqlParameter("apellidoNombre", ""), new SqlParameter("Cuil", ""), new SqlParameter("DNI", "")).ToList<DatosAfiliados>();
-
-                        List<DatosAfiliados> verEmpleados = new List<DatosAfiliados>();
-
-                        foreach (var emp in empleado)
+                        using (Models.geosoftw_seocapreinscripcionesEntities db = new Models.geosoftw_seocapreinscripcionesEntities())
                         {
-                            DatosAfiliados ver = new DatosAfiliados
+                            var delegacion = db.General_Delegacion_Usuarios.FirstOrDefault(d => d.Id == ids)?.Delegacion;
+
+                            List<DatosAfiliados> empleado = db.Database.SqlQuery<DatosAfiliados>("EXEC SP_VerTodosAfiliados @apellidoNombre, @Cuil, @DNI, @Delegacion",
+                                new SqlParameter("apellidoNombre", ""),
+                                new SqlParameter("Cuil", ""),
+                                new SqlParameter("DNI", ""),
+                                new SqlParameter("Delegacion", delegacion))
+                                .ToList();
+
+                            List<DatosAfiliados> verEmpleados = new List<DatosAfiliados>();
+
+                            foreach (var emp in empleado)
                             {
-                                Codigo = Int32.Parse(emp.Codigo.ToString())
-                            };
+                                DatosAfiliados ver = new DatosAfiliados
+                                {
+                                    Codigo = Int32.Parse(emp.Codigo.ToString())
+                                };
 
-                            ver.ApellidoNombre = emp.ApellidoNombre;
-                            string[] cfs = emp.Fecha_Solicitud.ToString().Split(' ');
-                            ver.FS = cfs[0];
-                            //ver.FS = DateTime.Parse(emp.Fecha_Solicitud.ToString("dd/MM/yyyy")).ToString();
+                                ver.ApellidoNombre = emp.ApellidoNombre;
+                                string[] cfs = emp.Fecha_Solicitud.ToString().Split(' ');
+                                ver.FS = cfs[0];
+                                //ver.FS = DateTime.Parse(emp.Fecha_Solicitud.ToString("dd/MM/yyyy")).ToString();
 
-                            string cuil = emp.CUIL; // COLOCARLE LOS GUIONES
-                            cuil = cuil.Insert(2, "-").Insert(11, "-");
-                            ver.CUIL = cuil;
+                                string cuil = emp.CUIL; // COLOCARLE LOS GUIONES
+                                cuil = cuil.Insert(2, "-").Insert(11, "-");
+                                ver.CUIL = cuil;
 
-                            ver.Numero_Doc = emp.Numero_Doc;
-                            if (string.IsNullOrEmpty(emp.Estado)) ver.Estado = "Pendiente";
-                            else ver.Estado = emp.Estado;
+                                ver.Numero_Doc = emp.Numero_Doc;
+                                if (string.IsNullOrEmpty(emp.Estado))
+                                    ver.Estado = "Pendiente";
+                                else
+                                    ver.Estado = emp.Estado;
 
-                            ver.NroAfiliado = Int32.Parse(emp.NroAfiliado.ToString());
+                                ver.NroAfiliado = Int32.Parse(emp.NroAfiliado.ToString());
 
-                            verEmpleados.Add(ver);
+                                verEmpleados.Add(ver);
+                            }
+
+                            ViewBag.login = true;
+                            ViewBag.filtroApellido = "";
+                            ViewBag.filtroCUIL = "";
+                            ViewBag.filtroDNI = "";
+                            ViewBag.filtroEstado = "";
+
+                            return View(verEmpleados);
                         }
-                        ViewBag.login = true;
-                        ViewBag.filtroApellido = "";
-                        ViewBag.filtroCUIL = "";
-                        ViewBag.filtroDNI = "";
-                        ViewBag.filtroEstado = "";
-
-                        return View(verEmpleados);
+                    }
+                    else
+                    {
+                        return View();
                     }
                 }
-                catch(Exception ex)
+                else
                 {
-                    Console.Write(ex.Message);
-                    return View();
+                    ViewBag.login = false;
+                    return RedirectToAction("IniciarSesion", "Home");
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                ViewBag.login = false;
-                return RedirectToAction("IniciarSesion", "Home");
+                Console.Write(ex.Message);
+                return View();
             }
         }
 
@@ -652,88 +600,100 @@ namespace SeocaPreincripcionesAfiliados.Controllers
         {
             try
             {
-                var session = Session["SessionUser"].ToString();
-                int ids = Int32.Parse(session.ToString());
-
-                string apellido = Convert.ToString(form["buscarAPELLIDO"]);
-                string CUIL = Convert.ToString(form["buscarCUIL"]);
-                string DNI = Convert.ToString(form["buscarDNI"]);
-                string estados = Convert.ToString(form["estados"]);
-
-                try
+                var session = Session["SessionUser"]?.ToString();
+                if (!string.IsNullOrEmpty(session))
                 {
-                    using (Models.geosoftw_seocapreinscripcionesEntities db = new Models.geosoftw_seocapreinscripcionesEntities())
+                    int ids;
+                    if (int.TryParse(session, out ids))
                     {
-                        List<DatosAfiliados> empleado = null;
-                        //TODOS LOS ACTIVOS
-                        if (estados == "0")
-                        {
-                            empleado = db.Database.SqlQuery<DatosAfiliados>("EXEC SP_VerTodosAfiliados @apellidoNombre, @Cuil, @DNI", new SqlParameter("apellidoNombre", apellido), new SqlParameter("Cuil", CUIL), new SqlParameter("DNI", DNI)).ToList<DatosAfiliados>();
-                        }
-                        else if (estados == "1") // Pendiente
-                        {
-                            empleado = db.Database.SqlQuery<DatosAfiliados>("EXEC SP_VerTodosAfiliadosSegunEstado @apellidoNombre, @Cuil, @DNI, @Estado", new SqlParameter("apellidoNombre", apellido), new SqlParameter("Cuil", CUIL), new SqlParameter("DNI", DNI), new SqlParameter("Estado", "Pendiente")).ToList<DatosAfiliados>();
-                        }
-                        else if (estados == "2") // A revisar
-                        {
-                            empleado = db.Database.SqlQuery<DatosAfiliados>("EXEC SP_VerTodosAfiliadosSegunEstado @apellidoNombre, @Cuil, @DNI, @Estado", new SqlParameter("apellidoNombre", apellido), new SqlParameter("Cuil", CUIL), new SqlParameter("DNI", DNI), new SqlParameter("Estado", "A Revisar")).ToList<DatosAfiliados>();
-                        }
-                        else if (estados == "3") // Activo
-                        {
-                            empleado = db.Database.SqlQuery<DatosAfiliados>("EXEC SP_VerTodosAfiliadosSegunEstado @apellidoNombre, @Cuil, @DNI, @Estado", new SqlParameter("apellidoNombre", apellido), new SqlParameter("Cuil", CUIL), new SqlParameter("DNI", DNI), new SqlParameter("Estado", "Activo")).ToList<DatosAfiliados>();
-                        }
-                        else if (estados == "4") // De Baja
-                        {
-                            empleado = db.Database.SqlQuery<DatosAfiliados>("EXEC SP_VerTodosAfiliadosSegunEstado @apellidoNombre, @Cuil, @DNI, @Estado", new SqlParameter("apellidoNombre", apellido), new SqlParameter("Cuil", CUIL), new SqlParameter("DNI", DNI), new SqlParameter("Estado", "De Baja")).ToList<DatosAfiliados>();
-                        }
+                        string apellido = Convert.ToString(form["buscarAPELLIDO"]);
+                        string CUIL = Convert.ToString(form["buscarCUIL"]);
+                        string DNI = Convert.ToString(form["buscarDNI"]);
+                        string estados = Convert.ToString(form["estados"]);
 
-                        List<DatosAfiliados> verEmpleados = new List<DatosAfiliados>();
-
-                        if (empleado.Count == 0) ViewBag.Mensaje = "No hay afiliados encontrados con este filtro";
-
-                        foreach (var emp in empleado)
+                        using (Models.geosoftw_seocapreinscripcionesEntities db = new Models.geosoftw_seocapreinscripcionesEntities())
                         {
-                            DatosAfiliados ver = new DatosAfiliados
+                            var delegacion = db.General_Delegacion_Usuarios.FirstOrDefault(d => d.Id == ids)?.Delegacion;
+
+                            List<DatosAfiliados> empleado = null;
+                            if (estados == "0") // Todos los activos
                             {
-                                Codigo = Int32.Parse(emp.Codigo.ToString())
-                            };
+                                empleado = db.Database.SqlQuery<DatosAfiliados>("EXEC SP_VerTodosAfiliados @apellidoNombre, @Cuil, @DNI, @Delegacion",
+                                    new SqlParameter("apellidoNombre", apellido),
+                                    new SqlParameter("Cuil", CUIL),
+                                    new SqlParameter("DNI", DNI),
+                                    new SqlParameter("Delegacion", delegacion))
+                                    .ToList();
+                            }
+                            else // Filtrar por estado
+                            {
+                                empleado = db.Database.SqlQuery<DatosAfiliados>("EXEC SP_VerTodosAfiliadosSegunEstado @apellidoNombre, @Cuil, @DNI, @Estado, @Delegacion",
+                                    new SqlParameter("apellidoNombre", apellido),
+                                    new SqlParameter("Cuil", CUIL),
+                                    new SqlParameter("DNI", DNI),
+                                    new SqlParameter("Estado", estados == "1" ? "Pendiente" :
+                                        estados == "2" ? "A Revisar" :
+                                        estados == "3" ? "Activo" :
+                                        estados == "4" ? "De Baja" : ""),
+                                    new SqlParameter("Delegacion", delegacion))
+                                    .ToList();
+                            }
 
-                            ver.ApellidoNombre = emp.ApellidoNombre;
-                            string[] cfs = emp.Fecha_Solicitud.ToString().Split(' ');
-                            ver.FS = cfs[0];
-                            //ver.FS = DateTime.Parse(emp.Fecha_Solicitud.ToString("dd/MM/yyyy")).ToString();
+                            List<DatosAfiliados> verEmpleados = new List<DatosAfiliados>();
 
-                            string cuil = emp.CUIL; // COLOCARLE LOS GUIONES
-                            cuil = cuil.Insert(2, "-").Insert(11, "-");
-                            ver.CUIL = cuil;
+                            if (empleado.Count == 0) ViewBag.Mensaje = "No hay afiliados encontrados con este filtro";
 
-                            ver.Numero_Doc = emp.Numero_Doc;
-                            if (string.IsNullOrEmpty(emp.Estado)) ver.Estado = "Pendiente";
-                            else ver.Estado = emp.Estado;
+                            foreach (var emp in empleado)
+                            {
+                                DatosAfiliados ver = new DatosAfiliados
+                                {
+                                    Codigo = Int32.Parse(emp.Codigo.ToString())
+                                };
 
-                            ver.NroAfiliado = Int32.Parse(emp.NroAfiliado.ToString());
+                                ver.ApellidoNombre = emp.ApellidoNombre;
+                                string[] cfs = emp.Fecha_Solicitud.ToString().Split(' ');
+                                ver.FS = cfs[0];
+                                //ver.FS = DateTime.Parse(emp.Fecha_Solicitud.ToString("dd/MM/yyyy")).ToString();
 
-                            verEmpleados.Add(ver);
+                                string cuil = emp.CUIL; // COLOCARLE LOS GUIONES
+                                cuil = cuil.Insert(2, "-").Insert(11, "-");
+                                ver.CUIL = cuil;
+
+                                ver.Numero_Doc = emp.Numero_Doc;
+                                if (string.IsNullOrEmpty(emp.Estado))
+                                    ver.Estado = "Pendiente";
+                                else
+                                    ver.Estado = emp.Estado;
+
+                                ver.NroAfiliado = Int32.Parse(emp.NroAfiliado.ToString());
+
+                                verEmpleados.Add(ver);
+                            }
+
+                            ViewBag.login = true;
+                            ViewBag.filtroApellido = apellido;
+                            ViewBag.filtroCUIL = CUIL;
+                            ViewBag.filtroDNI = DNI;
+                            ViewBag.filtroEstado = estados;
+
+                            return View(verEmpleados);
                         }
-                        ViewBag.login = true;
-                        ViewBag.filtroApellido = apellido;
-                        ViewBag.filtroCUIL = CUIL;
-                        ViewBag.filtroDNI = DNI;
-                        ViewBag.filtroEstado = estados;
-
-                        return View(verEmpleados);
+                    }
+                    else
+                    {
+                        return View();
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-                    Console.Write(ex.Message);
-                    return View();
+                    ViewBag.login = false;
+                    return RedirectToAction("IniciarSesion", "Home");
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                ViewBag.login = false;
-                return RedirectToAction("IniciarSesion", "Home");
+                Console.Write(ex.Message);
+                return View();
             }
         }
 
@@ -746,87 +706,93 @@ namespace SeocaPreincripcionesAfiliados.Controllers
         {
             try
             {
-                var session = Session["SessionUser"].ToString();
-                int ids = Int32.Parse(session.ToString());
-
-                using (Models.geosoftw_seocapreinscripcionesEntities db = new Models.geosoftw_seocapreinscripcionesEntities())
+                var session = Session["SessionUser"]?.ToString();
+                if (!string.IsNullOrEmpty(session))
                 {
-                    // Obtenemos los datos del empleado a modificar
-                    DatoAfiliadoDetallado afiliado = db.Database.SqlQuery<DatoAfiliadoDetallado>("EXEC SP_verDatoAfiliado @Codigo", new SqlParameter("Codigo", id)).First<DatoAfiliadoDetallado>();
-                    List<DatosFamiliarAfiliado> familiar = db.Database.SqlQuery<DatosFamiliarAfiliado>("EXEC SP_VerDatoFamiliar @Codigo", new SqlParameter("Codigo", afiliado.Codigo)).ToList<DatosFamiliarAfiliado>();
-
-                    string[] cfs = afiliado.Fecha_Solicitud.ToString().Split(' ');
-
-                    DatoAfiliadoDetallado verAfiliado = new DatoAfiliadoDetallado
+                    int ids;
+                    if (int.TryParse(session, out ids))
                     {
-                        Codigo = afiliado.Codigo,
-                        ApellidoNombre = afiliado.ApellidoNombre,
-                        CUIL = afiliado.CUIL,
-                        Delegacion = afiliado.Delegacion,
-                        Numero_Doc = afiliado.Numero_Doc,
-                        Calificacion_Profesional = afiliado.Calificacion_Profesional,
-                        Estado_Civil = afiliado.Estado_Civil,
-                        FS = cfs[0],
-                        Fecha_Nac = afiliado.Fecha_Nac,
-                        Calle = afiliado.Calle,
-                        Numero_Calle = afiliado.Numero_Calle,
-                        Telefono = afiliado.Telefono,
-                        Localidad_Afiliado = afiliado.Localidad_Afiliado,
-                        NroAfiliado = afiliado.NroAfiliado,
-                        Email = afiliado.Email,
-                        Celular = afiliado.Celular,
-                        Provincia = afiliado.Provincia,
-                        Estado = afiliado.Estado,
-                        Sexo = afiliado.Sexo,
-                        Nacionalidad = afiliado.Nacionalidad,
-                        Telefono_Empresa = afiliado.Telefono_Empresa,
-
-                        Nombre_Empresa = afiliado.Nombre_Empresa,
-                        Cuit_Empresa = afiliado.Cuit_Empresa,
-                        Calle_Empresa = afiliado.Calle_Empresa,
-                        Numero_Empresa = afiliado.Numero_Empresa,
-                        Localidad_Empresa = afiliado.Localidad_Empresa,
-                        Fecha_Ingreso_Empresa = afiliado.Fecha_Ingreso_Empresa
-                    };
-
-                    List<DatosFamiliarAfiliado> listFamiliar = new List<DatosFamiliarAfiliado>();
-                    foreach(var i in familiar)
-                    {
-                        string[] ce = i.Cert_Estudios.ToString().Split(' ');
-                        string[] fn = i.Fecha_Nac.ToString().Split(' ');
-
-                        DatosFamiliarAfiliado dfa = new DatosFamiliarAfiliado
+                        using (Models.geosoftw_seocapreinscripcionesEntities db = new Models.geosoftw_seocapreinscripcionesEntities())
                         {
-                            Apellido_Nombre = i.Apellido_Nombre,
-                            Id_Afiliado = i.Id_Afiliado,
-                            CE = ce[0],
-                            FN = fn[0],
-                            Num_Doc = i.Num_Doc,
-                            Parentesco = i.Parentesco,
-                            Sexo = i.Sexo,
-                            Tipo_Doc = i.Tipo_Doc
-                        };
-                        listFamiliar.Add(dfa);
+                            // Obtenemos los datos del empleado a modificar
+                            DatoAfiliadoDetallado afiliado = db.Database.SqlQuery<DatoAfiliadoDetallado>("EXEC SP_verDatoAfiliado @Codigo", new SqlParameter("Codigo", id)).FirstOrDefault();
+                            List<DatosFamiliarAfiliado> familiar = db.Database.SqlQuery<DatosFamiliarAfiliado>("EXEC SP_VerDatoFamiliar @Codigo", new SqlParameter("Codigo", afiliado?.Codigo)).ToList();
+
+                            if (afiliado != null)
+                            {
+                                string[] cfs = afiliado.Fecha_Solicitud.ToString().Split(' ');
+
+                                DatoAfiliadoDetallado verAfiliado = new DatoAfiliadoDetallado
+                                {
+                                    Codigo = afiliado.Codigo,
+                                    ApellidoNombre = afiliado.ApellidoNombre,
+                                    CUIL = afiliado.CUIL,
+                                    Delegacion = afiliado.Delegacion,
+                                    Numero_Doc = afiliado.Numero_Doc,
+                                    Calificacion_Profesional = afiliado.Calificacion_Profesional,
+                                    Estado_Civil = afiliado.Estado_Civil,
+                                    FS = cfs[0],
+                                    Fecha_Nac = afiliado.Fecha_Nac,
+                                    Calle = afiliado.Calle,
+                                    Numero_Calle = afiliado.Numero_Calle,
+                                    Telefono = afiliado.Telefono,
+                                    Localidad_Afiliado = afiliado.Localidad_Afiliado,
+                                    NroAfiliado = afiliado.NroAfiliado,
+                                    Email = afiliado.Email,
+                                    Celular = afiliado.Celular,
+                                    Provincia = afiliado.Provincia,
+                                    Estado = afiliado.Estado,
+                                    Sexo = afiliado.Sexo,
+                                    Nacionalidad = afiliado.Nacionalidad,
+                                    Telefono_Empresa = afiliado.Telefono_Empresa,
+
+                                    Nombre_Empresa = afiliado.Nombre_Empresa,
+                                    Cuit_Empresa = afiliado.Cuit_Empresa,
+                                    Calle_Empresa = afiliado.Calle_Empresa,
+                                    Numero_Empresa = afiliado.Numero_Empresa,
+                                    Localidad_Empresa = afiliado.Localidad_Empresa,
+                                    Fecha_Ingreso_Empresa = afiliado.Fecha_Ingreso_Empresa
+                                };
+
+                                List<DatosFamiliarAfiliado> listFamiliar = new List<DatosFamiliarAfiliado>();
+                                foreach (var i in familiar)
+                                {
+                                    string[] ce = i.Cert_Estudios.ToString().Split(' ');
+                                    string[] fn = i.Fecha_Nac.ToString().Split(' ');
+
+                                    DatosFamiliarAfiliado dfa = new DatosFamiliarAfiliado
+                                    {
+                                        Apellido_Nombre = i.Apellido_Nombre,
+                                        Id_Afiliado = i.Id_Afiliado,
+                                        CE = ce[0],
+                                        FN = fn[0],
+                                        Num_Doc = i.Num_Doc,
+                                        Parentesco = i.Parentesco,
+                                        Sexo = i.Sexo,
+                                        Tipo_Doc = i.Tipo_Doc
+                                    };
+                                    listFamiliar.Add(dfa);
+                                }
+
+                                ViewBag.familiar = listFamiliar.Count > 0 ? listFamiliar : null;
+
+                                return View(verAfiliado);
+                            }
+                        }
                     }
-
-
-                    if(familiar.Count != 0) ViewBag.familiar = listFamiliar;
-                    else ViewBag.familiar = null;
-
-                    return View(verAfiliado);
                 }
+
+                ViewBag.Session = false;
+                return RedirectToAction("IniciarSesion", "IniciarSesion");
             }
             catch (Exception ex)
             {
-                ViewBag.Session = false;
-                return RedirectToAction("IniciarSesion", "IniciarSesion");
+                Console.Write(ex.Message);
+                return View();
             }
         }
 
         //---------------------------------------//
-
-
-      
 
         [HttpGet]
         public ActionResult Codigo(string Cuil)
@@ -835,26 +801,115 @@ namespace SeocaPreincripcionesAfiliados.Controllers
             {
                 try
                 {
-                    var val = db.Afiliados_DatosPersonales.Where(d => d.CUIL == Cuil).First();
+                    var val = db.Afiliados_DatosPersonales.FirstOrDefault(d => d.CUIL == Cuil);
 
-                    Models.Afiliados_DatosPersonales adp = db.Afiliados_DatosPersonales.Find(val.Codigo);
-                    adp.Confirmado = true;
+                    if (val != null)
+                    {
+                        val.Confirmado = true;
 
-                    db.Afiliados_DatosPersonales.Attach(adp);
-                    db.Entry(adp).State = EntityState.Modified;//this is for modiying/update existing entry
-                    db.SaveChanges();
+                        db.Entry(val).State = EntityState.Modified;
+                        db.SaveChanges();
 
-                    codigo = "Codigo valido";
+                        codigo = "Codigo valido";
+                        ViewBag.cuit = Cuil;
+                    }
+                    else
+                    {
+                        codigo = "Codigo invalido";
+                    }
+
+                    // crear pdf y guardarlo en servidor
+                    List<ReporteAfiliado> reporteAfiliado = db.Database.SqlQuery<ReporteAfiliado>("EXEC SP_crearReporteAfiliados @Codigo", new SqlParameter("Codigo", val.Codigo)).ToList<ReporteAfiliado>();
+                    ReportViewer ReportViewer = new ReportViewer();
+                    ReportDataSource rdc = new ReportDataSource("DataSet1", reporteAfiliado);
+
+                    ReportViewer.Visible = true;
+                    ReportViewer.LocalReport.ReportPath = Server.MapPath("~/DatosAfiliado.rdlc");
+                    ReportViewer.ShowParameterPrompts = true;
+                    ReportViewer.LocalReport.DataSources.Clear();
+                    ReportViewer.LocalReport.DataSources.Add(rdc);
+
+                    ReportViewer.ProcessingMode = ProcessingMode.Local;
+
+                    using (StreamReader rdlcSR = new StreamReader(Server.MapPath("~/DatosAfiliado.rdlc")))
+                    {
+                        ReportViewer.LocalReport.LoadReportDefinition(rdlcSR);
+                        ReportViewer.LocalReport.Refresh();
+                    }
+
+                    ReportViewer.LocalReport.Refresh();
+
+                    string mimeType = string.Empty;
+                    string encoding = string.Empty;
+                    string extension = string.Empty;
+
+                    byte[] bytes = ReportViewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out string[] streamids, out Warning[] warnings);
+
+                    // Guardar el archivo PDF en el servidor
+                    string pdfFilePath = Server.MapPath("~/Pdfs/" + "InscripcionAfiliado_" + Cuil + ".pdf");
+                    using (FileStream fs = new FileStream(pdfFilePath, FileMode.Create))
+                    {
+                        fs.Write(bytes, 0, bytes.Length);
+                    }
+
+                    // Enviar PDF por Email
+                    try
+                    {
+                        MailKit.Net.Smtp.SmtpClient smtp2 = new MailKit.Net.Smtp.SmtpClient();
+                        smtp2.Connect("vps-2676239-x.dattaweb.com", 465, MailKit.Security.SecureSocketOptions.SslOnConnect);
+                        smtp2.Authenticate("afiliaciones@seocaweb.com.ar", "Hws*7YN7kB");
+
+                        MimeMessage email = new MimeMessage();
+                        email.From.Add(MailboxAddress.Parse("afiliaciones@seocaweb.com.ar"));
+                        email.To.Add(MailboxAddress.Parse(val.Email));
+                        email.Subject = "Adjunto de PDF";
+
+                        // Crear el cuerpo del mensaje de correo electrónico
+                        BodyBuilder bodyBuilder = new BodyBuilder();
+                        bodyBuilder.TextBody = "Adjunto se encuentra el PDF generado.";
+
+                        // Adjuntar el archivo PDF al mensaje de correo electrónico
+                        string pdfFilePath2 = Server.MapPath("~/Pdfs/" + "InscripcionAfiliado_" + Cuil + ".pdf");
+                        if (System.IO.File.Exists(pdfFilePath2))
+                        {
+                            bodyBuilder.Attachments.Add(pdfFilePath2);
+                        }
+                        else
+                        {
+                            return Content("El archivo PDF no existe.");
+                        }
+
+                        // Asignar el cuerpo al mensaje
+                        email.Body = bodyBuilder.ToMessageBody();
+
+                        smtp2.Send(email);
+                        smtp2.Disconnect(true);
+
+                        ViewBag.mensaje = "Preinscripcion Ingresada. Le llego un correo con el pdf adjuntado.";
+
+                    }
+                    catch (Exception ex)
+                    {
+                        ViewBag.message = "Error al registrarse.";
+                        return View("IniciarSesion");
+                    }
+
+                    // Borrar el pdf del servidor
+                    string pdfFilePath3 = Server.MapPath("~/Pdfs/" + "InscripcionAfiliado_" + Cuil + ".pdf");
+                    if (System.IO.File.Exists(pdfFilePath3))
+                    {
+                        System.IO.File.Delete(pdfFilePath3);
+                    }
+
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Console.Write(ex.Message);
                     codigo = "Codigo invalido";
                 }
+
+                return View();
             }
-
-            return View();
         }
-
-
     }
 }

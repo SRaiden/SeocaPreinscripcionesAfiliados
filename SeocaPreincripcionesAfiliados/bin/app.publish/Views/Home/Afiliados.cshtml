@@ -30,12 +30,29 @@
                     <b>Garantice la seguridad de su cuenta y manténgase actualizado</b>
                 </span>
                 <p class="title-10-form">
-                    Se ha enviado un correo electrónico de verificación a <b>@ViewBag.Email</b>. Por favor
-                    revise su bandeja de entrada y siga las instrucciones para verificar su dirección de
-                    correo electrónico.
+                        Se ha enviado un correo electrónico de verificación a <b>@ViewBag.Email</b>. Por favor
+                        revise su bandeja de entrada y siga las instrucciones para verificar su dirección de
+                        correo electrónico.
                 </p>
             }
         </div>
+
+        <div class="form-100 validate-form">
+            <p class="title-10-form" style="font-style: italic;">
+                <b>
+                    Por la presente expreso mi voluntad de incorporarme como afiliado al SEOCA Zona Oeste. A tal fin presto mi
+                    conformidad para que sea descontado de mis haberes el 2% adicional, en concepto de Cuota Sindical: Seguro de
+                    Sepelio y, Turismo-Recreación.
+                </b>
+            </p>
+        </div>
+
+
+        <div style="float: right;">
+            <a href="~/Descargar/NotaSolicitud.docx" download="NotaSolicitud.docx" " class="boton-descarga">Descargar Nota de Solicitud</a>
+        </div>
+
+        <br />
 
         <fieldset>
             <legend>Datos del Afiliado</legend>
@@ -55,13 +72,13 @@
                     <div class="form-group has-feedback col-lg-4">
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></div>
-                            <input class="form-control" data-error="Apellido es un campo requerido." id="Apellido" name="Apellido" placeholder="Apellido" required="required" type="text" value="@ViewBag.vacio">
+                            <input class="form-control" data-error="Apellido es un campo requerido." id="Apellido" name="Apellido" placeholder="Apellido" onchange="changeCampos()" required="required" type="text">
                         </div>
                     </div>
                     <div class="form-group has-feedback col-lg-4">
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></div>
-                            <input class="form-control" data-error="Nombre es un campo requerido." id="Nombre" name="Nombre" placeholder="Nombre" required="required" type="text" value="@ViewBag.vacio">
+                            <input class="form-control" data-error="Nombre es un campo requerido." id="Nombre" name="Nombre" placeholder="Nombre" onchange="changeCampos()" required="required" type="text">
                         </div>
                     </div>
                 </div>
@@ -69,7 +86,7 @@
                     <div class="form-group has-feedback col-lg-3">
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-list-alt"></span></div>
-                            <input class="form-control" data-error="Numero de Documento es un campo requerido." id="NumDoc" maxlength="11" name="NumDoc" placeholder="Numero de Documento" required="required" type="number" value="" autocomplete="off" onchange="">
+                            <input class="form-control" data-error="Numero de Documento es un campo requerido." id="NumDoc" maxlength="13" name="NumDoc" placeholder="Numero de Documento" required="required" type="number" value="" autocomplete="off" onchange="" readonly>
                         </div>
                     </div>
                     @if (ViewBag.Delegacion != "Sin Delegación")
@@ -112,7 +129,7 @@
                     <div class="form-group has-feedback col-lg-3">
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></div>
-                            <input class="form-control hasDatepicker" data-error="Fecha de nacimiento es un campo requerido." data-pattern-error="Verifique la fecha ingresada." id="FechaNac" maxlength="10" name="FechaNac" placeholder="F. Nacimiento (DD/MM/YYYY)" required="required" type="text" value="" autocomplete="off" onfocus="(this.type='date')" onblur="(this.type='text')">
+                            <input class="form-control hasDatepicker" data-error="Fecha de nacimiento es un campo requerido." id="FechaNac" maxlength="10" name="FechaNac" placeholder="F. Nacimiento (DD/MM/YYYY)" required="required" type="text" value="" autocomplete="off" onfocus="(this.type='date')" onblur="(this.type='text')">
                         </div>
                     </div>
                 </div>
@@ -121,6 +138,7 @@
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></div>
                             <select class="form-control" data-error="Sex es un campo requerido." data-val="true" id="SexoAfiliadoDocumento" name="SexoAfiliadoDocumento" placeholder="Sexo" required="required">
+                                <option value="0">- Genero -</option>
                                 @{
                                     if (ViewData["Sexo"] != null)
                                     {
@@ -138,13 +156,13 @@
                     <div class="form-group has-feedback col-lg-3">
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
-                            <input class="form-control" id="Email" maxlength="200" name="Email" placeholder="Email" required="required" type="email" value="">
+                            <input class="form-control" id="Email" maxlength="200" name="Email" placeholder="Email" required="required" type="email" onchange="changeCampos()" value="">
                         </div>
                     </div>
                     <div class="form-group has-feedback col-lg-3">
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
-                            <input class="form-control" id="EmailConfirmacion" maxlength="200" name="EmailConfirmacion" placeholder="Repetir Email" required="required" type="email" value="">
+                            <input class="form-control" id="EmailConfirmacion" maxlength="200" name="EmailConfirmacion" placeholder="Repetir Email" onchange="changeCampos()" required="required" type="email" value="">
                         </div>
                     </div>
                     <div class="form-group has-feedback col-lg-3">
@@ -162,12 +180,8 @@
                         </div>
                     </div>
                     <div class="form-group has-feedback col-lg-3">
-                        <div class="input-group">
-                            <label><input type="checkbox" value="Convenio" name="chkConvenio" class="w3-check bg1" id="chkConvenio" checked disabled /> Convenio Colectivo </label><br />
-                        </div>
                     </div>
                     <div class="form-group has-feedback col-lg-3">
-                        <label><input type="checkbox" name="chkCuota" class="w3-check bg1" id="chkCuota" /> Cuota Afiliado </label> <br />
                     </div>
                     <div class="form-group has-feedback col-lg-3">
 
@@ -181,7 +195,7 @@
                     <div class="form-group has-feedback col-lg-6">
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-home"></span></div>
-                            <input class="form-control" data-error="Calle es un campo uiuerido." id="Calle" maxlength="200" name="Calle" placeholder="Domicilio Particular" required="required" type="text" value="">
+                            <input class="form-control" data-error="Calle es un campo uiuerido." id="Calle" maxlength="200" name="Calle" placeholder="Domicilio Particular" required="required" type="text" value="" onchange="changeCampos()">
                         </div>
                     </div>
                     <div class="form-group has-feedback col-lg-2">
@@ -206,37 +220,17 @@
                 <div class="row">
                     <div class="form-group has-feedback col-lg-4">
                         <div class="input-group">
-                            <div class="input-group-addon"><span class="glyphicon glyphicon-equalizer"></span></div>
-                            <select class="form-control" data-error="Localidad es un campo requerido." data-val="true" id="Localidad" name="Localidad" placeholder="Localidad" required="required">
-                                @{
-                                    if (ViewData["Localidades"] != null)
-                                    {
-                                        IEnumerable<dynamic> Localidad = (IEnumerable<dynamic>)ViewData["Localidades"];
-
-                                        foreach (dynamic Loc in Localidad)
-                                        {
-                                            <option value="@Loc.Id">@Loc.Nombre_Localidad</option>
-                                        }
-                                    }
-                                }
-                            </select>
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-home"></span></div>
+                            <input class="form-control" data-error="Calle es un campo uiuerido." id="Localidad" maxlength="200" name="Localidad" placeholder="Localidad" required="required" type="text" value="" onchange="changeCampos()">
                         </div>
                     </div>
                     <div class="form-group has-feedback col-lg-4">
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-equalizer"></span></div>
                             <select class="form-control" data-error="Provincia es un campo requerido." data-val="true" id="Provincia" name="Provincia" placeholder="Provincia" required="required">
-                                @{
-                                    if (ViewData["Provincia"] != null)
-                                    {
-                                        IEnumerable<dynamic> Provincia = (IEnumerable<dynamic>)ViewData["Provincia"];
-
-                                        foreach (dynamic Loc in Provincia)
-                                        {
-                                            <option value="@Loc.Id">@Loc.Nombre</option>
-                                        }
-                                    }
-                                }
+                                <option value="0">- Provincia -</option>
+                                <option value="1">Bs AS</option>
+                                <option value="2">CABA</option>
                             </select>
                         </div>
                     </div>
@@ -244,6 +238,7 @@
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></div>
                             <select class="form-control" data-error="Nacionalidad es un campo requerido." data-val="true" data-val-number="The field Nacionalidad must be a number." data-val-required="The Nacionalidad field is required." id="Nacionalidad" name="Nacionalidad" placeholder="Nacionalidad" required="required">
+                                <option value="0">- Nacionalidad -</option>
                                 @{
                                     if (ViewData["Nacionalidad"] != null)
                                     {
@@ -251,14 +246,7 @@
 
                                         foreach (dynamic Loc in Nacionalidad)
                                         {
-                                            if (Loc.Codigo == 0)
-                                            {
-                                                <option value="@Loc.Codigo">< Nacionalidad ></option>
-                                            }
-                                            else
-                                            {
-                                                <option value="@Loc.Codigo"> @Loc.Descripcion </option>
-                                            }
+                                            <option value="@Loc.Codigo"> @Loc.Descripcion </option>
                                         }
                                     }
                                 }
@@ -337,6 +325,22 @@
                         </div>
                     </div>
                 </div>
+                <div class="row" style="margin-bottom: 2em;">
+                    <div class="form-group col-md-8 col-md-offset-2">
+                        <label> Nota de Solicitud </label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="textNotaSolicitud" placeholder="No hay ningún archivo seleccionado..." disabled="">
+                            <span class="input-group-btn">
+                                <label class="btn btn-success" type="button">
+                                    Seleccionar<input id="fileNS" name="fileNS" type="file" data-size-max="10" style="display:none;" accept="image/png,image/jpeg,application/pdf" onchange="fileNotaSolicitud();">
+                                </label>
+                            </span>
+                        </div>
+                        <div style="display: block;margin-top: 5px;margin-bottom: 10px;color: #737373;">
+                            Tamaño máximo permitido 10MB
+                        </div>
+                    </div>
+                </div>
 
                 <br />
 
@@ -352,7 +356,7 @@
                                 <div class="input-group">
                                     <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
                                     <select class="form-control" data-error="Tipo de familiar es un campo requerido." id="Parentesco" name="Parentesco">
-                                        <option value="0">< Parentesco ></option>
+                                        <option value="0">- Parentesco -</option>
                                         @{
                                             if (ViewData["Parentesco"] != null)
                                             {
@@ -370,7 +374,7 @@
                             <div class="form-group has-feedback col-lg-4">
                                 <div class="input-group">
                                     <div class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></div>
-                                    <input class="form-control numeric documento-familiar" data-error="Nombre y Apellido es un campo requerido." data-validate="false" id="ApellidoNombreAfiliadoFamiliar" name="ApellidoNombreAfiliadoFamiliar" placeholder="Nombre y Apellido" type="text" value="">
+                                    <input class="form-control numeric documento-familiar" data-error="Nombre y Apellido es un campo requerido." data-validate="false" id="ApellidoNombreAfiliadoFamiliar" name="ApellidoNombreAfiliadoFamiliar" placeholder="Nombre y Apellido" type="text" value="" onchange="changeCampos()">
                                 </div>
                             </div>
                             <div class="form-group has-feedback col-lg-4">
@@ -386,6 +390,7 @@
                                 <div class="input-group">
                                     <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
                                     <select class="form-control" id="SexoAfiliadoFamiliar" name="SexoAfiliadoFamiliar" placeholder="Genero">
+                                        <option value="0">- Genero -</option>
                                         @{
                                             if (ViewData["Sexo"] != null)
                                             {
@@ -403,7 +408,7 @@
                             <div class="form-group has-feedback col-lg-4">
                                 <div class="input-group">
                                     <div class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></div>
-                                    <input class="form-control hasDatepicker" data-error="Fecha de Nacimiento es un campo requerido." data-pattern-error="Verifique la Fecha de Nacimiento ingresada." id="FechaNacAfiliadoFamiliar" maxlength="10" name="FechaNacAfiliadoFamiliar" placeholder="F. Nacimiento (DD/MM/YYYY)" type="text" value="" autocomplete="off" onfocus="(this.type='date')" onblur="(this.type='text')">
+                                    <input class="form-control hasDatepicker" id="FechaNacAfiliadoFamiliar" maxlength="10" name="FechaNacAfiliadoFamiliar" placeholder="F. Nacimiento (DD/MM/YYYY)" type="text" value="" autocomplete="off" onfocus="(this.type='date')" onblur="(this.type='text')">
                                 </div>
                             </div>
                             <div class="form-group has-feedback col-lg-4">
@@ -444,13 +449,13 @@
                     <div class="form-group has-feedback col-lg-4">
                         <div class="input-group ">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-list"></span></div>
-                            <input class="form-control input-mask-format" data-error="CUIT es un campo requerido." data-masked-input="99-99999999-9" data-validate="false" id="CUITEmpresaAfiliadoEmpresa" maxlength="11" name="CUITEmpresaAfiliadoEmpresa" placeholder="XX-XXXXXXXX-X (CUIT de la empresa)" required="required" type="text" value="" autocomplete="off" onchange="valiCuit();">
+                            <input class="form-control input-mask-format" data-error="CUIT es un campo requerido." data-masked-input="99-99999999-9" data-validate="false" id="CUITEmpresaAfiliadoEmpresa" maxlength="13" name="CUITEmpresaAfiliadoEmpresa" placeholder="XX-XXXXXXXX-X (CUIT de la empresa)" required="required" type="text" value="" autocomplete="off" onchange="valiCuit();">
                         </div>
                     </div>
                     <div class="form-group has-feedback col-lg-8">
                         <div class="input-group ">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
-                            <input class="form-control" data-error="Razón social es un campo requerido." id="NombreEmpresaAfiliadoEmpresa" name="NombreEmpresaAfiliadoEmpresa" placeholder="Razón Social" required="required" type="text" value="">
+                            <input class="form-control" data-error="Razón social es un campo requerido." id="NombreEmpresaAfiliadoEmpresa" name="NombreEmpresaAfiliadoEmpresa" placeholder="Razón Social" required="required" type="text" value="" onchange="changeCampos()">
                         </div>
                     </div>
                 </div>
@@ -458,7 +463,7 @@
                     <div class="form-group has-feedback col-lg-8">
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></div>
-                            <input class="form-control" data-error="Nombre de Fantasia es un campo requerido." id="NombreFantasiaAfiliadoEmpresa" name="NombreFantasiaAfiliadoEmpresa" placeholder="Nombre de Fantasia" type="text" value="">
+                            <input class="form-control" data-error="Nombre de Fantasia es un campo requerido." id="NombreFantasiaAfiliadoEmpresa" name="NombreFantasiaAfiliadoEmpresa" placeholder="Nombre de Fantasia" type="text" value="" onchange="changeCampos()">
                         </div>
                     </div>
                     <div class="form-group has-feedback col-lg-4">
@@ -474,6 +479,8 @@
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-tasks"></span></div>
                             <select class="form-control" data-error="Rubro es un campo requerido." id="RubroAfiliadoEmpresa" name="RubroAfiliadoEmpresa" placeholder="Rubro" required="required" onchange="elegRubro();">
+                                <option value="0">- Actividad -</option>
+                                <option value="Otro">Otro</option>
                                 @{
                                     if (ViewData["Rubro"] != null)
                                     {
@@ -481,10 +488,10 @@
 
                                         foreach (dynamic Loc in Rubro)
                                         {
-                                            <option value="@Loc.Id">@Loc.Nombre_Rubro</option>
+                                            <option value="@Loc.Id">@Loc.Descripcion</option>
                                         }
                                     }
-                                    <option value="Otro">Otro</option>
+
                                 }
                             </select>
 
@@ -493,7 +500,7 @@
                     <div class="form-group has-feedback col-lg-8">
                         <div class="input-group ">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
-                            <input class="form-control"  id="OtroRubroAfiliadoEmpresa" name="OtroRubroAfiliadoEmpresa" placeholder="Escriba Nombre Rubro" disabled type="text" value="">
+                            <input class="form-control" id="OtroRubroAfiliadoEmpresa" name="OtroRubroAfiliadoEmpresa" placeholder="Escriba Nombre Rubro" disabled type="text" value="" onchange="changeCampos()">
                         </div>
                     </div>
 
@@ -507,7 +514,7 @@
                     <div class="form-group has-feedback col-lg-6">
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-home"></span></div>
-                            <input class="form-control" data-error="Calle es un campo requerido." id="CalleAfiliadoEmpresa" maxlength="200" name="CalleAfiliadoEmpresa" placeholder="Domicilio Laboral" required="required" type="text" value="">
+                            <input class="form-control" data-error="Calle es un campo requerido." id="CalleAfiliadoEmpresa" maxlength="200" name="CalleAfiliadoEmpresa" placeholder="Domicilio Laboral" required="required" type="text" value="" onchange="changeCampos()">
                         </div>
                     </div>
                     <div class="form-group has-feedback col-lg-2">
@@ -534,6 +541,7 @@
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-equalizer"></span></div>
                             <select class="form-control" data-error="Localidad es un campo requerido." id="LocalidadAfiliadoEmpresa" name="LocalidadAfiliadoEmpresa" placeholder="Localidad" required="required">
+                                <option value="0">- Localidad -</option>
                                 @{
                                     if (ViewData["Localidades"] != null)
                                     {
@@ -557,15 +565,13 @@
                     <div class="form-group has-feedback col-lg-4">
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
-                            <input class="form-control" id="EmailAfiliadoEmpresa" maxlength="200" name="EmailAfiliadoEmpresa" placeholder="Email" type="email" value="" required="required">
+                            <input class="form-control" id="EmailAfiliadoEmpresa" maxlength="200" name="EmailAfiliadoEmpresa" placeholder="Email" type="email" value="" required="required" onchange="changeCampos()">
                         </div>
                     </div>
                     <div class="form-group has-feedback col-lg-2">
                     </div>
                 </div>
-
             </div>
-
 
             <input type="text" id="matrizEmpresa" name="matrizEmpresa" hidden />
             <input type="text" id="matrizDatosAfiliado" name="matrizDatosAfiliado" hidden />
@@ -573,34 +579,29 @@
 
             <br />
 
+            <div class="title-10-form">
+                Por la presente expreso mi voluntad de incorporarme como afiliado/a al SEOCA Zona Oeste. A tan fin,
+                presto mi conformidad para que sea descontado de mis haberes el 2% adicional, en concepto de Cuota
+                Sindical (Seguro de Sepelio, Turismo y Recreación).
+            </div>
+
+            <br />
+
             <div class="form-footer">
-                <div class="form-group has-feedback col-lg-10">
-                    <div class="input-group" style="margin-top: 1%; float: right;">
-                        @if (ViewBag.Email != null)
-                        {
-                            <span>
-                                <b>Garantice la seguridad de su cuenta y manténgase actualizado</b>
-                            </span>
-                            <p>
-                                Se ha enviado un correo electrónico de verificación a <b>@ViewBag.Email</b>. Por favor
-                                revise su bandeja de entrada y siga las instrucciones para verificar su dirección de
-                                correo electrónico.
-                            </p>
-                        }
-                    </div>
+                <div class="form-group has-feedback col-lg-5">
                 </div>
-                <div class="form-group has-feedback col-lg-2">
+                <div class="form-group has-feedback col-lg-5">
                     <div class="input-group">
-                        <button class="btn btn-success" style="float:right;" type="submit" id="enviarDatos" name="enviarDatos" onclick="return enviar()">
+                        <button class="btn btn-success" style="padding: 15px 17px;" type="submit" id="enviarDatos" name="enviarDatos" onclick="return enviar()">
                             <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
                             Generar Solicitud
                         </button>
                     </div>
                 </div>
+                <div class="form-group has-feedback col-lg-5">
+                </div>
             </div>
-
         }
-       
     </div>
 </div>
 
@@ -620,4 +621,3 @@
     <script src="~/js/ValidacionesAfiliado.js"></script>
     <script src="~/js/ValidacionesEmpresa.js"></script>
 }
-

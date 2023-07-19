@@ -316,6 +316,7 @@
     <Content Include="Models\Afiliados.edmx.diagram">
       <DependentUpon>Afiliados.edmx</DependentUpon>
     </Content>
+    <Content Include="Descargar\NotaSolicitud.docx" />
     <None Include="Reportes\DataSet1.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -369,6 +370,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Pdfs\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

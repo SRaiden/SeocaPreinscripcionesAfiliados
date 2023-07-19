@@ -1691,7 +1691,7 @@
       <Width>6.55208in</Width>
       <Page>
         <PageHeader>
-          <Height>3.3602cm</Height>
+          <Height>4.81541cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -1811,6 +1811,42 @@
                 </Border>
               </Style>
             </Image>
+            <Textbox Name="Textbox60">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Por la presente expreso mi voluntad de incorporarme como afiliado al SEOCA Zona Oeste. A tal fin presto mi conformidad para que sea descontado de mis haberes el 2% adicional, en concepto de Cuota Sindical: Seguro de Sepelio y, Turismo-Recreación.</Value>
+                      <Style>
+                        <FontStyle>Italic</FontStyle>
+                        <FontFamily>Times New Roman</FontFamily>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox34</rd:DefaultName>
+              <Top>3.20145cm</Top>
+              <Left>1.37266cm</Left>
+              <Height>1.45507cm</Height>
+              <Width>14.44679cm</Width>
+              <ZIndex>3</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
           </ReportItems>
           <Style>
             <Border>

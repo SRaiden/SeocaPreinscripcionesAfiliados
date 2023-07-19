@@ -22,10 +22,10 @@
         <EntityTypeShape EntityType="geosoftw_seocapreinscripcionesModel.General_Parentesco" Width="1.5" PointX="12.75" PointY="0.75" />
         <EntityTypeShape EntityType="geosoftw_seocapreinscripcionesModel.General_Provincias" Width="1.5" PointX="12.75" PointY="3.75" />
         <EntityTypeShape EntityType="geosoftw_seocapreinscripcionesModel.General_Sexo" Width="1.5" PointX="12.75" PointY="6.75" />
-        <EntityTypeShape EntityType="geosoftw_seocapreinscripcionesModel.Afiliados_DatosPersonales" Width="1.5" PointX="7.375" PointY="12.75" />
         <EntityTypeShape EntityType="geosoftw_seocapreinscripcionesModel.Afiliados_Familiares" Width="1.5" PointX="0.75" PointY="5.75" />
         <EntityTypeShape EntityType="geosoftw_seocapreinscripcionesModel.General_ActividadRubro" Width="1.5" PointX="9.375" PointY="12.75" />
         <EntityTypeShape EntityType="geosoftw_seocapreinscripcionesModel.Afiliados_Empresa" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="geosoftw_seocapreinscripcionesModel.Afiliados_DatosPersonales" Width="1.5" PointX="11.375" PointY="12.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -36,5 +36,9 @@ namespace SeocaPreincripcionesAfiliados.Models
         public string Estado { get; set; }
         public string ComentarioEstado { get; set; }
         public Nullable<bool> Confirmada { get; set; }
+        public string PisoReal { get; set; }
+        public string DtoReal { get; set; }
+        public string PisoLegal { get; set; }
+        public string DtoLegal { get; set; }
     }
 }

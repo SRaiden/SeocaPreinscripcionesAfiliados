@@ -35,6 +35,21 @@
     width: 100%;
 }
 
+.boton-descarga {
+    padding: 10px;
+    border-color: #35bf35;
+    background-color: #35bf35;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+    .boton-descarga:hover {
+        color: #fff;
+        background-color: #2e582e;
+        text-decoration: none;
+    }
+
 
 .form-100 {
     width: 100%;

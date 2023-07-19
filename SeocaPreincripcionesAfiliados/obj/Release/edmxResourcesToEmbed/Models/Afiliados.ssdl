@@ -19,7 +19,7 @@
     <Property Name="Piso" Type="nvarchar" MaxLength="50" />
     <Property Name="Dto" Type="nvarchar" MaxLength="50" />
     <Property Name="Telefono" Type="int" />
-    <Property Name="Localidad" Type="int" />
+    <Property Name="Localidad" Type="nvarchar" MaxLength="50" />
     <Property Name="Provincia" Type="nvarchar" MaxLength="150" />
     <Property Name="Sexo" Type="int" />
     <Property Name="Nacionalidad" Type="int" />
@@ -31,6 +31,7 @@
     <Property Name="FotoDorsoDni" Type="varbinary(max)" />
     <Property Name="FotoReciboSueldo" Type="varbinary(max)" />
     <Property Name="FotoPerfil" Type="varbinary(max)" />
+    <Property Name="FotoNotaSolicitud" Type="varbinary(max)" />
     <Property Name="Art100" Type="bit" />
     <Property Name="CuotaAfiliado" Type="bit" />
     <Property Name="CodigoTemporal" Type="varchar" MaxLength="100" />
@@ -42,6 +43,8 @@
     <Property Name="extensionDorso" Type="varchar" MaxLength="10" />
     <Property Name="extensionSueldo" Type="varchar" MaxLength="10" />
     <Property Name="extensionPerfil" Type="varchar" MaxLength="10" />
+    <Property Name="extensionNotaSolicitud" Type="varchar" MaxLength="10" />
+    <Property Name="ActualizacionSecretaria" Type="bit" />
   </EntityType>
   <EntityType Name="Afiliados_Empresa">
     <Key>
@@ -89,10 +92,14 @@
     <Property Name="Cuit" Type="varchar" MaxLength="15" />
     <Property Name="DomicilioReal" Type="varchar" MaxLength="150" />
     <Property Name="NroReal" Type="varchar" MaxLength="10" />
+    <Property Name="PisoReal" Type="nvarchar" MaxLength="50" />
+    <Property Name="DtoReal" Type="nvarchar" MaxLength="50" />
     <Property Name="LocalidadReal" Type="int" />
     <Property Name="TelefonoReal" Type="varchar" MaxLength="20" />
     <Property Name="DomicilioLegal" Type="varchar" MaxLength="150" />
     <Property Name="NroLegal" Type="varchar" MaxLength="10" />
+    <Property Name="PisoLegal" Type="nvarchar" MaxLength="50" />
+    <Property Name="DtoLegal" Type="nvarchar" MaxLength="50" />
     <Property Name="LocalidadLegal" Type="varchar" MaxLength="150" />
     <Property Name="TelefonoLegal" Type="varchar" MaxLength="20" />
     <Property Name="Actividad" Type="int" />

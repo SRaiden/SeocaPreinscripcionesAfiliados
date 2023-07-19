@@ -24,7 +24,7 @@
           <Property Name="Piso" Type="nvarchar" MaxLength="50" />
           <Property Name="Dto" Type="nvarchar" MaxLength="50" />
           <Property Name="Telefono" Type="int" />
-          <Property Name="Localidad" Type="int" />
+          <Property Name="Localidad" Type="nvarchar" MaxLength="50" />
           <Property Name="Provincia" Type="nvarchar" MaxLength="150" />
           <Property Name="Sexo" Type="int" />
           <Property Name="Nacionalidad" Type="int" />
@@ -36,6 +36,7 @@
           <Property Name="FotoDorsoDni" Type="varbinary(max)" />
           <Property Name="FotoReciboSueldo" Type="varbinary(max)" />
           <Property Name="FotoPerfil" Type="varbinary(max)" />
+          <Property Name="FotoNotaSolicitud" Type="varbinary(max)" />
           <Property Name="Art100" Type="bit" />
           <Property Name="CuotaAfiliado" Type="bit" />
           <Property Name="CodigoTemporal" Type="varchar" MaxLength="100" />
@@ -47,6 +48,8 @@
           <Property Name="extensionDorso" Type="varchar" MaxLength="10" />
           <Property Name="extensionSueldo" Type="varchar" MaxLength="10" />
           <Property Name="extensionPerfil" Type="varchar" MaxLength="10" />
+          <Property Name="extensionNotaSolicitud" Type="varchar" MaxLength="10" />
+          <Property Name="ActualizacionSecretaria" Type="bit" />
         </EntityType>
         <EntityType Name="Afiliados_Empresa">
           <Key>
@@ -94,10 +97,14 @@
           <Property Name="Cuit" Type="varchar" MaxLength="15" />
           <Property Name="DomicilioReal" Type="varchar" MaxLength="150" />
           <Property Name="NroReal" Type="varchar" MaxLength="10" />
+          <Property Name="PisoReal" Type="nvarchar" MaxLength="50" />
+          <Property Name="DtoReal" Type="nvarchar" MaxLength="50" />
           <Property Name="LocalidadReal" Type="int" />
           <Property Name="TelefonoReal" Type="varchar" MaxLength="20" />
           <Property Name="DomicilioLegal" Type="varchar" MaxLength="150" />
           <Property Name="NroLegal" Type="varchar" MaxLength="10" />
+          <Property Name="PisoLegal" Type="nvarchar" MaxLength="50" />
+          <Property Name="DtoLegal" Type="nvarchar" MaxLength="50" />
           <Property Name="LocalidadLegal" Type="varchar" MaxLength="150" />
           <Property Name="TelefonoLegal" Type="varchar" MaxLength="20" />
           <Property Name="Actividad" Type="int" />
@@ -315,10 +322,10 @@
           <EntitySet Name="General_Parentesco" EntityType="geosoftw_seocapreinscripcionesModel.General_Parentesco" />
           <EntitySet Name="General_Provincias" EntityType="geosoftw_seocapreinscripcionesModel.General_Provincias" />
           <EntitySet Name="General_Sexo" EntityType="geosoftw_seocapreinscripcionesModel.General_Sexo" />
-          <EntitySet Name="Afiliados_DatosPersonales" EntityType="geosoftw_seocapreinscripcionesModel.Afiliados_DatosPersonales" />
           <EntitySet Name="Afiliados_Familiares" EntityType="geosoftw_seocapreinscripcionesModel.Afiliados_Familiares" />
           <EntitySet Name="General_ActividadRubro" EntityType="geosoftw_seocapreinscripcionesModel.General_ActividadRubro" />
           <EntitySet Name="Afiliados_Empresa" EntityType="geosoftw_seocapreinscripcionesModel.Afiliados_Empresa" />
+          <EntitySet Name="Afiliados_DatosPersonales" EntityType="geosoftw_seocapreinscripcionesModel.Afiliados_DatosPersonales" />
           </EntityContainer>
         <EntityType Name="Empresas">
           <Key>
@@ -346,6 +353,10 @@
           <Property Name="Estado" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="ComentarioEstado" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Confirmada" Type="Boolean" />
+          <Property Name="PisoReal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DtoReal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PisoLegal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DtoLegal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Empresas_Actividades">
           <Key>
@@ -494,49 +505,6 @@
           <Property Name="Codigo" Type="Int32" Nullable="false" />
           <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="Afiliados_DatosPersonales">
-          <Key>
-            <PropertyRef Name="Codigo" />
-          </Key>
-          <Property Name="Codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ApellidoNombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CUIL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Tipo_Doc" Type="Int32" />
-          <Property Name="Numero_Doc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Delegacion" Type="Int32" />
-          <Property Name="Calificacion_Profesional" Type="Int32" />
-          <Property Name="Fecha_Solicitud" Type="DateTime" Precision="0" />
-          <Property Name="Estado_Civil" Type="Int32" />
-          <Property Name="Fecha_Nac" Type="DateTime" Precision="0" />
-          <Property Name="Calle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Numero_Calle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Piso" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Dto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Telefono" Type="Int32" />
-          <Property Name="Localidad" Type="Int32" />
-          <Property Name="Provincia" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Sexo" Type="Int32" />
-          <Property Name="Nacionalidad" Type="Int32" />
-          <Property Name="Ingresado" Type="Boolean" />
-          <Property Name="NroAfiliado" Type="Int32" />
-          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Celular" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="FotoFrenteDni" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="FotoDorsoDni" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="FotoReciboSueldo" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="FotoPerfil" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="Art100" Type="Boolean" />
-          <Property Name="CuotaAfiliado" Type="Boolean" />
-          <Property Name="CodigoTemporal" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Confirmado" Type="Boolean" />
-          <Property Name="Estado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="ComentarioEstado" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Usuario" Type="Int32" />
-          <Property Name="extensionFrente" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="extensionDorso" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="extensionSueldo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="extensionPerfil" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="Afiliados_Familiares">
           <Key>
             <PropertyRef Name="Id" />
@@ -579,6 +547,52 @@
           <Property Name="Rubro" Type="Int32" />
           <Property Name="OtroRubro" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Afiliados_DatosPersonales">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ApellidoNombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CUIL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Tipo_Doc" Type="Int32" />
+          <Property Name="Numero_Doc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Delegacion" Type="Int32" />
+          <Property Name="Calificacion_Profesional" Type="Int32" />
+          <Property Name="Fecha_Solicitud" Type="DateTime" Precision="0" />
+          <Property Name="Estado_Civil" Type="Int32" />
+          <Property Name="Fecha_Nac" Type="DateTime" Precision="0" />
+          <Property Name="Calle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Numero_Calle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Piso" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Dto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Telefono" Type="Int32" />
+          <Property Name="Localidad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Provincia" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Sexo" Type="Int32" />
+          <Property Name="Nacionalidad" Type="Int32" />
+          <Property Name="Ingresado" Type="Boolean" />
+          <Property Name="NroAfiliado" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Celular" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FotoFrenteDni" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="FotoDorsoDni" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="FotoReciboSueldo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="FotoPerfil" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="FotoNotaSolicitud" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Art100" Type="Boolean" />
+          <Property Name="CuotaAfiliado" Type="Boolean" />
+          <Property Name="CodigoTemporal" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Confirmado" Type="Boolean" />
+          <Property Name="Estado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ComentarioEstado" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Usuario" Type="Int32" />
+          <Property Name="extensionFrente" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="extensionDorso" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="extensionSueldo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="extensionPerfil" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="extensionNotaSolicitud" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ActualizacionSecretaria" Type="Boolean" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -589,6 +603,10 @@
           <EntitySetMapping Name="Empresas">
             <EntityTypeMapping TypeName="geosoftw_seocapreinscripcionesModel.Empresas">
               <MappingFragment StoreEntitySet="Empresas">
+                <ScalarProperty Name="DtoLegal" ColumnName="DtoLegal" />
+                <ScalarProperty Name="PisoLegal" ColumnName="PisoLegal" />
+                <ScalarProperty Name="DtoReal" ColumnName="DtoReal" />
+                <ScalarProperty Name="PisoReal" ColumnName="PisoReal" />
                 <ScalarProperty Name="Confirmada" ColumnName="Confirmada" />
                 <ScalarProperty Name="ComentarioEstado" ColumnName="ComentarioEstado" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
@@ -777,50 +795,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Afiliados_DatosPersonales">
-            <EntityTypeMapping TypeName="geosoftw_seocapreinscripcionesModel.Afiliados_DatosPersonales">
-              <MappingFragment StoreEntitySet="Afiliados_DatosPersonales">
-                <ScalarProperty Name="extensionPerfil" ColumnName="extensionPerfil" />
-                <ScalarProperty Name="extensionSueldo" ColumnName="extensionSueldo" />
-                <ScalarProperty Name="extensionDorso" ColumnName="extensionDorso" />
-                <ScalarProperty Name="extensionFrente" ColumnName="extensionFrente" />
-                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
-                <ScalarProperty Name="ComentarioEstado" ColumnName="ComentarioEstado" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="Confirmado" ColumnName="Confirmado" />
-                <ScalarProperty Name="CodigoTemporal" ColumnName="CodigoTemporal" />
-                <ScalarProperty Name="CuotaAfiliado" ColumnName="CuotaAfiliado" />
-                <ScalarProperty Name="Art100" ColumnName="Art100" />
-                <ScalarProperty Name="FotoPerfil" ColumnName="FotoPerfil" />
-                <ScalarProperty Name="FotoReciboSueldo" ColumnName="FotoReciboSueldo" />
-                <ScalarProperty Name="FotoDorsoDni" ColumnName="FotoDorsoDni" />
-                <ScalarProperty Name="FotoFrenteDni" ColumnName="FotoFrenteDni" />
-                <ScalarProperty Name="Celular" ColumnName="Celular" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="NroAfiliado" ColumnName="NroAfiliado" />
-                <ScalarProperty Name="Ingresado" ColumnName="Ingresado" />
-                <ScalarProperty Name="Nacionalidad" ColumnName="Nacionalidad" />
-                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
-                <ScalarProperty Name="Provincia" ColumnName="Provincia" />
-                <ScalarProperty Name="Localidad" ColumnName="Localidad" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-                <ScalarProperty Name="Dto" ColumnName="Dto" />
-                <ScalarProperty Name="Piso" ColumnName="Piso" />
-                <ScalarProperty Name="Numero_Calle" ColumnName="Numero_Calle" />
-                <ScalarProperty Name="Calle" ColumnName="Calle" />
-                <ScalarProperty Name="Fecha_Nac" ColumnName="Fecha_Nac" />
-                <ScalarProperty Name="Estado_Civil" ColumnName="Estado_Civil" />
-                <ScalarProperty Name="Fecha_Solicitud" ColumnName="Fecha_Solicitud" />
-                <ScalarProperty Name="Calificacion_Profesional" ColumnName="Calificacion_Profesional" />
-                <ScalarProperty Name="Delegacion" ColumnName="Delegacion" />
-                <ScalarProperty Name="Numero_Doc" ColumnName="Numero_Doc" />
-                <ScalarProperty Name="Tipo_Doc" ColumnName="Tipo_Doc" />
-                <ScalarProperty Name="CUIL" ColumnName="CUIL" />
-                <ScalarProperty Name="ApellidoNombre" ColumnName="ApellidoNombre" />
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Afiliados_Familiares">
             <EntityTypeMapping TypeName="geosoftw_seocapreinscripcionesModel.Afiliados_Familiares">
               <MappingFragment StoreEntitySet="Afiliados_Familiares">
@@ -863,6 +837,53 @@
                 <ScalarProperty Name="Fecha_Ingreso" ColumnName="Fecha_Ingreso" />
                 <ScalarProperty Name="Id_Afiliado" ColumnName="Id_Afiliado" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Afiliados_DatosPersonales">
+            <EntityTypeMapping TypeName="geosoftw_seocapreinscripcionesModel.Afiliados_DatosPersonales">
+              <MappingFragment StoreEntitySet="Afiliados_DatosPersonales">
+                <ScalarProperty Name="ActualizacionSecretaria" ColumnName="ActualizacionSecretaria" />
+                <ScalarProperty Name="extensionNotaSolicitud" ColumnName="extensionNotaSolicitud" />
+                <ScalarProperty Name="extensionPerfil" ColumnName="extensionPerfil" />
+                <ScalarProperty Name="extensionSueldo" ColumnName="extensionSueldo" />
+                <ScalarProperty Name="extensionDorso" ColumnName="extensionDorso" />
+                <ScalarProperty Name="extensionFrente" ColumnName="extensionFrente" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="ComentarioEstado" ColumnName="ComentarioEstado" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Confirmado" ColumnName="Confirmado" />
+                <ScalarProperty Name="CodigoTemporal" ColumnName="CodigoTemporal" />
+                <ScalarProperty Name="CuotaAfiliado" ColumnName="CuotaAfiliado" />
+                <ScalarProperty Name="Art100" ColumnName="Art100" />
+                <ScalarProperty Name="FotoNotaSolicitud" ColumnName="FotoNotaSolicitud" />
+                <ScalarProperty Name="FotoPerfil" ColumnName="FotoPerfil" />
+                <ScalarProperty Name="FotoReciboSueldo" ColumnName="FotoReciboSueldo" />
+                <ScalarProperty Name="FotoDorsoDni" ColumnName="FotoDorsoDni" />
+                <ScalarProperty Name="FotoFrenteDni" ColumnName="FotoFrenteDni" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="NroAfiliado" ColumnName="NroAfiliado" />
+                <ScalarProperty Name="Ingresado" ColumnName="Ingresado" />
+                <ScalarProperty Name="Nacionalidad" ColumnName="Nacionalidad" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+                <ScalarProperty Name="Localidad" ColumnName="Localidad" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Dto" ColumnName="Dto" />
+                <ScalarProperty Name="Piso" ColumnName="Piso" />
+                <ScalarProperty Name="Numero_Calle" ColumnName="Numero_Calle" />
+                <ScalarProperty Name="Calle" ColumnName="Calle" />
+                <ScalarProperty Name="Fecha_Nac" ColumnName="Fecha_Nac" />
+                <ScalarProperty Name="Estado_Civil" ColumnName="Estado_Civil" />
+                <ScalarProperty Name="Fecha_Solicitud" ColumnName="Fecha_Solicitud" />
+                <ScalarProperty Name="Calificacion_Profesional" ColumnName="Calificacion_Profesional" />
+                <ScalarProperty Name="Delegacion" ColumnName="Delegacion" />
+                <ScalarProperty Name="Numero_Doc" ColumnName="Numero_Doc" />
+                <ScalarProperty Name="Tipo_Doc" ColumnName="Tipo_Doc" />
+                <ScalarProperty Name="CUIL" ColumnName="CUIL" />
+                <ScalarProperty Name="ApellidoNombre" ColumnName="ApellidoNombre" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
