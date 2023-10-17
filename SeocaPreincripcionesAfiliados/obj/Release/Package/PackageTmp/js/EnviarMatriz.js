@@ -59,6 +59,7 @@ function enviar() {
     var Email = document.getElementById("Email").value;
     var EmailConfirmacion = document.getElementById("EmailConfirmacion").value;
     var Localidad = document.getElementById("Localidad").value;
+    var CP = document.getElementById("CP").value;
     var Provincia = document.getElementById("Provincia").value;
     var SexoAfiliadoDocumento = document.getElementById("SexoAfiliadoDocumento").value;
     var Nacionalidad = document.getElementById("Nacionalidad").value;
@@ -80,7 +81,25 @@ function enviar() {
     var fileDNIFrente = document.getElementById("fileDNIFrente").value;
     var fileDNIDorso = document.getElementById("fileDNIDorso").value;
     var fileReciboSueldo = document.getElementById("fileReciboSueldo").value;
-    var fileNotaSolicitud = document.getElementById("fileNS").value;
+/*    var fileNotaSolicitud = document.getElementById("fileNS").value;*/
+
+    var check = document.getElementById("checkConstancia").checked;
+
+    if (check == false) {
+        alert("Debe de activar la casilla de Incorporacion de afiliado");
+        return false;
+    }
+
+    // verificar elementos matriz familiar
+    for (i = 0; i < matrizFamiliares.length; i++) {
+        var fileFamiliar = document.getElementById("fileFamiliar" + matrizFamiliares[i].FileFamiliar).value;
+        var fileFamiliarDos = document.getElementById("fileFamiliarDos" + matrizFamiliares[i].FileFamiliarDos).value;
+
+        if (fileFamiliar == "" && fileFamiliarDos == "") {
+            alert("Debe de ingresar al menos un archivo en el familiar: " + matrizFamiliares[i].ApellidoNombreAfiliadoFamiliar);
+            return false;
+        }
+    }
 
     // Validaciones
     if (!isNaN(Apellido)) {
@@ -134,6 +153,14 @@ function enviar() {
         alert("Debe de ingresar la Localidad del afiliado");
         return false;
     }
+    if (isNaN(CP)) {
+        alert("Ingrese solo numeros en el campo Codigo Postal");
+        return false;
+    }
+    if (CP < 0) {
+        alert("Ingrese solo numeros positivos");
+        return false;
+    }
     if (Provincia == 0) {
         alert("Debe de seleccionar una Provincia");
         return false;
@@ -182,10 +209,11 @@ function enviar() {
         alert("Debe de ingresar el archivo de Recibo Sueldo");
         return false;
     }
-    if (fileNotaSolicitud == "") {
-        alert("Debe de ingresar el archivo de Nota de Solicitud");
-        return false;
-    }
+    //if (fileNotaSolicitud == "") {
+    //    alert("Debe de ingresar el archivo de Nota de Solicitud");
+    //    return false;
+    //}
+
 
     //-------------------------------------------------------------------//
 
@@ -278,7 +306,8 @@ function enviar() {
         SexoAfiliadoDocumento: SexoAfiliadoDocumento,
         Nacionalidad: Nacionalidad,
         Email: Email,
-        Celular: Celular
+        Celular: Celular,
+        CP: CP
     });
 
     matrizEmpresa.push({
@@ -372,6 +401,28 @@ function insertarFamiliar() {
         }
     }
 
+    if ((matrizFamiliares.length + 1) > 10) {
+        alert("Puede ingresar hasta un maximo de 10 familiares");
+        return false;
+    }
+
+    var valorActual = 1;
+    var valorActualDos = 1;
+    for (a = 1; a <= 10; a++) {
+        for (b = 0; b < matrizFamiliares.length; b++) {
+            if (matrizFamiliares[b].FileFamiliar == a || matrizFamiliares[b].FileFamiliarDos == a) {
+                valorActual = 1;
+                valorActualDos = 1;
+                break;
+            } else {
+                valorActual = a;
+                valorActualDos = a;
+            }
+        }
+        if (valorActual != 1 && valorActualDos != 1) {
+            break;
+        }
+    }
 
     var table = document.getElementById('bodyFamiliar');
     var x = table.insertRow(0);
@@ -386,7 +437,25 @@ function insertarFamiliar() {
     table.rows[0].insertCell(2);
     table.rows[0].cells[2].innerHTML = NumDocAfiliadoFamiliar;
     table.rows[0].insertCell(3);
-    table.rows[0].cells[3].innerHTML = '<button class="btn btn-danger borrarFamiliar" type="button"  onclick="eliminarFamiliar(' + "'" + NumDocAfiliadoFamiliar + "'" + ')">Eliminar Familiar</button >';
+    table.rows[0].cells[3].innerHTML = '<div class="input-group">' + 
+                                            '<input type = "text" class="form-control" id = "textFamiliar' + valorActual + '" placeholder = "No hay ningún archivo seleccionado..." disabled = "" >' +
+                                            '<span class="input-group-btn">' + 
+                                                '<label class="btn btn-success" type="button">' +
+                                                    'Seleccionar<input id="fileFamiliar' + valorActual + '" name="fileFamiliar' + valorActual + '" type="file" data-size-max="10" style="display:none;" accept="image/png,image/jpeg,application/pdf" onchange="fileFamiliar(' + valorActual + ');">'+
+                                                '</label>'+
+                                            '</span>'+
+                                        '</div>';
+    table.rows[0].insertCell(4);
+    table.rows[0].cells[4].innerHTML = '<div class="input-group">' +
+                                            '<input type = "text" class="form-control" id = "textFamiliarDos' + valorActual + '" placeholder = "No hay ningún archivo seleccionado..." disabled = "" >' +
+                                            '<span class="input-group-btn">' +
+                                                '<label class="btn btn-success" type="button">' +
+                                                'Seleccionar<input id="fileFamiliarDos' + valorActual + '" name="fileFamiliarDos' + valorActual + '" type="file" data-size-max="10" style="display:none;" accept="image/png,image/jpeg,application/pdf" onchange="fileFamiliarDos(' + valorActualDos + ');">' +
+                                            '</label>' +
+                                            '</span>' +
+                                        '</div>';
+    table.rows[0].insertCell(5);
+    table.rows[0].cells[5].innerHTML = '<button class="btn btn-danger borrarFamiliar" type="button"  onclick="eliminarFamiliar(' + "'" + NumDocAfiliadoFamiliar + "'" + ')">Eliminar Familiar</button >';
 
     document.getElementById("Parentesco").value = "0"; // select
     document.getElementById("ApellidoNombreAfiliadoFamiliar").value = "";
@@ -399,7 +468,9 @@ function insertarFamiliar() {
         ApellidoNombreAfiliadoFamiliar: ApellidoNombreAfiliadoFamiliar,
         NumDocAfiliadoFamiliar: NumDocAfiliadoFamiliar,
         SexoAfiliadoFamiliar: SexoAfiliadoFamiliar,
-        FechaNacAfiliadoFamiliar: FechaNacAfiliadoFamiliar
+        FechaNacAfiliadoFamiliar: FechaNacAfiliadoFamiliar,
+        FileFamiliar: valorActual,
+        FileFamiliarDos: valorActualDos,
     });
 
 
@@ -412,6 +483,16 @@ function eliminarFamiliar(NumDocAfiliadoFamiliar) {
             matrizFamiliares.splice(i, 1);
         }
     }
+}
+
+function fileFamiliar(idFamiliar) {
+    const fileList = event.target.files;
+    document.getElementById("textFamiliar" + idFamiliar).value = fileList[0].name;
+}
+
+function fileFamiliarDos(idFamiliar) {
+    const fileList = event.target.files;
+    document.getElementById("textFamiliarDos" + idFamiliar).value = fileList[0].name;
 }
 
 // -------------------------------------------------------------- //
@@ -436,10 +517,10 @@ function fileFotoPerfil() {
     document.getElementById("textFotoPerfil").value = fileList[0].name;
 }
 
-function fileNotaSolicitud() {
-    const fileList = event.target.files;
-    document.getElementById("textNotaSolicitud").value = fileList[0].name;
-}
+//function fileNotaSolicitud() {
+//    const fileList = event.target.files;
+//    document.getElementById("textNotaSolicitud").value = fileList[0].name;
+//}
 
 function valiCuil() {
     var cuit = document.getElementById("Cuil").value;
@@ -498,6 +579,11 @@ function valiCuil() {
     }
 }
 
+const empresa = {
+    razonSocial: "",
+    nombreFantasia: ""
+}
+
 function valiCuit() {
     var cuit = document.getElementById("CUITEmpresaAfiliadoEmpresa").value;
     var cadena1 = "";
@@ -545,10 +631,53 @@ function valiCuit() {
             var cuit = cadena1 + "-" + cadena2 + "-" + cadena3;
             document.getElementById("CUITEmpresaAfiliadoEmpresa").value = cuit;
 
+            // Busqueda de RazonSocial 
+
+            var formdata = new FormData(); //FormData object
+            formdata.append('cuit', cuit);
+            //Creating an XMLHttpRequest and sending
+            //var xhr = new XMLHttpRequest();
+            //xhr.open('POST', '/Home/ObtenerRazonSocial');
+            //xhr.send(formdata);
+            //xhr.onreadystatechange = function (response) {
+            //    if (xhr.readyState == 4 && xhr.status == 200) {
+            //        alert("bien")
+            //    } else {
+            //        alert("mal")
+            //    }
+            //}
+
+
+            $.ajax({
+                url: '/Home/ObtenerRazonSocial',
+                type: 'POST',
+                dataType: 'json',
+                success: function (response) {
+                    if (response.razonSocial != "") {
+                        document.getElementById("NombreEmpresaAfiliadoEmpresa").value = response.razonSocial;
+                        document.getElementById("NombreFantasiaAfiliadoEmpresa").value = response.nombreFantasia;
+                        document.getElementById("RubroAfiliadoEmpresa").value = response.actividad;
+                    }
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                },
+                data: {
+                    cuit: cuit
+                }
+            });
+
         } else {
             document.getElementById("CUITEmpresaAfiliadoEmpresa").value = "";
+            document.getElementById("NombreEmpresaAfiliadoEmpresa").value = "";
+            document.getElementById("NombreFantasiaAfiliadoEmpresa").value = "";
+            document.getElementById("RubroAfiliadoEmpresa").value = "0";
             alert("Este cuit es invalido");
         }
+    } else {
+        document.getElementById("NombreEmpresaAfiliadoEmpresa").value = "";
+        document.getElementById("NombreFantasiaAfiliadoEmpresa").value = "";
+        document.getElementById("RubroAfiliadoEmpresa").value = "0";
     }
 }
 

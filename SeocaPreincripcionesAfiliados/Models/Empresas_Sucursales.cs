@@ -22,5 +22,6 @@ namespace SeocaPreincripcionesAfiliados.Models
         public string Calle { get; set; }
         public string Altura { get; set; }
         public string Telefono { get; set; }
+        public string Email { get; set; }
     }
 }

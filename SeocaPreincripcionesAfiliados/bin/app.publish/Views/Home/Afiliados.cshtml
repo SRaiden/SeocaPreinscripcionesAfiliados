@@ -40,17 +40,20 @@
         <div class="form-100 validate-form">
             <p class="title-10-form" style="font-style: italic;">
                 <b>
-                    Por la presente expreso mi voluntad de incorporarme como afiliado al SEOCA Zona Oeste. A tal fin presto mi
-                    conformidad para que sea descontado de mis haberes el 2% adicional, en concepto de Cuota Sindical: Seguro de
-                    Sepelio y, Turismo-Recreación.
+                    Por la presente expreso mi voluntad de incorporación como afiliado/a a dicha institución, comprendiendo el 
+                    cumplimiento a los preceptos estatutarios y la participación en las actividades programadas por la Entidad. 
+                    A tal fin, presto mi conformidad para que sea descontado de mis haberes, por mi empleador, los aportes 
+                    sindicales correspondientes (2% en concepto de Seguro de Sepelio y Turismo-Recreación). Dejo constancia 
+                    y doy fe de los datos personales y del grupo familiar a mi cargo, comprometiéndome comunicar toda 
+                    modificación de los mism
                 </b>
             </p>
         </div>
 
 
-        <div style="float: right;">
+        @*<div style="float: right;">
             <a href="~/Descargar/NotaSolicitud.docx" download="NotaSolicitud.docx" " class="boton-descarga">Descargar Nota de Solicitud</a>
-        </div>
+        </div>*@
 
         <br />
 
@@ -218,23 +221,29 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group has-feedback col-lg-4">
+                    <div class="form-group has-feedback col-lg-3">
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-home"></span></div>
                             <input class="form-control" data-error="Calle es un campo uiuerido." id="Localidad" maxlength="200" name="Localidad" placeholder="Localidad" required="required" type="text" value="" onchange="changeCampos()">
                         </div>
                     </div>
-                    <div class="form-group has-feedback col-lg-4">
+                    <div class="form-group has-feedback col-lg-3">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-home"></span></div>
+                            <input class="form-control" data-error="CP es un campo uiuerido." id="CP" maxlength="10" name="CP" placeholder="CP" min="0" required="required" type="number" value="">
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback col-lg-3">
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-equalizer"></span></div>
                             <select class="form-control" data-error="Provincia es un campo requerido." data-val="true" id="Provincia" name="Provincia" placeholder="Provincia" required="required">
                                 <option value="0">- Provincia -</option>
-                                <option value="1">Bs AS</option>
+                                <option value="1">Bs As</option>
                                 <option value="2">CABA</option>
                             </select>
                         </div>
                     </div>
-                    <div class="form-group has-feedback col-lg-4">
+                    <div class="form-group has-feedback col-lg-3">
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></div>
                             <select class="form-control" data-error="Nacionalidad es un campo requerido." data-val="true" data-val-number="The field Nacionalidad must be a number." data-val-required="The Nacionalidad field is required." id="Nacionalidad" name="Nacionalidad" placeholder="Nacionalidad" required="required">
@@ -325,7 +334,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row" style="margin-bottom: 2em;">
+                @*<div class="row" style="margin-bottom: 2em;">
                     <div class="form-group col-md-8 col-md-offset-2">
                         <label> Nota de Solicitud </label>
                         <div class="input-group">
@@ -340,7 +349,7 @@
                             Tamaño máximo permitido 10MB
                         </div>
                     </div>
-                </div>
+                </div>*@
 
                 <br />
 
@@ -428,6 +437,8 @@
                                     <th>Familiar</th>
                                     <th>Nombre</th>
                                     <th>N° Documento</th>
+                                    <th>1° Archivo</th>
+                                    <th>2° Archivo</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -580,9 +591,12 @@
             <br />
 
             <div class="title-10-form">
-                Por la presente expreso mi voluntad de incorporarme como afiliado/a al SEOCA Zona Oeste. A tan fin,
-                presto mi conformidad para que sea descontado de mis haberes el 2% adicional, en concepto de Cuota
-                Sindical (Seguro de Sepelio, Turismo y Recreación).
+                <input type="checkbox" id="checkConstancia" class="w3-check"/> Por la presente expreso mi voluntad de incorporación como afiliado/a a dicha institución,
+                comprendiendo el cumplimiento a los preceptos estatutarios y la participación en las actividades programadas por
+                la Entidad. A tal fin, presto mi conformidad para que sea descontado de mis haberes, por mi empleador, los
+                aportes sindicales correspondientes (2% en concepto de Seguro de Sepelio y Turismo-Recreación).
+                Dejo constancia y doy fe de los datos personales y del grupo familiar a mi cargo, comprometiéndome comunicar
+                toda modificación de los mismos.
             </div>
 
             <br />

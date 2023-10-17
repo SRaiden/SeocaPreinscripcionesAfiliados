@@ -4,6 +4,7 @@
     <FunctionImport Name="SP_crearReporteAfiliados">
       <Parameter Name="Codigo" Mode="In" Type="Int32" />
     </FunctionImport>
+    <EntitySet Name="Afiliados_Empresa" EntityType="geosoftw_seocapreinscripcionesModel.Afiliados_Empresa" />
     <EntitySet Name="Empresas" EntityType="geosoftw_seocapreinscripcionesModel.Empresas" />
     <EntitySet Name="Empresas_Actividades" EntityType="geosoftw_seocapreinscripcionesModel.Empresas_Actividades" />
     <EntitySet Name="Empresas_Antecedentes" EntityType="geosoftw_seocapreinscripcionesModel.Empresas_Antecedentes" />
@@ -11,6 +12,7 @@
     <EntitySet Name="Empresas_Empleados" EntityType="geosoftw_seocapreinscripcionesModel.Empresas_Empleados" />
     <EntitySet Name="Empresas_Sucursales" EntityType="geosoftw_seocapreinscripcionesModel.Empresas_Sucursales" />
     <EntitySet Name="Empresas_Titulares" EntityType="geosoftw_seocapreinscripcionesModel.Empresas_Titulares" />
+    <EntitySet Name="General_ActividadRubro" EntityType="geosoftw_seocapreinscripcionesModel.General_ActividadRubro" />
     <EntitySet Name="General_Calificacion" EntityType="geosoftw_seocapreinscripcionesModel.General_Calificacion" />
     <EntitySet Name="General_Delegacion" EntityType="geosoftw_seocapreinscripcionesModel.General_Delegacion" />
     <EntitySet Name="General_Delegacion_Usuarios" EntityType="geosoftw_seocapreinscripcionesModel.General_Delegacion_Usuarios" />
@@ -21,11 +23,57 @@
     <EntitySet Name="General_Parentesco" EntityType="geosoftw_seocapreinscripcionesModel.General_Parentesco" />
     <EntitySet Name="General_Provincias" EntityType="geosoftw_seocapreinscripcionesModel.General_Provincias" />
     <EntitySet Name="General_Sexo" EntityType="geosoftw_seocapreinscripcionesModel.General_Sexo" />
-    <EntitySet Name="Afiliados_Familiares" EntityType="geosoftw_seocapreinscripcionesModel.Afiliados_Familiares" />
-    <EntitySet Name="General_ActividadRubro" EntityType="geosoftw_seocapreinscripcionesModel.General_ActividadRubro" />
-    <EntitySet Name="Afiliados_Empresa" EntityType="geosoftw_seocapreinscripcionesModel.Afiliados_Empresa" />
+    <EntitySet Name="Secretaria_Afiliados" EntityType="geosoftw_seocapreinscripcionesModel.Secretaria_Afiliados" />
+    <EntitySet Name="Secretaria_Afiliados_Estado" EntityType="geosoftw_seocapreinscripcionesModel.Secretaria_Afiliados_Estado" />
+    <EntitySet Name="Secretaria_Afiliados_Familiares" EntityType="geosoftw_seocapreinscripcionesModel.Secretaria_Afiliados_Familiares" />
+    <EntitySet Name="Secretaria_Empresas" EntityType="geosoftw_seocapreinscripcionesModel.Secretaria_Empresas" />
+    <EntitySet Name="Secretaria_Empresas_DDJJ" EntityType="geosoftw_seocapreinscripcionesModel.Secretaria_Empresas_DDJJ" />
+    <EntitySet Name="Secretaria_Empresas_Responsables" EntityType="geosoftw_seocapreinscripcionesModel.Secretaria_Empresas_Responsables" />
+    <EntitySet Name="Secretaria_Empresas_Sucursales" EntityType="geosoftw_seocapreinscripcionesModel.Secretaria_Empresas_Sucursales" />
+    <EntitySet Name="Secretaria_Zonas" EntityType="geosoftw_seocapreinscripcionesModel.Secretaria_Zonas" />
+    <FunctionImport Name="SP_verDatoAfiliado" ReturnType="Collection(geosoftw_seocapreinscripcionesModel.SP_verDatoAfiliado_Result)">
+      <Parameter Name="Codigo" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_VerDatoFamiliar">
+      <Parameter Name="Codigo" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_VerTodosAfiliados" ReturnType="Collection(geosoftw_seocapreinscripcionesModel.SP_VerTodosAfiliados_Result)">
+      <Parameter Name="apellidoNombre" Mode="In" Type="String" />
+      <Parameter Name="Cuil" Mode="In" Type="String" />
+      <Parameter Name="DNI" Mode="In" Type="String" />
+      <Parameter Name="Delegacion" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_VerTodosAfiliadosSegunEstado" ReturnType="Collection(geosoftw_seocapreinscripcionesModel.SP_VerTodosAfiliadosSegunEstado_Result)">
+      <Parameter Name="apellidoNombre" Mode="In" Type="String" />
+      <Parameter Name="Cuil" Mode="In" Type="String" />
+      <Parameter Name="DNI" Mode="In" Type="String" />
+      <Parameter Name="Estado" Mode="In" Type="String" />
+      <Parameter Name="Delegacion" Mode="In" Type="Int32" />
+    </FunctionImport>
     <EntitySet Name="Afiliados_DatosPersonales" EntityType="geosoftw_seocapreinscripcionesModel.Afiliados_DatosPersonales" />
+    <EntitySet Name="Secretaria_Empresas_Estado1Set" EntityType="geosoftw_seocapreinscripcionesModel.Secretaria_Empresas_Estado1" />
+    <EntitySet Name="Afiliados_Familiares" EntityType="geosoftw_seocapreinscripcionesModel.Afiliados_Familiares" />
   </EntityContainer>
+  <EntityType Name="Afiliados_Empresa">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id_Afiliado" Type="Int32" Nullable="false" />
+    <Property Name="Fecha_Ingreso" Type="DateTime" Precision="0" />
+    <Property Name="Nombre_Empresa" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Nombre_Fantasia" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Cuit_Empresa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Calle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Numero" Type="Int32" />
+    <Property Name="Piso" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Dto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Localidad" Type="Int32" />
+    <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Rubro" Type="Int32" />
+    <Property Name="OtroRubro" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+  </EntityType>
   <EntityType Name="Empresas">
     <Key>
       <PropertyRef Name="Id" />
@@ -37,10 +85,14 @@
     <Property Name="Cuit" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
     <Property Name="DomicilioReal" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
     <Property Name="NroReal" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="PisoReal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DtoReal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="LocalidadReal" Type="Int32" />
     <Property Name="TelefonoReal" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="DomicilioLegal" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
     <Property Name="NroLegal" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="PisoLegal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DtoLegal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="LocalidadLegal" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
     <Property Name="TelefonoLegal" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="Actividad" Type="Int32" />
@@ -52,10 +104,18 @@
     <Property Name="Estado" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Name="ComentarioEstado" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="Confirmada" Type="Boolean" />
-    <Property Name="PisoReal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="DtoReal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="PisoLegal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="DtoLegal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FotoHabilitacionMunicipal" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="FotoComprobanteAFIP" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="FotoContratoSocial" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="FotoNotaEscrita" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="FotoReciboSueldo" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="extensionHabilitacionMunicipal" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="extensionComprobanteAFIP" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="extensionContratoSocial" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="extensionNotaEscrita" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="extensionReciboSueldo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="ActualizacionSecretaria" Type="Boolean" />
+    <Property Name="CPLegal" Type="Int32" />
   </EntityType>
   <EntityType Name="Empresas_Actividades">
     <Key>
@@ -118,6 +178,7 @@
     <Property Name="Calle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="Altura" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Name="Telefono" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Empresas_Titulares">
     <Key>
@@ -131,6 +192,14 @@
     <Property Name="Documento" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
     <Property Name="Cargo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="Localidad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="CP" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="General_ActividadRubro">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre_Rubro" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="General_Calificacion">
     <Key>
@@ -204,48 +273,237 @@
     <Property Name="Codigo" Type="Int32" Nullable="false" />
     <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
-  <EntityType Name="Afiliados_Familiares">
+  <EntityType Name="Secretaria_Afiliados">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="Codigo" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Id_Afiliado" Type="Int32" Nullable="false" />
-    <Property Name="Parentesco" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Apellido_Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-    <Property Name="Tipo_Doc" Type="Int32" />
-    <Property Name="Num_Doc" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Codigo" Type="Int32" Nullable="false" />
+    <Property Name="ApellidoNombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Cuil" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="TipoDocumento" Type="Int32" />
+    <Property Name="NroDocumento" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="FechaNacimiento" Type="DateTime" Precision="3" />
+    <Property Name="FechaAlta" Type="DateTime" Precision="3" />
+    <Property Name="Nacionalidad" Type="Int32" />
     <Property Name="Sexo" Type="Int32" />
-    <Property Name="Fecha_Nac" Type="DateTime" Precision="0" />
-    <Property Name="DatosArchivo" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="ExtensionArchivo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="EstadoCivil" Type="Int32" />
+    <Property Name="Calle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Nro" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Piso" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="Departamento" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="CodigoPostal" Type="Int32" />
+    <Property Name="Provincia" Type="Int32" />
+    <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Delegacion" Type="Int32" />
+    <Property Name="Estado" Type="Int32" />
+    <Property Name="TipoCarnet" Type="Int32" />
+    <Property Name="FechaBaja" Type="DateTime" Precision="3" />
+    <Property Name="Requisito_ReciboSueldo" Type="Boolean" />
+    <Property Name="Requisito_Matrimonio" Type="Boolean" />
+    <Property Name="Requisito_PartidaHijos" Type="Boolean" />
+    <Property Name="Requisito_Dni" Type="Boolean" />
+    <Property Name="Requisito_OSECAC" Type="Boolean" />
+    <Property Name="FechaActualizacion" Type="DateTime" Precision="3" />
+    <Property Name="FechaNotificacion" Type="DateTime" Precision="3" />
+    <Property Name="FechaRecepcion" Type="DateTime" Precision="3" />
+    <Property Name="TramiteCumplido" Type="Boolean" />
+    <Property Name="Obs_Generales" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Obs_Credencial" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Marca" Type="Boolean" />
+    <Property Name="FechaBajaFuturo" Type="DateTime" Precision="3" />
+    <Property Name="Marca2" Type="Boolean" />
+    <Property Name="UsuarioC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UsuarioM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Empresa" Type="Int32" />
+    <Property Name="Sucursal" Type="Int32" />
+    <Property Name="FechaIngresoEmpresa" Type="DateTime" Precision="3" />
+    <Property Name="UltimoPago" Type="DateTime" Precision="3" />
+    <Property Name="AporteDesde" Type="DateTime" Precision="3" />
+    <Property Name="AporteHasta" Type="DateTime" Precision="3" />
+    <Property Name="Aporte1" Type="Boolean" />
+    <Property Name="Aporte2" Type="Boolean" />
+    <Property Name="Aporte3" Type="Boolean" />
+    <Property Name="Calificacion" Type="Int32" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Celular" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="CuotaAfiliado" Type="Boolean" />
+    <Property Name="OrigenDelegacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="OrigenUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DatosActualizados" Type="Boolean" />
   </EntityType>
-  <EntityType Name="General_ActividadRubro">
+  <EntityType Name="Secretaria_Afiliados_Estado">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Marca" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Secretaria_Afiliados_Familiares">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="Int32" Nullable="false" />
+    <Property Name="Afiliado" Type="Int32" />
+    <Property Name="Tipo" Type="Int32" />
+    <Property Name="ApellidoNombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="TipoDocumento" Type="Int32" />
+    <Property Name="NroDocumento" Type="Int32" />
+    <Property Name="Sexo" Type="Int32" />
+    <Property Name="FechaNacimiento" Type="DateTime" Precision="3" />
+    <Property Name="FechaActualizacion" Type="DateTime" Precision="3" />
+    <Property Name="Vencimiento" Type="DateTime" Precision="3" />
+    <Property Name="Estudio" Type="DateTime" Precision="3" />
+    <Property Name="Marca" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Secretaria_Empresas">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="Int32" Nullable="false" />
+    <Property Name="Cuit" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+    <Property Name="RazonSocial" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="NombreFantasia" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Zona" Type="Int32" />
+    <Property Name="CalleFiscal" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NroFiscal" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="LocalidadFiscal" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="PisoFiscal" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="DepartamentoFiscal" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="CPFiscal" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="TelefonoFiscal" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="CalleReal" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NroReal" Type="Int32" />
+    <Property Name="LocalidadReal" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="PisoReal" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="DepartamentoReal" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="CPReal" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="TelefonoReal" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Ubicada" Type="Boolean" />
+    <Property Name="Actividad" Type="Int32" />
+    <Property Name="Doc_Habilitacion" Type="Boolean" />
+    <Property Name="Doc_Contrato_Estatuto" Type="Boolean" />
+    <Property Name="Doc_DNRP_Inscripcion" Type="Boolean" />
+    <Property Name="Doc_DNRHE" Type="Boolean" />
+    <Property Name="Doc_Sueldo" Type="Boolean" />
+    <Property Name="Estado" Type="Int32" />
+    <Property Name="FechaInscripcion" Type="DateTime" Precision="3" />
+    <Property Name="FechaDeuda" Type="DateTime" Precision="3" />
+    <Property Name="Web" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+    <Property Name="Detalle" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="FechaDatos" Type="DateTime" Precision="3" />
+    <Property Name="DDJJ" Type="DateTime" Precision="3" />
+    <Property Name="ContadorNombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ContadorDomicilio" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="ContadorLocalidad" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="ContadorTelefono" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ContadorEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Secretaria_Empresas_DDJJ">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" />
-    <Property Name="Nombre_Rubro" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Empresa" Type="Int32" />
+    <Property Name="Cuil" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+    <Property Name="Aporte1" Type="Boolean" />
+    <Property Name="Aporte2" Type="Boolean" />
+    <Property Name="Aporte3" Type="Boolean" />
+    <Property Name="Categoria" Type="Int32" />
+    <Property Name="FechaIngreso" Type="DateTime" Precision="3" />
+    <Property Name="Sueldo" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="FechaBaja" Type="DateTime" Precision="3" />
+    <Property Name="Sucursal" Type="Int32" />
+    <Property Name="Periodo" Type="DateTime" Precision="3" />
+    <Property Name="Fuente" Type="Int32" />
+    <Property Name="FechaDatos" Type="DateTime" Precision="3" />
+    <Property Name="Horas" Type="Int32" />
+    <Property Name="CuotaAfiliado" Type="Boolean" />
   </EntityType>
-  <EntityType Name="Afiliados_Empresa">
+  <EntityType Name="Secretaria_Empresas_Responsables">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Id_Afiliado" Type="Int32" Nullable="false" />
-    <Property Name="Fecha_Ingreso" Type="DateTime" Precision="0" />
-    <Property Name="Nombre_Empresa" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-    <Property Name="Nombre_Fantasia" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-    <Property Name="Cuit_Empresa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Calle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Numero" Type="Int32" />
-    <Property Name="Piso" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Dto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Localidad" Type="Int32" />
-    <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="Rubro" Type="Int32" />
-    <Property Name="OtroRubro" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="CodigoEmpresa" Type="Int32" />
+    <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Domicilio" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Localidad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="TipoDocumento" Type="Int32" />
+    <Property Name="NroDocumento" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Inhabilitado" Type="Boolean" />
   </EntityType>
+  <EntityType Name="Secretaria_Empresas_Sucursales">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Empresa" Type="Int32" Nullable="false" />
+    <Property Name="Numero" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Calle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Altura" Type="Int32" />
+    <Property Name="Localidad" Type="Int32" />
+    <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Marca" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Secretaria_Zonas">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="Int32" Nullable="false" />
+    <Property Name="CodigoPostal" Type="Int32" />
+    <Property Name="Inspector" Type="Int32" />
+  </EntityType>
+  <ComplexType Name="SP_verDatoAfiliado_Result">
+    <Property Type="Int32" Name="Codigo" Nullable="false" />
+    <Property Type="String" Name="ApellidoNombre" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="CUIL" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Delegacion" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Calificacion_Profesional" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="Estado_Civil" Nullable="true" MaxLength="150" />
+    <Property Type="DateTime" Name="Fecha_Nac" Nullable="true" />
+    <Property Type="String" Name="Calle" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Numero_Doc" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Numero_Calle" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="Telefono" Nullable="true" />
+    <Property Type="String" Name="Localidad_Afiliado" Nullable="true" MaxLength="150" />
+    <Property Type="Int32" Name="NroAfiliado" Nullable="true" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="Celular" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Nombre_Empresa" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="Cuit_Empresa" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="fecha_solicitud" Nullable="true" />
+    <Property Type="String" Name="Calle_Empresa" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="Numero_Empresa" Nullable="true" />
+    <Property Type="String" Name="Localidad_Empresa" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="Provincia" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="Sexo" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Nacionalidad" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Telefono_Empresa" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="Fecha_Ingreso_Empresa" Nullable="true" />
+    <Property Type="String" Name="Estado" Nullable="true" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="SP_VerTodosAfiliados_Result">
+    <Property Type="Int32" Name="Codigo" Nullable="false" />
+    <Property Type="String" Name="ApellidoNombre" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="CUIL" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="NroAfiliado" Nullable="true" />
+    <Property Type="String" Name="Estado" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Numero_Doc" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="Fecha_Solicitud" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="SP_VerTodosAfiliadosSegunEstado_Result">
+    <Property Type="Int32" Name="Codigo" Nullable="false" />
+    <Property Type="String" Name="ApellidoNombre" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="CUIL" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="NroAfiliado" Nullable="true" />
+    <Property Type="String" Name="Estado" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Numero_Doc" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="Fecha_Solicitud" Nullable="true" />
+  </ComplexType>
   <EntityType Name="Afiliados_DatosPersonales">
     <Key>
       <PropertyRef Name="Codigo" />
@@ -290,6 +548,41 @@
     <Property Name="extensionSueldo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Name="extensionPerfil" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Name="extensionNotaSolicitud" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="SecretariaEmpresa" Type="Int32" />
+    <Property Name="SecretariaSucursal" Type="Int32" />
+    <Property Name="SecretariaComentario" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="SecretariaIngresoEmpresa" Type="DateTime" Precision="0" />
     <Property Name="ActualizacionSecretaria" Type="Boolean" />
+    <Property Name="EnvioPDFEmail" Type="Boolean" />
+    <Property Name="CP" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Secretaria_Empresas_Estado1">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="Int32" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Afiliados_Familiares">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id_Afiliado" Type="Int32" Nullable="false" />
+    <Property Name="Parentesco" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Apellido_Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Tipo_Doc" Type="Int32" />
+    <Property Name="Num_Doc" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Sexo" Type="Int32" />
+    <Property Name="Fecha_Nac" Type="DateTime" Precision="0" />
+    <Property Name="DatosArchivo" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="ExtensionArchivo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="UsuarioSecretaria" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NroAfiliadoSecretaria" Type="Int32" />
+    <Property Name="IdFamiliarSecretaria" Type="Int32" />
+    <Property Name="InhabilitarSecretaria" Type="Boolean" />
+    <Property Name="ActualizacionSecretaria" Type="Boolean" />
+    <Property Name="DatosArchivo2" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="ExtensionArchivo2" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>

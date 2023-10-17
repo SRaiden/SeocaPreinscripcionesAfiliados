@@ -22,5 +22,6 @@ namespace SeocaPreincripcionesAfiliados.Models
         public string Documento { get; set; }
         public string Cargo { get; set; }
         public string Localidad { get; set; }
+        public string CP { get; set; }
     }
 }

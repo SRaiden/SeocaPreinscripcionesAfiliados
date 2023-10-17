@@ -24,5 +24,12 @@ namespace SeocaPreincripcionesAfiliados.Models
         public Nullable<System.DateTime> Fecha_Nac { get; set; }
         public byte[] DatosArchivo { get; set; }
         public string ExtensionArchivo { get; set; }
+        public string UsuarioSecretaria { get; set; }
+        public Nullable<int> NroAfiliadoSecretaria { get; set; }
+        public Nullable<int> IdFamiliarSecretaria { get; set; }
+        public Nullable<bool> InhabilitarSecretaria { get; set; }
+        public Nullable<bool> ActualizacionSecretaria { get; set; }
+        public byte[] DatosArchivo2 { get; set; }
+        public string ExtensionArchivo2 { get; set; }
     }
 }

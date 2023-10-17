@@ -14,6 +14,8 @@ using System.Web.Helpers;
 using System.Web.Mvc;
 using Microsoft.Reporting.WebForms;
 using MimeKit;
+//using Microsoft.AspNetCore.Mvc;
+//using Microsoft.AspNetCore.Http;
 
 namespace SeocaPreincripcionesAfiliados.Controllers
 {
@@ -156,7 +158,12 @@ namespace SeocaPreincripcionesAfiliados.Controllers
         }
 
         [HttpPost]
-        public ActionResult Afiliados(string matrizDatosAfiliado, string matrizEmpresa = null, string matrizFamiliares = null, HttpPostedFileBase fileDNIFrente = null, HttpPostedFileBase fileDNIDorso = null, HttpPostedFileBase fileReciboSueldo = null, HttpPostedFileBase filePerfil = null, HttpPostedFileBase fileNS = null)
+        public ActionResult Afiliados(string matrizDatosAfiliado, string matrizEmpresa = null, string matrizFamiliares = null, 
+                                        HttpPostedFileBase fileDNIFrente = null, HttpPostedFileBase fileDNIDorso = null, HttpPostedFileBase fileReciboSueldo = null, HttpPostedFileBase filePerfil = null, /*HttpPostedFileBase fileNS = null,*/
+                                        HttpPostedFileBase fileFamiliar1 = null, HttpPostedFileBase fileFamiliar2 = null, HttpPostedFileBase fileFamiliar3 = null, HttpPostedFileBase fileFamiliar4 = null, HttpPostedFileBase fileFamiliar5 = null,
+                                        HttpPostedFileBase fileFamiliar6 = null, HttpPostedFileBase fileFamiliar7 = null, HttpPostedFileBase fileFamiliar8 = null, HttpPostedFileBase fileFamiliar9 = null, HttpPostedFileBase fileFamiliar10 = null,
+                                        HttpPostedFileBase fileFamiliarDos1 = null, HttpPostedFileBase fileFamiliarDos2 = null, HttpPostedFileBase fileFamiliarDos3 = null, HttpPostedFileBase fileFamiliarDos4 = null, HttpPostedFileBase fileFamiliarDos5 = null,
+                                        HttpPostedFileBase fileFamiliarDos6 = null, HttpPostedFileBase fileFamiliarDos7 = null, HttpPostedFileBase fileFamiliarDos8 = null, HttpPostedFileBase fileFamiliarDos9 = null, HttpPostedFileBase fileFamiliarDos10 = null)
         {
             using (Models.geosoftw_seocapreinscripcionesEntities db = new Models.geosoftw_seocapreinscripcionesEntities())
             {
@@ -194,7 +201,8 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                         { "Celular", "" },
                         { "SexoAfiliadoDocumento", "" },
                         { "Nacionalidad", "" },
-                        { "Email", "" }
+                        { "Email", "" },
+                        { "CP", "" }
                     };
 
                     foreach (JObject jsonOperaciones in jsonPreservar.Children<JObject>())
@@ -226,6 +234,7 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                     string SexoAfiliadoDocumento = propiedades["SexoAfiliadoDocumento"];
                     string Nacionalidad = propiedades["Nacionalidad"];
                     string Celular = propiedades["Celular"];
+                    string CP = propiedades["CP"];
                     Email = propiedades["Email"];
 
                     // Validar si se preinscribio anteriormente
@@ -288,7 +297,7 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                     ReadFile(fileDNIDorso, out bytesDorso, out extDorso);
                     ReadFile(fileReciboSueldo, out bytesSueldo, out extSueldo);
                     ReadFile(filePerfil, out bytesPerfil, out extPerfil);
-                    ReadFile(fileNS, out bytesNotaSolicitud, out extNotaSolicitud);
+                    //ReadFile(fileNS, out bytesNotaSolicitud, out extNotaSolicitud);
 
                     int dele = 0;
                     string hoy = DateTime.Now.ToString("yyyy/MM/dd");
@@ -333,6 +342,7 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                         Dto = Dto,
                         Telefono = Int32.Parse(Telefono),
                         Localidad = Localidad,
+                        CP = CP,
                         Provincia = Provincia,
                         Sexo = Int32.Parse(SexoAfiliadoDocumento),
                         Nacionalidad = Int32.Parse(Nacionalidad),
@@ -356,7 +366,8 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                         extensionDorso = extDorso,
                         extensionSueldo = extSueldo,
                         extensionPerfil = extPerfil,
-                        extensionNotaSolicitud = extNotaSolicitud
+                        extensionNotaSolicitud = extNotaSolicitud,
+                        EnvioPDFEmail = false
                     };
 
                     db.Afiliados_DatosPersonales.Add(emp);
@@ -454,6 +465,51 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                             string NumDocAfiliadoFamiliar = jsonOperaciones.Value<string>("NumDocAfiliadoFamiliar");
                             string SexoAfiliadoFamiliar = jsonOperaciones.Value<string>("SexoAfiliadoFamiliar");
                             string FechaNacAfiliadoFamiliar = jsonOperaciones.Value<string>("FechaNacAfiliadoFamiliar");
+                            string FileFamiliar = jsonOperaciones.Value<string>("FileFamiliar");
+                            string FileFamiliarDos = jsonOperaciones.Value<string>("FileFamiliarDos");
+
+                            byte[] bytesFamiliar = null;
+                            string extfamiliar = null;
+                            byte[] bytesFamiliarDos = null;
+                            string extfamiliarDos = null;
+
+                            void ReadFileFamiliar(HttpPostedFileBase file, out byte[] bytesf, out string extension)
+                            {
+                                bytesf = null;
+                                extension = null;
+                                if (file != null)
+                                {
+                                    var fileName = Path.GetFileName(file.FileName);
+                                    string[] fileParts = fileName.Split('.');
+                                    extension = fileParts[1];
+                                    using (BinaryReader br = new BinaryReader(file.InputStream))
+                                    {
+                                        bytesf = br.ReadBytes(file.ContentLength);
+                                    }
+                                }
+                            }
+
+                            if(FileFamiliar == "1") ReadFileFamiliar(fileFamiliar1, out bytesFamiliar, out extfamiliar);
+                            else if (FileFamiliar == "2") ReadFileFamiliar(fileFamiliar2, out bytesFamiliar, out extfamiliar);
+                            else if (FileFamiliar == "3") ReadFileFamiliar(fileFamiliar3, out bytesFamiliar, out extfamiliar);
+                            else if (FileFamiliar == "4") ReadFileFamiliar(fileFamiliar4, out bytesFamiliar, out extfamiliar);
+                            else if (FileFamiliar == "5") ReadFileFamiliar(fileFamiliar5, out bytesFamiliar, out extfamiliar);
+                            else if (FileFamiliar == "6") ReadFileFamiliar(fileFamiliar6, out bytesFamiliar, out extfamiliar);
+                            else if (FileFamiliar == "7") ReadFileFamiliar(fileFamiliar7, out bytesFamiliar, out extfamiliar);
+                            else if (FileFamiliar == "8") ReadFileFamiliar(fileFamiliar8, out bytesFamiliar, out extfamiliar);
+                            else if (FileFamiliar == "9") ReadFileFamiliar(fileFamiliar9, out bytesFamiliar, out extfamiliar);
+                            else if (FileFamiliar == "10") ReadFileFamiliar(fileFamiliar10, out bytesFamiliar, out extfamiliar);
+                            //---------------------------------------------------------------------------------------------------//
+                            if (FileFamiliarDos == "1") ReadFileFamiliar(fileFamiliarDos1, out bytesFamiliarDos, out extfamiliarDos);
+                            else if (FileFamiliarDos == "2") ReadFileFamiliar(fileFamiliarDos2, out bytesFamiliarDos, out extfamiliarDos);
+                            else if (FileFamiliarDos == "3") ReadFileFamiliar(fileFamiliarDos3, out bytesFamiliarDos, out extfamiliarDos);
+                            else if (FileFamiliarDos == "4") ReadFileFamiliar(fileFamiliarDos4, out bytesFamiliarDos, out extfamiliarDos);
+                            else if (FileFamiliarDos == "5") ReadFileFamiliar(fileFamiliarDos5, out bytesFamiliarDos, out extfamiliarDos);
+                            else if (FileFamiliarDos == "6") ReadFileFamiliar(fileFamiliarDos6, out bytesFamiliarDos, out extfamiliarDos);
+                            else if (FileFamiliarDos == "7") ReadFileFamiliar(fileFamiliarDos7, out bytesFamiliarDos, out extfamiliarDos);
+                            else if (FileFamiliarDos == "8") ReadFileFamiliar(fileFamiliarDos8, out bytesFamiliarDos, out extfamiliarDos);
+                            else if (FileFamiliarDos == "9") ReadFileFamiliar(fileFamiliarDos9, out bytesFamiliarDos, out extfamiliarDos);
+                            else if (FileFamiliarDos == "10") ReadFileFamiliar(fileFamiliarDos10, out bytesFamiliarDos, out extfamiliarDos);
 
                             var emp = new Afiliados_Familiares
                             {
@@ -464,7 +520,11 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                                 Tipo_Doc = 1,
                                 Num_Doc = NumDocAfiliadoFamiliar,
                                 Sexo = Int32.Parse(SexoAfiliadoFamiliar),
-                                Fecha_Nac = DateTime.Parse(FechaNacAfiliadoFamiliar)
+                                Fecha_Nac = DateTime.Parse(FechaNacAfiliadoFamiliar),
+                                DatosArchivo = bytesFamiliar,
+                                ExtensionArchivo = extfamiliar,
+                                DatosArchivo2 = bytesFamiliarDos,
+                                ExtensionArchivo2 = extfamiliarDos
                             };
 
                             db.Afiliados_Familiares.Add(emp);
@@ -699,6 +759,43 @@ namespace SeocaPreincripcionesAfiliados.Controllers
 
         //---------------------------------------//
 
+        [HttpPost]
+        [Route("/ObtenerRazonSocial")]
+        public JsonResult ObtenerRazonSocial(string cuit)
+        {
+            GenericResponse<DatosEmpresa> gresponse = new GenericResponse<DatosEmpresa>();
+            try
+            {
+                using (Models.geosoftw_seocapreinscripcionesEntities db = new Models.geosoftw_seocapreinscripcionesEntities())
+                {
+                    string texto = Request.Params["cuit"];
+                    cuit = cuit.Replace("-", "");
+
+                    var element = db.Secretaria_Empresas.Where(d => d.Cuit == cuit).First();
+
+                    DatosEmpresa dt = new DatosEmpresa
+                    {
+                        nombreFantasia = element.NombreFantasia,
+                        razonSocial = element.RazonSocial,
+                        actividad = element.Actividad.ToString()
+                    };
+
+                    return Json(dt);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                DatosEmpresa dt = new DatosEmpresa
+                {
+                    nombreFantasia = "",
+                    razonSocial = ""
+                };
+                return Json(dt);
+            }
+        }
+
+
         [HttpGet]
         [Route("/verDatoAfiliado")]
         [Route("/verDatoAfiliado/{id}")]
@@ -816,90 +913,105 @@ namespace SeocaPreincripcionesAfiliados.Controllers
                     else
                     {
                         codigo = "Codigo invalido";
+                        ViewBag.mensaje = "Error al enviar el email";
+                        return View();
                     }
 
-                    // crear pdf y guardarlo en servidor
-                    List<ReporteAfiliado> reporteAfiliado = db.Database.SqlQuery<ReporteAfiliado>("EXEC SP_crearReporteAfiliados @Codigo", new SqlParameter("Codigo", val.Codigo)).ToList<ReporteAfiliado>();
-                    ReportViewer ReportViewer = new ReportViewer();
-                    ReportDataSource rdc = new ReportDataSource("DataSet1", reporteAfiliado);
-
-                    ReportViewer.Visible = true;
-                    ReportViewer.LocalReport.ReportPath = Server.MapPath("~/DatosAfiliado.rdlc");
-                    ReportViewer.ShowParameterPrompts = true;
-                    ReportViewer.LocalReport.DataSources.Clear();
-                    ReportViewer.LocalReport.DataSources.Add(rdc);
-
-                    ReportViewer.ProcessingMode = ProcessingMode.Local;
-
-                    using (StreamReader rdlcSR = new StreamReader(Server.MapPath("~/DatosAfiliado.rdlc")))
+                    if (val.EnvioPDFEmail != true)
                     {
-                        ReportViewer.LocalReport.LoadReportDefinition(rdlcSR);
+                        // crear pdf y guardarlo en servidor
+                        List<ReporteAfiliado> reporteAfiliado = db.Database.SqlQuery<ReporteAfiliado>("EXEC SP_crearReporteAfiliados @Codigo", new SqlParameter("Codigo", val.Codigo)).ToList<ReporteAfiliado>();
+                        ReportViewer ReportViewer = new ReportViewer();
+                        ReportDataSource rdc = new ReportDataSource("DataSet1", reporteAfiliado);
+
+                        ReportViewer.Visible = true;
+                        ReportViewer.LocalReport.ReportPath = Server.MapPath("~/DatosAfiliado.rdlc");
+                        ReportViewer.ShowParameterPrompts = true;
+                        ReportViewer.LocalReport.DataSources.Clear();
+                        ReportViewer.LocalReport.DataSources.Add(rdc);
+
+                        ReportViewer.ProcessingMode = ProcessingMode.Local;
+
+                        using (StreamReader rdlcSR = new StreamReader(Server.MapPath("~/DatosAfiliado.rdlc")))
+                        {
+                            ReportViewer.LocalReport.LoadReportDefinition(rdlcSR);
+                            ReportViewer.LocalReport.Refresh();
+                        }
+
                         ReportViewer.LocalReport.Refresh();
-                    }
 
-                    ReportViewer.LocalReport.Refresh();
+                        string mimeType = string.Empty;
+                        string encoding = string.Empty;
+                        string extension = string.Empty;
 
-                    string mimeType = string.Empty;
-                    string encoding = string.Empty;
-                    string extension = string.Empty;
+                        byte[] bytes = ReportViewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out string[] streamids, out Warning[] warnings);
 
-                    byte[] bytes = ReportViewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out string[] streamids, out Warning[] warnings);
-
-                    // Guardar el archivo PDF en el servidor
-                    string pdfFilePath = Server.MapPath("~/Pdfs/" + "InscripcionAfiliado_" + Cuil + ".pdf");
-                    using (FileStream fs = new FileStream(pdfFilePath, FileMode.Create))
-                    {
-                        fs.Write(bytes, 0, bytes.Length);
-                    }
-
-                    // Enviar PDF por Email
-                    try
-                    {
-                        MailKit.Net.Smtp.SmtpClient smtp2 = new MailKit.Net.Smtp.SmtpClient();
-                        smtp2.Connect("vps-2676239-x.dattaweb.com", 465, MailKit.Security.SecureSocketOptions.SslOnConnect);
-                        smtp2.Authenticate("afiliaciones@seocaweb.com.ar", "Hws*7YN7kB");
-
-                        MimeMessage email = new MimeMessage();
-                        email.From.Add(MailboxAddress.Parse("afiliaciones@seocaweb.com.ar"));
-                        email.To.Add(MailboxAddress.Parse(val.Email));
-                        email.Subject = "Adjunto de PDF";
-
-                        // Crear el cuerpo del mensaje de correo electrónico
-                        BodyBuilder bodyBuilder = new BodyBuilder();
-                        bodyBuilder.TextBody = "Adjunto se encuentra el PDF generado.";
-
-                        // Adjuntar el archivo PDF al mensaje de correo electrónico
-                        string pdfFilePath2 = Server.MapPath("~/Pdfs/" + "InscripcionAfiliado_" + Cuil + ".pdf");
-                        if (System.IO.File.Exists(pdfFilePath2))
+                        // Guardar el archivo PDF en el servidor
+                        string pdfFilePath = Server.MapPath("~/Pdfs/" + "InscripcionAfiliado_" + Cuil + ".pdf");
+                        using (FileStream fs = new FileStream(pdfFilePath, FileMode.Create))
                         {
-                            bodyBuilder.Attachments.Add(pdfFilePath2);
-                        }
-                        else
-                        {
-                            return Content("El archivo PDF no existe.");
+                            fs.Write(bytes, 0, bytes.Length);
                         }
 
-                        // Asignar el cuerpo al mensaje
-                        email.Body = bodyBuilder.ToMessageBody();
+                        // Enviar PDF por Email
+                        try
+                        {
+                            MailKit.Net.Smtp.SmtpClient smtp2 = new MailKit.Net.Smtp.SmtpClient();
+                            smtp2.Connect("vps-2676239-x.dattaweb.com", 465, MailKit.Security.SecureSocketOptions.SslOnConnect);
+                            smtp2.Authenticate("afiliaciones@seocaweb.com.ar", "Hws*7YN7kB");
 
-                        smtp2.Send(email);
-                        smtp2.Disconnect(true);
+                            MimeMessage email = new MimeMessage();
+                            email.From.Add(MailboxAddress.Parse("afiliaciones@seocaweb.com.ar"));
+                            email.To.Add(MailboxAddress.Parse(val.Email));
+                            email.Subject = "Adjunto de PDF";
 
-                        ViewBag.mensaje = "Preinscripcion Ingresada. Le llego un correo con el pdf adjuntado.";
+                            // Crear el cuerpo del mensaje de correo electrónico
+                            BodyBuilder bodyBuilder = new BodyBuilder();
+                            bodyBuilder.TextBody = "Adjunto se encuentra el PDF generado.";
 
+                            // Adjuntar el archivo PDF al mensaje de correo electrónico
+                            string pdfFilePath2 = Server.MapPath("~/Pdfs/" + "InscripcionAfiliado_" + Cuil + ".pdf");
+                            if (System.IO.File.Exists(pdfFilePath2))
+                            {
+                                bodyBuilder.Attachments.Add(pdfFilePath2);
+                            }
+                            else
+                            {
+                                return Content("El archivo PDF no existe.");
+                            }
+
+                            // Asignar el cuerpo al mensaje
+                            email.Body = bodyBuilder.ToMessageBody();
+
+                            smtp2.Send(email);
+                            smtp2.Disconnect(true);
+
+                            ViewBag.mensaje = "Preinscripcion Ingresada. Le llego un correo con el pdf adjuntado.";
+
+                        }
+                        catch (Exception ex)
+                        {
+                            ViewBag.message = "Error al registrarse.";
+                            return View("IniciarSesion");
+                        }
+
+                        // Borrar el pdf del servidor
+                        string pdfFilePath3 = Server.MapPath("~/Pdfs/" + "InscripcionAfiliado_" + Cuil + ".pdf");
+                        if (System.IO.File.Exists(pdfFilePath3))
+                        {
+                            System.IO.File.Delete(pdfFilePath3);
+                        }
+
+                        // ENVIOPDFEMAIL
+                        val.EnvioPDFEmail = true;
+                        db.Entry(val).State = EntityState.Modified;
+                        db.SaveChanges();
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        ViewBag.message = "Error al registrarse.";
-                        return View("IniciarSesion");
+                        ViewBag.mensaje = "Ya recibio anteriormente un email con el pdf.";
                     }
-
-                    // Borrar el pdf del servidor
-                    string pdfFilePath3 = Server.MapPath("~/Pdfs/" + "InscripcionAfiliado_" + Cuil + ".pdf");
-                    if (System.IO.File.Exists(pdfFilePath3))
-                    {
-                        System.IO.File.Delete(pdfFilePath3);
-                    }
+                    
 
                 }
                 catch (Exception ex)

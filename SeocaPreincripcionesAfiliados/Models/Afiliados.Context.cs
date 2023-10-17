@@ -27,6 +27,7 @@ namespace SeocaPreincripcionesAfiliados.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Afiliados_Empresa> Afiliados_Empresa { get; set; }
         public virtual DbSet<Empresas> Empresas { get; set; }
         public virtual DbSet<Empresas_Actividades> Empresas_Actividades { get; set; }
         public virtual DbSet<Empresas_Antecedentes> Empresas_Antecedentes { get; set; }
@@ -34,6 +35,7 @@ namespace SeocaPreincripcionesAfiliados.Models
         public virtual DbSet<Empresas_Empleados> Empresas_Empleados { get; set; }
         public virtual DbSet<Empresas_Sucursales> Empresas_Sucursales { get; set; }
         public virtual DbSet<Empresas_Titulares> Empresas_Titulares { get; set; }
+        public virtual DbSet<General_ActividadRubro> General_ActividadRubro { get; set; }
         public virtual DbSet<General_Calificacion> General_Calificacion { get; set; }
         public virtual DbSet<General_Delegacion> General_Delegacion { get; set; }
         public virtual DbSet<General_Delegacion_Usuarios> General_Delegacion_Usuarios { get; set; }
@@ -44,10 +46,17 @@ namespace SeocaPreincripcionesAfiliados.Models
         public virtual DbSet<General_Parentesco> General_Parentesco { get; set; }
         public virtual DbSet<General_Provincias> General_Provincias { get; set; }
         public virtual DbSet<General_Sexo> General_Sexo { get; set; }
-        public virtual DbSet<Afiliados_Familiares> Afiliados_Familiares { get; set; }
-        public virtual DbSet<General_ActividadRubro> General_ActividadRubro { get; set; }
-        public virtual DbSet<Afiliados_Empresa> Afiliados_Empresa { get; set; }
+        public virtual DbSet<Secretaria_Afiliados> Secretaria_Afiliados { get; set; }
+        public virtual DbSet<Secretaria_Afiliados_Estado> Secretaria_Afiliados_Estado { get; set; }
+        public virtual DbSet<Secretaria_Afiliados_Familiares> Secretaria_Afiliados_Familiares { get; set; }
+        public virtual DbSet<Secretaria_Empresas> Secretaria_Empresas { get; set; }
+        public virtual DbSet<Secretaria_Empresas_DDJJ> Secretaria_Empresas_DDJJ { get; set; }
+        public virtual DbSet<Secretaria_Empresas_Responsables> Secretaria_Empresas_Responsables { get; set; }
+        public virtual DbSet<Secretaria_Empresas_Sucursales> Secretaria_Empresas_Sucursales { get; set; }
+        public virtual DbSet<Secretaria_Zonas> Secretaria_Zonas { get; set; }
         public virtual DbSet<Afiliados_DatosPersonales> Afiliados_DatosPersonales { get; set; }
+        public virtual DbSet<Secretaria_Empresas_Estado1> Secretaria_Empresas_Estado1Set { get; set; }
+        public virtual DbSet<Afiliados_Familiares> Afiliados_Familiares { get; set; }
     
         public virtual int SP_crearReporteAfiliados(Nullable<int> codigo)
         {
@@ -56,6 +65,70 @@ namespace SeocaPreincripcionesAfiliados.Models
                 new ObjectParameter("Codigo", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_crearReporteAfiliados", codigoParameter);
+        }
+    
+        public virtual ObjectResult<SP_verDatoAfiliado_Result> SP_verDatoAfiliado(Nullable<int> codigo)
+        {
+            var codigoParameter = codigo.HasValue ?
+                new ObjectParameter("Codigo", codigo) :
+                new ObjectParameter("Codigo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_verDatoAfiliado_Result>("SP_verDatoAfiliado", codigoParameter);
+        }
+    
+        public virtual int SP_VerDatoFamiliar(Nullable<int> codigo)
+        {
+            var codigoParameter = codigo.HasValue ?
+                new ObjectParameter("Codigo", codigo) :
+                new ObjectParameter("Codigo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_VerDatoFamiliar", codigoParameter);
+        }
+    
+        public virtual ObjectResult<SP_VerTodosAfiliados_Result> SP_VerTodosAfiliados(string apellidoNombre, string cuil, string dNI, Nullable<int> delegacion)
+        {
+            var apellidoNombreParameter = apellidoNombre != null ?
+                new ObjectParameter("apellidoNombre", apellidoNombre) :
+                new ObjectParameter("apellidoNombre", typeof(string));
+    
+            var cuilParameter = cuil != null ?
+                new ObjectParameter("Cuil", cuil) :
+                new ObjectParameter("Cuil", typeof(string));
+    
+            var dNIParameter = dNI != null ?
+                new ObjectParameter("DNI", dNI) :
+                new ObjectParameter("DNI", typeof(string));
+    
+            var delegacionParameter = delegacion.HasValue ?
+                new ObjectParameter("Delegacion", delegacion) :
+                new ObjectParameter("Delegacion", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_VerTodosAfiliados_Result>("SP_VerTodosAfiliados", apellidoNombreParameter, cuilParameter, dNIParameter, delegacionParameter);
+        }
+    
+        public virtual ObjectResult<SP_VerTodosAfiliadosSegunEstado_Result> SP_VerTodosAfiliadosSegunEstado(string apellidoNombre, string cuil, string dNI, string estado, Nullable<int> delegacion)
+        {
+            var apellidoNombreParameter = apellidoNombre != null ?
+                new ObjectParameter("apellidoNombre", apellidoNombre) :
+                new ObjectParameter("apellidoNombre", typeof(string));
+    
+            var cuilParameter = cuil != null ?
+                new ObjectParameter("Cuil", cuil) :
+                new ObjectParameter("Cuil", typeof(string));
+    
+            var dNIParameter = dNI != null ?
+                new ObjectParameter("DNI", dNI) :
+                new ObjectParameter("DNI", typeof(string));
+    
+            var estadoParameter = estado != null ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(string));
+    
+            var delegacionParameter = delegacion.HasValue ?
+                new ObjectParameter("Delegacion", delegacion) :
+                new ObjectParameter("Delegacion", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_VerTodosAfiliadosSegunEstado_Result>("SP_VerTodosAfiliadosSegunEstado", apellidoNombreParameter, cuilParameter, dNIParameter, estadoParameter, delegacionParameter);
         }
     }
 }

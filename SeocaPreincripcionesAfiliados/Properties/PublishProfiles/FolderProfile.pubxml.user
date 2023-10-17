@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\Nata\OneDrive\Documentos\GitHub\Seoca\SeocaPreinscripcionesAfiliados\SeocaPreincripcionesAfiliados\bin\app.publish\</_PublishTargetUrl>
-    <History>True|2023-07-06T14:52:23.3515663Z;True|2023-07-03T10:32:18.9309818-03:00;False|2023-06-23T13:16:10.0060201-03:00;False|2023-06-23T13:15:57.0647243-03:00;True|2023-06-23T13:09:08.4905429-03:00;True|2023-06-23T09:25:42.2793957-03:00;True|2023-06-21T12:23:42.7790339-03:00;True|2023-06-15T14:11:28.0987348-03:00;True|2023-06-15T11:01:14.9367768-03:00;True|2023-06-14T13:23:28.1450462-03:00;True|2023-06-13T11:56:38.3938152-03:00;True|2023-06-09T13:21:33.6253448-03:00;True|2023-06-09T12:51:41.9379755-03:00;True|2023-06-09T11:00:04.6624832-03:00;True|2023-05-24T14:41:58.9456275-03:00;True|2023-05-24T11:02:36.5045285-03:00;True|2023-05-24T10:57:16.4290213-03:00;True|2023-05-12T11:59:12.8828289-03:00;True|2023-05-11T10:03:16.2805343-03:00;True|2023-05-11T09:53:16.2713061-03:00;True|2023-05-10T14:52:55.0075890-03:00;True|2023-05-10T12:10:37.5123075-03:00;True|2023-05-10T11:29:33.9345014-03:00;True|2023-05-10T11:04:10.9676374-03:00;True|2022-11-28T13:38:01.0396311-03:00;True|2022-11-28T13:34:15.6285252-03:00;True|2022-11-11T09:53:45.6844031-03:00;True|2022-11-07T13:33:23.5707933-03:00;True|2022-11-07T12:14:55.1515854-03:00;False|2022-11-07T12:10:46.3471553-03:00;True|2022-11-07T11:26:12.5478268-03:00;True|2022-11-07T10:52:26.6634845-03:00;True|2022-11-04T14:57:40.6868738-03:00;True|2022-10-27T14:54:47.7188763-03:00;</History>
+    <History>True|2023-08-04T13:16:20.6429393Z;True|2023-08-04T09:56:43.0169664-03:00;True|2023-07-31T15:16:53.5500614-03:00;True|2023-07-31T09:35:03.6967822-03:00;True|2023-07-26T16:47:05.7052746-03:00;False|2023-07-26T16:46:56.8660071-03:00;True|2023-07-26T16:45:29.6416107-03:00;True|2023-07-26T15:43:27.7951755-03:00;True|2023-07-26T13:54:52.7645234-03:00;True|2023-07-26T13:42:49.8511268-03:00;True|2023-07-26T13:37:29.0781954-03:00;True|2023-07-26T12:13:07.2545323-03:00;True|2023-07-25T11:01:34.0207419-03:00;True|2023-07-25T10:04:18.1900737-03:00;True|2023-07-25T10:02:41.5890149-03:00;True|2023-07-25T09:58:29.3422914-03:00;True|2023-07-25T09:58:00.7339967-03:00;True|2023-07-25T09:51:57.9884177-03:00;True|2023-07-06T11:52:23.3515663-03:00;True|2023-07-03T10:32:18.9309818-03:00;False|2023-06-23T13:16:10.0060201-03:00;False|2023-06-23T13:15:57.0647243-03:00;True|2023-06-23T13:09:08.4905429-03:00;True|2023-06-23T09:25:42.2793957-03:00;True|2023-06-21T12:23:42.7790339-03:00;True|2023-06-15T14:11:28.0987348-03:00;True|2023-06-15T11:01:14.9367768-03:00;True|2023-06-14T13:23:28.1450462-03:00;True|2023-06-13T11:56:38.3938152-03:00;True|2023-06-09T13:21:33.6253448-03:00;True|2023-06-09T12:51:41.9379755-03:00;True|2023-06-09T11:00:04.6624832-03:00;True|2023-05-24T14:41:58.9456275-03:00;True|2023-05-24T11:02:36.5045285-03:00;True|2023-05-24T10:57:16.4290213-03:00;True|2023-05-12T11:59:12.8828289-03:00;True|2023-05-11T10:03:16.2805343-03:00;True|2023-05-11T09:53:16.2713061-03:00;True|2023-05-10T14:52:55.0075890-03:00;True|2023-05-10T12:10:37.5123075-03:00;True|2023-05-10T11:29:33.9345014-03:00;True|2023-05-10T11:04:10.9676374-03:00;True|2022-11-28T13:38:01.0396311-03:00;True|2022-11-28T13:34:15.6285252-03:00;True|2022-11-11T09:53:45.6844031-03:00;True|2022-11-07T13:33:23.5707933-03:00;True|2022-11-07T12:14:55.1515854-03:00;False|2022-11-07T12:10:46.3471553-03:00;True|2022-11-07T11:26:12.5478268-03:00;True|2022-11-07T10:52:26.6634845-03:00;True|2022-11-04T14:57:40.6868738-03:00;True|2022-10-27T14:54:47.7188763-03:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -79,7 +79,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/28/2018 13:04:36</publishTime>
     </File>
     <File Include="bin/es/System.Web.Mvc.resources.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>11/28/2018 13:00:00</publishTime>
     </File>
     <File Include="bin/es/System.Web.Optimization.resources.dll">
       <publishTime>02/11/2014 15:28:40</publishTime>
@@ -150,6 +150,21 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="bin/ja/Microsoft.ReportViewer.WinForms.resources.dll">
       <publishTime>08/27/2022 18:04:02</publishTime>
     </File>
+    <File Include="bin/js/Afiliados.js">
+      <publishTime>06/06/2023 14:50:04</publishTime>
+    </File>
+    <File Include="bin/js/EnviarMatriz.js">
+      <publishTime>08/04/2023 09:49:50</publishTime>
+    </File>
+    <File Include="bin/js/tabPag.js">
+      <publishTime>09/05/2022 14:12:04</publishTime>
+    </File>
+    <File Include="bin/js/ValidacionesAfiliado.js">
+      <publishTime>05/10/2023 11:51:02</publishTime>
+    </File>
+    <File Include="bin/js/ValidacionesEmpresa.js">
+      <publishTime>06/13/2023 14:37:19</publishTime>
+    </File>
     <File Include="bin/ko/Microsoft.ReportViewer.Common.resources.dll">
       <publishTime>08/27/2022 18:03:58</publishTime>
     </File>
@@ -177,6 +192,54 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="bin/MailKit.pdb">
       <publishTime>04/15/2023 19:43:04</publishTime>
     </File>
+    <File Include="bin/Microsoft.AspNetCore.Authentication.Abstractions.dll">
+      <publishTime>11/12/2018 14:29:06</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNetCore.Authentication.Core.dll">
+      <publishTime>11/12/2018 14:29:10</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNetCore.Authorization.dll">
+      <publishTime>11/12/2018 14:39:28</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNetCore.Authorization.Policy.dll">
+      <publishTime>11/12/2018 14:39:32</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNetCore.Hosting.Abstractions.dll">
+      <publishTime>11/12/2018 14:30:22</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNetCore.Hosting.Server.Abstractions.dll">
+      <publishTime>11/12/2018 14:30:20</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNetCore.Http.Abstractions.dll">
+      <publishTime>11/12/2018 14:29:00</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNetCore.Http.dll">
+      <publishTime>11/12/2018 14:29:06</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNetCore.Http.Extensions.dll">
+      <publishTime>11/12/2018 14:29:06</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNetCore.Http.Features.dll">
+      <publishTime>11/12/2018 14:28:58</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNetCore.Mvc.Abstractions.dll">
+      <publishTime>11/12/2018 14:40:10</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNetCore.Mvc.Core.dll">
+      <publishTime>04/19/2019 20:24:44</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNetCore.ResponseCaching.Abstractions.dll">
+      <publishTime>11/12/2018 14:37:50</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNetCore.Routing.Abstractions.dll">
+      <publishTime>11/12/2018 14:38:16</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNetCore.Routing.dll">
+      <publishTime>11/12/2018 14:38:20</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNetCore.WebUtilities.dll">
+      <publishTime>11/12/2018 14:29:00</publishTime>
+    </File>
     <File Include="bin/Microsoft.Build.Framework.dll">
       <publishTime>06/20/2016 14:45:20</publishTime>
     </File>
@@ -189,8 +252,44 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>09/05/2018 16:10:50</publishTime>
     </File>
+    <File Include="bin/Microsoft.DotNet.PlatformAbstractions.dll">
+      <publishTime>05/15/2018 18:01:34</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Extensions.Configuration.Abstractions.dll">
+      <publishTime>11/10/2018 21:26:38</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Extensions.DependencyInjection.Abstractions.dll">
+      <publishTime>11/10/2018 21:26:36</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Extensions.DependencyInjection.dll">
+      <publishTime>11/10/2018 21:26:44</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Extensions.DependencyModel.dll">
+      <publishTime>05/15/2018 18:01:54</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Extensions.FileProviders.Abstractions.dll">
+      <publishTime>11/10/2018 21:26:38</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Extensions.Hosting.Abstractions.dll">
+      <publishTime>11/12/2018 14:30:20</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Extensions.Logging.Abstractions.dll">
+      <publishTime>11/10/2018 21:26:40</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Extensions.ObjectPool.dll">
+      <publishTime>11/10/2018 21:26:48</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Extensions.Options.dll">
+      <publishTime>11/10/2018 21:26:38</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Extensions.Primitives.dll">
+      <publishTime>11/10/2018 21:26:36</publishTime>
+    </File>
     <File Include="bin/Microsoft.MSXML.dll">
       <publishTime>08/31/2022 13:12:06</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Net.Http.Headers.dll">
+      <publishTime>11/12/2018 14:28:58</publishTime>
     </File>
     <File Include="bin/Microsoft.ReportViewer.Common.dll">
       <publishTime>08/27/2022 18:03:58</publishTime>
@@ -472,10 +571,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/27/2022 18:04:02</publishTime>
     </File>
     <File Include="bin/SeocaPreincripcionesAfiliados.dll">
-      <publishTime>07/10/2023 16:00:50</publishTime>
+      <publishTime>08/04/2023 10:16:18</publishTime>
     </File>
     <File Include="bin/SeocaPreincripcionesAfiliados.pdb">
-      <publishTime>07/10/2023 16:00:50</publishTime>
+      <publishTime>08/04/2023 10:16:18</publishTime>
     </File>
     <File Include="bin/SqlServerTypes/x64/msvcr120.dll">
       <publishTime>11/28/2022 14:27:58</publishTime>
@@ -495,14 +594,23 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="bin/System.Buffers.dll">
       <publishTime>02/19/2020 10:05:18</publishTime>
     </File>
+    <File Include="bin/System.ComponentModel.Annotations.dll">
+      <publishTime>05/15/2018 10:29:36</publishTime>
+    </File>
+    <File Include="bin/System.Diagnostics.DiagnosticSource.dll">
+      <publishTime>05/15/2018 10:29:40</publishTime>
+    </File>
     <File Include="bin/System.Memory.dll">
-      <publishTime>08/05/2022 00:31:02</publishTime>
+      <publishTime>05/08/2022 00:31:02</publishTime>
     </File>
     <File Include="bin/System.Numerics.Vectors.dll">
       <publishTime>05/15/2018 13:29:44</publishTime>
     </File>
     <File Include="bin/System.Runtime.CompilerServices.Unsafe.dll">
       <publishTime>10/22/2021 20:40:18</publishTime>
+    </File>
+    <File Include="bin/System.Text.Encodings.Web.dll">
+      <publishTime>05/15/2018 10:29:52</publishTime>
     </File>
     <File Include="bin/System.Threading.Tasks.Extensions.dll">
       <publishTime>02/19/2020 10:05:18</publishTime>
@@ -658,7 +766,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/06/2023 14:50:04</publishTime>
     </File>
     <File Include="js/EnviarMatriz.js">
-      <publishTime>06/26/2023 15:12:26</publishTime>
+      <publishTime>08/04/2023 09:49:50</publishTime>
     </File>
     <File Include="js/Familiares.js">
       <publishTime>08/11/2022 10:27:06</publishTime>
@@ -673,7 +781,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/13/2023 14:37:19</publishTime>
     </File>
     <File Include="Models/Afiliados.edmx.diagram">
-      <publishTime>06/28/2023 09:36:18</publishTime>
+      <publishTime>07/31/2023 14:01:21</publishTime>
     </File>
     <File Include="Reportes/DataSet1.xsc">
       <publishTime>05/09/2023 12:11:49</publishTime>
@@ -736,7 +844,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/28/2022 14:27:58</publishTime>
     </File>
     <File Include="Views/Home/Afiliados.cshtml">
-      <publishTime>07/10/2023 16:00:30</publishTime>
+      <publishTime>08/04/2023 10:15:25</publishTime>
     </File>
     <File Include="Views/Home/Codigo.cshtml">
       <publishTime>07/06/2023 11:51:54</publishTime>
@@ -769,7 +877,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>07/18/2022 12:58:42</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/09/2023 12:51:40</publishTime>
+      <publishTime>07/25/2023 09:51:56</publishTime>
     </File>
   </ItemGroup>
 </Project>

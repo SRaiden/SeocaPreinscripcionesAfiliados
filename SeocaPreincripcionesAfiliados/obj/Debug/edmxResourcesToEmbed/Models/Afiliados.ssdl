@@ -19,6 +19,7 @@
     <Property Name="Piso" Type="nvarchar" MaxLength="50" />
     <Property Name="Dto" Type="nvarchar" MaxLength="50" />
     <Property Name="Telefono" Type="int" />
+    <Property Name="CP" Type="varchar" MaxLength="10" />
     <Property Name="Localidad" Type="nvarchar" MaxLength="50" />
     <Property Name="Provincia" Type="nvarchar" MaxLength="150" />
     <Property Name="Sexo" Type="int" />
@@ -44,7 +45,12 @@
     <Property Name="extensionSueldo" Type="varchar" MaxLength="10" />
     <Property Name="extensionPerfil" Type="varchar" MaxLength="10" />
     <Property Name="extensionNotaSolicitud" Type="varchar" MaxLength="10" />
+    <Property Name="SecretariaEmpresa" Type="int" />
+    <Property Name="SecretariaSucursal" Type="int" />
+    <Property Name="SecretariaComentario" Type="varchar(max)" />
+    <Property Name="SecretariaIngresoEmpresa" Type="date" />
     <Property Name="ActualizacionSecretaria" Type="bit" />
+    <Property Name="EnvioPDFEmail" Type="bit" />
   </EntityType>
   <EntityType Name="Afiliados_Empresa">
     <Key>
@@ -80,6 +86,13 @@
     <Property Name="Fecha_Nac" Type="date" />
     <Property Name="DatosArchivo" Type="varbinary(max)" />
     <Property Name="ExtensionArchivo" Type="varchar" MaxLength="10" />
+    <Property Name="UsuarioSecretaria" Type="varchar" MaxLength="50" />
+    <Property Name="NroAfiliadoSecretaria" Type="int" />
+    <Property Name="IdFamiliarSecretaria" Type="int" />
+    <Property Name="InhabilitarSecretaria" Type="bit" />
+    <Property Name="ActualizacionSecretaria" Type="bit" />
+    <Property Name="DatosArchivo2" Type="varbinary(max)" />
+    <Property Name="ExtensionArchivo2" Type="varchar" MaxLength="10" />
   </EntityType>
   <EntityType Name="Empresas">
     <Key>
@@ -111,6 +124,18 @@
     <Property Name="Estado" Type="varchar" MaxLength="10" />
     <Property Name="ComentarioEstado" Type="varchar(max)" />
     <Property Name="Confirmada" Type="bit" />
+    <Property Name="FotoHabilitacionMunicipal" Type="varbinary(max)" />
+    <Property Name="FotoComprobanteAFIP" Type="varbinary(max)" />
+    <Property Name="FotoContratoSocial" Type="varbinary(max)" />
+    <Property Name="FotoNotaEscrita" Type="varbinary(max)" />
+    <Property Name="FotoReciboSueldo" Type="varbinary(max)" />
+    <Property Name="extensionHabilitacionMunicipal" Type="varchar" MaxLength="10" />
+    <Property Name="extensionComprobanteAFIP" Type="varchar" MaxLength="10" />
+    <Property Name="extensionContratoSocial" Type="varchar" MaxLength="10" />
+    <Property Name="extensionNotaEscrita" Type="varchar" MaxLength="10" />
+    <Property Name="extensionReciboSueldo" Type="varchar" MaxLength="10" />
+    <Property Name="ActualizacionSecretaria" Type="bit" />
+    <Property Name="CPLegal" Type="int" />
   </EntityType>
   <EntityType Name="Empresas_Actividades">
     <Key>
@@ -173,6 +198,7 @@
     <Property Name="Calle" Type="varchar" MaxLength="100" />
     <Property Name="Altura" Type="varchar" MaxLength="10" />
     <Property Name="Telefono" Type="varchar" MaxLength="30" />
+    <Property Name="Email" Type="varchar" MaxLength="150" />
   </EntityType>
   <EntityType Name="Empresas_Titulares">
     <Key>
@@ -186,6 +212,7 @@
     <Property Name="Documento" Type="varchar" MaxLength="15" />
     <Property Name="Cargo" Type="varchar" MaxLength="100" />
     <Property Name="Localidad" Type="varchar" MaxLength="100" />
+    <Property Name="CP" Type="nvarchar" MaxLength="10" />
   </EntityType>
   <EntityType Name="General_ActividadRubro">
     <Key>
@@ -266,8 +293,218 @@
     <Property Name="Codigo" Type="int" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="Secretaria_Afiliados">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="int" Nullable="false" />
+    <Property Name="ApellidoNombre" Type="varchar" MaxLength="100" />
+    <Property Name="Cuil" Type="varchar" MaxLength="15" />
+    <Property Name="TipoDocumento" Type="int" />
+    <Property Name="NroDocumento" Type="varchar" MaxLength="20" />
+    <Property Name="FechaNacimiento" Type="datetime" />
+    <Property Name="FechaAlta" Type="datetime" />
+    <Property Name="Nacionalidad" Type="int" />
+    <Property Name="Sexo" Type="int" />
+    <Property Name="EstadoCivil" Type="int" />
+    <Property Name="Calle" Type="varchar" MaxLength="50" />
+    <Property Name="Nro" Type="varchar" MaxLength="10" />
+    <Property Name="Piso" Type="varchar" MaxLength="3" />
+    <Property Name="Departamento" Type="varchar" MaxLength="3" />
+    <Property Name="CodigoPostal" Type="int" />
+    <Property Name="Provincia" Type="int" />
+    <Property Name="Telefono" Type="varchar" MaxLength="50" />
+    <Property Name="Delegacion" Type="int" />
+    <Property Name="Estado" Type="int" />
+    <Property Name="TipoCarnet" Type="int" />
+    <Property Name="FechaBaja" Type="datetime" />
+    <Property Name="Requisito_ReciboSueldo" Type="bit" />
+    <Property Name="Requisito_Matrimonio" Type="bit" />
+    <Property Name="Requisito_PartidaHijos" Type="bit" />
+    <Property Name="Requisito_Dni" Type="bit" />
+    <Property Name="Requisito_OSECAC" Type="bit" />
+    <Property Name="FechaActualizacion" Type="datetime" />
+    <Property Name="FechaNotificacion" Type="datetime" />
+    <Property Name="FechaRecepcion" Type="datetime" />
+    <Property Name="TramiteCumplido" Type="bit" />
+    <Property Name="Obs_Generales" Type="varchar(max)" />
+    <Property Name="Obs_Credencial" Type="varchar(max)" />
+    <Property Name="Marca" Type="bit" />
+    <Property Name="FechaBajaFuturo" Type="datetime" />
+    <Property Name="Marca2" Type="bit" />
+    <Property Name="UsuarioC" Type="varchar" MaxLength="50" />
+    <Property Name="UsuarioM" Type="varchar" MaxLength="50" />
+    <Property Name="Empresa" Type="int" />
+    <Property Name="Sucursal" Type="int" />
+    <Property Name="FechaIngresoEmpresa" Type="datetime" />
+    <Property Name="UltimoPago" Type="datetime" />
+    <Property Name="AporteDesde" Type="datetime" />
+    <Property Name="AporteHasta" Type="datetime" />
+    <Property Name="Aporte1" Type="bit" />
+    <Property Name="Aporte2" Type="bit" />
+    <Property Name="Aporte3" Type="bit" />
+    <Property Name="Calificacion" Type="int" />
+    <Property Name="Email" Type="varchar" MaxLength="100" />
+    <Property Name="Celular" Type="varchar" MaxLength="100" />
+    <Property Name="CuotaAfiliado" Type="bit" />
+    <Property Name="OrigenDelegacion" Type="varchar" MaxLength="50" />
+    <Property Name="OrigenUsuario" Type="varchar" MaxLength="50" />
+    <Property Name="DatosActualizados" Type="bit" />
+  </EntityType>
+  <EntityType Name="Secretaria_Afiliados_Estado">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="int" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="100" />
+    <Property Name="Marca" Type="bit" />
+  </EntityType>
+  <EntityType Name="Secretaria_Afiliados_Familiares">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="int" Nullable="false" />
+    <Property Name="Afiliado" Type="int" />
+    <Property Name="Tipo" Type="int" />
+    <Property Name="ApellidoNombre" Type="varchar" MaxLength="100" />
+    <Property Name="TipoDocumento" Type="int" />
+    <Property Name="NroDocumento" Type="int" />
+    <Property Name="Sexo" Type="int" />
+    <Property Name="FechaNacimiento" Type="datetime" />
+    <Property Name="FechaActualizacion" Type="datetime" />
+    <Property Name="Vencimiento" Type="datetime" />
+    <Property Name="Estudio" Type="datetime" />
+    <Property Name="Marca" Type="bit" />
+  </EntityType>
+  <EntityType Name="Secretaria_Empresas">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="int" Nullable="false" />
+    <Property Name="Cuit" Type="varchar" MaxLength="13" />
+    <Property Name="RazonSocial" Type="varchar" MaxLength="150" />
+    <Property Name="NombreFantasia" Type="varchar" MaxLength="150" />
+    <Property Name="Zona" Type="int" />
+    <Property Name="CalleFiscal" Type="varchar" MaxLength="50" />
+    <Property Name="NroFiscal" Type="varchar" MaxLength="10" />
+    <Property Name="LocalidadFiscal" Type="varchar" MaxLength="10" />
+    <Property Name="PisoFiscal" Type="varchar" MaxLength="5" />
+    <Property Name="DepartamentoFiscal" Type="varchar" MaxLength="5" />
+    <Property Name="CPFiscal" Type="varchar" MaxLength="10" />
+    <Property Name="TelefonoFiscal" Type="varchar" MaxLength="30" />
+    <Property Name="CalleReal" Type="varchar" MaxLength="50" />
+    <Property Name="NroReal" Type="int" />
+    <Property Name="LocalidadReal" Type="varchar" MaxLength="10" />
+    <Property Name="PisoReal" Type="varchar" MaxLength="5" />
+    <Property Name="DepartamentoReal" Type="varchar" MaxLength="5" />
+    <Property Name="CPReal" Type="varchar" MaxLength="10" />
+    <Property Name="TelefonoReal" Type="varchar" MaxLength="30" />
+    <Property Name="Ubicada" Type="bit" />
+    <Property Name="Actividad" Type="int" />
+    <Property Name="Doc_Habilitacion" Type="bit" />
+    <Property Name="Doc_Contrato_Estatuto" Type="bit" />
+    <Property Name="Doc_DNRP_Inscripcion" Type="bit" />
+    <Property Name="Doc_DNRHE" Type="bit" />
+    <Property Name="Doc_Sueldo" Type="bit" />
+    <Property Name="Estado" Type="int" />
+    <Property Name="FechaInscripcion" Type="datetime" />
+    <Property Name="FechaDeuda" Type="datetime" />
+    <Property Name="Web" Type="varchar" MaxLength="400" />
+    <Property Name="Email" Type="varchar" MaxLength="400" />
+    <Property Name="Detalle" Type="varchar(max)" />
+    <Property Name="FechaDatos" Type="datetime" />
+    <Property Name="DDJJ" Type="datetime" />
+    <Property Name="ContadorNombre" Type="varchar" MaxLength="100" />
+    <Property Name="ContadorDomicilio" Type="varchar" MaxLength="200" />
+    <Property Name="ContadorLocalidad" Type="varchar" MaxLength="200" />
+    <Property Name="ContadorTelefono" Type="varchar" MaxLength="100" />
+    <Property Name="ContadorEmail" Type="varchar" MaxLength="100" />
+    <Property Name="Observaciones" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="Secretaria_Empresas_DDJJ">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Empresa" Type="int" />
+    <Property Name="Cuil" Type="varchar" MaxLength="13" />
+    <Property Name="Aporte1" Type="bit" />
+    <Property Name="Aporte2" Type="bit" />
+    <Property Name="Aporte3" Type="bit" />
+    <Property Name="Categoria" Type="int" />
+    <Property Name="FechaIngreso" Type="datetime" />
+    <Property Name="Sueldo" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="FechaBaja" Type="datetime" />
+    <Property Name="Sucursal" Type="int" />
+    <Property Name="Periodo" Type="datetime" />
+    <Property Name="Fuente" Type="int" />
+    <Property Name="FechaDatos" Type="datetime" />
+    <Property Name="Horas" Type="int" />
+    <Property Name="CuotaAfiliado" Type="bit" />
+  </EntityType>
+  <EntityType Name="Secretaria_Empresas_Estado">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="int" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Secretaria_Empresas_Responsables">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="CodigoEmpresa" Type="int" />
+    <Property Name="Nombre" Type="varchar" MaxLength="100" />
+    <Property Name="Domicilio" Type="varchar" MaxLength="100" />
+    <Property Name="Localidad" Type="varchar" MaxLength="100" />
+    <Property Name="TipoDocumento" Type="int" />
+    <Property Name="NroDocumento" Type="varchar" MaxLength="15" />
+    <Property Name="Inhabilitado" Type="bit" />
+  </EntityType>
+  <EntityType Name="Secretaria_Empresas_Sucursales">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Empresa" Type="int" Nullable="false" />
+    <Property Name="Numero" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Calle" Type="varchar" MaxLength="100" />
+    <Property Name="Altura" Type="int" />
+    <Property Name="Localidad" Type="int" />
+    <Property Name="Telefono" Type="varchar" MaxLength="20" />
+    <Property Name="Email" Type="varchar" MaxLength="100" />
+    <Property Name="Marca" Type="bit" />
+  </EntityType>
+  <EntityType Name="Secretaria_Zonas">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="int" Nullable="false" />
+    <Property Name="CodigoPostal" Type="int" />
+    <Property Name="Inspector" Type="int" />
+  </EntityType>
   <Function Name="SP_crearReporteAfiliados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Codigo" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_verDatoAfiliado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Codigo" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_VerDatoFamiliar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Codigo" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_VerTodosAfiliados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="apellidoNombre" Type="nvarchar" Mode="In" />
+    <Parameter Name="Cuil" Type="nvarchar" Mode="In" />
+    <Parameter Name="DNI" Type="nvarchar" Mode="In" />
+    <Parameter Name="Delegacion" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_VerTodosAfiliadosSegunEstado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="apellidoNombre" Type="nvarchar" Mode="In" />
+    <Parameter Name="Cuil" Type="nvarchar" Mode="In" />
+    <Parameter Name="DNI" Type="nvarchar" Mode="In" />
+    <Parameter Name="Estado" Type="nvarchar" Mode="In" />
+    <Parameter Name="Delegacion" Type="int" Mode="In" />
   </Function>
   <EntityContainer Name="geosoftw_seocapreinscripcionesModelStoreContainer">
     <EntitySet Name="Afiliados_DatosPersonales" EntityType="Self.Afiliados_DatosPersonales" Schema="dbo" store:Type="Tables" />
@@ -291,5 +528,14 @@
     <EntitySet Name="General_Parentesco" EntityType="Self.General_Parentesco" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="General_Provincias" EntityType="Self.General_Provincias" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="General_Sexo" EntityType="Self.General_Sexo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Secretaria_Afiliados" EntityType="Self.Secretaria_Afiliados" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Secretaria_Afiliados_Estado" EntityType="Self.Secretaria_Afiliados_Estado" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Secretaria_Afiliados_Familiares" EntityType="Self.Secretaria_Afiliados_Familiares" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Secretaria_Empresas" EntityType="Self.Secretaria_Empresas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Secretaria_Empresas_DDJJ" EntityType="Self.Secretaria_Empresas_DDJJ" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Secretaria_Empresas_Estado" EntityType="Self.Secretaria_Empresas_Estado" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Secretaria_Empresas_Responsables" EntityType="Self.Secretaria_Empresas_Responsables" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Secretaria_Empresas_Sucursales" EntityType="Self.Secretaria_Empresas_Sucursales" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Secretaria_Zonas" EntityType="Self.Secretaria_Zonas" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

@@ -54,6 +54,12 @@ namespace SeocaPreincripcionesAfiliados.Models
         public string extensionSueldo { get; set; }
         public string extensionPerfil { get; set; }
         public string extensionNotaSolicitud { get; set; }
+        public Nullable<int> SecretariaEmpresa { get; set; }
+        public Nullable<int> SecretariaSucursal { get; set; }
+        public string SecretariaComentario { get; set; }
+        public Nullable<System.DateTime> SecretariaIngresoEmpresa { get; set; }
         public Nullable<bool> ActualizacionSecretaria { get; set; }
+        public Nullable<bool> EnvioPDFEmail { get; set; }
+        public string CP { get; set; }
     }
 }
